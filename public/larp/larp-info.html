@@ -12,7 +12,7 @@
     <style>
       .larp-container {
         width: 80%;
-        margin: 40px auto 0 auto;
+        margin: 40px auto;
         /* gap: 67px; */
       }
       h1 {
@@ -60,7 +60,9 @@
         letter-spacing: 4px;
       }
       #larp-story h4,
-      #p1 {
+      #p1,
+      #icons,
+      .accordion {
         margin-top: 60px;
       }
       #p1 {
@@ -122,6 +124,25 @@
         position: absolute;
         left: 118px;
         bottom: 211px;
+      }
+      #icons > div > div {
+        margin-top: 20px;
+      }
+      .accordion-button,
+      .accordion-button:not(.collapsed) {
+        background-color: transparent;
+        color: #d7bf7d;
+        font-size: 24px;
+        border-color: #d7bf7d !important;
+      }
+      .accordion-item {
+        background-color: transparent;
+        color: #f8f0e5;
+        font-size: 20px;
+      }
+      .accordion-button::after,
+      .accordion-button:not(.collapsed)::after {
+        background-image: url(./img/arrow2.png);
       }
     </style>
   </head>
@@ -208,8 +229,9 @@
         <div class="line flex-fill"></div>
       </div>
       <!-- icon -->
-      <div id="icons">
-        <div>
+      <div id="icons" class="d-flex flex-row justify-content-around">
+        <!-- 人數 -->
+        <div class="d-inline flex-column text-white text-center">
           <svg
             width="100"
             height="99"
@@ -263,7 +285,233 @@
               fill="white"
             />
           </svg>
-          
+          <div>
+            <h3>遊玩人數</h3>
+            <h3>4-8人</h3>
+          </div>
+        </div>
+        <!-- 價錢 -->
+        <div class="d-inline flex-column text-white text-center">
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="1.5"
+              y="2.5"
+              width="97"
+              height="95.4733"
+              rx="47.7366"
+              stroke="white"
+              stroke-width="3"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M50 97C75.9574 97 97 75.9574 97 50C97 24.0426 75.9574 3 50 3C24.0426 3 3 24.0426 3 50C3 75.9574 24.0426 97 50 97ZM50 100C77.6142 100 100 77.6142 100 50C100 22.3858 77.6142 0 50 0C22.3858 0 0 22.3858 0 50C0 77.6142 22.3858 100 50 100Z"
+              fill="white"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M43.7424 30.4281C39.8579 30.4281 36.5599 33.8086 36.5599 38.0898C36.5599 40.6294 37.1101 42.12 37.8788 43.0989C38.6613 44.0954 39.8279 44.7668 41.4868 45.3577C41.4882 45.3582 41.4896 45.3587 41.491 45.3592L59.515 51.6466C61.3963 52.3162 63.1886 53.2483 64.4831 54.906C65.7909 56.5808 66.4401 58.7992 66.4401 61.7424C66.4401 67.5876 61.9474 72.404 56.2574 72.404H45.0001C38.6005 72.404 33.5 66.9983 33.5 60.425C33.5 59.5966 34.1716 58.925 35 58.925C35.8284 58.925 36.5 59.5966 36.5 60.425C36.5 65.4685 40.3816 69.404 45.0001 69.404H56.2574C60.1481 69.404 63.4401 66.0768 63.4401 61.7424C63.4401 59.2365 62.8916 57.7423 62.1186 56.7524C61.333 55.7464 60.1628 55.0621 58.5135 54.4745L40.485 48.1855C38.6132 47.5193 36.817 46.6042 35.5194 44.9518C34.2074 43.2811 33.5599 41.0591 33.5599 38.0898C33.5599 32.311 38.0461 27.4281 43.7424 27.4281H54.9999C61.3995 27.4281 66.5 32.8338 66.5 39.4071C66.5 40.2355 65.8284 40.9071 65 40.9071C64.1716 40.9071 63.5 40.2355 63.5 39.4071C63.5 34.3637 59.6184 30.4281 54.9999 30.4281H43.7424Z"
+              fill="white"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M49.9701 21.5C50.7985 21.5 51.4701 22.1716 51.4701 23V76.8921C51.4701 77.7205 50.7985 78.3921 49.9701 78.3921C49.1417 78.3921 48.4701 77.7205 48.4701 76.8921V23C48.4701 22.1716 49.1417 21.5 49.9701 21.5Z"
+              fill="white"
+            />
+          </svg>
+          <div>
+            <h3>遊玩價錢</h3>
+            <h3>600元/人</h3>
+          </div>
+        </div>
+        <!-- 時間 -->
+        <div class="d-inline flex-column text-white text-center">
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M97.8508 50.0001C97.8508 23.5724 76.427 2.14856 49.9993 2.14856C23.5716 2.14856 2.14771 23.5724 2.14771 50.0001C2.14771 76.4278 23.5716 97.8517 49.9993 97.8517C76.427 97.8517 97.8508 76.4278 97.8508 50.0001Z"
+              stroke="white"
+              stroke-width="3"
+              stroke-miterlimit="10"
+            />
+            <path
+              d="M46.543 22.37V56.3153L69.5297 69.5312"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div>
+            <h3>遊玩時間</h3>
+            <h3>60分鐘</h3>
+          </div>
+        </div>
+      </div>
+      <!-- 注意事項手風琴 -->
+      <!-- style="background-color: transparent;color: #d7bf7d;font-size: 24px;border: none;border-bottom: 1px solid #d7bf7d;" -->
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne"
+              aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne"
+            >
+              注意事項
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="panelsStayOpen-headingOne"
+          >
+            <div class="accordion-body">
+              <ul>
+                <li>身高 110 公分以上即可入場；12歲以下需成人陪同。</li>
+                <li>
+                  患有黑暗恐懼症、幽閉恐懼症、心血管疾病、孕婦與行動不便者，請自行斟酌參加。
+                </li>
+                <li>
+                  建議穿著方便行動的服裝與鞋子，請勿穿著跟鞋(著跟鞋者需現場購買襪子)。
+                </li>
+                <li>
+                  <strong>
+                    爲維護遊戲品質與玩家權益，請務必提早 5 分鐘報到入場，遲到 5
+                    分鐘以上視為自動放棄參與權益，並且不提供退換票服務。
+                  </strong>
+                </li>
+                <li>
+                  遊戲進行中請勿飲食、拍照、攝影、錄音，以維護其他玩家遊戲品質。
+                </li>
+                <li>活動期間禁止攜帶外食。</li>
+                <li>
+                  請勿攜帶危險物品，場地提供置物服務，物品請自行負保管責任。
+                </li>
+                <li>
+                  這是個考驗智慧、觀察力與團隊合作的遊戲，切忌使用蠻力尋找線索。
+                </li>
+                <li>出發日前 7 日前（不含出發日）通知取消，可全額退費。</li>
+                <li>
+                  出發日前 6 日至前 4 日內（不含出發日）通知取消，收取手續費
+                  50％；或改期一次（僅限同活動方案及相同價格）。
+                </li>
+                <li>
+                  出發日前 3
+                  日（不含出發日）至當日內不接受取消，並不予退回款項。
+                </li>
+                <li>
+                  於活動中如因非可究責主辦單位之因素中止參與活動，將不予退回款項。
+                </li>
+                <li>如因天災等不可抗力因素，石之骰 將主動聯繫延期或退款。</li>
+                <li>上述時間以消費者進線客服人員表明要取消的時間點為準。</li>
+                <li>取消收取手續費依四捨五入計算至元。</li>
+                <li>
+                  同筆訂單因可歸責於消費者理由提出修改時，僅得修改一次，並限更改時同方案有可選擇之時段，且更改的時段價格不得高於原訂單金額。
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo"
+            >
+              客戶須知
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingTwo"
+          >
+            <div class="accordion-body">
+              <ul>
+                <li>
+                  如欲查詢退訂規則或有取消訂單之需求，請參考「注意事項」
+                  了解詳細資訊。
+                </li>
+                <li>
+                  如因天災等不可抗力之因素，或因報名人數未達開班門檻而須取消活動，石之骰
+                  將主動聯繫延期或退款。
+                </li>
+                <li>
+                  若因訂購資訊填寫不完整致使店家無法提供服務，店家有權取消該筆訂單。
+                </li>
+                <li>
+                  為保障其他學員及老師權益，請消費者務必於您訂購的體驗時間準時抵達。
+                </li>
+                <li>特殊需求之額外費用，依現場規定收取。</li>
+                <li>個別方案之特殊規則依注意事項為準。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree"
+            >
+              取消與更改時間政策
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingThree"
+          >
+            <div class="accordion-body">
+              <span>更改訂單時間注意事項：</span>
+              <ul>
+                <li>在享樂時間開始 3 天前，可更改一次享樂時間。</li>
+                <li>享樂時間變更後，該訂單不可再次更改或取消。</li>
+                <li>線上付款更改時間如有價差，將不另行退款。</li>
+              </ul>
+              <span>取消訂單注意事項：</span>
+              <ul>
+                <li>在享樂時間開始前 7 日（含）前取消，將全額退費。</li>
+                <li>
+                  在享樂時間開始前 4 ～ 6 日（含）取消，將收取訂單金額之 50%
+                  訂金。
+                </li>
+                <li>
+                  在享樂時間當天（第 0 日） ～ 享樂時間開始前 3
+                  日（含）取消，將收取訂單金額之 100% 訂金。
+                </li>
+                <li>
+                  若使用信用卡分期付款且有收取部分款項時，於全額退回款項後，以此交易相同信用卡支付。
+                </li>
+                <li>截止時間皆以方案當地時間為準。</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
