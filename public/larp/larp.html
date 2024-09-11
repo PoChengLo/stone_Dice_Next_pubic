@@ -10,11 +10,6 @@
 "
     />
     <style>
-      .larp-container {
-        width: 1536px;
-        margin: 40px 192px 0 192px;
-        /* gap: 67px; */
-      }
       h1 {
         font-size: 48px;
       }
@@ -45,20 +40,24 @@
       .card-text {
         color: #f8f0e5;
       }
+      .larp-container {
+        width: 80%;
+        margin: 40px auto 0 auto;
+        /* gap: 67px; */
+      }
       .larp-title {
-        width: 991px;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 90px auto 0 auto;
       }
       .line {
-        width: 354px;
         height: 1px;
         background-color: #d7bf7d;
       }
       #larp-button {
-        margin: 0 230px;
+        margin: 0 auto;
       }
       #larp-button button {
         width: 250px;
@@ -78,35 +77,16 @@
         border-radius: 0;
       }
       #larp-location button.active {
-        background-color: transparent;
-        width: 250px;
-        font-size: 36px;
+        background-image: url(../larp/img/background-line.png);
         color: #d7bf7d;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1px solid #d7bf7d;
-        position: relative;
-        overflow: hidden;
+        object-fit: cover;
       }
       #larp-location button:hover {
         color: #d7bf7d;
       }
-      #larp-location .active::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -20px;
-        width: 160px;
-        height: 10px;
-        background: rgba(212, 175, 55, 0); /* 淡金色光暈 */
-        box-shadow: 0 0 20px 10px rgba(212, 175, 55, 0.8); /* 模糊的光暈效果 */
-        border-radius: 50%;
-        z-index: -1;
+      #select {
+        margin-top: 38px;
       }
-#select{
-  margin-top: 38px ;
-}
       .card {
         padding: 0;
         border: none;
@@ -120,12 +100,20 @@
     <div class="text-white" style="height: 60px">我是navbar</div>
     <img src="https://i.postimg.cc/qqgTnCn5/image.png" class="w-100" />
 
-    <!-- 遊戲主題分隔線 -->
     <div class="larp-container">
-      <div class="larp-title">
-        <span class="line"></span>
-        <span class="primary-text" style="font-size: 40px">遊戲主題</span>
-        <span class="line"></span>
+      <!-- 遊戲主題分隔線 -->
+      <div
+        class="d-flex w-100 justify-content-evenly align-items-center"
+        style="padding: 0 20% 0 20%"
+      >
+        <div class="line flex-fill"></div>
+        <div
+          class="primary-text text-center"
+          style="font-size: 40px; padding: 0 30px"
+        >
+          遊戲主題
+        </div>
+        <div class="line flex-fill"></div>
       </div>
 
       <!-- 密室逃脫/劇本殺選擇按鈕 -->
@@ -134,51 +122,117 @@
         <button type="button" class="btn btn-outline-warning btn-lg">
           劇本殺
         </button>
-      </div>
-      <!-- 館別按鈕 -->
-      <div id="larp-location" class="d-flex justify-content-evenly">
-        <button type="button" class="active btn btn-primary btn-lg">
-          台北館
-        </button>
-        <button type="button" class="btn btn-lg secondary-text">台中館</button>
-        <button type="button" class="btn btn-lg secondary-text">高雄館</button>
-      </div>
-      <!-- 篩選小助理 -->
-      <div id="select" class="dropdown">
-        <button
-          class="btn btn-warning dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <span> 圖 </span>
-          篩選小助理
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li>
-            <label class="dropdown-item"
-              ><input type="checkbox" value="1" /> 奇幻</label
+        <!-- 館別按鈕 -->
+        <div id="larp-location" class="d-flex justify-content-evenly">
+          <button type="button" class="active btn btn-primary btn-lg">
+            台北館
+          </button>
+          <button type="button" class="btn btn-lg secondary-text">
+            台中館
+          </button>
+          <button type="button" class="btn btn-lg secondary-text">
+            高雄館
+          </button>
+        </div>
+        <!-- 篩選小助理 -->
+        <div id="select" class="dropdown">
+          <button
+            class="btn btn-warning dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-          </li>
-          <li>
-            <label class="dropdown-item"
-              ><input type="checkbox" value="2" /> 懸疑</label
-            >
-          </li>
-          <li>
-            <label class="dropdown-item"
-              ><input type="checkbox" value="3" /> 恐怖</label
-            >
-          </li>
-          <li>
-            <label class="dropdown-item"><button>清除</button></label>
-          </li>
-        </ul>
+              <path d="M6.77771 1.00122H19H6.77771Z" fill="#7F5A3D" />
+              <path
+                d="M6.77771 1.00122H19"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.33325 1.01234L2.34436 1L2.33325 1.01234Z"
+                fill="#7F5A3D"
+              />
+              <path
+                d="M2.33325 1.01234L2.34436 1"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.33325 7.67896L2.34436 7.66663L2.33325 7.67896Z"
+                fill="#7F5A3D"
+              />
+              <path
+                d="M2.33325 7.67896L2.34436 7.66663"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M1 14.1124L1.88889 15.0013L4.11111 12.7791"
+                fill="#7F5A3D"
+              />
+              <path
+                d="M1 14.1124L1.88889 15.0013L4.11111 12.7791"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M6.77771 7.66785H19H6.77771Z" fill="#7F5A3D" />
+              <path
+                d="M6.77771 7.66785H19"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M6.77771 14.3346H19H6.77771Z" fill="#7F5A3D" />
+              <path
+                d="M6.77771 14.3346H19"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span style="margin-left: 15px">篩選小助理</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <label class="dropdown-item"
+                ><input type="checkbox" value="1" /> 奇幻</label
+              >
+            </li>
+            <li>
+              <label class="dropdown-item"
+                ><input type="checkbox" value="2" /> 懸疑</label
+              >
+            </li>
+            <li>
+              <label class="dropdown-item"
+                ><input type="checkbox" value="3" /> 恐怖</label
+              >
+            </li>
+            <li>
+              <label class="dropdown-item"><button>清除</button></label>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <!-- 密室逃脫卡片 -->
-    <div class="larp-container">
+      <!-- 密室逃脫卡片 -->
       <div class="row text-white d-flex justify-content-between">
         <div class="card bg-transparent" style="width: 342px">
           <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
