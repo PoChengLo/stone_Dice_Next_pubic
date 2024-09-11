@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import SideCart from '../../components/board-game/side-cart'
 
 export default function ProductCart() {
   return (
@@ -431,6 +432,7 @@ export default function ProductCart() {
           </div>
         </div>
       </div>
+      <SideCart />
     </>
   )
 }
