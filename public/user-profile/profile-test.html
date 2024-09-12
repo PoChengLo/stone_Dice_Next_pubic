@@ -26,7 +26,7 @@
 
   :root {
     --body-font: "Inter", sans-serif;
-    --theme-bg: #1f1d2b;
+    --theme-bg: rgba(166, 151, 124, 0.5);;
     --body-color: #808191;
     --button-bg: #353340;
     --border-color: rgb(128 129 145 / 24%);
@@ -56,10 +56,11 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* Keep the navbar at 60px */
-    z-index: 999; /* Ensure it's on top */
-    background-color: var(--theme-bg);
+    height: 60px; 
+    z-index: 999; 
+    background-color: #262626;
     padding: 0;
+    margin-bottom: 55px;
 }
 
 .navbar .nav {
@@ -71,10 +72,10 @@
 
 .container {
     background-color: var(--theme-bg);
-    max-width: 1920px;
-    max-height: 900px;
-    height: 95vh;
-    margin-top: 60px; /* Push content below navbar */
+    max-width: 1700px;
+    max-height: 1200px;
+    height: 950px;
+    margin-top: 150px; 
     display: flex;
     overflow: hidden;
     width: 100%;
@@ -86,7 +87,7 @@
 }
 
   .sidebar {
-    width: 220px;
+    width: 280px;
     height: 100%;
     padding: 30px;
     display: flex;
@@ -241,6 +242,7 @@
     align-items: center;
     flex-shrink: 0;
     padding: 30px;
+    
   }
 
   .search-bar {
@@ -337,7 +339,7 @@
   .main-container {
     display: flex;
     flex-direction: column;
-    padding: 0 30px 30px;
+    padding: 0 80px 80px;
     flex-grow: 1;
     overflow: auto;
   }
@@ -391,13 +393,13 @@
   }
 
   .main-blog {
-    background-image: url("https://assets.codepen.io/3364143/skate-removebg-preview.png");
+    
     background-size: 80%;
     background-position-x: 150px;
     background-color: #31abbd;
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 35%;
     padding: 30px;
     border-radius: 20px;
     align-self: stretch;
@@ -409,11 +411,7 @@
 
   .main-blog+.main-blog {
     margin-left: 20px;
-    width: 35%;
-    background-image: url(https://c0.anyrgb.com/images/1020/945/venice-beach-2018-outdoors-sport-men-jumping-desert-sunset-extreme-sports-one-person-action.jpg);
-    background-color: unset;
-    background-position-x: 0;
-    background-size: 139%;
+    width: 65%;
     filter: saturate(1.4);
   }
 
@@ -499,6 +497,7 @@
   .author-detail {
     margin-left: 16px;
   }
+  
   .navbar-brand img {
   height: 60px;
   max-width: 100%;
@@ -506,15 +505,6 @@
   vertical-align: middle;
 }
 
-.navbar {
-  height: 60px;
-  padding: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999; /* Ensure navbar stays on top of other elements */
-  background-color: #000; /* Optional: Add background color */
-}
 
 .navbar-header {
   display: flex;
@@ -662,6 +652,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="wrapper">
       <div class="header">
         <div class="search-bar">
@@ -680,11 +672,22 @@
           
         </div>
       </div>
+
+
       <div class="main-container">
-        <div class="main-header anim" style="--delay: 0s">Discover</div>
+
+
+        
         <div class="main-blogs">
           <div class="main-blog anim" style="--delay: .1s">
-            <div class="main-blog__title">How to do Basic Jumping and how to landing safely</div>
+           
+
+
+            <img
+            src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            class="rounded-circle"
+            alt="avatar"
+          />
             <div class="main-blog__author">
               <div class="author-img__wrapper">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
@@ -694,14 +697,19 @@
                 <img class="author-img"
                   src="https://images.unsplash.com/photo-1560941001-d4b52ad00ecc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" />
               </div>
+
               <div class="author-detail">
                 <div class="author-name">Thomas Hope</div>
                 <div class="author-info">53K views <span class="seperate"></span>2 weeks ago</div>
               </div>
             </div>
+
             <div class="main-blog__time">7 min</div>
           </div>
+
+
           <div class="main-blog anim" style="--delay: .2s">
+            <div class="main-header anim" style="--delay: 0s">個人資料</div>
             <div class="main-blog__title">Skateboard Tips You need to know</div>
             <div class="main-blog__author tips">
               <div class="main-blog__time">7 min</div>
@@ -723,6 +731,8 @@
         <div class="small-header anim" style="--delay: .3s">Most Watched</div>
         
   </div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
   "></script>
 
@@ -747,18 +757,7 @@
     })
     .resize();
 
-  const allVideos = document.querySelectorAll(".video");
 
-  allVideos.forEach((v) => {
-    v.addEventListener("mouseover", () => {
-      const video = v.querySelector("video");
-      video.play();
-    });
-    v.addEventListener("mouseleave", () => {
-      const video = v.querySelector("video");
-      video.pause();
-    });
-  });
 
   $(function () {
     $(".logo, .logo-expand, .discover").on("click", function (e) {
@@ -772,19 +771,10 @@
       $(".trending").addClass("is-active");
     });
 
-    $(".video").click(function () {
-      var source = $(this).find("source").attr("src");
-      var title = $(this).find(".video-name").text();
-      var person = $(this).find(".video-by").text();
-      var img = $(this).find(".author-img").attr("src");
-      $(".video-stream video").stop();
-      $(".video-stream source").attr("src", source);
-      $(".video-stream video").load();
-      $(".video-p-title").text(title);
-      $(".video-p-name").text(person);
-      $(".video-detail .author-img").attr("src", img);
-    });
+    
   });
+
+  
 
 </script>
 
