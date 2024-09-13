@@ -1,0 +1,100 @@
+/* h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.ST {
+  font-size: 14px;
+} */
+.primaryText {
+  color: #d7bf7d;
+}
+
+.secondaryText {
+  color: #f8f0e5;
+}
+
+.cardTitle {
+  color: #f8f0e5;
+}
+
+.cardText {
+  color: #f8f0e5;
+}
+
+.larpContainer {
+  width: 80%;
+  margin: 40px auto 0 auto;
+  /* gap: 67px; */
+}
+
+.larpTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 90px auto 0 auto;
+}
+
+.line {
+  height: 1px;
+  background-color: #d7bf7d;
+}
+
+#larpButton {
+  margin: 0 auto;
+}
+#larpButton button {
+  width: 250px;
+  font-size: 30px;
+  margin-top: 38px;
+  margin-right: 50px;
+}
+
+#larpLocation {
+  margin-top: 20px;
+}
+
+#larpLocation button {
+  background-color: transparent;
+  width: 250px;
+  height: 65px;
+  font-size: 36px;
+  border: none;
+  border-radius: 0;
+}
+
+#larpLocation button.active {
+  /* background-image: url(../larp/img/background-line.png); */
+  color: #d7bf7d;
+  object-fit: cover;
+}
+
+#larpLocation button:hover {
+  color: #d7bf7d;
+}
+
+#select {
+  margin-top: 38px;
+}
+
+.card {
+  padding: 0;
+  border: none;
+  margin-bottom: 67px;
+}

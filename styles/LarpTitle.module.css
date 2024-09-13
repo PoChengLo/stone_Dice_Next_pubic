@@ -1,0 +1,16 @@
+.larpContainer {
+  width: 80%;
+  margin: 40px auto 0 auto;
+  background-color: #1f1f1f;
+}
+.larpTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 90px auto 0 auto;
+}
+.line {
+  height: 1px;
+  background-color: #d7bf7d;
+}
