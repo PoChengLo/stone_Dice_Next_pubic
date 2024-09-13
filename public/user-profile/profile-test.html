@@ -20,13 +20,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  a{
+  text-decoration:none;
+}
   img {
     max-width: 100%;
   }
 
   :root {
     --body-font: "Inter", sans-serif;
-    --theme-bg: rgba(166, 151, 124, 0.5);;
+    --theme-bg: rgba(166, 151, 124, 0.65);;
     --body-color: #808191;
     --button-bg: #353340;
     --border-color: rgb(128 129 145 / 24%);
@@ -45,10 +48,9 @@
     padding: 1em 2em;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
-    /* Remove justify-content and align-items */
+    overflow: auto;
     display: flex;
-    flex-direction: column; /* Keep column direction for normal flow */
+    flex-direction: column; 
 }
 
 .navbar {
@@ -75,9 +77,9 @@
     max-width: 1700px;
     max-height: 1200px;
     height: 950px;
-    margin-top: 150px; 
+    margin-top: 100px; 
     display: flex;
-    overflow: hidden;
+    overflow: auto;
     width: 100%;
     border-radius: 20px;
     font-size: 15px;
@@ -95,7 +97,7 @@
     flex-shrink: 0;
     transition-duration: 0.2s;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
   }
 
   .sidebar .logo {
@@ -194,7 +196,6 @@
   .side-menu a {
     display: flex;
     align-items: center;
-    text-decoration: none;
     color: var(--body-color);
   }
 
@@ -270,52 +271,7 @@
     color: #fff;
   }
 
-  .user-settings {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-
-  .user-settings svg {
-    width: 10px;
-    flex-shrink: 0;
-  }
-
-  @media screen and (max-width: 575px) {
-    .user-settings svg {
-      display: none;
-    }
-  }
-
-  .user-settings .notify {
-    position: relative;
-  }
-
-  .user-settings .notify svg {
-    width: 20px;
-    margin-left: 24px;
-    flex-shrink: 0;
-  }
-
-  .user-settings .notify .notification {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ec5252;
-    position: absolute;
-    right: 1px;
-    border: 1px solid var(--theme-bg);
-    top: -2px;
-  }
-
-  @media screen and (max-width: 575px) {
-    .user-settings .notify .notification {
-      display: none;
-    }
-  }
-
+  
   .user-img {
     width: 30px;
     height: 30px;
@@ -342,6 +298,7 @@
     padding: 0 80px 80px;
     flex-grow: 1;
     overflow: auto;
+    margin-top: 50px;
   }
 
   .anim {
@@ -375,6 +332,7 @@
   .main-blog__author {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-bottom: 10px;
   }
 
@@ -394,39 +352,43 @@
 
   .main-blog {
     
-    background-size: 80%;
-    background-position-x: 150px;
-    background-color: #31abbd;
     display: flex;
     flex-direction: column;
     width: 35%;
     padding: 30px;
     border-radius: 20px;
     align-self: stretch;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
-    transition: background 0.3s;
-    background-repeat: no-repeat;
+    align-items: center;
+  justify-content: center;
+    
+    
   }
 
-  .main-blog+.main-blog {
+  .main-blog1 {
     margin-left: 20px;
     width: 65%;
     filter: saturate(1.4);
   }
 
-  .main-blog+.main-blog .author-img {
+  .main-blog1 .author-img {
     border-color: rgba(255, 255, 255, 0.75);
     margin-top: 14px;
   }
 
-  .main-blog+.main-blog .author-img__wrapper svg {
+  .main-blog1 .author-img__wrapper svg {
     border-color: #ffe6b2;
     color: #e7bb7d;
   }
 
-  .main-blog+.main-blog .author-detail {
+  .main-blog1 .author-detail {
     margin-left: 0;
+  }
+
+  .rounded-circle{
+    width: 250px;
+    
   }
 
   @media screen and (max-width: 905px) {
@@ -489,9 +451,10 @@
   }
 
   .author-info {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
-    color: #fff;
+    color: #D9D9D9;
+    
   }
 
   .author-detail {
@@ -512,19 +475,15 @@
   height: 60px; /* Ensure the height is consistent */
 }
 
-.navbar-brand {
-  font-family: 'Montserrat', sans-serif;
-  height: 60px;
-  padding: 0;
-}
 
 .navbar .nav {
-  font-family: 'Open Sans', sans-serif;
+
   letter-spacing: 3px;
-  font-size: 1.2rem;
+  font-size: 20px;
   display: flex;
   align-items: center;
   height: 60px;
+
 }
 
 .navbar .nav li {
@@ -567,7 +526,12 @@
               <img src="./img/Rectangle 3.png">
               <a href="#">關於我們</a>
             </li>
+            <img class="user-img"
+            src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            alt="">
+          <div class="user-name">汪汪大隊長</div>
           </ul>
+          
         </nav>
       
     </header>
@@ -618,7 +582,16 @@
           </a>
         </div>
       </div>
+      
+          <div class="search-bar">
+            <input type="text" placeholder="Search">
+          </div>
+             
+            
+            
+         
       <div class="side-wrapper">
+        
         <div class="side-title">CATEGORY</div>
         <div class="side-menu">
           <a class="sidebar-link" href="#">
@@ -654,24 +627,7 @@
     </div>
 
 
-    <div class="wrapper">
-      <div class="header">
-        <div class="search-bar">
-          <input type="text" placeholder="Search">
-        </div>
-        <div class="user-settings">
-          <img class="user-img"
-            src="https://images.unsplash.com/photo-1587918842454-870dbd18261a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=943&q=80"
-            alt="">
-          <div class="user-name">Thomas</div>
-          <svg viewBox="0 0 492 492" fill="currentColor">
-            <path
-              d="M484.13 124.99l-16.11-16.23a26.72 26.72 0 00-19.04-7.86c-7.2 0-13.96 2.79-19.03 7.86L246.1 292.6 62.06 108.55c-5.07-5.06-11.82-7.85-19.03-7.85s-13.97 2.79-19.04 7.85L7.87 124.68a26.94 26.94 0 000 38.06l219.14 219.93c5.06 5.06 11.81 8.63 19.08 8.63h.09c7.2 0 13.96-3.57 19.02-8.63l218.93-219.33A27.18 27.18 0 00492 144.1c0-7.2-2.8-14.06-7.87-19.12z">
-            </path>
-          </svg>
-          
-        </div>
-      </div>
+    
 
 
       <div class="main-container">
@@ -690,16 +646,12 @@
           />
             <div class="main-blog__author">
               <div class="author-img__wrapper">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
-                  stroke-linejoin="round" class="feather feather-check">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-                <img class="author-img"
-                  src="https://images.unsplash.com/photo-1560941001-d4b52ad00ecc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" />
+                
+               
               </div>
 
               <div class="author-detail">
-                <div class="author-name">Thomas Hope</div>
+           
                 <div class="author-info">53K views <span class="seperate"></span>2 weeks ago</div>
               </div>
             </div>
@@ -708,7 +660,7 @@
           </div>
 
 
-          <div class="main-blog anim" style="--delay: .2s">
+          <div class="main-blog1 anim" style="--delay: .2s">
             <div class="main-header anim" style="--delay: 0s">個人資料</div>
             <div class="main-blog__title">Skateboard Tips You need to know</div>
             <div class="main-blog__author tips">
@@ -729,6 +681,9 @@
           </div>
         </div>
         <div class="small-header anim" style="--delay: .3s">Most Watched</div>
+
+        <br>
+        <br>
         
   </div>
 
