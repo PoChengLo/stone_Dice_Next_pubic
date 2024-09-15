@@ -84,7 +84,7 @@ export default function ProductPage() {
           <div className="col">
             <Tabs
               defaultActiveKey="home"
-              id="uncontrolled-tab-example"
+              id="bg-story-user-commit"
               className="mb-3"
             >
               {/* 背景故事 Tab */}

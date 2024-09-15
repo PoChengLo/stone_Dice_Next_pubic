@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-
+import styles from '@/styles/board-game-css/board-game-style.module.css'
 export default function BoardGame() {
   return (
     <>
@@ -16,7 +16,9 @@ export default function BoardGame() {
             />
           </div>
           <div className="col-6">
-            <button className="btn btn-primary">單人遊戲</button>
+            <button className={`btn btn-primary ${styles.btnPrimary}`}>
+              單人遊戲
+            </button>
           </div>
         </div>
         {/* 總共商品數，下拉式選單，卡片，詳細資訊 */}
@@ -466,29 +468,29 @@ export default function BoardGame() {
             <div className="row">
               <div className="col">
                 <nav aria-label="Page navigation example d-flex justify-content-center">
-                  <ul class="pagination d-flex justify-content-center">
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
+                  <ul className="pagination d-flex justify-content-center">
+                    <li className="page-item">
+                      <a className="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
+                    <li className="page-item">
+                      <a className="page-link" href="#">
                         1
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
+                    <li className="page-item">
+                      <a className="page-link" href="#">
                         2
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
+                    <li className="page-item">
+                      <a className="page-link" href="#">
                         3
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
+                    <li className="page-item">
+                      <a className="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
