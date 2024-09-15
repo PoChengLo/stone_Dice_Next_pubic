@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import SideCartAccordion from '@/components/board-game/side-cart-accordion'
 import ETicketTabs from '@/components/board-game/e-ticket-tabs'
-import Recipient from '@/components/board-game/recipient'
 export default function UserInfo() {
   return (
     <>
