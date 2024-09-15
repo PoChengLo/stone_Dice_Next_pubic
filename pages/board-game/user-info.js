@@ -21,7 +21,6 @@ export default function UserInfo() {
         {/* 主要區域 */}
         <div className="row">
           {/* 側邊購物車明細，商品明細 */}
-          {/* 位置互換 */}
           <div className="col-3">
             <SideCartAccordion />
           </div>
@@ -63,7 +62,6 @@ export default function UserInfo() {
               </div>
               {/* 電子發票，公司統編，手機載具 */}
               {/* 找測試用的API */}
-
               <div className="row">
                 <div className="col">
                   <label htmlFor="e-ticket" className="form-label">
@@ -72,16 +70,7 @@ export default function UserInfo() {
                   <ETicketTabs />
                 </div>
               </div>
-              {/* 取件人資訊 */}
-              {/* 收件換到物流區 */}
-              <div className="row">
-                <div className="col">
-                  <label htmlFor="e-ticket" className="form-label">
-                    取件人資訊
-                  </label>
-                  <Recipient />
-                </div>
-              </div>
+
               {/* 繼續購物，付款與運送，按鈕 */}
               <div className="row">
                 <div className="col">
