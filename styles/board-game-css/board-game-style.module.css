@@ -1,0 +1,8 @@
+.btnPrimary {
+  --bs-btn-color: #f8f0e5 !important;
+  --bs-btn-hover-color: #1f1f1f;
+  --bs-btn-bg: rgba(127, 90, 61, 0.7);
+  --bs-btn-border-color: #rgba(127, 90, 61, 0.7);
+  --bs-btn-hover-bg: #d7bf7d;
+  --bs-btn-hover-border-color: #d7bf7d;
+}/*# sourceMappingURL=board-game-style.module.css.map */
