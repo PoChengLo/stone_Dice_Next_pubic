@@ -1,0 +1,13 @@
+#select {
+  margin-top: 38px;
+  width: 170px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background-color: #d7bf7d;
+  color: #7f5a3d;
+}
+.btn-primary {
+  border-radius: 50px;
+  background-color: #d7bf7d;
+  color: #7f5a3d;
+}

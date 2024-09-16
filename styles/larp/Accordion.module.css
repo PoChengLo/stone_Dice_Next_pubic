@@ -1,0 +1,43 @@
+.accordion {
+  margin-top: 60px;
+  --bs-border-color: none !important; /* 暴力改bootstrap樣式*/
+  --bs-accordion-bg: transparent !important;
+  color: #d7bf7d;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-active-bg: transparent;
+}
+.accordionItem {
+  background-color: transparent;
+  color: #f8f0e5;
+  font-size: 20px;
+  border: none !important;
+}
+.accordionHeader {
+  color: #d7bf7d;
+  height: 50px !important;
+  background-color: transparent;
+  border-radius: 0% !important;
+  border-bottom: 1px solid #d7bf7d !important;
+}
+.accordionHeader::after {
+  color: #d7bf7d;
+}
+.accordionHeader button {
+  margin: 0;
+  padding: 0 0 20px 0;
+  height: 50px;
+}
+.accordionHeader h3 {
+  padding: 0;
+  margin: 0;
+  color: #d7bf7d;
+}
+.accordionButton,
+.accordionButton:not(.collapsed) {
+  /* background-color: transparent !important; */
+  color: #f8f0e5;
+  font-size: 20px;
+  border: none !important;
+  border-radius: 0% !important;
+  border-bottom: 1px solid #d7bf7d !important;
+}

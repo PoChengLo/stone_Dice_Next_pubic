@@ -1,0 +1,23 @@
+.card {
+  padding: 0;
+  border: none;
+  margin-bottom: 67px;
+}
+.card:hover {
+  box-shadow: 0px 4px 26.5px 0px #7f5a3d;
+}
+.btn {
+  background-color: #7f5a3d;
+  color: #f8f0e5;
+  display: flex;
+  width: 142px;
+  padding: 8px 36px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border-radius: 10px;
+}
+.btn:hover {
+  background: #d7bf7d;
+  color: #1f1f1f;
+}
