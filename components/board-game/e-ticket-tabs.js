@@ -6,8 +6,8 @@ export default function ETicketTabs() {
   return (
     <>
       <Tabs
-        defaultActiveKey="profile"
-        id="uncontrolled-tab-example"
+        defaultActiveKey="user-vehicle"
+        id="ETicketTabs"
         className="mb-3"
         variant="pills"
       >
