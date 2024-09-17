@@ -7,7 +7,7 @@ function LarpCard() {
   return (
     <Card
       className={`${styles.card} card bg-transparent`}
-      style={{ width: 342, color: '#f8f0e5' }}
+      style={{ width: '22%', color: '#f8f0e5' }}
     >
       <Image
         src="https://i.postimg.cc/MK1Y8ZvC/image.png"

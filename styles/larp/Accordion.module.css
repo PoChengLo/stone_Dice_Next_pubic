@@ -18,6 +18,7 @@
   background-color: transparent;
   border-radius: 0% !important;
   border-bottom: 1px solid #d7bf7d !important;
+  margin: 20px 0;
 }
 .accordionHeader::after {
   color: #d7bf7d;

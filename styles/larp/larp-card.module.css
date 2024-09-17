@@ -10,8 +10,8 @@
   background-color: #7f5a3d;
   color: #f8f0e5;
   display: flex;
-  width: 142px;
-  padding: 8px 36px;
+  width: 46%;
+  padding: 8px 0;
   justify-content: center;
   align-items: center;
   gap: 15px;
@@ -20,4 +20,7 @@
 .btn:hover {
   background: #d7bf7d;
   color: #1f1f1f;
+}
+.carouselItem {
+  width: 30%;
 }

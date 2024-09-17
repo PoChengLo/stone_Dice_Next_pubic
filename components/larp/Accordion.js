@@ -51,6 +51,59 @@ function AccordionItem() {
           </ul>
         </Accordion.Body>
       </Accordion.Item>
+      <Accordion.Item className={styles.accordionItem} eventKey="1">
+        <Accordion.Header className={styles.accordionHeader}>
+          <h3>客戶須知</h3>
+        </Accordion.Header>
+        <Accordion.Body className={styles.accordionButton}>
+          <ul>
+            <li>
+              如欲查詢退訂規則或有取消訂單之需求，請參考「注意事項」
+              了解詳細資訊。
+            </li>
+            <li>
+              如因天災等不可抗力之因素，或因報名人數未達開班門檻而須取消活動，石之骰
+              將主動聯繫延期或退款。
+            </li>
+            <li>
+              若因訂購資訊填寫不完整致使店家無法提供服務，店家有權取消該筆訂單。
+            </li>
+            <li>
+              為保障其他學員及老師權益，請消費者務必於您訂購的體驗時間準時抵達。
+            </li>
+            <li>特殊需求之額外費用，依現場規定收取。</li>
+            <li>個別方案之特殊規則依注意事項為準。</li>
+          </ul>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item className={styles.accordionItem} eventKey="2">
+        <Accordion.Header className={styles.accordionHeader}>
+          <h3>取消與更改時間政策</h3>
+        </Accordion.Header>
+        <Accordion.Body className={styles.accordionButton}>
+          <span>更改訂單時間注意事項：</span>
+          <ul>
+            <li>在享樂時間開始 3 天前，可更改一次享樂時間。</li>
+            <li>享樂時間變更後，該訂單不可再次更改或取消。</li>
+            <li>線上付款更改時間如有價差，將不另行退款。</li>
+          </ul>
+          <span>取消訂單注意事項：</span>
+          <ul>
+            <li>在享樂時間開始前 7 日（含）前取消，將全額退費。</li>
+            <li>
+              在享樂時間開始前 4 ～ 6 日（含）取消，將收取訂單金額之 50% 訂金。
+            </li>
+            <li>
+              在享樂時間當天（第 0 日） ～ 享樂時間開始前 3
+              日（含）取消，將收取訂單金額之 100% 訂金。
+            </li>
+            <li>
+              若使用信用卡分期付款且有收取部分款項時，於全額退回款項後，以此交易相同信用卡支付。
+            </li>
+            <li>截止時間皆以方案當地時間為準。</li>
+          </ul>
+        </Accordion.Body>
+      </Accordion.Item>
     </Accordion>
   )
 }

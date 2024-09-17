@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-bootstrap'
 import styles from '@/styles/larp/Larp.module.css'
-import TitleLine from '@/components/larp/title-line.js'
+import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/larp-card'
 import DropdownButton from '@/components/larp/select-button.js'
 
@@ -16,8 +16,8 @@ export default function LarpPage() {
         height={'auto'}
       />
       <div className={styles.larpContainer}>
-        <TitleLine />
-
+        {/* 遊戲主題分隔線 */}
+        <Line title="遊戲主題" />
         {/* 館別按鈕 */}
         <div id={styles.larpLocation} className="d-flex justify-content-evenly">
           <button

@@ -1,6 +1,6 @@
 import styles from '@/styles/larp/line.module.css'
 
-const TitleLine = () => {
+const TitleLine = ({ title = '' }) => {
   return (
     <>
       <div
@@ -12,7 +12,7 @@ const TitleLine = () => {
           className={`${styles.primaryText} text-center`}
           style={{ fontSize: 40, padding: '0 30px' }}
         >
-          遊戲主題
+          {title}
         </h3>
         <div className={`${styles.line} flex-fill`} />
       </div>
