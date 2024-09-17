@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+"
+    />
+    <style>
+      .larpContainer {
+        width: 80%;
+        margin: 40px auto;
+        /* gap: 67px; */
+      }
+      .primaryText {
+        color: #d7bf7d;
+      }
+      .secondaryText {
+        color: #f8f0e5;
+      }
+      .line {
+        height: 1px;
+        background-color: #d7bf7d;
+      }
+      #infoGroup {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.3) 0%,
+          rgba(153, 153, 153, 0.3) 100%
+        );
+        margin-top: 40px;
+        display: flex;
+        padding: 30px 200px;
+        flex-direction: column;
+        align-items: flex-start;
+        /* gap: 76px; */
+        align-self: stretch;
+      }
+      .orderInfo {
+        display: flex;
+        padding: 50px 100px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 23px;
+        align-self: stretch;
+        border-radius: 10px;
+        border: 1px solid #f8f0e5;
+      }
+      .orderLine {
+        display: flex;
+        padding-right: 150px;
+        align-items: flex-start;
+        gap: 23px;
+        align-self: stretch;
+      }
+      .orderMin {
+        display: flex;
+        width: 304px;
+        align-items: center;
+        gap: 54px;
+      }
+    </style>
+  </head>
+  <body class="bg-dark">
+    <!-- 導覽列 -->
+    <div class="text-white" style="height: 60px">我是navbar</div>
+    <div class="larpContainer">
+      <!-- 立即預約進度條 -->
+      <div
+        id="order-step"
+        class="d-flex justify-content-around align-items-center"
+        style="margin: 60px 189px 0 189px"
+      >
+        <div class="d-flex align-items-center" style="padding: 0 22px">
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="8.5" cy="8.5" r="8" stroke="#D7BF7D" />
+          </svg>
+          <p class="primaryText d-inline" style="margin: 0 0 0 10px">
+            填寫訂單資料
+          </p>
+        </div>
+        <div class="line flex-fill"></div>
+        <div class="d-flex align-items-center" style="padding: 0 22px">
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="8.5" cy="8.5" r="8" stroke="#D7BF7D" />
+          </svg>
+          <p class="primaryText d-inline" style="margin: 0 0 0 10px">
+            確認訂單資料
+          </p>
+        </div>
+        <div class="line flex-fill" style="background-color: #6e7c91"></div>
+        <div class="d-flex align-items-center" style="padding: 0 22px">
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="8.5" cy="8.5" r="8" stroke="#6e7c91" />
+          </svg>
+          <p
+            class="primaryText d-inline"
+            style="margin: 0 0 0 10px; color: #6e7c91"
+          >
+            付款
+          </p>
+        </div>
+        <div class="line flex-fill" style="background-color: #6e7c91"></div>
+        <div class="d-flex align-items-center" style="padding: 0 22px">
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="8.5" cy="8.5" r="8" stroke="#6e7c91" />
+          </svg>
+          <p
+            class="primary-text d-inline"
+            style="margin: 0 0 0 10px; color: #6e7c91"
+          >
+            預約完成
+          </p>
+        </div>
+      </div>
+      <!-- 表單 -->
+      <!-- 訂單資料 -->
+      <div id="infoGroup">
+        <h4 class="secondaryText">訂單資料</h4>
+        <div class="orderInfo">
+          <div class="orderLine">
+            <div class="orderMin">
+              <h4>預約主題</h4>
+              <h4>幽靈船的詛咒</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
