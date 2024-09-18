@@ -10,13 +10,16 @@ function ProdCard() {
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
     >
-      <Image
-        src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-        className={` ${styles.card_img_top}`}
-        alt=""
-        width={280}
-        height={280}
-      />
+      <Link href="../single-page/1">
+        <Image
+          src="https://i.postimg.cc/t4f6cdQw/043.jpg"
+          className={` ${styles.card_img_top}`}
+          alt=""
+          width={280}
+          height={280}
+        />
+      </Link>
+
       <Card.Body className={`card-body ${styles.card_body}`}>
         <Card.Title>
           <p className="card-text d-flex justify-content-between">
