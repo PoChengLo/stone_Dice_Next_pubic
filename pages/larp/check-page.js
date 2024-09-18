@@ -1,17 +1,13 @@
 import React from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
-// import BgImg from '@/public/larp/img/cart-bg.png'
+import ETicketTabs from '@/components/larp/e-ticket-tabs'
 
 export default function CheckPage() {
-  const bodyBg = {
-    backgroundImage: 'url(https://i.postimg.cc/3J578SB5/1.png)',
-    backgroundSize: 'cover',
-    height: '100vh',
-    width: '100vw',
-  }
   return (
-    // className={styles.bodyBg}
-    <div style={bodyBg}>
+    <div
+      className={styles.bodyBg}
+      // style={bodyBgStyle}
+    >
       {/* 導覽列 */}
       <div className="text-white bg-dark" style={{ height: 60 }}>
         我是navbar
@@ -170,6 +166,7 @@ export default function CheckPage() {
           </h4>
           <div className={styles.orderInfo}>
             <h4 className={styles.orderTitle}>電子發票</h4>
+            <ETicketTabs />
           </div>
         </div>
       </div>
