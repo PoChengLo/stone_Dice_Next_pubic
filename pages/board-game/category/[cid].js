@@ -2,9 +2,11 @@ import React from 'react'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import ProdCard from '@/components/board-game/prod-card'
 import SideClass from '@/components/board-game/side-class-m'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 export default function BoardGame() {
   return (
     <>
+      <Navbar></Navbar>
       <div className="container">
         {/* 搜尋欄，標籤 */}
         <div className="row my-3">
