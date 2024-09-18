@@ -1,27 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import { LiaCircleSolid } from 'react-icons/lia'
-import { CiCircleCheck } from 'react-icons/ci'
+import { FaCircleCheck } from 'react-icons/fa6'
 import styles from '@/styles/larp/checkpage.module.css'
 
 export default function ETicketTabs() {
-  // const activeTab = 'aaa'
+  const [activeTab, setActiveTab] = useState('user-vehicle')
   return (
     <>
-      <Tabs defaultActiveKey="user-vehicle" id="ETicketTabs" variant="pills">
+      <Tabs
+        defaultActiveKey={activeTab}
+        onSelect={(i) => {
+          setActiveTab(i)
+        }}
+        id="ETicketTabs"
+        variant="pills"
+        className="d-flex"
+        style={{ gap: '41px' }}
+      >
         <Tab
           tabClassName={styles.navButton}
+          tabStyle={{ border: '1px solid #F8F0E5' }}
           eventKey="user-vehicle"
           title={
             <div
-              className="d-flex  align-item-center mb-0"
+              className="d-flex align-item-center mb-0"
               style={{ gap: '12px' }}
             >
-              {'activeTab' ? (
-                <LiaCircleSolid style={{ width: '24px', height: '24px' }} />
+              {activeTab === 'user-vehicle' ? (
+                <FaCircleCheck style={{ width: '24px', height: '24px' }} />
               ) : (
-                <CiCircleCheck style={{ width: '24px', height: '24px' }} />
+                <LiaCircleSolid style={{ width: '24px', height: '24px' }} />
               )}
               <p className="d-inline mb-0">會員載具 (個人)</p>
             </div>
@@ -42,21 +52,27 @@ export default function ETicketTabs() {
               className="d-flex  align-item-center "
               style={{ gap: '12px', margin: 0 }}
             >
-              <LiaCircleSolid style={{ width: '24px', height: '24px' }} />
+              {activeTab === 'company-vehicle' ? (
+                <FaCircleCheck style={{ width: '24px', height: '24px' }} />
+              ) : (
+                <LiaCircleSolid style={{ width: '24px', height: '24px' }} />
+              )}
               <p className="d-inline mb-0">公司統編</p>
             </div>
           }
         >
           <div className="d-flex justify-content-between">
             <input
+              style={{ width: '300px' }}
               type="text"
-              className="form-control"
+              className={`form-control ${styles.inputColor}`}
               id="company-vehicle-input"
               placeholder="請輸入統一編號"
             />
             <input
+              style={{ width: '300px' }}
               type="text"
-              className="form-control"
+              className={`form-control ${styles.inputColor}`}
               id="company-title-input"
               placeholder="請輸入發票抬頭"
             />
@@ -70,14 +86,18 @@ export default function ETicketTabs() {
               className="d-flex align-item-center"
               style={{ gap: '12px', margin: 0 }}
             >
-              <LiaCircleSolid style={{ width: '24px', height: '24px' }} />
+              {activeTab === 'phone-vehicle' ? (
+                <FaCircleCheck style={{ width: '24px', height: '24px' }} />
+              ) : (
+                <LiaCircleSolid style={{ width: '24px', height: '24px' }} />
+              )}
               <p className="d-inline mb-0">手機載具</p>
             </div>
           }
         >
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${styles.inputColor}`}
             id="phone-vehicle-input"
             placeholder="手機條碼 第一碼務必為 /，後面為7碼（大寫英文、符號、數字）"
           />

@@ -4,6 +4,7 @@
   height: 100%;
   color: #d7bf7d;
   z-index: 2;
+  padding-bottom: 40px;
 }
 .larpContainer {
   width: 80%;
@@ -73,6 +74,23 @@
 .navButton {
   --bs-nav-pills-link-active-bg: #f8f0e5;
   --bs-nav-pills-link-active-color: #4e4e4e;
-  --bs-nav-link-hover-color: f8f0e5;
+  --bs-nav-link-hover-color: #f8f0e5;
   color: #f8f0e5;
+  border: 1px solid #f8f0e5;
+  padding: 8px 24px;
+}
+.inputColor {
+  --bs-body-bg: #f8f0e5;
+  margin-right: 20px;
+}
+.btnstyle {
+  background-color: rgba(127, 90, 61, 0.7);
+  color: #f8f0e5;
+  border: none;
+  width: 192px;
+  padding: 9px 39px;
+}
+.btnstyle:hover {
+  background-color: #d7bf7d;
+  color: #4e4e4e;
 }
