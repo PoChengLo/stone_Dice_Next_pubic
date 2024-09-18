@@ -1,0 +1,13 @@
+.inputGroup {
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+.inputGroupText {
+  color: #f8f0e5;
+  background-color: transparent;
+  border: none;
+}
+
+.secondaryText {
+  color: #f8f0e5;
+}

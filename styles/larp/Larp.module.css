@@ -1,0 +1,33 @@
+.larpBody {
+  background-color: #1f1f1f;
+}
+.larpContainer {
+  width: 80%;
+  margin: 40px auto 0 auto;
+}
+.primaryText {
+  color: #d7bf7d;
+}
+.secondaryText {
+  color: #f8f0e5;
+}
+#larpLocation {
+  margin-top: 20px;
+}
+#larpLocation button {
+  background-color: transparent;
+  width: 250px;
+  height: 65px;
+  font-size: 36px;
+  border: none;
+  border-radius: 0;
+}
+#larpLocation button.active {
+  background-image: url(/public/larp/img/background-line.png);
+  color: #d7bf7d;
+  object-fit: cover;
+}
+#larpLocation button:hover {
+  color: #d7bf7d;
+}
+
