@@ -3,27 +3,25 @@
   max-width: 1700px;
   max-height: 1200px;
   height: 950px;
-  margin-top: 50px;
   display: flex;
   overflow: auto;
   width: 100%;
   border-radius: 20px;
-  font-size: 15px;
-  font-weight: 500;
   box-shadow: 0 20px 50px rgba(73, 62, 31, 0.3);
   position: relative;
   max-width: calc(100% - 260px);
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 .sidebar {
   width: 320px;
   height: 100%;
   padding: 30px;
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  transition-duration: 0.2s;
   overflow-y: auto;
   overflow-x: auto;
 }
@@ -121,11 +119,10 @@
 
 .side-menu svg {
   width: 30px;
-  padding: 8px;
   border-radius: 10px;
   background-color: #353340;
-  flex-shrink: 0;
   margin-right: 16px;
+  padding: 4.5px;
 }
 
 .side-menu svg:hover {
@@ -208,6 +205,25 @@
   margin-bottom: 10px;
   border-collapse: collapse;
 }
+
+.anim tr{
+  width: 100%;
+}
+
+.anim tr td{
+  width: 33%;
+    padding: 10px;
+    border: none;
+    
+}
+
+.anim tr td a{
+  width: 33%;
+    padding: 10px;
+    border: none;
+    margin-left:230px ;
+}
+
 
 .main-header {
   font-size: 36px;
