@@ -10,7 +10,7 @@ import CarouselCard from '@/components/larp/Carousel'
 
 export default function LarpId() {
   return (
-    <body className={styles.larpBody}>
+    <div className={styles.larpBody}>
       {/* 置頂大圖 */}
       <div className="position-relative">
         <Image
@@ -338,6 +338,6 @@ export default function LarpId() {
           <CarouselCard />
         </div>
       </div>
-    </body>
+    </div>
   )
 }

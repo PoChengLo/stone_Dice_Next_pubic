@@ -4,10 +4,11 @@ import styles from '@/styles/larp/Larp.module.css'
 import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/larp-card'
 import DropdownButton from '@/components/larp/select-button.js'
+import { Fragment } from 'react'
 
 export default function LarpPage() {
   return (
-    <body className={styles.larpBody}>
+    <div className={styles.larpBody}>
       {/* 置頂大圖 */}
       <Image
         src="https://i.postimg.cc/qqgTnCn5/image.png"
@@ -57,6 +58,6 @@ export default function LarpPage() {
           <Card />
         </div>
       </div>
-    </body>
+    </div>
   )
 }
