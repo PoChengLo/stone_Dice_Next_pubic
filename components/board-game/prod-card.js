@@ -5,7 +5,9 @@ import { BsHeart } from 'react-icons/bs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-function ProdCard() {
+function ProdCard(props) {
+  console.log(props)
+
   return (
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
