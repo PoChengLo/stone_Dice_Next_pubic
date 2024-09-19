@@ -4,7 +4,7 @@ import ProdCard from '@/components/board-game/prod-card'
 import SideClass from '@/components/board-game/side-class-m'
 export default function BoardGame() {
   return (
-    <>
+    <div id={`${styles.backgroundImage}`}>
       <div className="container">
         {/* 搜尋欄，標籤 */}
         <div className="row my-3">
@@ -184,7 +184,7 @@ export default function BoardGame() {
           <div className="col-12 col-xxl-10 ">
             <div className={`row`}>
               <div className="col-6 col-xxl-3">
-                <ProdCard />
+                <ProdCard title="123" />
               </div>
               <div className="col-6 col-xxl-3">
                 <ProdCard />
@@ -244,6 +244,6 @@ export default function BoardGame() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

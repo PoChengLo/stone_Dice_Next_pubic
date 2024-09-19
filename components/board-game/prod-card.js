@@ -5,7 +5,7 @@ import { BsHeart } from 'react-icons/bs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-function ProdCard() {
+function ProdCard({ title }) {
   return (
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
@@ -23,7 +23,7 @@ function ProdCard() {
       <Card.Body className={`card-body ${styles.card_body}`}>
         <Card.Title>
           <p className="card-text d-flex justify-content-between">
-            商品名稱
+            {title}
             <BsHeart className={`${styles.bi_heart}`} />
           </p>
         </Card.Title>
