@@ -1,0 +1,18 @@
+.primaryText {
+  color: #d7bf7d;
+  letter-spacing: 8px;
+}
+.secondarText {
+  color: #f8f0e5;
+}
+.line {
+  height: 1px;
+  background-color: #d7bf7d;
+}
+.larpTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 90px auto 0 auto;
+}
