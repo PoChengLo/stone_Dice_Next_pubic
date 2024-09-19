@@ -18,6 +18,15 @@ const imageStyle = {
   objectFit: 'cover',
   boxShadow:
     '130px 107px 47px 0px rgba(0, 0, 0, 0.00), 83px 68px 43px 0px rgba(0, 0, 0, 0.01), 47px 38px 36px 0px rgba(0, 0, 0, 0.05), 21px 17px 27px 0px rgba(0, 0, 0, 0.09), 5px 4px 15px 0px rgba(0, 0, 0, 0.10)',
+  position: 'relative',
+}
+
+const secondImageStyle = {
+  position: 'absolute',
+  top: '220px',
+  right: '50px',
+  filter:
+    'drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.10)) drop-shadow(0px 9px 9px rgba(0, 0, 0, 0.09)) drop-shadow(0px 20px 12px rgba(0, 0, 0, 0.05)) drop-shadow(0px 35px 14px rgba(0, 0, 0, 0.01)) drop-shadow(0px 55px 15px rgba(0, 0, 0, 0.00))',
 }
 
 const backgroundStyle = {
@@ -97,12 +106,15 @@ export default function userProfile() {
                   height={280}
                   style={imageStyle}
                 />
-                <Image
-                  src="https://i.postimg.cc/dtzxD7Ks/cccccrrr.png"
-                  alt=""
-                  width={80}
-                  height={80}
-                />
+                <a href="#">
+                  <Image
+                    src="https://i.postimg.cc/dtzxD7Ks/cccccrrr.png"
+                    alt=""
+                    width={80}
+                    height={80}
+                    style={secondImageStyle}
+                  />
+                </a>
                 <div className={styles['main-blog-author']}>
                   <div className={styles['author-img-wrapper']}></div>
                   <div className={styles['author-detail']}>
@@ -115,7 +127,11 @@ export default function userProfile() {
               <div className={styles['main-blog1']}>
                 <div className={styles['main-header']}>個人資料</div>
                 <div className={styles['main-blog-title']}>
-                  您好！汪汪大隊長！維持宇宙和平的任務就靠您了！
+                  <p>
+                    您好！汪汪大隊長！維持宇宙和平的任務就靠您了！
+                    <br />
+                    目前消費累積金額 1500 元 點數：15 點
+                  </p>
                 </div>
                 <div className={styles['main-blog-author tips']}>
                   <div className={styles['main-blog-time']}>7 min</div>
@@ -127,7 +143,11 @@ export default function userProfile() {
                       height={160}
                     />
                     <div>
-                      <p>會員等級</p>
+                      <p>
+                        會員等級 <span>金骰子</span>
+                        <br />
+                        消費累積滿 5000 即可升級柏金骰子
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -174,6 +194,15 @@ export default function userProfile() {
             </table>
             <div className={styles['line']} />
             <div className={styles['small-header']}>詳細資料</div>
+            <div className={styles['search-bar']}>
+              <input type="text" placeholder="Search" />
+            </div>
+            <div className={styles['search-bar']}>
+              <input type="text" placeholder="Search" />
+            </div>
+            <div className={styles['search-bar']}>
+              <input type="text" placeholder="Search" />
+            </div>
             <div className={styles['line']} />
             <div className={styles['small-header']}>電子報</div>
           </div>
