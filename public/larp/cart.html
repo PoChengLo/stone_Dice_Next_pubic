@@ -10,6 +10,12 @@
 "
     />
     <style>
+      h4 {
+        font-size: 20px;
+      }
+      .bodyBg {
+        background-image: url(img/cart-bg.png);
+      }
       .larpContainer {
         width: 80%;
         margin: 40px auto;
@@ -52,8 +58,8 @@
       .orderLine {
         display: flex;
         padding-right: 150px;
+        justify-content: space-between;
         align-items: flex-start;
-        gap: 23px;
         align-self: stretch;
       }
       .orderMin {
@@ -62,15 +68,19 @@
         align-items: center;
         gap: 54px;
       }
+      .orderTitle {
+        width: 100px;
+        flex-shrink: 0;
+      }
     </style>
   </head>
-  <body class="bg-dark">
+  <body class="bodyBg">
     <!-- 導覽列 -->
-    <div class="text-white" style="height: 60px">我是navbar</div>
+    <div class="text-white bg-dark" style="height: 60px">我是navbar</div>
     <div class="larpContainer">
       <!-- 立即預約進度條 -->
       <div
-        id="order-step"
+        id="orderStep"
         class="d-flex justify-content-around align-items-center"
         style="margin: 60px 189px 0 189px"
       >
@@ -142,15 +152,63 @@
       </div>
       <!-- 表單 -->
       <!-- 訂單資料 -->
-      <div id="infoGroup">
-        <h4 class="secondaryText">訂單資料</h4>
+      <div id="infoGroup" class="secondaryText">
+        <h4 class="secondaryText" style="padding:10px">訂單資料</h4>
         <div class="orderInfo">
           <div class="orderLine">
             <div class="orderMin">
-              <h4>預約主題</h4>
+              <h4 class="orderTitle">預約主題</h4>
               <h4>幽靈船的詛咒</h4>
             </div>
+            <div class="orderMin">
+              <h4 class="orderTitle">館別</h4>
+              <h4>台北館</h4>
+            </div>
           </div>
+          <div class="orderLine">
+            <div class="orderMin">
+              <h4 class="orderTitle">日期</h4>
+              <h4>2024/09/05</h4>
+            </div>
+            <div class="orderMin">
+              <h4 class="orderTitle">時段</h4>
+              <h4>10:00</h4>
+            </div>
+          </div>
+          <div class="orderLine">
+            <div class="orderMin">
+              <h4 class="orderTitle">人數</h4>
+              <h4>8人</h4>
+            </div>
+            <div class="orderMin">
+              <h4 class="orderTitle">聯絡人信箱</h4>
+              <h4>flower@test.com</h4>
+            </div>
+          </div>
+          <div class="orderLine">
+            <div class="orderMin">
+              <h4 class="orderTitle">聯絡人姓名</h4>
+              <h4>小蘭花</h4>
+            </div>
+            <div class="orderMin">
+              <h4 class="orderTitle">聯絡人電話</h4>
+              <h4>0912-345-678</h4>
+            </div>
+          </div>
+          <div
+            class="orderLine flex-row-reverse"
+            style="border-top: 1px dashed #f8f0e5; padding-top: 20px"
+          >
+            <div div class="orderMin justify-content-end">
+              <h4 class="orderTitle">訂單金額</h4>
+              <h4>5,200 元</h4>
+            </div>
+          </div>
+        </div>
+        <!-- 付款資訊 -->
+        <h4 class="secondaryText" style="margin-top: 76px;padding: 10px;">付款資訊</h4>
+        <div class="orderInfo">
+          <h4 class="orderTitle">電子發票</h4>
         </div>
       </div>
     </div>
