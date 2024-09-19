@@ -11,7 +11,6 @@
   position: relative;
   max-width: calc(100% - 260px);
   margin: 0 auto;
-  margin-top: 50px;
 }
 
 .sidebar {
@@ -274,12 +273,12 @@
 .main-blog {
   display: flex;
   flex-direction: column;
-  width: 100%; 
-  max-width: 450px; 
-  padding: 1%; 
+  width: 100%;
+  max-width: 450px;
+  padding: 1%;
   border-radius: 20px;
   align-self: stretch;
-  overflow: hidden; 
+  overflow: hidden;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -287,13 +286,13 @@
 
 .main-blog1 {
   display: flex;
-width: 707px;
-padding: 14px 0px 41px 36px;
-flex-direction: column;
-align-items: flex-start;
-gap: 15px;
-border: 2px solid rgba(84, 69, 41, 0.80);
-background: rgba(217, 191, 143, 0.30);
+  width: 707px;
+  padding: 14px 0px 41px 36px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  border: 2px solid rgba(84, 69, 41, 0.8);
+  background: rgba(217, 191, 143, 0.3);
 }
 
 .main-blog1 .author-img {
