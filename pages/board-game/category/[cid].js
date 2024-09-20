@@ -210,13 +210,15 @@ export default function BoardGame() {
           {/* 商品卡片 */}
           <div className="col-12 col-xxl-10 ">
             <div className={`row`}>
-              <div className="col-6 col-xxl-3">
-                <ProdCard title="123" />
-                {products.map((v, i) => {
-                  return <ProdCard key={v.prod_id} />
-                })}
-                <ProdCard />
-              </div>
+              {products.map((product) => (
+                <div className="col-6 col-xxl-3" key={product.id}>
+                  <ProdCard
+                    prodName={product.prod_name}
+                    prodImg={product.prod_img}
+                    prodPrice={product.prod_price}
+                  />
+                </div>
+              ))}
               <div className="col-6 col-xxl-3">
                 <ProdCard />
               </div>
