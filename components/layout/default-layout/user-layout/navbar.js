@@ -28,56 +28,26 @@ export default function Navbar() {
           <ul>
             <li>
               <div className={styles['main-item']}>
-                <Image
-                  src="https://i.postimg.cc/3xmbGKKg/Rectangle-3.png"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
                 <a href="#">桌遊商品</a>
               </div>
             </li>
             <li>
               <div className={styles['main-item']}>
-                <Image
-                  src="https://i.postimg.cc/QMq460KC/Rectangle-4.png"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
                 <a href="#">密室逃脫</a>
               </div>
             </li>
             <li>
               <div className={styles['main-item']}>
-                <Image
-                  src="https://i.postimg.cc/gkTQyY7r/samuel-thompson-icons-1.png"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
                 <a href="#">劇本殺</a>
               </div>
             </li>
             <li>
               <div className={styles['main-item']}>
-                <Image
-                  src="https://i.postimg.cc/W4VY6Q3x/Rectangle-5.png"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
                 <a href="#">活動頁面</a>
               </div>
             </li>
             <li className={styles['dropdown']}>
               <div className={styles['main-item']}>
-                <Image
-                  src="https://i.postimg.cc/V6L72nXR/Rectangle-6.png"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
                 <a href="#">關於我們</a>
                 <ul className={styles['dropdown-menu']}>
                   <li>
@@ -101,7 +71,9 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <h6>歡迎回來！汪汪大隊長</h6>
+              <a href="#">
+                <h6>歡迎回來！汪汪大隊長</h6>
+              </a>
             </li>
             <li>
               <a>
