@@ -1,17 +1,22 @@
 import React from 'react'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
+import styles from '@/styles/board-game-css/board-game-style.module.css'
 
 export default function ETicketTabs() {
   return (
     <>
       <Tabs
-        defaultActiveKey="profile"
-        id="uncontrolled-tab-example"
-        className="mb-3"
+        defaultActiveKey="user-vehicle"
+        id="ETicketTabs"
+        className={`mb-3 ${styles.btnPrimary}`}
         variant="pills"
       >
-        <Tab eventKey="user-vehicle" title="會員載具（個人）">
+        <Tab
+          eventKey="user-vehicle"
+          title="會員載具（個人）"
+          tabClassName={`${styles.nav_pills_form}`}
+        >
           <p>
             依統一發票使用辦法規定
             依統一發票使用辦法規定：個人發票一經開立，無法更改或改開公司戶發票，需開立統編請選擇『公司用(統編)

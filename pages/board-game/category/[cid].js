@@ -1,26 +1,57 @@
-import React from 'react'
-import Image from 'next/image'
-
+import { useState, useEffect } from 'react'
+import styles from '@/styles/board-game-css/board-game-style.module.css'
+import ProdCard from '@/components/board-game/prod-card'
+import SideClass from '@/components/board-game/side-class-m'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 export default function BoardGame() {
+  // 商品物件陣列狀態
+  // 注意1: 初始值至少要空陣列，初次渲染使用的是初始值
+  // 注意2: 在應用程式執行過程中，一定要保持狀態的資料類型一致(陣列)
+  const [products, setProducts] = useState([])
+
+  // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
+  const getProducts = async () => {
+    const baseURL = 'http://127.0.0.1:3006/board-game/category/1'
+
+    const res = await fetch(baseURL)
+    const resData = await res.json()
+
+    console.log(resData)
+
+    // 設定到狀態中
+    // (3.) 設定到狀態後 -> 觸發update(re-render)
+    setProducts(resData)
+  }
+
+  // 樣式2: didMount
+  useEffect(() => {
+    // (2.) 初次render之後，執行這裡一次
+    getProducts()
+  }, [])
+
   return (
-    <>
+    <div id={`${styles.backgroundImage}`}>
+      <Navbar></Navbar>
       <div className="container">
         {/* 搜尋欄，標籤 */}
         <div className="row my-3">
-          <div className="col-6">
+          <div className="col-12 col-xxl-6">
             <input
               type="text"
               className="form-control"
               id="search"
               placeholder="搜尋"
             />
+            <SideClass />
           </div>
-          <div className="col-6">
-            <button className="btn btn-primary">單人遊戲</button>
+          <div className="col-6" id={`${styles.prod_tag}`}>
+            <button className={`btn btn-primary ${styles.btnPrimary}`}>
+              單人遊戲
+            </button>
           </div>
         </div>
         {/* 總共商品數，下拉式選單，卡片，詳細資訊 */}
-        <div className="row">
+        <div className="row" id={`${styles.filter_order}`}>
           <div className="col">
             <button type="button" className="btn btn-primary me-3">
               共二十件商品
@@ -91,10 +122,10 @@ export default function BoardGame() {
         </div>
       </div>
       {/* 側邊欄，商品卡片 */}
-      <div className="container-fluid p-5">
+      <div className="container-fluid p-xxl-5">
         <div className="row">
           {/* 側邊欄 */}
-          <div className="col-2 m-auto ">
+          <div className="col-2 m-auto" id={`${styles.side_bar}`}>
             <ul className="list-group side-bar">
               <li
                 className="list-group-item list-group-item-action bg-transparent text-warning"
@@ -177,318 +208,65 @@ export default function BoardGame() {
             </div>
           </div>
           {/* 商品卡片 */}
-          <div className="col-10">
-            <div className="row">
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
+          <div className="col-12 col-xxl-10 ">
+            <div className={`row`}>
+              {products.map((product) => (
+                <div className="col-6 col-xxl-3" key={product.id}>
+                  <ProdCard
+                    prodName={product.prod_name}
+                    prodImg={product.prod_img}
+                    prodPrice={product.prod_price}
                   />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between px-1">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text px-1">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary buy-now">
-                        立即購買
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-primary add-in-cart"
-                      >
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
                 </div>
+              ))}
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-3">
-                <div className="card border-0 bg-transparent text-warning m-4">
-                  <Image
-                    src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-                    className="card-img-top"
-                    alt=""
-                    width={280}
-                    height={280}
-                  />
-                  <div className="card-body">
-                    <p className="card-text d-flex justify-content-between">
-                      商品名稱
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        className="bi bi-heart"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg>
-                    </p>
-                    <p className="card-text">商品價格</p>
-                    <div className="d-flex justify-content-between">
-                      <button type="button" className="btn btn-primary">
-                        立即購買
-                      </button>
-                      <button type="button" className="btn btn-primary">
-                        加入購物車
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-6 col-xxl-3">
+                <ProdCard />
               </div>
             </div>
             <div className="row">
               <div className="col">
                 <nav aria-label="Page navigation example d-flex justify-content-center">
-                  <ul class="pagination d-flex justify-content-center">
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
+                  <ul className="pagination d-flex justify-content-center">
+                    <li className="page-item">
+                      <a className="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
+                    <li className="page-item">
+                      <a className="page-link" href="#">
                         1
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
+                    <li className="page-item">
+                      <a className="page-link" href="#">
                         2
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">
+                    <li className="page-item">
+                      <a className="page-link" href="#">
                         3
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
+                    <li className="page-item">
+                      <a className="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
@@ -499,6 +277,6 @@ export default function BoardGame() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

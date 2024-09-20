@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LARP 首頁</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+"
+    />
+    <style>
+      h1 {
+        font-size: 48px;
+      }
+      h2 {
+        font-size: 36px;
+      }
+      h3 {
+        font-size: 24px;
+      }
+      h4 {
+        font-size: 20px;
+      }
+      p {
+        font-size: 18px;
+      }
+      .ST {
+        font-size: 14px;
+      }
+      .primary-text {
+        color: #d7bf7d;
+      }
+      .secondary-text {
+        color: #f8f0e5;
+      }
+      .card-title {
+        color: #f8f0e5;
+      }
+      .card-text {
+        color: #f8f0e5;
+      }
+      .larp-container {
+        width: 80%;
+        margin: 40px auto 0 auto;
+        /* gap: 67px; */
+      }
+      .larp-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 90px auto 0 auto;
+      }
+      .line {
+        height: 1px;
+        background-color: #d7bf7d;
+      }
+      #larp-button {
+        margin: 0 auto;
+      }
+      #larp-button button {
+        width: 250px;
+        font-size: 30px;
+        margin-top: 38px;
+        margin-right: 50px;
+      }
+      #larp-location {
+        margin-top: 20px;
+      }
+      #larp-location button {
+        background-color: transparent;
+        width: 250px;
+        height: 65px;
+        font-size: 36px;
+        border: none;
+        border-radius: 0;
+      }
+      #larp-location button.active {
+        background-image: url(../larp/img/background-line.png);
+        color: #d7bf7d;
+        object-fit: cover;
+      }
+      #larp-location button:hover {
+        color: #d7bf7d;
+      }
+      #select {
+        margin-top: 38px;
+      }
+      .card {
+        padding: 0;
+        border: none;
+        margin-bottom: 67px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-dark">
+    <!-- 導覽列 -->
+    <div class="text-white" style="height: 60px">我是navbar</div>
+    <img src="https://i.postimg.cc/qqgTnCn5/image.png" class="w-100" />
+
+    <div class="larp-container">
+      <!-- 遊戲主題分隔線 -->
+      <div
+        class="d-flex w-100 justify-content-evenly align-items-center"
+        style="padding: 0 20% 0 20%"
+      >
+        <div class="line flex-fill"></div>
+        <div
+          class="primary-text text-center"
+          style="font-size: 40px; padding: 0 30px"
+        >
+          遊戲主題
+        </div>
+        <div class="line flex-fill"></div>
+      </div>
+
+      <!-- 密室逃脫/劇本殺選擇按鈕 -->
+      <div id="larp-button">
+        <button type="button" class="btn btn-warning btn-lg">密室逃脫</button>
+        <button type="button" class="btn btn-outline-warning btn-lg">
+          劇本殺
+        </button>
+        <!-- 館別按鈕 -->
+        <div id="larp-location" class="d-flex justify-content-evenly">
+          <button type="button" class="active btn btn-primary btn-lg">
+            台北館
+          </button>
+          <button type="button" class="btn btn-lg secondary-text">
+            台中館
+          </button>
+          <button type="button" class="btn btn-lg secondary-text">
+            高雄館
+          </button>
+        </div>
+        <!-- 篩選小助理 -->
+        <div id="select" class="dropdown">
+          <button
+            class="btn btn-warning dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M6.77771 1.00122H19H6.77771Z" fill="#7F5A3D" />
+              <path
+                d="M6.77771 1.00122H19"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.33325 1.01234L2.34436 1L2.33325 1.01234Z"
+                fill="#7F5A3D"
+              />
+              <path
+                d="M2.33325 1.01234L2.34436 1"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.33325 7.67896L2.34436 7.66663L2.33325 7.67896Z"
+                fill="#7F5A3D"
+              />
+              <path
+                d="M2.33325 7.67896L2.34436 7.66663"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M1 14.1124L1.88889 15.0013L4.11111 12.7791"
+                fill="#7F5A3D"
+              />
+              <path
+                d="M1 14.1124L1.88889 15.0013L4.11111 12.7791"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M6.77771 7.66785H19H6.77771Z" fill="#7F5A3D" />
+              <path
+                d="M6.77771 7.66785H19"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M6.77771 14.3346H19H6.77771Z" fill="#7F5A3D" />
+              <path
+                d="M6.77771 14.3346H19"
+                stroke="#7F5A3D"
+                stroke-width="2.0053"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span style="margin-left: 15px">篩選小助理</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <label class="dropdown-item"
+                ><input type="checkbox" value="1" /> 奇幻</label
+              >
+            </li>
+            <li>
+              <label class="dropdown-item"
+                ><input type="checkbox" value="2" /> 懸疑</label
+              >
+            </li>
+            <li>
+              <label class="dropdown-item"
+                ><input type="checkbox" value="3" /> 恐怖</label
+              >
+            </li>
+            <li>
+              <label class="dropdown-item"><button>清除</button></label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 密室逃脫卡片 -->
+      <div class="row text-white d-flex justify-content-between">
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-white d-flex justify-content-between">
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-transparent" style="width: 342px">
+          <img src="img/larp-product/午夜圖書館.png" class="card-img-top" />
+          <div class="card-body">
+            <h4 class="card-title">午夜圖書館</h4>
+            <p class="card-text">NT$ 600/人</p>
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-warning">主題預約</a>
+              <a href="#" class="btn btn-warning">查看更多</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
+"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+.larpBody {
+  background-color: #1f1f1f;
+  color: #d7bf7d;
+}
+.larpContainer {
+  width: 80%;
+  margin: 40px auto;
+  /* gap: 67px; */
+}
+.secondaryText {
+  color: #f8f0e5;
+}
+.orderButton {
+  position: absolute;
+  left: 0px;
+  bottom: 50px;
+}
+.line {
+  height: 1px;
+  background-color: #d7bf7d;
+}
+#larpStory h4,
+.p-1 {
+  letter-spacing: 4px;
+}
+#larpStory h4,
+#p1,
+#icons,
+#VRspace,
+#orderStep,
+#commentCard,
+#commentGroup {
+  margin-top: 60px;
+}
+#p1,
+#p2 {
+  position: relative;
+  width: 100%;
+  height: 867px;
+  overflow: hidden;
+}
+#p1 Image,
+#p2 Image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#p1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+.p1Text,
+.p2Text {
+  width: 635px;
+  position: absolute;
+  right: 118px;
+  bottom: 211px;
+  letter-spacing: 4.8px;
+}
+#p2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+.p2Text {
+  width: 635px;
+  position: absolute;
+  left: 118px;
+  bottom: 211px;
+}
+#icons > div > div {
+  margin-top: 20px;
+}
+#bookGroup {
+  border: 1px solid #d7bf7d;
+  border-radius: 10px;
+}
+#commentCard {
+  width: 30%;
+  padding: 25px;
+  background-color: transparent;
+  color: #dfebed;
+  border-color: #dfebed;
+}
+#commentCard .cardBody {
+  padding: 0 16px !important;
+}
+#commentImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}

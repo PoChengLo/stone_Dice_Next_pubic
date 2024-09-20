@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import SideCartAccordion from '@/components/board-game/side-cart-accordion'
 import ETicketTabs from '@/components/board-game/e-ticket-tabs'
-import Recipient from '@/components/board-game/recipient'
 export default function UserInfo() {
   return (
     <>
@@ -61,6 +60,7 @@ export default function UserInfo() {
                 </div>
               </div>
               {/* 電子發票，公司統編，手機載具 */}
+              {/* 找測試用的API */}
               <div className="row">
                 <div className="col">
                   <label htmlFor="e-ticket" className="form-label">
@@ -69,15 +69,7 @@ export default function UserInfo() {
                   <ETicketTabs />
                 </div>
               </div>
-              {/* 取件人資訊 */}
-              <div className="row">
-                <div className="col">
-                  <label htmlFor="e-ticket" className="form-label">
-                    取件人資訊
-                  </label>
-                  <Recipient />
-                </div>
-              </div>
+
               {/* 繼續購物，付款與運送，按鈕 */}
               <div className="row">
                 <div className="col">
