@@ -1,255 +1,234 @@
+.main-container {
+  display: flex;
+  width: 1728px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #d7cebe;
+}
 
+.login-section {
+  display: flex;
+  width: 1728px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+}
 
+.login-form {
+  align-self: stretch;
+  position: relative;
+  display: flex;
+  min-width: 240px;
+  width: 388px;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  margin: auto 0;
+}
 
-  .main-container {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 32px;
-  }
+.intro {
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  justify-content: start;
+}
 
+.welcome-title {
+  color: rgba(68, 68, 68, 1);
+  font: 48px RocknRoll One, sans-serif;
+}
 
-  .login-section {
-    display: flex;
-    min-width: 240px;
-    align-items: center;
-    font-weight: 400;
-    justify-content: center;
-    height: 100%;
-    flex: 1;
-    flex-basis: 0%;
-  }
+.welcome-description {
+  color: var(--Secondary-text, #313957);
+  font-feature-settings: 'liga' off, 'clig' off;
+  letter-spacing: 0.2px;
+  margin-top: 21px;
+  font: 20px/32px Abyssinica SIL, -apple-system, Roboto, Helvetica, sans-serif;
+}
 
+.form {
+  align-self: stretch;
+  z-index: 0;
+  display: flex;
+  margin-top: 48px;
+  width: 100%;
+  flex-direction: column;
+  letter-spacing: 0.16px;
+  justify-content: center;
+  font: 16px/1 Roboto, sans-serif;
+}
 
-  .login-form {
-    align-self: stretch;
-    position: relative;
-    display: flex;
-    min-width: 240px;
-    width: 388px;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    margin: auto 0;
-  }
+.input-group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  white-space: nowrap;
+  justify-content: start;
+}
 
-  .intro {
-    z-index: 0;
-    display: flex;
-    flex-direction: column;
-    white-space: nowrap;
-    justify-content: start;
-  }
+.input-label {
+  color: var(--Primary-text, #0c1421);
+  font-feature-settings: 'liga' off, 'clig' off;
+}
 
+.input-wrapper {
+  border-radius: 12px;
+  display: flex;
+  margin-top: 8px;
+  width: 100%;
+  flex-direction: column;
+  color: rgba(136, 151, 173, 1);
+}
 
+.input-field {
+  border-radius: 12px;
+  background-color: rgba(247, 251, 255, 1);
+  z-index: 10;
+  padding: 17px;
+  border: 1px solid rgba(212, 215, 227, 1);
+}
 
-  .welcome-title {
-    color: rgba(68, 68, 68, 1);
-    font: 48px RocknRoll One, sans-serif;
-  }
+.forgot-password {
+  color: rgba(234, 67, 53, 1);
+  text-align: center;
+  align-self: end;
+  margin-top: 24px;
+}
 
+.submit-button {
+  align-self: stretch;
+  border-radius: 12px;
+  background: var(--d-9-bf-8-f, #a6977c);
+  background-color: var(--d-9-bf-8-f, #a6977c);
+  margin-top: 24px;
+  width: 100%;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  letter-spacing: 0.2px;
+  padding: 16px 0;
+}
 
-  .welcome-description {
-    color: var(--Secondary-text, #313957);
-    font-feature-settings: "liga" off, "clig" off;
-    letter-spacing: 0.2px;
-    margin-top: 21px;
-    font: 20px/32px Abyssinica SIL, -apple-system, Roboto, Helvetica, sans-serif;
-  }
+.social-sign-in {
+  align-self: stretch;
+  z-index: 0;
+  display: flex;
+  margin-top: 48px;
+  width: 100%;
+  max-width: 388px;
+  flex-direction: column;
+  letter-spacing: 0.16px;
+  justify-content: start;
+  font: 16px/1 Roboto, sans-serif;
+}
 
-  
-  .form {
-    align-self: stretch;
-    z-index: 0;
-    display: flex;
-    margin-top: 48px;
-    width: 100%;
-    flex-direction: column;
-    letter-spacing: 0.16px;
-    justify-content: center;
-    font: 16px/1 Roboto, sans-serif;
-  }
+.divider {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+  color: rgba(41, 73, 87, 1);
+  white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+  padding: 10px 0;
+}
 
-  
+.divider-line {
+  background-color: #a6977c;
+  align-self: stretch;
+  width: 170px;
+  height: 1px;
+  flex: 1;
+  flex-basis: 0%;
+  margin: auto 0;
+  border: 1px solid rgba(166, 151, 124, 1);
+}
 
-  .input-group {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    white-space: nowrap;
-    justify-content: start;
-  }
+.divider-text {
+  align-self: stretch;
+  margin: auto 0;
+}
 
-  
+.social-buttons {
+  display: flex;
+  margin-top: 24px;
+  width: 100%;
+  flex-direction: column;
+  color: var(--Secondary-text, #313957);
+  justify-content: start;
+}
 
-  .input-label {
-    color: var(--Primary-text, #0c1421);
-    font-feature-settings: "liga" off, "clig" off;
-  }
+.social-button {
+  border-radius: 12px;
+  background-color: rgba(243, 249, 250, 1);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  padding: 12px 9px;
+}
 
-  .input-wrapper {
-    border-radius: 12px;
-    display: flex;
-    margin-top: 8px;
-    width: 100%;
-    flex-direction: column;
-    color: rgba(136, 151, 173, 1);
-  }
+.social-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 28px;
+  align-self: stretch;
+  margin: auto 0;
+}
 
-  
-  .input-field {
-    border-radius: 12px;
-    background-color: rgba(247, 251, 255, 1);
-    z-index: 10;
-    padding: 17px;
-    border: 1px solid rgba(212, 215, 227, 1);
-  }
+.social-text {
+  font-feature-settings: 'liga' off, 'clig' off;
+  align-self: stretch;
+  width: 159px;
+  margin: auto 0;
+}
 
+.signup-prompt {
+  color: rgba(18, 43, 49, 1);
+  letter-spacing: 0.18px;
+  text-align: center;
+  z-index: 0;
+  margin-top: 48px;
+  font: 18px/1.6 Roboto, sans-serif;
+}
 
-  .forgot-password {
-    color: rgba(234, 67, 53, 1);
-    text-align: center;
-    align-self: end;
-    margin-top: 24px;
-  }
+.copyright {
+  color: rgba(149, 156, 182, 1);
+  letter-spacing: 0.16px;
+  text-align: center;
+  position: absolute;
+  z-index: 0;
+  left: 0px;
+  bottom: -115px;
+  width: 382px;
+  height: 16px;
+  font: 16px/1 Roboto, sans-serif;
+}
 
-  .submit-button {
-    align-self: stretch;
-    border-radius: 12px;
-    background: var(--d-9-bf-8-f, #a6977c);
-    background-color: var(--d-9-bf-8-f, #a6977c);
-    margin-top: 24px;
-    width: 100%;
-    font-size: 20px;
-    color: rgba(255, 255, 255, 1);
-    text-align: center;
-    letter-spacing: 0.2px;
-    padding: 16px 0;
-  }
+.art-section {
+  display: flex;
+  min-width: 240px;
+  justify-content: start;
+  height: 100%;
+  flex: 1;
+  flex-basis: 0%;
+}
 
-  .social-sign-in {
-    align-self: stretch;
-    z-index: 0;
-    display: flex;
-    margin-top: 48px;
-    width: 100%;
-    max-width: 388px;
-    flex-direction: column;
-    letter-spacing: 0.16px;
-    justify-content: start;
-    font: 16px/1 Roboto, sans-serif;
-  }
-
-
-  .divider {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: 16px;
-    color: rgba(41, 73, 87, 1);
-    white-space: nowrap;
-    text-align: center;
-    justify-content: center;
-    padding: 10px 0;
-  }
-
-
-  .divider-line {
-    background-color: #a6977c;
-    align-self: stretch;
-    width: 170px;
-    height: 1px;
-    flex: 1;
-    flex-basis: 0%;
-    margin: auto 0;
-    border: 1px solid rgba(166, 151, 124, 1);
-  }
-
-  .divider-text {
-    align-self: stretch;
-    margin: auto 0;
-  }
-
-  .social-buttons {
-    display: flex;
-    margin-top: 24px;
-    width: 100%;
-    flex-direction: column;
-    color: var(--Secondary-text, #313957);
-    justify-content: start;
-  }
-
-  .social-button {
-    border-radius: 12px;
-    background-color: rgba(243, 249, 250, 1);
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: 16px;
-    justify-content: center;
-    padding: 12px 9px;
-  }
-
-  .social-icon {
-    aspect-ratio: 1;
-    object-fit: contain;
-    object-position: center;
-    width: 28px;
-    align-self: stretch;
-    margin: auto 0;
-  }
-
-  .social-text {
-    font-feature-settings: "liga" off, "clig" off;
-    align-self: stretch;
-    width: 159px;
-    margin: auto 0;
-  }
-
-  .signup-prompt {
-    color: rgba(18, 43, 49, 1);
-    letter-spacing: 0.18px;
-    text-align: center;
-    z-index: 0;
-    margin-top: 48px;
-    font: 18px/1.6 Roboto, sans-serif;
-  }
-
-
-  .copyright {
-    color: rgba(149, 156, 182, 1);
-    letter-spacing: 0.16px;
-    text-align: center;
-    position: absolute;
-    z-index: 0;
-    left: 0px;
-    bottom: -115px;
-    width: 382px;
-    height: 16px;
-    font: 16px/1 Roboto, sans-serif;
-  }
-
-  .art-section {
-    display: flex;
-    min-width: 240px;
-    justify-content: start;
-    height: 100%;
-    flex: 1;
-    flex-basis: 0%;
-  }
-
-
-
-
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

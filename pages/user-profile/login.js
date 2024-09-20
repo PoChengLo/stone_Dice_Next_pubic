@@ -1,7 +1,7 @@
 import React from 'react'
 import InputField from '@/components/layout/default-layout/user-layout/input-field'
 import Image from 'next/image'
-import styles from '@/styles/user-profile/user-profile.module.scss'
+import styles from '@/styles/user-profile/login.module.scss'
 import SocialButton from '@/components/layout/default-layout/user-layout/social-butt'
 
 const backgroundStyle = {
@@ -82,16 +82,17 @@ export default function LoginPage() {
                   Sign up
                 </a>
               </p>
-              <div className="art-section">
-                <Image
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/73d1faff86a6a7216d6599e924d5feac8382cc80757abd1111aa9a5779c75936?placeholderIfAbsent=true&apiKey=efb5b4cc8c044d4a8cc81c446806a7df"
-                  alt=""
-                  width={280}
-                  height={280}
-                  style={artImage}
-                />
-              </div>
+
               <footer className="copyright">© 2023 ALL RIGHTS RESERVED</footer>
+            </div>{' '}
+            <div className="art-section">
+              <Image
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/73d1faff86a6a7216d6599e924d5feac8382cc80757abd1111aa9a5779c75936?placeholderIfAbsent=true&apiKey=efb5b4cc8c044d4a8cc81c446806a7df"
+                alt=""
+                width={280}
+                height={280}
+                style={artImage}
+              />
             </div>
           </section>
         </main>
