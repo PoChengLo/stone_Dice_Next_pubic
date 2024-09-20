@@ -27,7 +27,7 @@ function ProdCard({ prodName, prodImg, prodPrice }) {
             <BsHeart className={`${styles.bi_heart}`} />
           </p>
         </Card.Title>
-        <Card.Text className="card-text">{prodPrice}</Card.Text>
+        <Card.Text className="card-text">NT$ {prodPrice}</Card.Text>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
           <Link
             href="../single-page/1"
