@@ -91,7 +91,7 @@ export default function userProfile() {
             <div className={styles['search-bar']}>
               <input type="text" placeholder="Search" />
             </div>
-            <div className="{styles['side-wrapper']}">
+            <div className={styles['side-wrapper']}>
               <div className={styles['side-title']}>CATEGORY</div>
               <div className={styles['side-menu']}></div>
             </div>

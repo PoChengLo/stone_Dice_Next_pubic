@@ -20,8 +20,8 @@ export default function ETicketTabs() {
         style={{ gap: '41px' }}
       >
         <Tab
-          tabClassName={styles.navButton}
-          tabStyle={{ border: '1px solid #F8F0E5' }}
+          tabClassName={`${styles.navButton}`}
+          // Style={{ border: '1px solid #F8F0E5' }}
           eventKey="user-vehicle"
           title={
             <div
