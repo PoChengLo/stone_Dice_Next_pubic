@@ -5,26 +5,29 @@ import { BsHeart } from 'react-icons/bs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-function ProdCard() {
+function ProdCard({ prodName, prodImg, prodPrice }) {
   return (
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
     >
-      <Image
-        src="https://i.postimg.cc/t4f6cdQw/043.jpg"
-        className={` ${styles.card_img_top}`}
-        alt=""
-        width={280}
-        height={280}
-      />
+      <Link href="../single-page/1">
+        <Image
+          src={prodImg}
+          className={` ${styles.card_img_top}`}
+          alt=""
+          width={280}
+          height={280}
+        />
+      </Link>
+
       <Card.Body className={`card-body ${styles.card_body}`}>
         <Card.Title>
           <p className="card-text d-flex justify-content-between">
-            商品名稱
+            {prodName}
             <BsHeart className={`${styles.bi_heart}`} />
           </p>
         </Card.Title>
-        <Card.Text className="card-text">商品價格</Card.Text>
+        <Card.Text className="card-text">{prodPrice}</Card.Text>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
           <Link
             href="../single-page/1"

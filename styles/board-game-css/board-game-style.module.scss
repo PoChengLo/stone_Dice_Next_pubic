@@ -7,6 +7,15 @@
   --bs-btn-hover-border-color: #d7bf7d;
 }
 
+.nav_pills_form {
+  --bs-nav-pills-link-active-color: #ffffff;
+  --bs-nav-pills-link-active-bg: #010101;
+}
+
+#backgroundImage {
+  background-image: url('../../public/board-game/bg-smoke.png');
+}
+
 @media (min-width: 577px) {
   .side_class {
     display: none;
