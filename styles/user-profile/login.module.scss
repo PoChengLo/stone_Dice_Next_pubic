@@ -1,6 +1,14 @@
+.body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
 .main-container {
   display: flex;
-  width: 1728px;
+  width: 80%;
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -8,25 +16,21 @@
 }
 
 .login-section {
-  display: flex;
-  width: 1728px;
-  height: 100vh;
   justify-content: center;
-  align-items: center;
   gap: 32px;
   flex-shrink: 0;
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
 }
 
 .login-form {
-  align-self: stretch;
-  position: relative;
+  align-items: center;
   display: flex;
-  min-width: 240px;
-  width: 388px;
   flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  margin: auto 0;
+  width: 50%;
+  justify-content: flex-start;
 }
 
 .intro {
@@ -39,15 +43,12 @@
 
 .welcome-title {
   color: rgba(68, 68, 68, 1);
-  font: 48px RocknRoll One, sans-serif;
 }
 
 .welcome-description {
   color: var(--Secondary-text, #313957);
-  font-feature-settings: 'liga' off, 'clig' off;
   letter-spacing: 0.2px;
   margin-top: 21px;
-  font: 20px/32px Abyssinica SIL, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .form {
@@ -59,7 +60,6 @@
   flex-direction: column;
   letter-spacing: 0.16px;
   justify-content: center;
-  font: 16px/1 Roboto, sans-serif;
 }
 
 .input-group {
@@ -72,7 +72,6 @@
 
 .input-label {
   color: var(--Primary-text, #0c1421);
-  font-feature-settings: 'liga' off, 'clig' off;
 }
 
 .input-wrapper {
@@ -123,7 +122,6 @@
   flex-direction: column;
   letter-spacing: 0.16px;
   justify-content: start;
-  font: 16px/1 Roboto, sans-serif;
 }
 
 .divider {
@@ -175,7 +173,6 @@
 }
 
 .social-icon {
-  aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
   width: 28px;
@@ -184,7 +181,6 @@
 }
 
 .social-text {
-  font-feature-settings: 'liga' off, 'clig' off;
   align-self: stretch;
   width: 159px;
   margin: auto 0;
@@ -196,7 +192,6 @@
   text-align: center;
   z-index: 0;
   margin-top: 48px;
-  font: 18px/1.6 Roboto, sans-serif;
 }
 
 .copyright {
@@ -209,16 +204,13 @@
   bottom: -115px;
   width: 382px;
   height: 16px;
-  font: 16px/1 Roboto, sans-serif;
 }
 
 .art-section {
   display: flex;
-  min-width: 240px;
-  justify-content: start;
-  height: 100%;
-  flex: 1;
-  flex-basis: 0%;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 }
 
 .visually-hidden {
