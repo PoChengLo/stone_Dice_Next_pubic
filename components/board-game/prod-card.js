@@ -1,16 +1,15 @@
-import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsHeart } from 'react-icons/bs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-function ProdCard({ prodName, prodImg, prodPrice }) {
+function ProdCard({ prodId, prodName, prodImg, prodPrice }) {
   return (
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
     >
-      <Link href="../single-page/1">
+      <Link href={`/board-game/${prodId}`}>
         <Image
           src={prodImg}
           className={` ${styles.card_img_top}`}
@@ -27,12 +26,9 @@ function ProdCard({ prodName, prodImg, prodPrice }) {
             <BsHeart className={`${styles.bi_heart}`} />
           </p>
         </Card.Title>
-        <Card.Text className="card-text">{prodPrice}</Card.Text>
+        <Card.Text className="card-text">NT$ {prodPrice}</Card.Text>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
-          <Link
-            href="../single-page/1"
-            className={`btn btn-primary ${styles.btn}`}
-          >
+          <Link href={`/cart`} className={`btn btn-primary ${styles.btn}`}>
             立即購買
           </Link>
           <Link
