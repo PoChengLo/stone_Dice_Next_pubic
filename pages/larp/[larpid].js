@@ -10,55 +10,68 @@ import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
 
 export default function LarpId() {
-  const router = useRouter()
-  //設定larpid是從queryString抓下來的
-  const { larpid } = router.query
-  const [escape, setEscape] = useState([])
+  // const { larpid } = router.query
+  const [escape, setEscape] = useState({
+    larp_id: 0,
+    larp_name: '',
+    larp_top_img: '',
+    larp_price: 0,
+    larp_people: '',
+    larp_duration: '',
+    larp_p1_img: '',
+    larp_p2_img: '',
+    larp_title1: '',
+    larp_title2: '',
+    larp_p1: '',
+    larp_p2: '',
+    larp_intro: '',
+  })
 
   //跟伺服器抓資料
-  const getEscape = async () => {
-    if (!larpid) return // 檢查 larpid 是否已經存在，避免 undefined 錯誤
+  const getEscape = async (larpid) => {
     const baseURL = `http://127.0.0.1:3006/larp/${larpid}`
+    if (!larpid) return // 檢查 larpid 是否已經存在，避免 undefined 錯誤
     try {
       const res = await fetch(baseURL)
       const resData = await res.json()
+      console.log(resData[0])
 
-      console.log(resData)
-      setEscape(resData) // 使用 `[resData]` 將資料包裝成一個陣列
-      console.log('Fetched data:', resData)
-
-    } catch (error) {
-      console.error('Error fetching escape data:', error)
+      if (typeof resData[0] === 'object' && resData[0].larp_id) {
+        setEscape(resData[0])
+      }
+    } catch (e) {
+      console.error(e)
     }
   }
+  const router = useRouter()
 
   //id改變的時候，重新載入資料
   useEffect(() => {
-    getEscape()
-  }, [larpid])
+    if (router.isReady) {
+      console.log(router.query)
+      getEscape(router.query.larpid)
+    }
+  }, [router.isReady])
 
   return (
     <div className={styles.larpBody}>
       {/* 置頂大圖 */}
-      {escape.map((v) => {
-        return (
-          <div key={v.id}>
-            <h1>{v.larp_name}</h1>
-            <div className="position-relative">
-              <Image src={v.larp_top_img} alt={v.larp_name} className="w-100" />
-            </div>
-          </div>
-        )
-      })}
-      {/* <div className="position-relative">
-        <Image
-          src="https://i.postimg.cc/jdwKtVNh/T.png"
-          alt=""
-          className="w-100"
-        /> */}
-
+      {/* <Navbar /> */}
+      <div className="position-relative">
+        <h1
+          className={`position-absolute ${styles.larpName} strokeText`}
+          data-storke={escape.larp_name}
+        >
+          {escape.larp_name}
+        </h1>
+        <Image src={escape.larp_top_img} alt="" className="w-100" />
+      </div>
       {/* 立即預約按鈕 */}
-      <Link href="#bookGroup" className={styles.orderButton}>
+      <Link
+        href="#order"
+        className={styles.orderButton}
+        style={{ zIndex: '1' }}
+      >
         <svg
           width="100%"
           height={49}
@@ -78,36 +91,22 @@ export default function LarpId() {
         {/* 故事背景分隔線 */}
         <Line title="故事背景" />
         {/* 故事內容 */}
-        <h4>
-          在海上漂流多年的幽靈船突然現身，據說這艘船承載著一個古老的詛咒，所有踏上這艘船的人都無法活著離開。你和你的團隊是尋寶者，因為傳說中的寶藏而登上這艘神秘的船。船內到處都是失落靈魂的低語，隱藏著解開詛咒的關鍵線索。你們必須在幽靈和詛咒的威脅下，找到寶藏，並逃出這艘致命的船，否則你們將永遠成為幽靈船的一部分。
-        </h4>
+        <h4>{escape.larp_intro}</h4>
       </div>
       {/* 第一段大圖 */}
       <div id={styles.p1} className="position-relative">
-        <Image
-          alt=""
-          src="https://i.postimg.cc/c15Zp1KH/1.png"
-          width={'100%'}
-        />
+        <Image alt="" src={escape.larp_p1_img} width={'100%'} />
         <div className={styles.p1Text}>
-          <h3>扭曲的歷史迷宮</h3>
-          <h4>
-            你們發現自己被困在一個不斷變化的歷史迷宮中，這裡的時間線已經被篡改。每個錯誤的抉擇都可能使歷史更加扭曲，必須迅速修復時間錯誤。
-          </h4>
+          <h3>{escape.larp_title1}</h3>
+          <h4>{escape.larp_p1}</h4>
         </div>
       </div>
       {/* 第二段大圖 */}
       <div id={styles.p2} className="position-relative">
-        <Image
-          alt=""
-          src="https://i.postimg.cc/HxhKhxS1/2.png"
-          width={'100%'}
-        />
+        <Image alt="" src={escape.larp_p2_img} width={'100%'} />
         <div className={styles.p2Text}>
-          <h3>追逐時光之影</h3>
-          <h4>
-            隨著時間流逝，你們發現邪惡組織正加速進行他們的計劃。你們必須在時光機徹底失控之前找到它，並將時間線恢復至原本的軌道。
-          </h4>
+          <h3>{escape.larp_title2}</h3>
+          <h4>{escape.larp_p2}</h4>
         </div>
       </div>
       <div className={styles.larpContainer}>
@@ -175,7 +174,7 @@ export default function LarpId() {
             </svg>
             <div>
               <h3>遊玩人數</h3>
-              <h3>4-8人</h3>
+              <h3>{escape.larp_people}</h3>
             </div>
           </div>
           {/* 價錢 */}
@@ -217,7 +216,7 @@ export default function LarpId() {
             </svg>
             <div>
               <h3>遊玩價錢</h3>
-              <h3>600元/人</h3>
+              <h3>{escape.larp_price} /人</h3>
             </div>
           </div>
           {/* 時間 */}
@@ -245,7 +244,7 @@ export default function LarpId() {
             </svg>
             <div>
               <h3>遊玩時間</h3>
-              <h3>60分鐘</h3>
+              <h3>{escape.larp_duration}</h3>
             </div>
           </div>
         </div>
@@ -263,7 +262,9 @@ export default function LarpId() {
           }}
         />
         {/* 立即預約分隔線 */}
-        <Line title="立即預約" />
+        <div id="order">
+          <Line title="立即預約" />
+        </div>
         {/* 立即預約進度條 */}
         <div
           id={styles.orderStep}
@@ -365,7 +366,7 @@ export default function LarpId() {
           {/* 行事曆 */}
           <Calender />
           {/* 預約表單 */}
-          <BookForm />
+          <BookForm larpName={escape.larp_name} />
         </div>
         {/* 玩家反饋分隔線 */}
         <Line title="玩家反饋" />
