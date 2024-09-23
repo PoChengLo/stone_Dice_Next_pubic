@@ -10,7 +10,7 @@ import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
 
 export default function LarpId() {
-  // const { larpid } = router.query
+  const router = useRouter()
   const [escape, setEscape] = useState({
     id: 0,
     larp_name: '',
@@ -43,7 +43,6 @@ export default function LarpId() {
       console.error(e)
     }
   }
-  const router = useRouter()
 
   //id改變的時候，重新載入資料
   useEffect(() => {

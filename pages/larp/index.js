@@ -10,7 +10,6 @@ export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
   // 儲存當前被選擇的館別
   const [locSelect, setLocSelect] = useState('')
-  // const filterOptions = ['All', 'Taipei', 'Taichung', 'Kaohsiung']
 
   // 跟伺服器抓資料
   const getEscapes = async () => {
@@ -32,7 +31,7 @@ export default function LarpPage() {
     const seenIds = new Set()
     let filteredEscapes = []
 
-    // 遍歷 escapes 數據集，根據 locSelect 來篩選資料
+    // 根據 locSelect 來篩選資料
     escapes.forEach((escape) => {
       // 根據選中的 loc_id 進行篩選
       if (
@@ -56,6 +55,8 @@ export default function LarpPage() {
         larpImg={r.larp_img}
         larpName={r.larp_name}
         larpPrice={r.price}
+        orderLink={`/larp/${r.id}#order`}
+        seeMoreLink={`/larp/${r.id}`}
       />
     ))
   }
@@ -109,19 +110,6 @@ export default function LarpPage() {
         <Line title="遊戲主題" />
         {/* 館別按鈕 */}
         <div id={styles.larpLocation} className="d-flex justify-content-evenly">
-          {/* {['台北館', '台中館', '高雄館'].map((location) => (
-            <button
-              key={location}
-              type="button"
-              className={`${
-                locSelect === location ? styles.active : ''
-              } btn btn-primary btn-lg`}
-              onClick={() => handleLoc(location)}
-            >
-              <h2>{location}</h2>
-            </button>
-          ))} */}
-
           <button
             type="button"
             className={`${
@@ -159,16 +147,6 @@ export default function LarpPage() {
           style={{ padding: '40px 0 0 0' }}
         >
           {cardInfo()}
-          {/* {escapes.map((r) => {
-            return (
-              <Card
-                key={r.id}
-                larpImg={r.larp_img}
-                larpName={r.larp_name}
-                larpPrice={r.price}
-              />
-            )
-          })} */}
         </div>
       </div>
     </div>
