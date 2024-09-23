@@ -6,6 +6,8 @@ import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import { BsGridFill, BsCardText } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from './side-class'
+
+
 export default function BoardGame() {
   // 商品物件陣列狀態
   // 注意1: 初始值至少要空陣列，初次渲染使用的是初始值
@@ -24,8 +26,8 @@ export default function BoardGame() {
 
       // 設定到狀態中
       // (3.) 設定到狀態後 -> 觸發update(re-render)
-      if (Array.isArray(resData)) {
-        setProducts(resData)
+
+
       }
     } catch (e) {
       console.error(e)
@@ -37,6 +39,8 @@ export default function BoardGame() {
     // (2.) 初次render之後，執行這裡一次
     getProducts()
   }, [])
+
+
 
   return (
     <>
@@ -90,12 +94,8 @@ export default function BoardGame() {
               <div className={`row`}>
                 {products.map((product) => (
                   <div className="col-6 col-xxl-3" key={product.prod_id}>
-                    <ProdCard
-                      prodId={product.prod_id}
-                      prodName={product.prod_name}
-                      prodImg={product.prod_img}
-                      prodPrice={product.prod_price}
-                    />
+
+
                   </div>
                 ))}
               </div>
