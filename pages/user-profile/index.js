@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
-import styles from './user-profile.module.scss'
+import styles from '@/styles/user-profile/user-profile.module.scss'
 import Image from 'next/image'
 import {
   BsPersonCircle,
@@ -23,8 +23,8 @@ const imageStyle = {
 
 const secondImageStyle = {
   position: 'absolute',
-  top: '220px',
-  right: '50px',
+  top: '50%',
+  right: '5%',
   filter:
     'drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.10)) drop-shadow(0px 9px 9px rgba(0, 0, 0, 0.09)) drop-shadow(0px 20px 12px rgba(0, 0, 0, 0.05)) drop-shadow(0px 35px 14px rgba(0, 0, 0, 0.01)) drop-shadow(0px 55px 15px rgba(0, 0, 0, 0.00))',
 }
@@ -88,22 +88,25 @@ export default function userProfile() {
                 </a>
               </div>
             </div>
-            <div className={styles['search-bar']}>
-              <input type="text" placeholder="Search" />
-            </div>
-            <div className="{styles['side-wrapper']}">
-              <div className={styles['side-title']}>CATEGORY</div>
-              <div className={styles['side-menu']}></div>
+
+            <div className={styles['side-wrapper']}>
+              <div className={styles['side-title']}>最近瀏覽：</div>
+              <div className={styles['side-menu']}>
+                <div className={styles['search-bar']}>
+                  <input type="text" placeholder="Search" />
+                </div>
+              </div>
             </div>
           </div>
+
           <div className={styles['main-container']}>
             <div className={styles['main-blogs']}>
               <div className={styles['main-blog']}>
                 <Image
                   src="https://i.postimg.cc/XYZ6wqcD/26-2.jpg"
                   alt=""
-                  width={280}
-                  height={280}
+                  width={260}
+                  height={260}
                   style={imageStyle}
                 />
                 <a href="#">
@@ -134,7 +137,6 @@ export default function userProfile() {
                   </p>
                 </div>
                 <div className={styles['main-blog-author tips']}>
-                  <div className={styles['main-blog-time']}>7 min</div>
                   <div className={styles['author-img-wrapper']}>
                     <Image
                       src="https://i.postimg.cc/bN4mc4Z3/9600ab6937c3a9c668afea4183baa0bb.png"
@@ -142,7 +144,7 @@ export default function userProfile() {
                       width={160}
                       height={160}
                     />
-                    <div>
+                    <div className={styles['user-level']}>
                       <p>
                         會員等級 <span>金骰子</span>
                         <br />
@@ -194,17 +196,59 @@ export default function userProfile() {
             </table>
             <div className={styles['line']} />
             <div className={styles['small-header']}>詳細資料</div>
-            <div className={styles['search-bar']}>
-              <input type="text" placeholder="Search" />
-            </div>
-            <div className={styles['search-bar']}>
-              <input type="text" placeholder="Search" />
-            </div>
-            <div className={styles['search-bar']}>
-              <input type="text" placeholder="Search" />
+            <div className={styles['user-info']}>
+              <div className={styles['input-bar']}>
+                暱稱：
+                <input type="text" placeholder="長度限制二到十三個字" />
+              </div>
+              <div className={styles['input-bar']}>
+                性別：
+                <select>
+                  <option value="">請選擇</option>
+                  <option value="">男</option>
+                  <option value="">女</option>
+                  <option value="">非二元性別</option>
+                  <option value="">不願透露</option>
+                </select>
+              </div>
+              <div className={styles['input-bar']}>
+                生日：
+                <input
+                  type="date"
+                  value="1990-01-01"
+                  min="1900-01-01"
+                  max="2020-01-01"
+                  placeholder="請選擇"
+                />
+              </div>
             </div>
             <div className={styles['line']} />
             <div className={styles['small-header']}>電子報</div>
+            <div className={styles['checkbox-group']}>
+              <div className={styles['checkbox-item']}>
+                <label>
+                  <input type="checkbox" />
+                  <span className={styles['main-text']}>
+                    我願意訂閱活動優惠電子報
+                  </span>
+                </label>
+                <div className={styles['sub-text']}>
+                  當期最強新品通知！還有外星人的目擊情報
+                </div>
+              </div>
+
+              <div className={styles['checkbox-item']}>
+                <label>
+                  <input type="checkbox" />
+                  <span className={styles['main-text']}>
+                    我願意接收個人化商品資訊
+                  </span>
+                </label>
+                <div className={styles['sub-text']}>
+                  一些您可能感興趣的商品，或我們真的很想賣的東西。
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
