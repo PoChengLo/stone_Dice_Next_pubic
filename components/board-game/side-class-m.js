@@ -116,7 +116,7 @@ function OffCanvasExample({ ...props }) {
   )
 }
 
-function SideClass() {
+function SideClassM() {
   return (
     <>
       {['start'].map((placement, idx) => (
@@ -126,4 +126,4 @@ function SideClass() {
   )
 }
 
-export default SideClass
+export default SideClassM
