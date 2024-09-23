@@ -55,7 +55,7 @@ function ProdCard({ product }) {
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
     >
-      <Link href={`/board-game/${product.prod_id}`}>
+      <Link href={`/board-game/${product.id}`}>
         <Image
           src={product.prod_img}
           className={` ${styles.card_img_top}`}
@@ -85,8 +85,6 @@ function ProdCard({ product }) {
               const item = {
                 ...product,
                 quantity: 1,
-                id: product.prod_id,
-                price: product.prod_price,
               }
               // 注意: 重覆加入會自動+1產品數量
               addItem(item)

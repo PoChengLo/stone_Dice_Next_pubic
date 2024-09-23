@@ -10,7 +10,7 @@ export default function ProductPage() {
   // 注意1: 初始值至少要空物件，比較好的選擇是加入屬性名稱的物件，初次渲染使用的是初始值
   // 注意2: 在應用程式執行過程中，一定要保持狀態的資料類型一致(物件)
   const [product, setProduct] = useState({
-    prod_id: 0,
+    id: 0,
     prod_img: '',
     prod_name: '',
     prod_desc: '',
@@ -18,7 +18,7 @@ export default function ProductPage() {
     prod_rules: '',
     prod_people: '',
     prod_time: '',
-    prod_price: 0,
+    price: 0,
   })
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
@@ -31,7 +31,7 @@ export default function ProductPage() {
 
       // 設定到狀態中
       // (3.) 設定到狀態後 -> 觸發update(re-render)
-      if (typeof resData[0] === 'object' && resData[0].prod_id) {
+      if (typeof resData[0] === 'object' && resData[0].id) {
         setProduct(resData[0])
       }
     } catch (e) {
@@ -59,19 +59,12 @@ export default function ProductPage() {
 
   return (
     <>
+      <pre>{console.log(product)}</pre>
       <div className="container">
         {/* 商品圖片，商品介紹 */}
         <div className="row">
           <div className="col">
-            <SingleProductCard
-              prodImg={product.prod_img}
-              prodName={product.prod_name}
-              prodIntro={product.prod_intro}
-              prodRules={product.prod_rules}
-              prodPeople={product.prod_people}
-              prodTime={product.prod_time}
-              prodPrice={product.prod_price}
-            />
+            <SingleProductCard product={product} />
           </div>
         </div>
         {/* 商品背景故事，會員商品評論 */}

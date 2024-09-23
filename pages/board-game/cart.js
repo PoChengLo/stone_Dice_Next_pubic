@@ -4,6 +4,10 @@ import SideCart from '../../components/board-game/side-cart'
 import { useCart } from '@/hooks/use-cart-state'
 import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast'
+import { useEffect, useState } from 'react'
+import { FiPlus } from 'react-icons/fi'
+import { FiMinus } from 'react-icons/fi'
+import { BsXLg } from 'react-icons/bs'
 
 export default function ProductCart() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
@@ -19,6 +23,28 @@ export default function ProductCart() {
     increment,
     decrement,
   } = useCart()
+
+  const preTotal = items
+    .map((item) => item.subtotal)
+    .reduce((acc, curr) => acc + curr, 0)
+
+  const finalTotal = items
+    .map((item) => item.subtotal)
+    .reduce((acc, curr) => acc + curr, 0)
+
+  // 修正 Next hydration 問題
+  // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+
+  if (!hydrated) {
+    return null
+  }
+  // 修正 end
+
   return (
     <>
       <div className="container">
@@ -38,215 +64,50 @@ export default function ProductCart() {
           {/* 購物車卡片區域 */}
           <div className="col-8">
             {/* 單張卡片 */}
-            <div className="card mb-3">
-              <div className="row g-0">
-                <div className="col-md-3">
-                  <Image
-                    src="https://i.postimg.cc/7Y0jh9XM/078.jpg"
-                    className="img-fluid rounded-start"
-                    alt="..."
-                    width={130}
-                    height={130}
-                  />
-                </div>
-                <div className="col-md-9">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-4">
-                        <h5 className="card-title">巴黎謎影 Paris Shadows</h5>
-                      </div>
-                      <div className="col-2">
-                        <p className="card-text">NT$2,000</p>
-                      </div>
-                      <div className="col-2">
-                        <div className="d-flex">
-                          <p>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-dash"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                            </svg>
-                          </p>
-                          <p className="card-text">1</p>
-                          <p>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-plus"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                            </svg>
-                          </p>
+            {items.map((v, i) => {
+              return (
+                <div className="card mb-3" key={v.id}>
+                  <div className="row g-0">
+                    <div className="col-md-3">
+                      <Image
+                        src={v.prod_img}
+                        className="img-fluid rounded-start"
+                        alt="..."
+                        width={130}
+                        height={130}
+                      />
+                    </div>
+                    <div className="col-md-9">
+                      <div className="card-body">
+                        <div className="row">
+                          <div className="col-4">
+                            <h5 className="card-title">{v.prod_name}</h5>
+                          </div>
+                          <div className="col-2">
+                            <p className="card-text">NT${v.price}</p>
+                          </div>
+                          <div className="col-2">
+                            <div className="d-flex">
+                              <FiMinus />
+                              <p className="card-text">{v.quantity}</p>
+                              <FiPlus />
+                            </div>
+                          </div>
+                          <div className="col-2">
+                            <p className="card-text">
+                              NT${v.price * v.quantity}
+                            </p>
+                          </div>
+                          <div className="col-2">
+                            <BsXLg />
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-2">
-                        <p className="card-text">NT$2,000</p>
-                      </div>
-                      <div className="col-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={16}
-                          height={16}
-                          fill="currentColor"
-                          className="bi bi-x"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                        </svg>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            {/* 單張卡片 */}
-            <div className="card mb-3">
-              <div className="row g-0">
-                <div className="col-md-3">
-                  <Image
-                    src="https://i.postimg.cc/7Y0jh9XM/078.jpg"
-                    className="img-fluid rounded-start"
-                    alt="..."
-                    width={130}
-                    height={130}
-                  />
-                </div>
-                <div className="col-md-9">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-4">
-                        <h5 className="card-title">巴黎謎影 Paris Shadows</h5>
-                      </div>
-                      <div className="col-2">
-                        <p className="card-text">NT$2,000</p>
-                      </div>
-                      <div className="col-2">
-                        <div className="d-flex">
-                          <p>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-dash"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                            </svg>
-                          </p>
-                          <p className="card-text">1</p>
-                          <p>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-plus"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                            </svg>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="col-2">
-                        <p className="card-text">NT$2,000</p>
-                      </div>
-                      <div className="col-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={16}
-                          height={16}
-                          fill="currentColor"
-                          className="bi bi-x"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* 單張卡片 */}
-            <div className="card mb-3">
-              <div className="row g-0">
-                <div className="col-md-3">
-                  <Image
-                    src="https://i.postimg.cc/7Y0jh9XM/078.jpg"
-                    className="img-fluid rounded-start"
-                    alt="..."
-                    width={130}
-                    height={130}
-                  />
-                </div>
-                <div className="col-md-9">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-4">
-                        <h5 className="card-title">巴黎謎影 Paris Shadows</h5>
-                      </div>
-                      <div className="col-2">
-                        <p className="card-text">NT$2,000</p>
-                      </div>
-                      <div className="col-2">
-                        <div className="d-flex">
-                          <p>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-dash"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                            </svg>
-                          </p>
-                          <p className="card-text">1</p>
-                          <p>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-plus"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                            </svg>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="col-2">
-                        <p className="card-text">NT$2,000</p>
-                      </div>
-                      <div className="col-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={16}
-                          height={16}
-                          fill="currentColor"
-                          className="bi bi-x"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              )
+            })}
             {/* 備註區域 */}
             <div className="row">
               <div className="col">
@@ -269,7 +130,7 @@ export default function ProductCart() {
           <div className="col-4 d-flex flex-column justify-content-between">
             <div className="d-flex justify-content-between">
               <p>小計</p>
-              <p>NT$6,000</p>
+              <p>{preTotal}</p>
             </div>
             <div className="mb-3">
               <label htmlFor="discount-input" className="form-label">
@@ -287,20 +148,20 @@ export default function ProductCart() {
             </div>
             <div className="d-flex justify-content-between">
               <h4>總計</h4>
-              <h4>NT$6,000</h4>
+              <h4>{finalTotal}</h4>
             </div>
             <div className="d-flex flex-column">
               <button type="button" className="btn btn-primary mb-3">
                 繼續購物
               </button>
-              <button type="button" className="btn btn-primary">
+              <Link href="" className="btn btn-primary">
                 前往結帳
-              </button>
+              </Link>
             </div>
           </div>
         </div>
         {/* 相關熱門商品 */}
-        <div className="row">
+        {/* <div className="row">
           <div className="col">
             <h4>相關熱門商品</h4>
             <div className="row">
@@ -446,7 +307,7 @@ export default function ProductCart() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <SideCart />
     </>
