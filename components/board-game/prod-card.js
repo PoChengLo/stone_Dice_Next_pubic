@@ -42,7 +42,7 @@ function ProdCard({ product }) {
           variant="primary"
           onClick={() => {
             // 導向購物車頁面
-            router.push('/test/cart')
+            router.push('/board-game/cart')
           }}
         >
           前往購物車結帳
@@ -74,7 +74,10 @@ function ProdCard({ product }) {
         </Card.Title>
         <Card.Text className="card-text">NT$ {product.prod_price}</Card.Text>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
-          <Link href={`/cart`} className={`btn btn-primary ${styles.btn}`}>
+          <Link
+            href="/board-game/cart"
+            className={`btn btn-primary ${styles.btn}`}
+          >
             立即購買
           </Link>
           <button

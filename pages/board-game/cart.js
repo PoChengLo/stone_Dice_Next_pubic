@@ -154,7 +154,7 @@ export default function ProductCart() {
               <button type="button" className="btn btn-primary mb-3">
                 繼續購物
               </button>
-              <Link href="" className="btn btn-primary">
+              <Link href="./user-info" className="btn btn-primary">
                 前往結帳
               </Link>
             </div>

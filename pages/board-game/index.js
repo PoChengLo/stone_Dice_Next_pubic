@@ -5,7 +5,7 @@ import SideClassM from '@/components/board-game/side-class-m'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import { BsGridFill, BsCardText } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
-import SideClass from './side-class'
+import SideClass from '../../components/board-game/side-class'
 import { Modal, Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import { useCart } from '@/hooks/use-cart-state'
@@ -43,9 +43,9 @@ export default function BoardGame() {
 
   return (
     <>
+      <Navbar></Navbar>
       <div id={`${styles.backgroundImage}`} className="py-5">
         <div className="container py-3">
-          <Navbar></Navbar>
           {/* 搜尋欄，標籤 */}
           <div className="row my-3">
             <div className="col-12 col-xxl-6">

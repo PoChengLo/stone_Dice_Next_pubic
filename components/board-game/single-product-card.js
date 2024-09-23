@@ -5,8 +5,22 @@ import { BsArrowUpCircle, BsHeart, BsShare } from 'react-icons/bs'
 import { FiPlus } from 'react-icons/fi'
 import { FiMinus } from 'react-icons/fi'
 import { Button } from 'react-bootstrap'
+import { useCart } from '@/hooks/use-cart-state'
 
 export default function SingleProductCard({ product }) {
+  //可從useCart中獲取的各方法與屬性，參考README檔中說明
+  const {
+    cart,
+    items,
+    addItem,
+    removeItem,
+    updateItem,
+    updateItemQty,
+    clearCart,
+    isInCart,
+    increment,
+    decrement,
+  } = useCart()
   return (
     <>
       <div className="card mb-3">
@@ -45,13 +59,13 @@ export default function SingleProductCard({ product }) {
               </div>
               <div className={`d-flex justify-content-between ${styles.btns}`}>
                 <Button
-                  href="@/pages/board-game/cart"
+                  href="./cart"
                   className={`btn btn-primary ${styles.btn}`}
                 >
                   立即購買
                 </Button>
                 <Button
-                  href="@/pages/board-game/cart"
+                  href="./cart"
                   className={`btn btn-primary ${styles.btn}`}
                 >
                   加入購物車

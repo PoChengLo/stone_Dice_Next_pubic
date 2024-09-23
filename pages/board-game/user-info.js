@@ -1,8 +1,45 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import SideCartAccordion from '@/components/board-game/side-cart-accordion'
 import ETicketTabs from '@/components/board-game/e-ticket-tabs'
+import Link from 'next/link'
+import { useCart } from '@/hooks/use-cart-state'
 export default function UserInfo() {
+  //可從useCart中獲取的各方法與屬性，參考README檔中說明
+  const {
+    cart,
+    items,
+    addItem,
+    removeItem,
+    updateItem,
+    updateItemQty,
+    clearCart,
+    isInCart,
+    increment,
+    decrement,
+  } = useCart()
+
+  const preTotal = items
+    .map((item) => item.subtotal)
+    .reduce((acc, curr) => acc + curr, 0)
+
+  const finalTotal = items
+    .map((item) => item.subtotal)
+    .reduce((acc, curr) => acc + curr, 0)
+
+  // 修正 Next hydration 問題
+  // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+
+  if (!hydrated) {
+    return null
+  }
+  // 修正 end
+
   return (
     <>
       <div className="container">
@@ -21,7 +58,7 @@ export default function UserInfo() {
         <div className="row">
           {/* 側邊購物車明細，商品明細 */}
           <div className="col-3">
-            <SideCartAccordion />
+            <SideCartAccordion items={items} />
           </div>
           <div className="col-9">
             <form>
@@ -77,9 +114,9 @@ export default function UserInfo() {
                     <button type="button" className="btn btn-primary m-1">
                       繼續購物
                     </button>
-                    <button type="button" className="btn btn-primary m-1">
+                    <Link href="./pay-ship" className="btn btn-primary m-1">
                       付款與運送
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
