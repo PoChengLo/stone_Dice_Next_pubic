@@ -3,22 +3,26 @@ import styles from '@/styles/larp/larp-card.module.css'
 import { Image } from 'react-bootstrap'
 import Link from 'next/link'
 
-function LarpCard() {
+function LarpCard({ larpImg, larpName, larpPrice }) {
   return (
     <Card
       className={`${styles.card} card bg-transparent`}
-      style={{ width: '22%', color: '#f8f0e5' }}
+      style={{ maxWidth: '342px', height: '752px', color: '#f8f0e5' }}
     >
       <Image
-        src="https://i.postimg.cc/MK1Y8ZvC/image.png"
+        src={larpImg}
         className="card-img-top"
+        style={{
+          height: '603px',
+          objectFit: 'cover',
+        }}
         alt=""
       />
       <Card.Body className="card-body">
         <Card.Title>
-          <h4 className="card-title text-center"> 午夜圖書館</h4>
+          <h4 className="card-title text-center"> {larpName}</h4>
         </Card.Title>
-        <p className="card-text">商品價格</p>
+        <p className="card-text">$ {larpPrice} 元 /位</p>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
           <Link href="" className={`btn ${styles.btn}`}>
             主題預約

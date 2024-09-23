@@ -89,13 +89,6 @@ export default function userProfile() {
               </div>
             </div>
 
-            <div className={styles['side-wrapper']}>
-              <div className={styles['side-title']}>最近瀏覽：</div>
-              <div className={styles['side-menu']}>
-                <div className={styles['search-bar']}>
-                  <input type="text" placeholder="Search" />
-                </div>
-              </div>
             </div>
           </div>
 

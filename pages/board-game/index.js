@@ -6,9 +6,8 @@ import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import { BsGridFill, BsCardText } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from './side-class'
-import { Modal, Button } from 'react-bootstrap'
-import { useRouter } from 'next/router'
-import { useCart } from '@/hooks/use-cart-state'
+
+
 export default function BoardGame() {
   // 商品物件陣列狀態
   // 注意1: 初始值至少要空陣列，初次渲染使用的是初始值
@@ -27,8 +26,8 @@ export default function BoardGame() {
 
       // 設定到狀態中
       // (3.) 設定到狀態後 -> 觸發update(re-render)
-      if (Array.isArray(resData.data.rows)) {
-        setProducts(resData.data.rows)
+
+
       }
     } catch (e) {
       console.error(e)
@@ -41,47 +40,7 @@ export default function BoardGame() {
     getProducts()
   }, [])
 
-  // // 跳轉使用
-  // const router = useRouter()
-  // // 對話盒使用
-  // const [show, setShow] = useState(false)
-  // // 對話盒中的商品名稱
-  // const [productName, setProductName] = useState('')
 
-  // // 加入購物車
-  // const { addItem } = useCart()
-
-  // const handleClose = () => setShow(false)
-  // const handleShow = () => setShow(true)
-
-  // const showModal = (name) => {
-  //   setProductName('產品：' + name + '已成功加入購物車')
-  //   handleShow()
-  // }
-
-  // // 對話盒
-  // const messageModal = (
-  //   <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-  //     <Modal.Header closeButton>
-  //       <Modal.Title>加入購物車訊息</Modal.Title>
-  //     </Modal.Header>
-  //     <Modal.Body>{productName} </Modal.Body>
-  //     <Modal.Footer>
-  //       <Button variant="secondary" onClick={handleClose}>
-  //         繼續購物
-  //       </Button>
-  //       <Button
-  //         variant="primary"
-  //         onClick={() => {
-  //           // 導向購物車頁面
-  //           router.push('/test/cart')
-  //         }}
-  //       >
-  //         前往購物車結帳
-  //       </Button>
-  //     </Modal.Footer>
-  //   </Modal>
-  // )
 
   return (
     <>
@@ -135,7 +94,8 @@ export default function BoardGame() {
               <div className={`row`}>
                 {products.map((product) => (
                   <div className="col-6 col-xxl-3" key={product.prod_id}>
-                    <ProdCard product={product} />
+
+
                   </div>
                 ))}
               </div>

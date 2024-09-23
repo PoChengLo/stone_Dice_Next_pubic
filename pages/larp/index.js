@@ -1,14 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image } from 'react-bootstrap'
 import styles from '@/styles/larp/Larp.module.css'
 import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/larp-card'
 import DropdownButton from '@/components/larp/select-button.js'
-import { Fragment } from 'react'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function LarpPage() {
+  const [escapes, setEscapes] = useState([])
+  // 儲存當前被選擇的館別
+  const [locSelect, setLocSelect] = useState('')
+
+  // 跟伺服器抓資料
+  const getEscapes = async () => {
+    const baseURL = 'http://127.0.0.1:3006/larp'
+    const res = await fetch(baseURL)
+    const resData = await res.json()
+
+    console.log(resData)
+    setEscapes(resData)
+  }
+
+  // useEffect(() => {
+  //   getEscapes()
+  // }, [])
+
+  getEscapes(setEscapes)
+
+  const handleLoc = (loc) => {
+    setLocSelect(loc) // 更新選擇的館別
+  }
+
   return (
     <div className={styles.larpBody}>
+      <Navbar />
       {/* 置頂大圖 */}
       <Image
         src="https://i.postimg.cc/qqgTnCn5/image.png"
@@ -21,21 +46,43 @@ export default function LarpPage() {
         <Line title="遊戲主題" />
         {/* 館別按鈕 */}
         <div id={styles.larpLocation} className="d-flex justify-content-evenly">
+          {/* {['台北館', '台中館', '高雄館'].map((location) => (
+            <button
+              key={location}
+              type="button"
+              className={`${
+                locSelect === location ? styles.active : ''
+              } btn btn-primary btn-lg`}
+              onClick={() => handleLoc(location)}
+            >
+              <h2>{location}</h2>
+            </button>
+          ))} */}
+
           <button
             type="button"
-            className={`${styles.active} btn btn-primary btn-lg`}
+            className={`${
+              locSelect === '台北館' ? styles.active : ''
+            } btn btn-primary btn-lg`}
+            onClick={() => handleLoc('台北館')}
           >
             <h2>台北館</h2>
           </button>
           <button
             type="button"
-            className={`btn btn-lg ${styles.secondaryText}`}
+            className={`${
+              locSelect === '台中館' ? styles.active : ''
+            } btn btn-primary btn-lg`}
+            onClick={() => handleLoc('台中館')}
           >
             <h2>台中館</h2>
           </button>
           <button
             type="button"
-            className={`btn btn-lg ${styles.secondaryText}`}
+            className={`${
+              locSelect === '高雄館' ? styles.active : ''
+            } btn btn-primary btn-lg`}
+            onClick={() => handleLoc('高雄館')}
           >
             <h2>高雄館</h2>
           </button>
@@ -48,14 +95,16 @@ export default function LarpPage() {
           className="row text-white d-flex justify-content-between"
           style={{ padding: '40px 0 0 0' }}
         >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {escapes.map((r) => {
+            return (
+              <Card
+                key={r.larp_id}
+                larpImg={r.larp_img}
+                larpName={r.larp_name}
+                larpPrice={r.larp_price}
+              />
+            )
+          })}
         </div>
       </div>
     </div>
