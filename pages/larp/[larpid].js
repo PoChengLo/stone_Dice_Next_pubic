@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 export default function LarpId() {
   // const { larpid } = router.query
   const [escape, setEscape] = useState({
-    larp_id: 0,
+    id: 0,
     larp_name: '',
     larp_top_img: '',
     larp_price: 0,
@@ -36,7 +36,7 @@ export default function LarpId() {
       const resData = await res.json()
       console.log(resData[0])
 
-      if (typeof resData[0] === 'object' && resData[0].larp_id) {
+      if (typeof resData[0] === 'object' && resData[0].id) {
         setEscape(resData[0])
       }
     } catch (e) {

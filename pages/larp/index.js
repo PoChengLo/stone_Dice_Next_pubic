@@ -10,6 +10,7 @@ export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
   // 儲存當前被選擇的館別
   const [locSelect, setLocSelect] = useState('')
+  // const filterOptions = ['All', 'Taipei', 'Taichung', 'Kaohsiung']
 
   // 跟伺服器抓資料
   const getEscapes = async () => {
@@ -21,15 +22,77 @@ export default function LarpPage() {
     setEscapes(resData)
   }
 
-  // useEffect(() => {
-  //   getEscapes()
-  // }, [])
-
   getEscapes(setEscapes)
 
   const handleLoc = (loc) => {
     setLocSelect(loc) // 更新選擇的館別
   }
+  const cardInfo = () => {
+    // 使用 Set 來追蹤已經見過的 larp_id
+    const seenIds = new Set()
+    let filteredEscapes = []
+
+    // 遍歷 escapes 數據集，根據 locSelect 來篩選資料
+    escapes.forEach((escape) => {
+      // 根據選中的 loc_id 進行篩選
+      if (
+        (locSelect === '台北館' && escape.loc_id === 1) ||
+        (locSelect === '台中館' && escape.loc_id === 2) ||
+        (locSelect === '高雄館' && escape.loc_id === 3) ||
+        locSelect === ''
+      ) {
+        // 如果 seenIds 中不存在此 larp_id，則加入到過濾結果中
+        if (!seenIds.has(escape.id)) {
+          seenIds.add(escape.id)
+          filteredEscapes.push(escape)
+        }
+      }
+    })
+
+    // 生成卡片
+    return filteredEscapes.map((r) => (
+      <Card
+        key={r.id}
+        larpImg={r.larp_img}
+        larpName={r.larp_name}
+        larpPrice={r.price}
+      />
+    ))
+  }
+  // const cardInfo = () => {
+  //   const seenIds = new Set()
+  //   const filteredEscapes = escapes.filter((r) => {
+  //     if (seenIds.has(r.id)) {
+  //       return false // 如果已經見過這個 id，則過濾掉
+  //     } else {
+  //       seenIds.add(r.id) // 如果沒見過，則加入到 Set 中
+  //       return true
+  //     }
+  //   })
+
+  //   let filterCards
+  //   switch (locSelect) {
+  //     case '台北館':
+  //       filterCards = escapes.filter((r) => r.loc_id === 1)
+  //       break
+  //     case '台中館':
+  //       filterCards = escapes.filter((r) => r.loc_id === 2)
+  //       break
+  //     case '高雄館':
+  //       filterCards = escapes.filter((r) => r.loc_id === 3)
+  //       break
+  //     default:
+  //       filterCards = escapes
+  //   }
+  //   return filterCards.map((r) => (
+  //     <Card
+  //       key={r.id}
+  //       larpImg={r.larp_img}
+  //       larpName={r.larp_name}
+  //       larpPrice={r.price}
+  //     />
+  //   ))
+  // }
 
   return (
     <div className={styles.larpBody}>
@@ -95,16 +158,17 @@ export default function LarpPage() {
           className="row text-white d-flex justify-content-between"
           style={{ padding: '40px 0 0 0' }}
         >
-          {escapes.map((r) => {
+          {cardInfo()}
+          {/* {escapes.map((r) => {
             return (
               <Card
-                key={r.larp_id}
+                key={r.id}
                 larpImg={r.larp_img}
                 larpName={r.larp_name}
-                larpPrice={r.larp_price}
+                larpPrice={r.price}
               />
             )
-          })}
+          })} */}
         </div>
       </div>
     </div>
