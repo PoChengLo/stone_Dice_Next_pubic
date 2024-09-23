@@ -1,6 +1,6 @@
 .container {
   max-height: 1200px;
-  height: 100vh; 
+  height: 100vh;
   display: flex;
   overflow: auto;
   width: 100%;
@@ -166,7 +166,7 @@
   width: 100%;
   height: 100%;
   border: none;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -189,7 +189,11 @@
   margin-bottom: 20px;
   background: rgba(166, 151, 124, 0.8);
   border-radius: 20px;
-  box-shadow: -615px 600px 241px 0px rgba(0, 0, 0, 0.00), -394px 384px 220px 0px rgba(0, 0, 0, 0.01), -222px 216px 186px 0px rgba(0, 0, 0, 0.05), -98px 96px 137px 0px rgba(0, 0, 0, 0.09), -25px 24px 76px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: -615px 600px 241px 0px rgba(0, 0, 0, 0),
+    -394px 384px 220px 0px rgba(0, 0, 0, 0.01),
+    -222px 216px 186px 0px rgba(0, 0, 0, 0.05),
+    -98px 96px 137px 0px rgba(0, 0, 0, 0.09),
+    -25px 24px 76px 0px rgba(0, 0, 0, 0.1);
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -257,7 +261,8 @@
   font-weight: 700;
   padding-bottom: 20px;
   color: #fff;
-  margin: 30px 0 20px;
+  margin-left: 40px;
+  margin-bottom: 10px;
 }
 
 .main-blogs {
@@ -287,12 +292,12 @@
   margin-bottom: 30px;
 }
 
-.user-info{
+.user-info {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  gap: 20px; 
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .input-bar {
@@ -303,15 +308,14 @@
   display: flex;
   align-items: center; /* 讓文字與 input 垂直置中 */
   gap: 10px; /* 文字與 input 之間的間距 */
-  
 }
 
 .input-bar input,
-.input-bar select{
+.input-bar select {
   width: 80%;
   height: 100%;
   border: none;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -335,7 +339,7 @@
   justify-content: center;
 }
 
-.user-level{
+.user-level {
   display: flex;
 }
 
@@ -452,11 +456,26 @@
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 左對齊 */
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .checkbox-item {
   margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-item input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
 }
 
 .main-text {
@@ -467,5 +486,5 @@
 .sub-text {
   font-size: 14px;
   color: #fff;
-  margin-left: 20px; /* 讓小字和checkbox對齊 */
+  margin-left: 32px;
 }

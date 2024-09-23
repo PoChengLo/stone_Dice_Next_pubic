@@ -105,8 +105,8 @@ export default function userProfile() {
                 <Image
                   src="https://i.postimg.cc/XYZ6wqcD/26-2.jpg"
                   alt=""
-                  width={280}
-                  height={280}
+                  width={260}
+                  height={260}
                   style={imageStyle}
                 />
                 <a href="#">
