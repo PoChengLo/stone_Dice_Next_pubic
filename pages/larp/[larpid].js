@@ -52,6 +52,17 @@ export default function LarpId() {
     }
   }, [router.isReady])
 
+  useEffect(() => {
+    // 檢查 URL 中是否包含 `#order`
+    if (window.location.hash === '#order') {
+      // 使用 `getElementById` 取得目標元素
+      const orderElement = document.getElementById('order')
+      if (orderElement) {
+        orderElement.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  })
+
   return (
     <div className={styles.larpBody}>
       {/* 置頂大圖 */}
@@ -68,6 +79,7 @@ export default function LarpId() {
       {/* 立即預約按鈕 */}
       <Link
         href="#order"
+        scroll={true}
         className={styles.orderButton}
         style={{ zIndex: '1' }}
       >
