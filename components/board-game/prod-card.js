@@ -74,12 +74,21 @@ function ProdCard({ product }) {
         </Card.Title>
         <Card.Text className="card-text">NT$ {product.prod_price}</Card.Text>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
-          <Link
+          <Button
+            onClick={() => {
+              // 商品原本沒有數量屬性(quantity)，要先加上
+              const item = {
+                ...product,
+                quantity: 1,
+              }
+              // 注意: 重覆加入會自動+1產品數量
+              addItem(item)
+            }}
             href="/board-game/cart"
             className={`btn btn-primary ${styles.btn}`}
           >
             立即購買
-          </Link>
+          </Button>
           <button
             type="button"
             className={`btn btn-primary ${styles.btn}`}

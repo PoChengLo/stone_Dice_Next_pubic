@@ -1,26 +1,62 @@
-import React from 'react'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsArrowUpCircle, BsHeart, BsShare } from 'react-icons/bs'
 import { FiPlus } from 'react-icons/fi'
 import { FiMinus } from 'react-icons/fi'
-import { Button } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { useCart } from '@/hooks/use-cart-state'
+import BoardGame from '@/pages/board-game'
 
 export default function SingleProductCard({ product }) {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
-  const {
-    cart,
-    items,
-    addItem,
-    removeItem,
-    updateItem,
-    updateItemQty,
-    clearCart,
-    isInCart,
-    increment,
-    decrement,
-  } = useCart()
+  const { addItem } = useCart()
+
+  // 跳轉使用
+  const router = useRouter()
+  // 對話盒使用
+  const [show, setShow] = useState(false)
+  // 對話盒中的商品名稱
+  const [productName, setProductName] = useState('')
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const showModal = (name) => {
+    setProductName('產品：' + name + '已成功加入購物車')
+    handleShow()
+  }
+
+  // 對話盒
+  const messageModal = (
+    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+      <Modal.Header closeButton>
+        <Modal.Title>加入購物車訊息</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{productName} </Modal.Body>
+      <Modal.Footer>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            router.push('/board-game')
+            // handleClose
+          }}
+        >
+          回到商品列表
+        </Button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            // 導向購物車頁面
+            router.push('/board-game/cart')
+          }}
+        >
+          前往購物車結帳
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
   return (
     <>
       <div className="card mb-3">
@@ -59,18 +95,38 @@ export default function SingleProductCard({ product }) {
               </div>
               <div className={`d-flex justify-content-between ${styles.btns}`}>
                 <Button
+                  onClick={() => {
+                    // 商品原本沒有數量屬性(quantity)，要先加上
+                    const item = {
+                      ...product,
+                      quantity: 1,
+                    }
+                    // 注意: 重覆加入會自動+1產品數量
+                    addItem(item)
+                  }}
                   href="./cart"
                   className={`btn btn-primary ${styles.btn}`}
                 >
                   立即購買
                 </Button>
                 <Button
-                  href="./cart"
+                  onClick={() => {
+                    // 商品原本沒有數量屬性(quantity)，要先加上
+                    const item = {
+                      ...product,
+                      quantity: 1,
+                    }
+                    // 注意: 重覆加入會自動+1產品數量
+                    addItem(item)
+                    // 呈現跳出對話盒
+                    showModal(product.prod_name)
+                  }}
                   className={`btn btn-primary ${styles.btn}`}
                 >
                   加入購物車
                 </Button>
               </div>
+              {messageModal}
             </div>
           </div>
         </div>
