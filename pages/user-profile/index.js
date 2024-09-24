@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/user-profile/user-profile.module.scss'
 import Image from 'next/image'
+import UserButton from '@/components/layout/default-layout/user-layout/user-button'
 import {
   BsPersonCircle,
   BsPencilSquare,
@@ -248,6 +249,9 @@ export default function userProfile() {
                   一些您可能感興趣的商品，或我們真的很想賣的東西。
                 </div>
               </div>
+            </div>
+            <div className={styles['button-wrapper']}>
+              <UserButton />
             </div>
           </div>
         </div>
