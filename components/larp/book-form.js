@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 import Link from 'next/link'
-import { isArray, isObject } from 'lodash'
+import { Router, useRouter } from 'next/router'
 
 export default function BookForm({
   larpName = '',
@@ -13,6 +13,7 @@ export default function BookForm({
   allName,
   escapes = [],
 }) {
+  const router = useRouter()
   return (
     <>
       <div
@@ -38,9 +39,12 @@ export default function BookForm({
               aria-describedby="inputGroup-sizing-default"
             >
               <option disabled>=====請選擇主題=====</option>
-              <option default>{larpName}</option>
               {escapes.map((v, i) => (
-                <option key={i} value={v.id}>
+                <option
+                  key={i}
+                  value={v.id}
+                  select={router.query.larpid === Number.toString(v.id)}
+                >
                   {v.larp_name}
                 </option>
               ))}

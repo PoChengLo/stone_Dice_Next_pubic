@@ -38,41 +38,43 @@ export default function LarpId() {
     try {
       const res = await fetch(baseURL)
       const resData = await res.json()
-      console.log(resData[0])
+      // console.log('API Response:', resData)
+      // console.log(resData.single)
 
-      if (typeof resData[0] === 'object' && resData[0].id) {
-        setEscape(resData[0])
+      // 檢查resData.single是否為陣列，且長度大於1
+      if (Array.isArray(resData.single) && resData.single.length > 0) {
+        setEscape(resData.single[0])
       }
     } catch (e) {
       console.error(e)
     }
   }
 
-  const getAllEscapes = async () => {
-    const baseURL = 'http://127.0.0.1:3006/larp/lo'
+  const getAllEscapes = async (larpid) => {
+    const baseURL = `http://127.0.0.1:3006/larp/${larpid}`
     const res = await fetch(baseURL)
-    console.log('res', res)
     const resData = await res.json()
-    console.log('escapes數量:', resData)
-    setEscapes(resData)
+    console.log('AllEscapes數量:', resData.all)
+    setEscapes(resData.all)
   }
 
   //id改變的時候，重新載入資料
   useEffect(() => {
     if (router.isReady) {
-      console.log(router.query)
+      // console.log('Router is ready with larpid:', router.query.larpid)
       getEscape(router.query.larpid)
       getAllEscapes()
     }
-  }, [router.isReady])
+  }, [router.isReady, router.query.larpid])
 
+  // 解決Accordion產生的滾輪滑動位置不準確問題
   useEffect(() => {
     // 檢查 URL 中是否包含 `#order`
     if (window.location.hash === '#order') {
       // 使用 `getElementById` 取得目標元素
-      const orderElement = document.getElementById('order')
-      if (orderElement) {
-        orderElement.scrollIntoView({ behavior: 'smooth' })
+      const order = document.getElementById('order')
+      if (order) {
+        order.scrollIntoView({ behavior: 'smooth' })
       }
     }
   })
