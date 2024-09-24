@@ -5,16 +5,11 @@ import { BsListUl } from 'react-icons/bs'
 import styles from '@/styles/larp/dropdowm.module.css'
 import Form from 'react-bootstrap/Form'
 
-export default function SelectButton() {
+export default function SelectButton({ tag = '' }) {
   const [fantasyChecked, setFantasyChecked] = useState(false)
-  const [adventureChecked, setAdventureChecked] = useState(false)
 
   const handleFantasyChange = () => {
     setFantasyChecked(!fantasyChecked)
-  }
-
-  const handleAdventureChange = () => {
-    setAdventureChecked(!adventureChecked)
   }
 
   return (
@@ -31,20 +26,13 @@ export default function SelectButton() {
         }
         id={`${styles.select} bg-vertical-dropdown-1`}
       >
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" style={{ paddingLeft: '10px' }}>
           <Form.Check
             type="checkbox"
-            label="奇幻"
+            label={tag}
             checked={fantasyChecked}
             onChange={handleFantasyChange}
             id="fantasyCheckbox"
-          />
-          <Form.Check
-            type="checkbox"
-            label="冒險"
-            checked={adventureChecked}
-            onChange={handleAdventureChange}
-            id="adventureCheckbox"
           />
         </Form.Group>
       </DropdownButton>

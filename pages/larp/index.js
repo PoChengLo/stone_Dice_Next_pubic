@@ -5,11 +5,20 @@ import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/larp-card'
 import DropdownButton from '@/components/larp/select-button.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import { BsListUl } from 'react-icons/bs'
+import Form from 'react-bootstrap/Form'
 
 export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
   // 儲存當前被選擇的館別
   const [locSelect, setLocSelect] = useState('')
+
+  const [fantasyChecked, setFantasyChecked] = useState(false)
+
+  const handleFantasyChange = () => {
+    setFantasyChecked(!fantasyChecked)
+  }
 
   // 跟伺服器抓資料
   const getEscapes = async () => {
@@ -21,7 +30,9 @@ export default function LarpPage() {
     setEscapes(resData)
   }
 
-  getEscapes(setEscapes)
+  useEffect(() => {
+    getEscapes(setEscapes)
+  }, [])
 
   const handleLoc = (loc) => {
     setLocSelect(loc) // 更新選擇的館別
@@ -60,40 +71,6 @@ export default function LarpPage() {
       />
     ))
   }
-  // const cardInfo = () => {
-  //   const seenIds = new Set()
-  //   const filteredEscapes = escapes.filter((r) => {
-  //     if (seenIds.has(r.id)) {
-  //       return false // 如果已經見過這個 id，則過濾掉
-  //     } else {
-  //       seenIds.add(r.id) // 如果沒見過，則加入到 Set 中
-  //       return true
-  //     }
-  //   })
-
-  //   let filterCards
-  //   switch (locSelect) {
-  //     case '台北館':
-  //       filterCards = escapes.filter((r) => r.loc_id === 1)
-  //       break
-  //     case '台中館':
-  //       filterCards = escapes.filter((r) => r.loc_id === 2)
-  //       break
-  //     case '高雄館':
-  //       filterCards = escapes.filter((r) => r.loc_id === 3)
-  //       break
-  //     default:
-  //       filterCards = escapes
-  //   }
-  //   return filterCards.map((r) => (
-  //     <Card
-  //       key={r.id}
-  //       larpImg={r.larp_img}
-  //       larpName={r.larp_name}
-  //       larpPrice={r.price}
-  //     />
-  //   ))
-  // }
 
   return (
     <div className={styles.larpBody}>
@@ -140,7 +117,33 @@ export default function LarpPage() {
         </div>
 
         {/* 篩選小助理 */}
-        <DropdownButton />
+        <ButtonGroup>
+          <DropdownButton
+            as={ButtonGroup}
+            title={
+              <>
+                <BsListUl />
+                <p style={{ margin: '0 0 0 18px', display: 'inline-block' }}>
+                  篩選小助理
+                </p>
+              </>
+            }
+            id={`${styles.select} bg-vertical-dropdown-1`}
+          >
+            <Form.Group className="mb-3" style={{ paddingLeft: '10px' }}>
+              {escapes.map((v, i) => (
+                <Form.Check
+                  key={i + 1}
+                  type="checkbox"
+                  label={v.tag_name}
+                  checked={fantasyChecked}
+                  onChange={handleFantasyChange}
+                  id="fantasyCheckbox"
+                />
+              ))}
+            </Form.Group>
+          </DropdownButton>
+        </ButtonGroup>
         {/* 密室逃脫卡片 */}
         <div
           className="row text-white d-flex justify-content-between"
