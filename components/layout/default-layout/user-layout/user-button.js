@@ -4,7 +4,8 @@ import style from '@/styles/user-profile/user-button.module.scss'
 const textStyle = {
   color: '#635336',
   fontSize: '18px',
-  padding: '2px',
+  position: 'relative',
+  top: '0.3rem',
 }
 
 export default function UserButton() {
