@@ -22,8 +22,8 @@ export default function ProductPage() {
   })
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
-  const getProduct = async (pid) => {
-    const baseURL = `http://127.0.0.1:3006/board-game/${pid}`
+  const getProduct = async (id) => {
+    const baseURL = `http://127.0.0.1:3006/board-game/${id}`
     try {
       const res = await fetch(baseURL)
       const resData = await res.json()
