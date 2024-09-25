@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Success() {
   return (
@@ -103,12 +104,12 @@ export default function Success() {
         <div className="row">
           <div className="col">
             <div className="d-flex ">
-              <button type="button" className="btn btn-primary flex-fill">
+              <Link href="/user-info" className="btn btn-primary flex-fill">
                 前往會員中心
-              </button>
-              <button type="button" className="btn btn-primary flex-fill">
+              </Link>
+              <Link href="/" className="btn btn-primary flex-fill">
                 回到首頁
-              </button>
+              </Link>
             </div>
           </div>
         </div>
