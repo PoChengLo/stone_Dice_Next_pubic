@@ -51,11 +51,14 @@ function ProdCard({ product }) {
     </Modal>
   )
 
+
+
   return (
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
     >
       <Link href={`/board-game/${product.id}`}>
+
         <Image
           src={product.prod_img}
           className={` ${styles.card_img_top}`}
@@ -72,7 +75,8 @@ function ProdCard({ product }) {
             <BsHeart className={`${styles.bi_heart}`} />
           </p>
         </Card.Title>
-        <Card.Text className="card-text">NT$ {product.prod_price}</Card.Text>
+
+
         <div className={`d-flex justify-content-between ${styles.btns}`}>
           <Button
             onClick={() => {

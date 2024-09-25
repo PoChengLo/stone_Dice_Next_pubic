@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 
-export default function BookForm() {
+export default function BookForm({ larpName = '' }) {
   return (
     <>
       <div
@@ -29,7 +29,11 @@ export default function BookForm() {
               aria-label="theme"
               aria-describedby="inputGroup-sizing-default"
             >
-              <option>=====請選擇主題=====</option>
+              <option disabled>=====請選擇主題=====</option>
+              <option default>{larpName}</option>
+              {/* {escape.map((v) => {
+                return <option>午夜圖書館</option>
+              })} */}
               <option value="1">午夜圖書館</option>
               <option value="2">鬼屋實驗室</option>
               <option value="3">遺失的皇宮</option>

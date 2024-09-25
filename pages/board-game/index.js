@@ -7,6 +7,7 @@ import { BsGridFill, BsCardText } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from '../../components/board-game/side-class'
 
+
 export default function BoardGame() {
   // 商品物件陣列狀態
   // 注意1: 初始值至少要空陣列，初次渲染使用的是初始值
@@ -46,6 +47,7 @@ export default function BoardGame() {
         setProducts(resData.data.rows)
         setTotal(resData.data.total)
         setPageCount(resData.data.pageCount)
+
       }
     } catch (e) {
       console.error(e)
@@ -75,6 +77,7 @@ export default function BoardGame() {
       (_, i) => startPage + i
     )
   }
+
 
   return (
     <>
@@ -129,6 +132,7 @@ export default function BoardGame() {
                 {products.map((product) => (
                   <div className="col-6 col-xxl-3" key={product.id}>
                     <ProdCard product={product} />
+
                   </div>
                 ))}
               </div>
