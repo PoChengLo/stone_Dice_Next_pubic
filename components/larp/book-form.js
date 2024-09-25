@@ -1,24 +1,60 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function BookForm({
-  larpName = '',
   price = 0,
-  NameValue,
-  allName,
+  // NameValue,
+  // allName,
   escapes = [],
+  escape = [],
 }) {
   const router = useRouter()
   // 儲存被選擇的主題id
-  const [selectId, setSelectId] = useState(
-    router.query.id ? Number(router.query.id) : ''
-  )
-  // 要呈現的
+  const [selectId, setSelectId] = useState('')
+
+  // 儲存篩選後的館別
+  const [filteredLocations, setFilteredLocations] = useState([])
+
+  // 根據選擇的主題id 過濾對應的館別
+  const filterLoc = (larpId) => {
+    const locationInfo = escapes
+      .filter((r) => r.id === larpId)
+      .map((r) => ({
+        loc_id: r.loc_id,
+        loc_name: r.loc_name,
+      }))
+
+    // 刪除重複的館別
+    const onlyLoc = locationInfo.filter(
+      (v, i, esc) => esc.findIndex((loc) => loc.loc_id === v.loc_id) === i
+    )
+    console.log('Filtered Locations:', onlyLoc) // 檢查過濾結果
+
+    // 把篩選出來的館別設定回去
+    setFilteredLocations(onlyLoc)
+  }
+  console.log(filteredLocations)
+
+  // 選擇主題的時候，重新過濾館別
+  const larpChange = (e) => {
+    const selectId = Number(e.target.value)
+    setSelectId(selectId)
+    filterLoc(selectId)
+  }
+
+  // 根據escape.larp_name帶入預設主題
+  useEffect(() => {
+    const selectLarp = escapes.find((e) => e.larp_name === escape.larp_name)
+    if (selectLarp) {
+      setSelectId(selectLarp.id)
+      filterLoc(selectLarp.id)
+    }
+  }, [escape.larp_name, escapes])
 
   return (
     <>
@@ -43,22 +79,21 @@ export default function BookForm({
             <Form.Select
               aria-label="theme"
               aria-describedby="inputGroup-sizing-default"
+              value={selectId}
+              onChange={larpChange}
             >
-              <option disabled>=====請選擇主題=====</option>
+              <option disabled value="">
+                =====請選擇主題=====
+              </option>
               {escapes
                 .filter(
                   (v, i, esc) => esc.findIndex((item) => item.id === v.id) === i
                 )
                 .map((v, i) => (
-                  <option
-                    key={i}
-                    value={v.id}
-                    selected={router.query.larpid === v.id.toString()}
-                  >
+                  <option key={i} value={v.id}>
                     {v.larp_name}
                   </option>
                 ))}
-              {/* <option value={NameValue}>{allName}</option> */}
             </Form.Select>
           </InputGroup>
           {/* 館別 */}
@@ -73,10 +108,14 @@ export default function BookForm({
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
             >
-              <option>=====請選擇館別=====</option>
-              <option value="1">台北館</option>
-              <option value="2">台中館</option>
-              <option value="3">高雄館</option>
+              <option default disabled value="">
+                =====請選擇館別=====
+              </option>
+              {filteredLocations.map((loc) => (
+                <option key={loc.loc_id} value={loc.loc_id}>
+                  {loc.loc_name}
+                </option>
+              ))}
             </Form.Select>
           </InputGroup>
         </div>

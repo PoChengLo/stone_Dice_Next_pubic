@@ -30,6 +30,7 @@ export default function LarpId() {
   })
 
   const [escapes, setEscapes] = useState([])
+  console.log(escapes[0])
 
   //跟伺服器抓資料
   const getEscape = async (larpid) => {
@@ -382,11 +383,12 @@ export default function LarpId() {
           <Calender />
           {/* 預約表單 */}
           <BookForm
-            larpName={escape.larp_name}
-            price={escape.price}
-            NameValue={escapes.id}
+            // larpName={escape.larp_name}
+            // price={escape.price}
+            // NameValue={escapes.id}
             allName={escapes.larp_name}
             escapes={escapes}
+            escape={escape}
           />
         </div>
         {/* 玩家反饋分隔線 */}
