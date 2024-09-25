@@ -16,6 +16,7 @@ export default function BookForm({
   const router = useRouter()
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
+  const [selectedLocationId, setSelectedLocationId] = useState('') // 儲存當前選擇的館別
 
   // 儲存篩選後的館別
   const [filteredLocations, setFilteredLocations] = useState([])
@@ -44,6 +45,7 @@ export default function BookForm({
   const larpChange = (e) => {
     const selectId = Number(e.target.value)
     setSelectId(selectId)
+    setSelectedLocationId('') // 重置館別選項
     filterLoc(selectId)
   }
 
@@ -55,6 +57,12 @@ export default function BookForm({
       filterLoc(selectLarp.id)
     }
   }, [escape.larp_name, escapes])
+
+  const handleLocationChange = (e) => {
+    const selectedLocationId = e.target.value // 取得選擇的館別ID
+    setSelectedLocationId(selectedLocationId) // 設置選擇的館別狀態
+    console.log('Selected Location ID:', selectedLocationId)
+  }
 
   return (
     <>
@@ -107,8 +115,10 @@ export default function BookForm({
             <Form.Select
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              value={selectedLocationId} // 使用狀態來設置value
+              onChange={handleLocationChange} // 使用函數
             >
-              <option default disabled value="">
+              <option disabled value="">
                 =====請選擇館別=====
               </option>
               {filteredLocations.map((loc) => (
