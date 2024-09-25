@@ -5,11 +5,20 @@ import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/larp-card'
 import DropdownButton from '@/components/larp/select-button.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import { BsListUl } from 'react-icons/bs'
+import Form from 'react-bootstrap/Form'
 
 export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
   // 儲存當前被選擇的館別
   const [locSelect, setLocSelect] = useState('')
+
+  const [fantasyChecked, setFantasyChecked] = useState(false)
+
+  const handleFantasyChange = () => {
+    setFantasyChecked(!fantasyChecked)
+  }
 
   // 跟伺服器抓資料
   const getEscapes = async () => {
@@ -21,14 +30,46 @@ export default function LarpPage() {
     setEscapes(resData)
   }
 
-  // useEffect(() => {
-  //   getEscapes()
-  // }, [])
-
-  getEscapes(setEscapes)
+  useEffect(() => {
+    getEscapes(setEscapes)
+  }, [])
 
   const handleLoc = (loc) => {
     setLocSelect(loc) // 更新選擇的館別
+  }
+  const cardInfo = () => {
+    // 使用 Set 來追蹤已經見過的 larp_id
+    const seenIds = new Set()
+    let filteredEscapes = []
+
+    // 根據 locSelect 來篩選資料
+    escapes.forEach((escape) => {
+      // 根據選中的 loc_id 進行篩選
+      if (
+        (locSelect === '台北館' && escape.loc_id === 1) ||
+        (locSelect === '台中館' && escape.loc_id === 2) ||
+        (locSelect === '高雄館' && escape.loc_id === 3) ||
+        locSelect === ''
+      ) {
+        // 如果 seenIds 中不存在此 larp_id，則加入到過濾結果中
+        if (!seenIds.has(escape.id)) {
+          seenIds.add(escape.id)
+          filteredEscapes.push(escape)
+        }
+      }
+    })
+
+    // 生成卡片
+    return filteredEscapes.map((r) => (
+      <Card
+        key={r.id}
+        larpImg={r.larp_img}
+        larpName={r.larp_name}
+        larpPrice={r.price}
+        orderLink={`/larp/${r.id}#order`}
+        seeMoreLink={`/larp/${r.id}`}
+      />
+    ))
   }
 
   return (
@@ -46,19 +87,6 @@ export default function LarpPage() {
         <Line title="遊戲主題" />
         {/* 館別按鈕 */}
         <div id={styles.larpLocation} className="d-flex justify-content-evenly">
-          {/* {['台北館', '台中館', '高雄館'].map((location) => (
-            <button
-              key={location}
-              type="button"
-              className={`${
-                locSelect === location ? styles.active : ''
-              } btn btn-primary btn-lg`}
-              onClick={() => handleLoc(location)}
-            >
-              <h2>{location}</h2>
-            </button>
-          ))} */}
-
           <button
             type="button"
             className={`${
@@ -89,22 +117,39 @@ export default function LarpPage() {
         </div>
 
         {/* 篩選小助理 */}
-        <DropdownButton />
+        <ButtonGroup>
+          <DropdownButton
+            as={ButtonGroup}
+            title={
+              <>
+                <BsListUl />
+                <p style={{ margin: '0 0 0 18px', display: 'inline-block' }}>
+                  篩選小助理
+                </p>
+              </>
+            }
+            id={`${styles.select} bg-vertical-dropdown-1`}
+          >
+            <Form.Group className="mb-3" style={{ paddingLeft: '10px' }}>
+              {escapes.map((v, i) => (
+                <Form.Check
+                  key={i + 1}
+                  type="checkbox"
+                  label={v.tag_name}
+                  checked={fantasyChecked}
+                  onChange={handleFantasyChange}
+                  id="fantasyCheckbox"
+                />
+              ))}
+            </Form.Group>
+          </DropdownButton>
+        </ButtonGroup>
         {/* 密室逃脫卡片 */}
         <div
           className="row text-white d-flex justify-content-between"
           style={{ padding: '40px 0 0 0' }}
         >
-          {escapes.map((r) => {
-            return (
-              <Card
-                key={r.larp_id}
-                larpImg={r.larp_img}
-                larpName={r.larp_name}
-                larpPrice={r.larp_price}
-              />
-            )
-          })}
+          {cardInfo()}
         </div>
       </div>
     </div>

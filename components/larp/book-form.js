@@ -3,8 +3,17 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
+import Link from 'next/link'
+import { Router, useRouter } from 'next/router'
 
-export default function BookForm({ larpName = '' }) {
+export default function BookForm({
+  larpName = '',
+  price = 0,
+  NameValue,
+  allName,
+  escapes = [],
+}) {
+  const router = useRouter()
   return (
     <>
       <div
@@ -30,13 +39,20 @@ export default function BookForm({ larpName = '' }) {
               aria-describedby="inputGroup-sizing-default"
             >
               <option disabled>=====請選擇主題=====</option>
-              <option default>{larpName}</option>
-              {/* {escape.map((v) => {
-                return <option>午夜圖書館</option>
-              })} */}
-              <option value="1">午夜圖書館</option>
-              <option value="2">鬼屋實驗室</option>
-              <option value="3">遺失的皇宮</option>
+              {escapes
+                .filter((v, i, esc) => (
+                  esc.findIndex((item) => item.id === v.id) === i
+                ))
+                .map((v, i) => (
+                  <option
+                    key={i}
+                    value={v.id}
+                    selected={router.query.larpid === v.id.toString()}
+                  >
+                    {v.larp_name}
+                  </option>
+                ))}
+              {/* <option value={NameValue}>{allName}</option> */}
             </Form.Select>
           </InputGroup>
           {/* 館別 */}
@@ -104,15 +120,16 @@ export default function BookForm({ larpName = '' }) {
               人數
             </InputGroup.Text>
             <Form.Select
+              id="poepleAmount"
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
             >
               <option>=====請選擇人數=====</option>
-              <option value="1">4</option>
-              <option value="2">5</option>
-              <option value="3">6</option>
-              <option value="4">7</option>
-              <option value="5">8</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
             </Form.Select>
           </InputGroup>
         </div>
@@ -176,23 +193,25 @@ export default function BookForm({ larpName = '' }) {
               金額
             </InputGroup.Text>
             <h3 className={styles.secondaryText} style={{ margin: 0 }}>
-              5,200元
+              {price} 元
             </h3>
           </InputGroup>
         </div>
-        <Button
-          className="position-absolute end-0"
-          style={{
-            padding: '8px 29px',
-            marginRight: 64,
-            backgroundColor: '#FFFFFF',
-            border: 'none',
-            color: '#1f1f1f',
-          }}
-          type="submit"
-        >
-          預約
-        </Button>
+        <Link href={`/larp/check-page`}>
+          <Button
+            className="position-absolute end-0"
+            style={{
+              padding: '8px 29px',
+              marginRight: 64,
+              backgroundColor: '#FFFFFF',
+              border: 'none',
+              color: '#1f1f1f',
+            }}
+            type="submit"
+          >
+            預約
+          </Button>
+        </Link>
       </div>
     </>
   )
