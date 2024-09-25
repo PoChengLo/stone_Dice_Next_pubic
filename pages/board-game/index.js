@@ -22,6 +22,8 @@ export default function BoardGame() {
   // 分頁用 （建議與後端的預設值要一致，減少錯誤）
   const [page, setPage] = useState(1)
   const [perpage, setPerpage] = useState(8)
+  // 分頁按鈕
+  const [pagesToShow, setPagesToShow] = useState(10)
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getProducts = async (params = {}) => {
@@ -61,6 +63,18 @@ export default function BoardGame() {
     // 向伺服器要求資料
     getProducts(params)
   }, [page, perpage])
+
+  // Create a pagination range
+  const generatePageNumbers = () => {
+    const totalPages = Math.min(pageCount, pagesToShow)
+    const startPage = Math.max(1, page - Math.floor(totalPages / 2))
+    const endPage = Math.min(pageCount, startPage + totalPages - 1)
+
+    return Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    )
+  }
 
   return (
     <>
@@ -133,45 +147,20 @@ export default function BoardGame() {
                           }}
                         ></button>
                       </li>
-                      <li className="page-item">
-                        <button
-                          onClick={() => {
-                            const nextPage = page - 1
-                            // 最小是1
-                            if (nextPage >= 1) {
-                              setPage(nextPage)
-                            }
-                          }}
+                      {/* Page numbers */}
+                      {generatePageNumbers().map((pg) => (
+                        <li
+                          key={pg}
+                          className={`page-item ${page === pg ? 'active' : ''}`}
                         >
-                          {page - 1}
-                        </button>
-                      </li>
-                      <li className="page-item">
-                        <button
-                          onClick={() => {
-                            const nextPage = page - 1
-                            // 最小是1
-                            if (nextPage >= 1) {
-                              setPage(nextPage)
-                            }
-                          }}
-                        >
-                          {page}
-                        </button>
-                      </li>
-                      <li className="page-item">
-                        <button
-                          onClick={() => {
-                            const nextPage = page + 1
-                            // 最大是pageCount
-                            if (nextPage <= pageCount) {
-                              setPage(nextPage)
-                            }
-                          }}
-                        >
-                          {page + 1}
-                        </button>
-                      </li>
+                          <button
+                            className="page-link"
+                            onClick={() => setPage(pg)}
+                          >
+                            {pg}
+                          </button>
+                        </li>
+                      ))}
                       <li className="page-item">
                         <button
                           onClick={() => {
