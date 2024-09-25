@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
@@ -14,6 +14,12 @@ export default function BookForm({
   escapes = [],
 }) {
   const router = useRouter()
+  // 儲存被選擇的主題id
+  const [selectId, setSelectId] = useState(
+    router.query.id ? Number(router.query.id) : ''
+  )
+  // 要呈現的
+
   return (
     <>
       <div
@@ -40,9 +46,9 @@ export default function BookForm({
             >
               <option disabled>=====請選擇主題=====</option>
               {escapes
-                .filter((v, i, esc) => (
-                  esc.findIndex((item) => item.id === v.id) === i
-                ))
+                .filter(
+                  (v, i, esc) => esc.findIndex((item) => item.id === v.id) === i
+                )
                 .map((v, i) => (
                   <option
                     key={i}
