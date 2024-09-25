@@ -6,8 +6,8 @@ import SocialButton from '@/components/layout/default-layout/user-layout/social-
 
 const backgroundStyle = {
   height: '100vh',
-  backgroundImage:
-    'url(https://www.toptal.com/designers/subtlepatterns/uploads/binding_dark.png)',
+  backgroundColor: '#1E1E1E',
+  backgroundImage: 'url(https://i.postimg.cc/wTS865ZT/rocky-wall.png)',
   backgroundRepeat: 'repeat',
   backgroundPosition: 'center 0',
   backgroundAttachment: 'fixed',
