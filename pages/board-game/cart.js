@@ -32,6 +32,8 @@ export default function ProductCart() {
     .map((item) => item.subtotal)
     .reduce((acc, curr) => acc + curr, 0)
 
+  console.log('preTotal:', preTotal, 'finalTotal:', finalTotal)
+
   // 修正 Next hydration 問題
   // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
   const [hydrated, setHydrated] = useState(false)
