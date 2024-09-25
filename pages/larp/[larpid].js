@@ -41,7 +41,7 @@ export default function LarpId() {
       // console.log('API Response:', resData)
       // console.log(resData.single)
 
-      // 檢查resData.single是否為陣列，且長度大於1
+      // 檢查resData.single是否為陣列，且長度至少為1
       if (Array.isArray(resData.single) && resData.single.length > 0) {
         setEscape(resData.single[0])
       }

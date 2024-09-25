@@ -39,15 +39,19 @@ export default function BookForm({
               aria-describedby="inputGroup-sizing-default"
             >
               <option disabled>=====請選擇主題=====</option>
-              {escapes.map((v, i) => (
-                <option
-                  key={i}
-                  value={v.id}
-                  select={router.query.larpid === Number.toString(v.id)}
-                >
-                  {v.larp_name}
-                </option>
-              ))}
+              {escapes
+                .filter((v, i, esc) => (
+                  esc.findIndex((item) => item.id === v.id) === i
+                ))
+                .map((v, i) => (
+                  <option
+                    key={i}
+                    value={v.id}
+                    selected={router.query.larpid === v.id.toString()}
+                  >
+                    {v.larp_name}
+                  </option>
+                ))}
               {/* <option value={NameValue}>{allName}</option> */}
             </Form.Select>
           </InputGroup>
