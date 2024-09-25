@@ -2,8 +2,34 @@ import React from 'react'
 import SideCartAccordion from '@/components/board-game/side-cart-accordion'
 import Image from 'next/image'
 import ShipMethod from '@/components/board-game/ship-method'
+import { useCart } from '@/hooks/use-cart-state'
 
 export default function PayShip() {
+  //可從useCart中獲取的各方法與屬性，參考README檔中說明
+  const {
+    cart,
+    items,
+    addItem,
+    removeItem,
+    updateItem,
+    updateItemQty,
+    clearCart,
+    isInCart,
+    increment,
+    decrement,
+  } = useCart()
+
+  const finalTotal = items
+    .map((item) => item.subtotal)
+    .reduce((acc, curr) => acc + curr, 0)
+
+  // 導向至ECPay付款頁面
+  const goECPay = () => {
+    if (window.confirm('確認要導向至ECPay進行付款?')) {
+      // 先連到node伺服器後，導向至ECPay付款頁面
+      window.location.href = `http://localhost:3006/ecpay?amount=${finalTotal}`
+    }
+  }
   return (
     <>
       <div className="container">
@@ -21,7 +47,7 @@ export default function PayShip() {
         <div className="row">
           {/* 結帳金額，側邊購物車 */}
           <div className="col-3">
-            <SideCartAccordion />
+            <SideCartAccordion items={items} />
           </div>
           <div className="col-9">
             {/* 優惠卷 */}
@@ -162,7 +188,9 @@ export default function PayShip() {
             </div>
             <div className="row">
               <div className="col d-flex">
-                <button className="btn btn-primary flex-fill">立即結帳</button>
+                <button className="btn btn-primary flex-fill" onClick={goECPay}>
+                  立即結帳
+                </button>
               </div>
             </div>
           </div>

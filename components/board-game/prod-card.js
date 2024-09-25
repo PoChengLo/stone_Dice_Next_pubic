@@ -42,7 +42,7 @@ function ProdCard({ product }) {
           variant="primary"
           onClick={() => {
             // 導向購物車頁面
-            router.push('/test/cart')
+            router.push('/board-game/cart')
           }}
         >
           前往購物車結帳
@@ -57,7 +57,7 @@ function ProdCard({ product }) {
     <Card
       className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
     >
-
+      <Link href={`/board-game/${product.id}`}>
 
         <Image
           src={product.prod_img}
@@ -78,9 +78,21 @@ function ProdCard({ product }) {
 
 
         <div className={`d-flex justify-content-between ${styles.btns}`}>
-          <Link href={`/cart`} className={`btn btn-primary ${styles.btn}`}>
+          <Button
+            onClick={() => {
+              // 商品原本沒有數量屬性(quantity)，要先加上
+              const item = {
+                ...product,
+                quantity: 1,
+              }
+              // 注意: 重覆加入會自動+1產品數量
+              addItem(item)
+            }}
+            href="/board-game/cart"
+            className={`btn btn-primary ${styles.btn}`}
+          >
             立即購買
-          </Link>
+          </Button>
           <button
             type="button"
             className={`btn btn-primary ${styles.btn}`}
@@ -89,8 +101,6 @@ function ProdCard({ product }) {
               const item = {
                 ...product,
                 quantity: 1,
-                id: product.prod_id,
-                price: product.prod_price,
               }
               // 注意: 重覆加入會自動+1產品數量
               addItem(item)
