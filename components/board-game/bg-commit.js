@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image'
 import { BsStar, BsStarFill } from 'react-icons/bs'
 
 import styles from '@/styles/board-game-css/board-game-style.module.css'
-export default function BgCommit() {
+export default function BgCommit({ prodDesc }) {
   return (
     <>
       <Tabs
@@ -15,9 +15,7 @@ export default function BgCommit() {
       >
         {/* 背景故事 Tab */}
         <Tab eventKey="bg-story" title="桌遊故事背景">
-          <p>
-            在遙遠的小島上，一場突如其來的洪水威脅著島上的生物。暴雨不斷，水位上升，島上的每一個角落都充滿了危險。玩家需要迅速應對這場危機，利用有限的資源與智慧，幫助島上的居民找到安全的避難所，抵擋洪水的侵襲，確保他們的安全。
-          </p>
+          <p>{prodDesc}</p>
         </Tab>
 
         {/* 會員評論 Tab */}

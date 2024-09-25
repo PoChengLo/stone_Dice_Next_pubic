@@ -23,11 +23,10 @@
   border-radius: 0;
 }
 #larpLocation button.active {
-  background-image: url(/public/larp/img/background-line.png);
+  background-image: url(../../public/larp/img/background-line.png);
   color: #d7bf7d;
   object-fit: cover;
 }
 #larpLocation button:hover {
   color: #d7bf7d;
 }
-

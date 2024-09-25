@@ -1,0 +1,118 @@
+@charset "UTF-8";
+.nav {
+  width: 100%;
+  top: 0;
+  height: 60px;
+  position: fixed;
+  background-color: #262626;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.logo-image {
+  padding-left: 0.5rem;
+}
+
+.main-list ul {
+  height: 60px;
+  align-items: center;
+  display: flex;
+  padding: 0;
+}
+
+.main-list ul li {
+  padding-left: 20px;
+  list-style: none;
+}
+
+.main-item:hover {
+  background-color: #4e4e4e;
+}
+
+.main-list ul li:nth-child(1),
+.main-list ul li:nth-child(4) {
+  padding-right: 5px;
+}
+
+.main-list ul li:nth-child(1) a {
+  margin: 3px;
+}
+
+.main-list ul li:nth-child(2) a,
+.main-list ul li:nth-child(5) a {
+  margin: 5px;
+}
+
+.main-list ul li a {
+  color: #d9bf8f;
+  text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* 隱藏下拉選單，初始狀態 */
+.dropdown-menu {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  list-style: none;
+  min-width: 150px;
+  min-height: 120px;
+  background-color: #262626;
+}
+
+.dropdown-menu li {
+  padding: 8px 8px;
+  width: 120px;
+  text-align: left;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #4e4e4e;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block !important;
+}
+
+.user-list {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.user-list ul {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  gap: 25px;
+}
+
+.user-list ul li h6 {
+  color: #d9d9d9;
+  list-style: none;
+  font-size: 16px;
+}
+
+.user-list ul li a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #d92626;
+  display: inline-flex;
+  align-items: center;
+}
+
+.user-list ul li a svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}/*# sourceMappingURL=navbar.module.css.map */
