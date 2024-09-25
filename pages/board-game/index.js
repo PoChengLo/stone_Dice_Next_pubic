@@ -65,7 +65,7 @@ export default function BoardGame() {
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       <div id={`${styles.backgroundImage}`} className="py-5">
         <div className="container py-3">
           {/* 搜尋欄，標籤 */}

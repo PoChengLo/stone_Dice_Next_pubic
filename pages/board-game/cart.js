@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useEffect, useState } from 'react'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { BsXLg } from 'react-icons/bs'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function ProductCart() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
@@ -46,6 +47,7 @@ export default function ProductCart() {
 
   return (
     <>
+      <Navbar />
       <div className="container">
         {/* 步驟提示圖，購物車 */}
         <div className="row">

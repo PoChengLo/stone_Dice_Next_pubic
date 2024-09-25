@@ -4,6 +4,7 @@ import ProdCard from '@/components/board-game/prod-card'
 import BgCommit from '@/components/board-game/bg-commit'
 import SingleProductCard from '@/components/board-game/single-product-card'
 import { useRouter } from 'next/router'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function ProductPage() {
   // 商品物件狀態
@@ -59,6 +60,7 @@ export default function ProductPage() {
 
   return (
     <>
+      <Navbar />
       <pre>{console.log(product)}</pre>
       <div className="container">
         {/* 商品圖片，商品介紹 */}

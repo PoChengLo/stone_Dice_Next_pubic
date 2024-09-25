@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 export default function Fail() {
   return (
     <>
+      <Navbar />
       <div className="container">
         {/* ICON，付款失敗 */}
         <div className="row">

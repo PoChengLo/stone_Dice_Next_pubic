@@ -4,6 +4,8 @@ import SideCartAccordion from '@/components/board-game/side-cart-accordion'
 import ETicketTabs from '@/components/board-game/e-ticket-tabs'
 import Link from 'next/link'
 import { useCart } from '@/hooks/use-cart-state'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+
 export default function UserInfo() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
   const {
@@ -42,6 +44,8 @@ export default function UserInfo() {
 
   return (
     <>
+      <Navbar />
+
       <div className="container">
         {/* 步驟提示圖，購物車 */}
         <div className="row">
