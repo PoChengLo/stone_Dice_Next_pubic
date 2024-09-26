@@ -30,7 +30,6 @@ export default function LarpId() {
   })
 
   const [escapes, setEscapes] = useState([])
-  console.log(escapes[0])
 
   //跟伺服器抓資料
   const getEscape = async (larpid) => {
@@ -55,7 +54,6 @@ export default function LarpId() {
     const baseURL = `http://127.0.0.1:3006/larp/${larpid}`
     const res = await fetch(baseURL)
     const resData = await res.json()
-    console.log('AllEscapes數量:', resData.all)
     setEscapes(resData.all)
   }
 

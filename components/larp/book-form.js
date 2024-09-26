@@ -6,20 +6,17 @@ import Button from 'react-bootstrap/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default function BookForm({
-  price = 0,
-  // NameValue,
-  // allName,
-  escapes = [],
-  escape = [],
-}) {
+export default function BookForm({ escapes = [], escape = [] }) {
   const router = useRouter()
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
   const [selectedLocationId, setSelectedLocationId] = useState('') // 儲存當前選擇的館別
-
+  // 儲存人數選項
+  const [peoples, setPeoples] = useState([])
   // 儲存篩選後的館別
   const [filteredLocations, setFilteredLocations] = useState([])
+  // 控制選中的人數選項
+  const [selectPeople, setSelectPeople] = useState('')
 
   // 根據選擇的主題id 過濾對應的館別
   const filterLoc = (larpId) => {
@@ -29,7 +26,6 @@ export default function BookForm({
         loc_id: r.loc_id,
         loc_name: r.loc_name,
       }))
-
     // 刪除重複的館別
     const onlyLoc = locationInfo.filter(
       (v, i, esc) => esc.findIndex((loc) => loc.loc_id === v.loc_id) === i
@@ -39,14 +35,45 @@ export default function BookForm({
     // 把篩選出來的館別設定回去
     setFilteredLocations(onlyLoc)
   }
-  console.log(filteredLocations)
 
   // 選擇主題的時候，重新過濾館別
   const larpChange = (e) => {
     const selectId = Number(e.target.value)
     setSelectId(selectId)
     setSelectedLocationId('') // 重置館別選項
+    setSelectPeople('') // 重置人數選項
     filterLoc(selectId)
+    setPeoples([])
+
+    // 選擇其他主題的時候，將人數選項恢復預設值
+    const peopleSelect = document.getElementById('peopleAmount')
+    if (peopleSelect) {
+      peopleSelect.value = ''
+    }
+
+    // 根據選中的主題立即更新人數選項
+    const selectLarp = escapes.find((r) => r.id === selectId)
+    if (selectLarp) {
+      const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
+      if (numRange) {
+        const min = parseInt(numRange[1], 10)
+        const max = parseInt(numRange[2], 10)
+
+        // 生成option選項
+        const option = []
+        for (let i = min; i <= max; i++) {
+          option.push(i)
+        }
+        setPeoples(option)
+      } else {
+        setPeoples([])
+      }
+    }
+  }
+
+  const handleLocationChange = (e) => {
+    const selectedLocationId = e.target.value // 取得選擇的館別ID
+    setSelectedLocationId(selectedLocationId) // 設置選擇的館別狀態
   }
 
   // 根據escape.larp_name帶入預設主題
@@ -58,11 +85,27 @@ export default function BookForm({
     }
   }, [escape.larp_name, escapes])
 
-  const handleLocationChange = (e) => {
-    const selectedLocationId = e.target.value // 取得選擇的館別ID
-    setSelectedLocationId(selectedLocationId) // 設置選擇的館別狀態
-    console.log('Selected Location ID:', selectedLocationId)
-  }
+  // 網站載入的時候，生成人數選項，只生成一次
+  useEffect(() => {
+    // 根據escape.larp_name帶入預設主題
+    const selectLarp = escapes.find((e) => e.larp_name === escape.larp_name)
+    if (selectLarp) {
+      setSelectId(selectLarp.id)
+      filterLoc(selectLarp.id)
+
+      // 根據預設主題生成對應的人數選項
+      const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
+      if (numRange) {
+        const min = parseInt(numRange[1], 10)
+        const max = parseInt(numRange[2], 10)
+        const option = []
+        for (let i = min; i <= max; i++) {
+          option.push(i)
+        }
+        setPeoples(option)
+      }
+    }
+  }, [escape.larp_name, escapes])
 
   return (
     <>
@@ -175,16 +218,18 @@ export default function BookForm({
               人數
             </InputGroup.Text>
             <Form.Select
-              id="poepleAmount"
+              id="peopleAmount"
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              value={selectPeople}
+              onChange={(e) => setSelectPeople(e.target.value)}
             >
               <option>=====請選擇人數=====</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
+              {peoples.map((v, i) => (
+                <option key={i} value={v}>
+                  {v} 位
+                </option>
+              ))}
             </Form.Select>
           </InputGroup>
         </div>
@@ -248,7 +293,7 @@ export default function BookForm({
               金額
             </InputGroup.Text>
             <h3 className={styles.secondaryText} style={{ margin: 0 }}>
-              {price} 元
+              {escape.price} 元
             </h3>
           </InputGroup>
         </div>
