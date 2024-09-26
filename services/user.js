@@ -47,7 +47,7 @@ export const lineLogout = async (line_uid) => {
  * 登入用，loginData = { username, password }
  */
 export const login = async (loginData = {}) => {
-  return await axiosInstance.post('/auth/login', loginData)
+  return await axiosInstance.post('/user-profile/login', loginData)
 }
 /**
  * 登出用
@@ -59,8 +59,17 @@ export const logout = async () => {
  * 載入會員id的資料用，需要登入後才能使用。此API路由會檢查JWT中的id是否符合本會員，不符合會失敗。
  */
 export const getUserById = async (id = 0) => {
-  return await axiosInstance.get(`/users/${id}`)
+  try {
+    return await axiosInstance.get(`/user-profile/${id}/home`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    console.error('Error fetching user data:', error.response)
+  }
 }
+
 /**
  * 忘記密碼/OTP 要求一次性密碼
  */
@@ -121,7 +130,7 @@ export const removeFav = async (pid) => {
 }
 
 export const useUser = (id) => {
-  const { data, error, isLoading } = useSWR(`/users/${id}`, fetcher)
+  const { data, error, isLoading } = useSWR(`/user-profile/${id}/home`, fetcher)
 
   return {
     data,

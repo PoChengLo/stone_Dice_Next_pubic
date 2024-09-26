@@ -17,7 +17,7 @@ const fieldStyle = {
   padding: '10px',
 }
 
-const InputField = ({ label, type, placeholder }) => {
+const InputField = ({ label, type, placeholder, value, onChange, name }) => {
   return (
     <div className="input-group" style={inputStyle}>
       <label className="input-label" htmlFor={`${type}Input`}>
@@ -31,6 +31,9 @@ const InputField = ({ label, type, placeholder }) => {
           placeholder={placeholder}
           aria-label={label}
           style={fieldStyle}
+          value={value}
+          onChange={onChange}
+          name={name}
         />
       </div>
     </div>

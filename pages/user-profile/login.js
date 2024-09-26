@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import InputField from '@/components/layout/default-layout/user-layout/input-field'
 import Image from 'next/image'
 import styles from '@/styles/user-profile/login.module.scss'
 import SocialButton from '@/components/layout/default-layout/user-layout/social-butt'
+import { login, parseJwt, getUserById } from '@/services/user'
+import useLocalStorage from '@/hooks/use-localstorage'
+import toast, { Toaster } from 'react-hot-toast'
+import { initUserData } from '@/hooks/use-auth'
+import { useRouter } from 'next/router'
 
+// 背景樣式設定
 const backgroundStyle = {
   height: '100vh',
   backgroundColor: '#1E1E1E',
@@ -13,6 +19,7 @@ const backgroundStyle = {
   backgroundAttachment: 'fixed',
 }
 
+// 藝術圖像樣式設定
 const artImage = {
   objectFit: 'cover',
   objectPosition: 'center',
@@ -23,6 +30,58 @@ const artImage = {
 }
 
 export default function LoginPage() {
+  const [user, setUser] = useState({ email: '', password: '' })
+  const [auth, setAuth] = useLocalStorage('auth', {
+    isAuth: false,
+    userData: {},
+  })
+  const router = useRouter()
+
+  // 處理表單欄位變更
+  const handleFieldChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
+
+  // 處理登入
+  const handleLogin = async (event) => {
+    event.preventDefault() // 阻止表單的默認行為
+    try {
+      const res = await login(user)
+
+      if (res.data.status === 'success') {
+        const jwtUser = parseJwt(res.data.data.accessToken)
+        const res1 = await getUserById(jwtUser.id)
+
+        if (res1.data.status === 'success') {
+          const dbUser = res1.data.data.user
+          const userData = { ...initUserData }
+
+          for (const key in userData) {
+            if (Object.hasOwn(dbUser, key)) {
+              userData[key] = dbUser[key]
+            }
+          }
+
+          setAuth({
+            isAuth: true,
+            userData,
+          })
+
+          toast.success('已成功登入')
+          // 重定向到用戶的 home 頁面
+          router.push(`/user-profile/${jwtUser.id}/home`)
+        } else {
+          toast.error('登入後無法得到會員資料')
+        }
+      } else {
+        toast.error('登入失敗')
+      }
+    } catch (error) {
+      console.error('登入失敗', error)
+      toast.error('伺服器錯誤，請稍後再試')
+    }
+  }
+
   return (
     <>
       <div style={backgroundStyle}>
@@ -38,16 +97,25 @@ export default function LoginPage() {
                     硬幣你就會有兩個公平的硬幣。
                   </p>
 
-                  <form className={styles['form']}>
+                  <form
+                    className={styles['form']}
+                    onSubmit={handleLogin} // 使用 onSubmit 處理表單提交
+                  >
                     <InputField
                       label="Email"
+                      name="email"
                       type="email"
                       placeholder="Example@email.com"
+                      value={user.email} // 綁定 email 狀態
+                      onChange={handleFieldChange} // 綁定變更處理函數
                     />
                     <InputField
                       label="Password"
+                      name="password"
                       type="password"
                       placeholder="At least 8 characters"
+                      value={user.password} // 綁定 password 狀態
+                      onChange={handleFieldChange} // 綁定變更處理函數
                     />
                     <a href="#" className={styles['forgot-password']}>
                       Forgot Password?
@@ -56,6 +124,7 @@ export default function LoginPage() {
                       Sign in
                     </button>
                   </form>
+
                   <div className={styles['social-sign-in']}>
                     <div className={styles['divider-container']}>
                       <div className={styles['divider']}>

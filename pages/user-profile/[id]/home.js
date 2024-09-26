@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/user-profile/user-profile.module.scss'
 import Image from 'next/image'
@@ -40,7 +42,34 @@ const backgroundStyle = {
   backgroundAttachment: 'fixed',
 }
 
-export default function userProfile() {
+export default function UserProfile() {
+  const router = useRouter()
+  const { id } = router.query // 獲取動態路由中的 user ID
+  const [userData, setUserData] = useState(null)
+
+  useEffect(() => {
+    if (id) {
+      console.log(`Fetching data for user ID: ${id}`)
+      axios
+        .get(`http://localhost:3006/backend/user-profile/${id}/home`)
+        .then((res) => {
+          console.log('API Response:', res.data)
+          if (res.data.status === 'success') {
+            setUserData(res.data.data.user)
+          } else {
+            console.error('User not found')
+          }
+        })
+        .catch((err) => {
+          console.error('Error fetching user data:', err)
+        })
+    }
+  }, [id])
+
+  if (!userData) {
+    return <div>Loading...</div> // 加載過程中顯示的內容
+  }
+
   return (
     <>
       <Navbar />

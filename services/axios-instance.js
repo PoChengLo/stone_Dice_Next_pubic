@@ -5,6 +5,9 @@ const axiosInstance = axios.create({
   baseURL: apiBaseUrl,
   timeout: 8000,
   withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  }, // 確保發送的是 JSON 格式
 })
 
 // fetcher for swr
