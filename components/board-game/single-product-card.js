@@ -11,7 +11,18 @@ import BoardGame from '@/pages/board-game'
 
 export default function SingleProductCard({ product }) {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
-  const { addItem } = useCart()
+  const {
+    cart,
+    items,
+    addItem,
+    removeItem,
+    updateItem,
+    updateItemQty,
+    clearCart,
+    isInCart,
+    increment,
+    decrement,
+  } = useCart()
 
   // 跳轉使用
   const router = useRouter()
@@ -27,6 +38,8 @@ export default function SingleProductCard({ product }) {
     setProductName('產品：' + name + '已成功加入購物車')
     handleShow()
   }
+
+  const [singleQuantity, setSingleQuantity] = useState(1)
 
   // 對話盒
   const messageModal = (
@@ -83,9 +96,19 @@ export default function SingleProductCard({ product }) {
                 <h3 className="card-title">{product.price}</h3>
                 <div className="d-flex">
                   <p className="card-text">數量</p>
-                  <FiMinus />
-                  <p className="card-text">1</p>
-                  <FiPlus />
+                  <FiMinus
+                    onClick={() => {
+                      const newSingleQuantity = singleQuantity - 1
+                      setSingleQuantity(newSingleQuantity)
+                    }}
+                  />
+                  <p className="card-text">{singleQuantity}</p>
+                  <FiPlus
+                    onClick={() => {
+                      const newSingleQuantity = singleQuantity + 1
+                      setSingleQuantity(newSingleQuantity)
+                    }}
+                  />
                 </div>
               </div>
               <div className="d-flex">
@@ -99,7 +122,7 @@ export default function SingleProductCard({ product }) {
                     // 商品原本沒有數量屬性(quantity)，要先加上
                     const item = {
                       ...product,
-                      quantity: 1,
+                      quantity: singleQuantity,
                     }
                     // 注意: 重覆加入會自動+1產品數量
                     addItem(item)
@@ -114,7 +137,7 @@ export default function SingleProductCard({ product }) {
                     // 商品原本沒有數量屬性(quantity)，要先加上
                     const item = {
                       ...product,
-                      quantity: 1,
+                      quantity: singleQuantity,
                     }
                     // 注意: 重覆加入會自動+1產品數量
                     addItem(item)

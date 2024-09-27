@@ -4,6 +4,7 @@ import ProdCard from '@/components/board-game/prod-card'
 import BgCommit from '@/components/board-game/bg-commit'
 import SingleProductCard from '@/components/board-game/single-product-card'
 import { useRouter } from 'next/router'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function ProductPage() {
   // 商品物件狀態
@@ -27,12 +28,14 @@ export default function ProductPage() {
     try {
       const res = await fetch(baseURL)
       const resData = await res.json()
-      console.log(resData[0])
+      console.log(resData)
+      console.log(resData.row)
+      console.log(resData.data.row[0])
 
       // 設定到狀態中
       // (3.) 設定到狀態後 -> 觸發update(re-render)
-      if (typeof resData[0] === 'object' && resData[0].id) {
-        setProduct(resData[0])
+      if (typeof resData.data.row[0] === 'object' && resData.data.row[0].id) {
+        setProduct(resData.data.row[0])
       }
     } catch (e) {
       console.error(e)
@@ -59,7 +62,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <pre>{console.log(product)}</pre>
+      <Navbar />
       <div className="container">
         {/* 商品圖片，商品介紹 */}
         <div className="row">

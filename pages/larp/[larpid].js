@@ -54,7 +54,6 @@ export default function LarpId() {
     const baseURL = `http://127.0.0.1:3006/larp/${larpid}`
     const res = await fetch(baseURL)
     const resData = await res.json()
-    console.log('AllEscapes數量:', resData.all)
     setEscapes(resData.all)
   }
 
@@ -382,11 +381,12 @@ export default function LarpId() {
           <Calender />
           {/* 預約表單 */}
           <BookForm
-            larpName={escape.larp_name}
-            price={escape.price}
-            NameValue={escapes.id}
+            // larpName={escape.larp_name}
+            // price={escape.price}
+            // NameValue={escapes.id}
             allName={escapes.larp_name}
             escapes={escapes}
+            escape={escape}
           />
         </div>
         {/* 玩家反饋分隔線 */}

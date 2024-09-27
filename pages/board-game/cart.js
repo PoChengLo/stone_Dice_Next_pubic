@@ -5,9 +5,9 @@ import { useCart } from '@/hooks/use-cart-state'
 import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast'
 import { useEffect, useState } from 'react'
-import { FiPlus } from 'react-icons/fi'
-import { FiMinus } from 'react-icons/fi'
+import { FiPlus, FiMinus } from 'react-icons/fi'
 import { BsXLg } from 'react-icons/bs'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function ProductCart() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
@@ -49,6 +49,7 @@ export default function ProductCart() {
 
   return (
     <>
+      <Navbar />
       <div className="container">
         {/* 步驟提示圖，購物車 */}
         <div className="row">
@@ -90,9 +91,17 @@ export default function ProductCart() {
                           </div>
                           <div className="col-2">
                             <div className="d-flex">
-                              <FiMinus />
+                              <FiMinus
+                                onClick={() => {
+                                  decrement(v.id)
+                                }}
+                              />
                               <p className="card-text">{v.quantity}</p>
-                              <FiPlus />
+                              <FiPlus
+                                onClick={() => {
+                                  increment(v.id)
+                                }}
+                              />
                             </div>
                           </div>
                           <div className="col-2">
@@ -101,7 +110,11 @@ export default function ProductCart() {
                             </p>
                           </div>
                           <div className="col-2">
-                            <BsXLg />
+                            <BsXLg
+                              onClick={() => {
+                                removeItem(v.id)
+                              }}
+                            />
                           </div>
                         </div>
                       </div>
@@ -153,9 +166,9 @@ export default function ProductCart() {
               <h4>{finalTotal}</h4>
             </div>
             <div className="d-flex flex-column">
-              <button type="button" className="btn btn-primary mb-3">
+              <Link href="./" className="btn btn-primary mb-3">
                 繼續購物
-              </button>
+              </Link>
               <Link href="./user-info" className="btn btn-primary">
                 前往結帳
               </Link>

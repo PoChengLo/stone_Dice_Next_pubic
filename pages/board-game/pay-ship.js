@@ -3,6 +3,7 @@ import SideCartAccordion from '@/components/board-game/side-cart-accordion'
 import Image from 'next/image'
 import ShipMethod from '@/components/board-game/ship-method'
 import { useCart } from '@/hooks/use-cart-state'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function PayShip() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
@@ -32,6 +33,8 @@ export default function PayShip() {
   }
   return (
     <>
+      <Navbar />
+
       <div className="container">
         {/* 步驟提示圖，付款與運送 */}
         <div className="row">

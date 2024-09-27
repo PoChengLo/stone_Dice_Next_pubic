@@ -6,7 +6,7 @@ import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import { BsGridFill, BsCardText } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from '../../components/board-game/side-class'
-
+import { Button } from 'react-bootstrap'
 
 export default function BoardGame() {
   // 商品物件陣列狀態
@@ -23,8 +23,6 @@ export default function BoardGame() {
   // 分頁用 （建議與後端的預設值要一致，減少錯誤）
   const [page, setPage] = useState(1)
   const [perpage, setPerpage] = useState(8)
-  // 分頁按鈕
-  const [pagesToShow, setPagesToShow] = useState(10)
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getProducts = async (params = {}) => {
@@ -47,7 +45,6 @@ export default function BoardGame() {
         setProducts(resData.data.rows)
         setTotal(resData.data.total)
         setPageCount(resData.data.pageCount)
-
       }
     } catch (e) {
       console.error(e)
@@ -66,22 +63,9 @@ export default function BoardGame() {
     getProducts(params)
   }, [page, perpage])
 
-  // Create a pagination range
-  const generatePageNumbers = () => {
-    const totalPages = Math.min(pageCount, pagesToShow)
-    const startPage = Math.max(1, page - Math.floor(totalPages / 2))
-    const endPage = Math.min(pageCount, startPage + totalPages - 1)
-
-    return Array.from(
-      { length: endPage - startPage + 1 },
-      (_, i) => startPage + i
-    )
-  }
-
-
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       <div id={`${styles.backgroundImage}`} className="py-5">
         <div className="container py-3">
           {/* 搜尋欄，標籤 */}
@@ -132,7 +116,6 @@ export default function BoardGame() {
                 {products.map((product) => (
                   <div className="col-6 col-xxl-3" key={product.id}>
                     <ProdCard product={product} />
-
                   </div>
                 ))}
               </div>
@@ -141,7 +124,7 @@ export default function BoardGame() {
                   <nav aria-label="Page navigation example d-flex justify-content-center">
                     <ul className="pagination d-flex justify-content-center">
                       <li className="page-item">
-                        <button
+                        <Button
                           onClick={() => {
                             const nextPage = page - 1
                             // 最小是1
@@ -149,24 +132,28 @@ export default function BoardGame() {
                               setPage(nextPage)
                             }
                           }}
-                        ></button>
+                        ></Button>
                       </li>
                       {/* Page numbers */}
-                      {generatePageNumbers().map((pg) => (
-                        <li
-                          key={pg}
-                          className={`page-item ${page === pg ? 'active' : ''}`}
-                        >
-                          <button
-                            className="page-link"
-                            onClick={() => setPage(pg)}
-                          >
-                            {pg}
-                          </button>
-                        </li>
-                      ))}
+                      {Array(5)
+                        .fill(1)
+                        .map((v, i) => {
+                          const p = page - 2 + i
+                          if (p < 1 || p > pageCount) return null
+                          return (
+                            <li key={p} className={page === p ? 'active' : ''}>
+                              <Button
+                                onClick={() => {
+                                  setPage(p)
+                                }}
+                              >
+                                {p}
+                              </Button>
+                            </li>
+                          )
+                        })}
                       <li className="page-item">
-                        <button
+                        <Button
                           onClick={() => {
                             const nextPage = page + 1
                             // 最大是pageCount
@@ -174,7 +161,7 @@ export default function BoardGame() {
                               setPage(nextPage)
                             }
                           }}
-                        ></button>
+                        ></Button>
                       </li>
                     </ul>
                   </nav>
