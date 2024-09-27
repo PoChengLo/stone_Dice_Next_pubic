@@ -21,7 +21,7 @@ export default function SideClass() {
           className="list-group-item list-group-item-action bg-transparent text-warning"
           type="button"
         >
-          最新到貨
+          新品上架
         </li>
         <li
           className="list-group-item list-group-item-action bg-transparent text-warning"
@@ -52,12 +52,6 @@ export default function SideClass() {
           type="button"
         >
           策略遊戲
-        </li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        >
-          桌遊周邊/配件
         </li>
       </ul>
       <div className="card bg-transparent text-warning">

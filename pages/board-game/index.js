@@ -7,8 +7,10 @@ import { BsGridFill, BsCardText } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from '../../components/board-game/side-class'
 import { Button } from 'react-bootstrap'
+import { useRouter } from 'next/router'
 
 export default function BoardGame() {
+  const router = useRouter()
   // 商品物件陣列狀態
   // 注意1: 初始值至少要空陣列，初次渲染使用的是初始值
   // 注意2: 在應用程式執行過程中，一定要保持狀態的資料類型一致(陣列)
@@ -22,13 +24,13 @@ export default function BoardGame() {
   // 控制用資訊
   // 分頁用 （建議與後端的預設值要一致，減少錯誤）
   const [page, setPage] = useState(1)
-  const [perpage, setPerpage] = useState(8)
+  const [perpage, setPerpage] = useState(24)
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
-  const getProducts = async (params = {}) => {
+  const getProducts = async () => {
     const baseURL = 'http://127.0.0.1:3006/board-game'
     // 轉換params為查詢字串
-    const searchParams = new URLSearchParams(params)
+    const searchParams = new URLSearchParams(router.query)
     const qs = searchParams.toString()
     const url = `${baseURL}?${qs}`
 
@@ -59,9 +61,18 @@ export default function BoardGame() {
       perpage,
     }
 
+    // 頁面載入時+目前頁數改變時，取得商品資料
+    // 捲動到最上層
+    if (typeof window !== 'undefined') {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    }
     // 向伺服器要求資料
-    getProducts(params)
-  }, [page, perpage])
+    getProducts()
+  }, [router])
 
   return (
     <>
@@ -92,7 +103,27 @@ export default function BoardGame() {
                 共二十件商品
               </button>
               <div className="btn-group me-3">
-                <OrderSelection />
+                <OrderSelection
+                  onChange={(e) => {
+                    console.log(e.target.value, '--')
+                    const query = { ...router.query }
+                    switch (e.target.value) {
+                      case '1':
+                        query.sort = 'price'
+                        query.order = 'desc'
+
+                        break
+                      case '2':
+                        query.sort = 'price'
+                        query.order = 'asc'
+                        break
+                      default:
+                        delete query.sort
+                        delete query.order
+                    }
+                    router.push(`?` + new URLSearchParams(query))
+                  }}
+                />
               </div>
               <button type="button" className="btn btn-primary me-3">
                 <BsGridFill />
