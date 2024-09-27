@@ -3,7 +3,7 @@ import styles from '@/styles/board-game-css/board-game-style.module.css'
 import ProdCard from '@/components/board-game/prod-card'
 import SideClassM from '@/components/board-game/side-class-m'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
-import { BsGridFill, BsCardText } from 'react-icons/bs'
+import { BsGridFill, BsCardText, BsSearch } from 'react-icons/bs'
 import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from '../../components/board-game/side-class'
 import { Button } from 'react-bootstrap'
@@ -24,7 +24,13 @@ export default function BoardGame() {
   // 控制用資訊
   // 分頁用 （建議與後端的預設值要一致，減少錯誤）
   const [page, setPage] = useState(1)
-  const [perpage, setPerpage] = useState(24)
+  const [perpage, setPerpage] = useState(8)
+
+  // 搜尋關鍵字
+  const [search, setSearch] = useState('')
+
+  // 回傳 rows 的數量，用於搜尋
+  const [search_rows, setSearch_rows] = useState(8)
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getProducts = async () => {
@@ -47,6 +53,9 @@ export default function BoardGame() {
         setProducts(resData.data.rows)
         setTotal(resData.data.total)
         setPageCount(resData.data.pageCount)
+        setPage(resData.data.page)
+        setPerpage(resData.data.perpage)
+        setSearch_rows(resData.data.rows.length)
       }
     } catch (e) {
       console.error(e)
@@ -55,12 +64,6 @@ export default function BoardGame() {
 
   // 樣式3: didMount + didUpdate
   useEffect(() => {
-    // 建立查詢字串用的參數值
-    const params = {
-      page,
-      perpage,
-    }
-
     // 頁面載入時+目前頁數改變時，取得商品資料
     // 捲動到最上層
     if (typeof window !== 'undefined') {
@@ -81,16 +84,55 @@ export default function BoardGame() {
         <div className="container py-3">
           {/* 搜尋欄，標籤 */}
           <div className="row my-3">
-            <div className="col-12 col-xxl-6">
+            <div className="col-12 col-xxl-6  ">
               <input
                 type="text"
                 className="form-control"
-                id="search"
-                placeholder="搜尋"
+                id="search_input"
+                placeholder="請輸入關鍵字，可以是商品名稱、背景故事、遊戲介紹或遊戲規則"
+                onInput={(e) => {
+                  const search_input = e.target.value
+                  setSearch(e.target.value)
+                }}
               />
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  const query = { ...router.query }
+                  if (search) {
+                    delete query.sort
+                    delete query.order
+                    delete query.page
+                    query.prod_name_like = `${search}`
+                    query.prod_desc_like = `${search}`
+                    query.prod_intro_like = `${search}`
+                    query.prod_rules_like = `${search}`
+                    router.push(`?` + new URLSearchParams(query))
+                  }
+                }}
+              >
+                搜尋
+                <BsSearch />
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  const query = { ...router.query }
+                  if (query.prod_name_like) {
+                    delete query.prod_name_like
+                    delete query.prod_desc_like
+                    delete query.prod_intro_like
+                    delete query.prod_rules_like
+                    router.push(new URLSearchParams(query))
+                  }
+                  search_input.value = ''
+                }}
+              >
+                清除搜尋
+              </button>
               <SideClassM />
             </div>
-            <div className="col-6" id={`${styles.prod_tag}`}>
+            <div className=" col-xxl-6" id={`${styles.prod_tag}`}>
               <button className={`btn btn-primary ${styles.btnPrimary}`}>
                 單人遊戲
               </button>
@@ -105,7 +147,6 @@ export default function BoardGame() {
               <div className="btn-group me-3">
                 <OrderSelection
                   onChange={(e) => {
-                    console.log(e.target.value, '--')
                     const query = { ...router.query }
                     switch (e.target.value) {
                       case '1':
@@ -150,54 +191,74 @@ export default function BoardGame() {
                   </div>
                 ))}
               </div>
-              <div className="row">
-                <div className="col">
-                  <nav aria-label="Page navigation example d-flex justify-content-center">
-                    <ul className="pagination d-flex justify-content-center">
-                      <li className="page-item">
-                        <Button
-                          onClick={() => {
-                            const nextPage = page - 1
-                            // 最小是1
-                            if (nextPage >= 1) {
-                              setPage(nextPage)
-                            }
-                          }}
-                        ></Button>
-                      </li>
-                      {/* Page numbers */}
-                      {Array(5)
-                        .fill(1)
-                        .map((v, i) => {
-                          const p = page - 2 + i
-                          if (p < 1 || p > pageCount) return null
-                          return (
-                            <li key={p} className={page === p ? 'active' : ''}>
-                              <Button
-                                onClick={() => {
-                                  setPage(p)
-                                }}
+              {/* 分頁按鈕 */}
+              {search_rows >= 8 ? (
+                <div className="row">
+                  <div className="col">
+                    <nav aria-label="Page navigation example d-flex justify-content-center">
+                      <ul className="pagination d-flex justify-content-center">
+                        <li className="page-item">
+                          <Button
+                            onClick={() => {
+                              const query = { ...router.query }
+                              const prePage = page - 1
+                              // 最小是1
+                              if (prePage >= 1) {
+                                query.page = prePage
+                                router.push(`?` + new URLSearchParams(query))
+                              }
+                            }}
+                          >
+                            上一頁
+                          </Button>
+                        </li>
+                        {/* Page numbers */}
+                        {Array(5)
+                          .fill(1)
+                          .map((v, i) => {
+                            const query = { ...router.query }
+                            const p = page - 2 + i
+                            if (p < 1 || p > pageCount) return null
+                            return (
+                              <li
+                                key={p}
+                                className={page === p ? 'active' : ''}
                               >
-                                {p}
-                              </Button>
-                            </li>
-                          )
-                        })}
-                      <li className="page-item">
-                        <Button
-                          onClick={() => {
-                            const nextPage = page + 1
-                            // 最大是pageCount
-                            if (nextPage <= pageCount) {
-                              setPage(nextPage)
-                            }
-                          }}
-                        ></Button>
-                      </li>
-                    </ul>
-                  </nav>
+                                <Button
+                                  onClick={() => {
+                                    query.page = p
+                                    router.push(
+                                      `?` + new URLSearchParams(query)
+                                    )
+                                  }}
+                                >
+                                  {p}
+                                </Button>
+                              </li>
+                            )
+                          })}
+                        <li className="page-item">
+                          <Button
+                            onClick={() => {
+                              const query = { ...router.query }
+                              const nextPage = page + 1
+                              // 最大是pageCount
+                              if (nextPage <= pageCount) {
+                                query.page = nextPage
+                                router.push(`?` + new URLSearchParams(query))
+                              }
+                            }}
+                          >
+                            下一頁
+                          </Button>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
         </div>
