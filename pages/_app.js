@@ -7,10 +7,5 @@ export default function MyApp({ Component, pageProps }) {
   // 使用自訂在頁面層級的版面(layout)
   const getLayout = Component.getLayout || ((page) => page)
 
-  return (
-    <CartProvider>
-      <Navbar></Navbar>
-      {getLayout(<Component {...pageProps} />)}
-    </CartProvider>
-  )
+  return <CartProvider>{getLayout(<Component {...pageProps} />)}</CartProvider>
 }
