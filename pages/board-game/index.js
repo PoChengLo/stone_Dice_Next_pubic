@@ -92,7 +92,7 @@ export default function BoardGame() {
                 placeholder="請輸入關鍵字，可以是商品名稱、背景故事、遊戲介紹或遊戲規則"
                 onInput={(e) => {
                   const search_input = e.target.value
-                  setSearch(e.target.value)
+                  setSearch(search_input)
                 }}
               />
               <button
@@ -125,7 +125,10 @@ export default function BoardGame() {
                     delete query.prod_rules_like
                     router.push(new URLSearchParams(query))
                   }
-                  search_input.value = ''
+                  // 清除搜尋欄狀態
+                  setSearch('')
+                  // 清除 search_input 的文字內容
+                  document.getElementById('search_input').value = ''
                 }}
               >
                 清除搜尋
@@ -157,6 +160,14 @@ export default function BoardGame() {
                       case '2':
                         query.sort = 'price'
                         query.order = 'asc'
+                        break
+                      case '3':
+                        query.sort = 'prod_sales'
+                        query.order = 'asc'
+                        break
+                      case '4':
+                        query.sort = 'prod_update'
+                        query.order = 'desc'
                         break
                       default:
                         delete query.sort
@@ -192,73 +203,65 @@ export default function BoardGame() {
                 ))}
               </div>
               {/* 分頁按鈕 */}
-              {search_rows >= 8 ? (
-                <div className="row">
-                  <div className="col">
-                    <nav aria-label="Page navigation example d-flex justify-content-center">
-                      <ul className="pagination d-flex justify-content-center">
-                        <li className="page-item">
-                          <Button
-                            onClick={() => {
-                              const query = { ...router.query }
-                              const prePage = page - 1
-                              // 最小是1
-                              if (prePage >= 1) {
-                                query.page = prePage
-                                router.push(`?` + new URLSearchParams(query))
-                              }
-                            }}
-                          >
-                            上一頁
-                          </Button>
-                        </li>
-                        {/* Page numbers */}
-                        {Array(5)
-                          .fill(1)
-                          .map((v, i) => {
+
+              <div className="row">
+                <div className="col">
+                  <nav aria-label="Page navigation example d-flex justify-content-center">
+                    <ul className="pagination d-flex justify-content-center">
+                      <li className="page-item">
+                        <Button
+                          onClick={() => {
                             const query = { ...router.query }
-                            const p = page - 2 + i
-                            if (p < 1 || p > pageCount) return null
-                            return (
-                              <li
-                                key={p}
-                                className={page === p ? 'active' : ''}
+                            const prePage = page - 1
+                            // 最小是1
+                            if (prePage >= 1) {
+                              query.page = prePage
+                              router.push(`?` + new URLSearchParams(query))
+                            }
+                          }}
+                        >
+                          上一頁
+                        </Button>
+                      </li>
+                      {/* 頁碼 */}
+                      {Array(5)
+                        .fill(1)
+                        .map((v, i) => {
+                          const query = { ...router.query }
+                          const p = page - 2 + i
+                          if (p < 1 || p > pageCount) return null
+                          return (
+                            <li key={p} className={page === p ? 'active' : ''}>
+                              <Button
+                                onClick={() => {
+                                  query.page = p
+                                  router.push(`?` + new URLSearchParams(query))
+                                }}
                               >
-                                <Button
-                                  onClick={() => {
-                                    query.page = p
-                                    router.push(
-                                      `?` + new URLSearchParams(query)
-                                    )
-                                  }}
-                                >
-                                  {p}
-                                </Button>
-                              </li>
-                            )
-                          })}
-                        <li className="page-item">
-                          <Button
-                            onClick={() => {
-                              const query = { ...router.query }
-                              const nextPage = page + 1
-                              // 最大是pageCount
-                              if (nextPage <= pageCount) {
-                                query.page = nextPage
-                                router.push(`?` + new URLSearchParams(query))
-                              }
-                            }}
-                          >
-                            下一頁
-                          </Button>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
+                                {p}
+                              </Button>
+                            </li>
+                          )
+                        })}
+                      <li className="page-item">
+                        <Button
+                          onClick={() => {
+                            const query = { ...router.query }
+                            const nextPage = page + 1
+                            // 最大是pageCount
+                            if (nextPage <= pageCount) {
+                              query.page = nextPage
+                              router.push(`?` + new URLSearchParams(query))
+                            }
+                          }}
+                        >
+                          下一頁
+                        </Button>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
-              ) : (
-                <div></div>
-              )}
+              </div>
             </div>
           </div>
         </div>
