@@ -29,9 +29,6 @@ export default function BoardGame() {
   // 搜尋關鍵字
   const [search, setSearch] = useState('')
 
-  // 回傳 rows 的數量，用於搜尋
-  const [search_rows, setSearch_rows] = useState(8)
-
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getProducts = async () => {
     const baseURL = 'http://127.0.0.1:3006/board-game'
@@ -55,7 +52,6 @@ export default function BoardGame() {
         setPageCount(resData.data.pageCount)
         setPage(resData.data.page)
         setPerpage(resData.data.perpage)
-        setSearch_rows(resData.data.rows.length)
       }
     } catch (e) {
       console.error(e)
@@ -123,7 +119,7 @@ export default function BoardGame() {
                     delete query.prod_desc_like
                     delete query.prod_intro_like
                     delete query.prod_rules_like
-                    router.push(new URLSearchParams(query))
+                    router.push(`?` + new URLSearchParams(query))
                   }
                   // 清除搜尋欄狀態
                   setSearch('')
@@ -145,7 +141,7 @@ export default function BoardGame() {
           <div className="row" id={`${styles.filter_order}`}>
             <div className="col">
               <button type="button" className="btn btn-primary me-3">
-                共二十件商品
+                總計共{total}件商品
               </button>
               <div className="btn-group me-3">
                 <OrderSelection
@@ -155,7 +151,6 @@ export default function BoardGame() {
                       case '1':
                         query.sort = 'price'
                         query.order = 'desc'
-
                         break
                       case '2':
                         query.sort = 'price'
