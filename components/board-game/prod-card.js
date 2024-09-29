@@ -62,6 +62,7 @@ function ProdCard({ product }) {
           alt=""
           width={280}
           height={280}
+          priority={false} // {false} | {true}
         />
       </Link>
 
