@@ -1,0 +1,27 @@
+.myButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 3px solid #333029;
+  color: #505739;
+  font-size: 20px;
+  width: 150px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: rgba(217, 217, 217, 0.2);
+  cursor: pointer;
+}
+
+.myButton p {
+  margin: 0;
+}
+
+.myButton:hover {
+  background: linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+  background-color: #ccc2a6;
+}
+
+.myButton:active {
+  position: relative;
+  top: 1px;
+}/*# sourceMappingURL=user-button.module.css.map */

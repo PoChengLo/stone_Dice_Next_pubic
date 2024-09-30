@@ -6,6 +6,7 @@ import { useCart } from '@/hooks/use-cart-state'
 import { BsCart4, BsTrash } from 'react-icons/bs'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import Link from 'next/link'
+import styles from '@/styles/board-game-css/board-game-style.module.css'
 
 function SideCartOffcanvas({ ...props }) {
   const [show, setShow] = useState(false)
@@ -50,9 +51,12 @@ function SideCartOffcanvas({ ...props }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="me-2">
-        <BsCart4 />
-      </Button>
+      <button onClick={handleShow} id={`${styles.buttonCart}`}>
+        <p>
+          <BsCart4 />
+          購物車
+        </p>
+      </button>
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>購物車</Offcanvas.Title>
@@ -116,10 +120,10 @@ function SideCartOffcanvas({ ...props }) {
             <h4>NT${finalTotal}</h4>
           </div>
           <div className="d-flex flex-column">
-            <Link href="./" className="btn btn-primary mb-3">
+            <Link href="/board-game" className="btn btn-primary mb-3">
               繼續購物
             </Link>
-            <Link href="./user-info" className="btn btn-primary">
+            <Link href="/board-game/user-info" className="btn btn-primary">
               前往結帳
             </Link>
           </div>
