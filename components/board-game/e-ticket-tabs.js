@@ -17,6 +17,13 @@ export default function ETicketTabs() {
           title="會員載具（個人）"
           tabClassName={`${styles.nav_pills_form}`}
         >
+          <input
+            type="text"
+            className="form-control"
+            id="user-vehicle-input"
+            placeholder="請輸入會員載具"
+            defaultValue={'/XX4567'}
+          />{' '}
           <p>
             依統一發票使用辦法規定
             依統一發票使用辦法規定：個人發票一經開立，無法更改或改開公司戶發票，需開立統編請選擇『公司用(統編)
