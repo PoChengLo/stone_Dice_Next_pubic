@@ -34,7 +34,6 @@ export default function PayShip() {
   return (
     <>
       <Navbar />
-
       <div className="container">
         {/* 步驟提示圖，付款與運送 */}
         <div className="row">
@@ -79,8 +78,12 @@ export default function PayShip() {
                 <label htmlFor="e-ticket" className="form-label">
                   收件人資訊
                 </label>
-                <select className="form-select" aria-label="user-recipient">
-                  <option selected="">選擇常用收件人</option>
+                <select
+                  className="form-select"
+                  aria-label="user-recipient"
+                  defaultValue={'default'}
+                >
+                  <option value={'default'}>選擇常用收件人</option>
                   <option value={1}>吉伊卡哇</option>
                   <option value={2}>小八貓</option>
                   <option value={2}>兔兔</option>

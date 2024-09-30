@@ -59,14 +59,22 @@ export default function ShipMethod() {
             宅配地址
           </label>
           <div className="d-flex">
-            <select className="form-select" aria-label="country">
-              <option selected="">縣市</option>
+            <select
+              className="form-select"
+              aria-label="country"
+              defaultValue={'default'}
+            >
+              <option value={'default'}>縣市</option>
               <option value={1}>台北市</option>
               <option value={2}>台中市</option>
               <option value={3}>高雄市</option>
             </select>
-            <select className="form-select" aria-label="region">
-              <option selected="">鄉鎮市區</option>
+            <select
+              className="form-select"
+              aria-label="region"
+              defaultValue={'default'}
+            >
+              <option value={'default'}>鄉鎮市區</option>
               <option value={1}>信義區</option>
               <option value={2}>烏日區</option>
               <option value={3}>前金區</option>
@@ -87,8 +95,12 @@ export default function ShipMethod() {
           <label htmlFor="user-recipient-time-select" className="form-label">
             配送時段
           </label>
-          <select className="form-select" aria-label="time">
-            <option selected="">請選擇配送時段</option>
+          <select
+            className="form-select"
+            aria-label="time"
+            defaultValue={'default'}
+          >
+            <option value={'default'}>請選擇配送時段</option>
             <option value={1}>不限時</option>
             <option value={2}>早上(09:00~13:00)</option>
             <option value={3}>下午(13:00~18:00)</option>
