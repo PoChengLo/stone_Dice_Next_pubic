@@ -16,6 +16,23 @@
   background-image: url('../../public/board-game/bg-smoke.png');
 }
 
+#buttonCart {
+  color: #f4565c;
+  background: none;
+  border: none;
+
+  p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 0px;
+    svg {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+}
+
 @media (min-width: 577px) {
   .side_class {
     display: none;

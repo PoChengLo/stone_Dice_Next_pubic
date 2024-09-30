@@ -92,7 +92,7 @@ export default function BoardGame() {
                 }}
               />
               <button
-                className="btn btn-primary"
+                className={`btn btn-primary ${styles.btn}`}
                 onClick={() => {
                   const query = { ...router.query }
                   if (search) {
@@ -107,11 +107,13 @@ export default function BoardGame() {
                   }
                 }}
               >
-                搜尋
-                <BsSearch />
+                <p>
+                  搜尋
+                  <BsSearch />
+                </p>
               </button>
               <button
-                className="btn btn-primary"
+                className={`btn btn-primary ${styles.btn}`}
                 onClick={() => {
                   const query = { ...router.query }
                   if (query.prod_name_like) {
@@ -127,7 +129,7 @@ export default function BoardGame() {
                   document.getElementById('search_input').value = ''
                 }}
               >
-                清除搜尋
+                <p>清除搜尋</p>
               </button>
               <SideClassM />
             </div>

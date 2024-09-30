@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './navbar.module.scss'
 import { BsCart4 } from 'react-icons/bs'
+import SideCart from '@/components/board-game/side-cart'
 
 const imageStyle = {
   borderRadius: '50%',
@@ -65,10 +66,11 @@ export default function Navbar() {
         <div className={styles['user-list']}>
           <ul>
             <li>
-              <a href="#">
+              <SideCart />
+              {/* <a href="#">
                 <BsCart4 />
                 購物車
-              </a>
+              </a> */}
             </li>
             <li>
               <a href="#">
