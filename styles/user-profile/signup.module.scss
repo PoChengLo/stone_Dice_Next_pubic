@@ -1,0 +1,99 @@
+.body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.main-container {
+  
+  width: 75%;
+  height: 90%;
+  justify-content: center;
+  align-items: center;
+  background: #d7cebe;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0px 0px 40px 10px rgba(255, 245, 160, 0.2);
+}
+
+.login-section {
+  justify-content: center;
+  gap: 20px;
+  flex-shrink: 0;
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
+}
+
+.login-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  justify-content: flex-start;
+}
+
+.welcome-title {
+  color: rgba(68, 68, 68, 1);
+  margin-top: 50px;
+}
+
+.welcome-description {
+  color: var(--Secondary-text, #313957);
+  letter-spacing: 0.2px;
+  margin-top: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  align-self: stretch;
+}
+
+
+.submit-button {
+  align-self: stretch;
+  border-radius: 12px;
+  background: var(--d-9-bf-8-f, #a6977c);
+  background-color: var(--d-9-bf-8-f, #a6977c);
+  margin-top: 24px;
+  width: 80%;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+
+
+.divider-line {
+  width: 100%;
+  height: 3px;
+  background: #a6977c;
+  margin: 10px;
+}
+
+
+.copyright {
+  color: rgba(149, 156, 182, 1);
+  text-align: center;
+  position: absolute;
+  bottom: 0.5%;
+  right: 1%;
+}
+
+.art-section {
+
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+

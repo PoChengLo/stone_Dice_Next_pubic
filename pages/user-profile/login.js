@@ -161,7 +161,7 @@ export default function LoginPage() {
                   style={artImage}
                 />
                 <footer className={styles['copyright']}>
-                  © 2023 ALL RIGHTS RESERVED
+                  © 2024 THE DICE IN THE STONE
                 </footer>
               </div>
             </section>
