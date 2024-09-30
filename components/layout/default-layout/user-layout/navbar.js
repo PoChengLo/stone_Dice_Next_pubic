@@ -67,10 +67,7 @@ export default function Navbar() {
         <div className={styles['user-list']}>
           <ul>
             <li>
-              <p>
-                <SideCart />
-                購物車
-              </p>
+              <SideCart />
             </li>
             <li>
               <a href="#">

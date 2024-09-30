@@ -57,7 +57,10 @@ function SideCartOffcanvas({ ...props }) {
         className="me-2"
         id={`${styles.buttonCart}`}
       >
-        <BsCart4 />
+        <p>
+          <BsCart4 />
+          購物車
+        </p>
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
