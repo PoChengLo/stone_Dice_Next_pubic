@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
       const userData = { ...initUserData }
 
       // 手動對應後端欄位名稱到前端
-      userData.id = dbUser.user_id || 0
+      userData.id = dbUser.user_id || ''
       userData.username = dbUser.user_name || ''
       userData.google_uid = dbUser.google_uid || ''
       userData.line_uid = dbUser.line_uid || ''
