@@ -66,6 +66,7 @@ export default function UserInfo() {
 
   return (
     <>
+      <Navbar />
       <div className="container">
         {/* 步驟提示圖，購物車 */}
         <div className="row">
