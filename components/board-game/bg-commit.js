@@ -11,7 +11,7 @@ export default function BgCommit({ prodDesc }) {
       <Tabs
         defaultActiveKey="bg-story"
         id="bg-story-user-commit"
-        className="mb-3"
+        className={`mb-3 ${styles.p_tabs}`}
       >
         {/* 背景故事 Tab */}
         <Tab eventKey="bg-story" title="桌遊故事背景">

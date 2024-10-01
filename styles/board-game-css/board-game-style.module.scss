@@ -30,6 +30,29 @@
   }
 }
 
+.singleCard {
+  --bs-card-bg: none;
+  border: none;
+  color: #f8f0e5;
+  .card_body {
+    height: 100%;
+    width: 100%;
+    .icons {
+      font-size: 24px;
+    }
+    .a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+    }
+  }
+}
+
+.p_tabs {
+  color: #f8f0e5;
+}
+
 .nav_pills_form {
   --bs-nav-pills-link-active-color: #ffffff;
   --bs-nav-pills-link-active-bg: #010101;

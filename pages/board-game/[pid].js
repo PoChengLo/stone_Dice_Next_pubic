@@ -62,23 +62,24 @@ export default function ProductPage() {
 
   return (
     <>
-      <Navbar />
-      <div className="container">
-        {/* 商品圖片，商品介紹 */}
-        <div className="row">
-          <div className="col">
-            <SingleProductCard product={product} />
+      <Navbar />{' '}
+      <div id={`${styles.backgroundImage}`} className="pt-5">
+        <div className="container pt-5">
+          {/* 商品圖片，商品介紹 */}
+          <div className="row">
+            <div className="col">
+              <SingleProductCard product={product} />
+            </div>
           </div>
-        </div>
-        {/* 商品背景故事，會員商品評論 */}
-        <div className="row">
-          <div className="col">
-            <BgCommit prodDesc={product.prod_desc} />
+          {/* 商品背景故事，會員商品評論 */}
+          <div className="row mt-xxl-5">
+            <div className="col">
+              <BgCommit prodDesc={product.prod_desc} />
+            </div>
           </div>
-        </div>
 
-        {/* 相關熱門商品 */}
-        {/* <div className="row">
+          {/* 相關熱門商品 */}
+          {/* <div className="row">
           <div className="col">
             <h4>相關熱門商品</h4>
             <div className="row">
@@ -97,8 +98,8 @@ export default function ProductPage() {
             </div>
           </div>
         </div> */}
-        {/* 我的瀏覽紀錄 */}
-        {/* <div className="row">
+          {/* 我的瀏覽紀錄 */}
+          {/* <div className="row">
           <div className="col">
             <h4>我的瀏覽紀錄</h4>
             <div className="row">
@@ -117,6 +118,7 @@ export default function ProductPage() {
             </div>
           </div>
         </div> */}
+        </div>
       </div>
     </>
   )

@@ -30,16 +30,23 @@ function ProdCard({ product }) {
   // 對話盒
   const messageModal = (
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={`${styles.white_to_text}`}>
         <Modal.Title>加入購物車訊息</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{productName} </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+      <Modal.Body className={`${styles.white_to_text}`}>
+        {productName}{' '}
+      </Modal.Body>
+      <Modal.Footer className={`${styles.white_to_text}`}>
+        <Button
+          variant="secondary"
+          className={`${styles.btn}`}
+          onClick={handleClose}
+        >
           繼續購物
         </Button>
         <Button
           variant="primary"
+          className={`${styles.btn}`}
           onClick={() => {
             // 導向購物車頁面
             router.push('/board-game/cart')
@@ -74,7 +81,7 @@ function ProdCard({ product }) {
           </p>
         </Card.Title>
         <Card.Title>
-          <p className="card-text ">NT$ {product.price}</p>
+          <p className="card-text ">NT$ {product.price.toLocaleString()}</p>
         </Card.Title>
 
         <div className={`d-flex justify-content-between ${styles.btns}`}>
@@ -89,7 +96,7 @@ function ProdCard({ product }) {
               addItem(item)
             }}
             href="/board-game/cart"
-            className={` ${styles.btn} , ${styles.a}`}
+            className={` ${styles.btn}  ${styles.a}`}
           >
             立即購買
           </Button>
