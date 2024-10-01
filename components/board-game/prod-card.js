@@ -53,7 +53,7 @@ function ProdCard({ product }) {
 
   return (
     <Card
-      className={`card border-0  d-flex align-items-xxl-center  bg-transparent text-warning m-xxl-4 ${styles.card}`}
+      className={`card border-0  d-flex align-items-xxl-center  bg-transparent  ${styles.card}`}
     >
       <Link href={`/board-game/${product.id}`}>
         <Image
@@ -66,7 +66,7 @@ function ProdCard({ product }) {
         />
       </Link>
 
-      <Card.Body className={`card-body ${styles.card_body}`}>
+      <Card.Body className={`card-body my-2 ${styles.card_body}`}>
         <Card.Title>
           <p className="card-text d-flex justify-content-between">
             {product.prod_name}
@@ -89,7 +89,7 @@ function ProdCard({ product }) {
               addItem(item)
             }}
             href="/board-game/cart"
-            className={`btn btn-primary ${styles.btn}`}
+            className={` ${styles.btn} , ${styles.a}`}
           >
             立即購買
           </Button>

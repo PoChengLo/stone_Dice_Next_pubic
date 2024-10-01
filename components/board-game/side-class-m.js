@@ -13,7 +13,7 @@ function OffCanvasExample({ ...props }) {
       <Button
         variant="primary"
         onClick={handleShow}
-        className={`${styles.side_class}`}
+        className={`${styles.side_class_m} ${styles.btn}`}
       >
         <p>桌遊分類</p>
       </Button>
