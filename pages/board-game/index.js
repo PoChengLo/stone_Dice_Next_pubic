@@ -76,7 +76,7 @@ export default function BoardGame() {
   return (
     <>
       <Navbar />
-      <div id={`${styles.backgroundImage}`} className="pt-5">
+      <div id={`${styles.backgroundImage_index}`} className="pt-5">
         <div className="container pt-5">
           {/* 搜尋欄，標籤 */}
           <div className="row my-xxl-3">
@@ -205,7 +205,7 @@ export default function BoardGame() {
               <div className={`row`}>
                 {products.map((product) => (
                   <div
-                    className="col-6 col-xxl-3 d-flex justify-content-center"
+                    className={`col-6 col-xxl-3 d-flex justify-content-center `}
                     key={product.id}
                   >
                     <ProdCard product={product} />
@@ -213,8 +213,7 @@ export default function BoardGame() {
                 ))}
               </div>
               {/* 分頁按鈕 */}
-
-              <div className="row">
+              <div className="row mt-3">
                 <div className="col">
                   <nav aria-label="Page navigation example d-flex justify-content-center">
                     <ul className="pagination d-flex justify-content-center">
@@ -242,9 +241,11 @@ export default function BoardGame() {
                           const p = page - 2 + i
                           if (p < 1 || p > pageCount) return null
                           return (
-                            <li key={p} className={page === p ? 'active' : ''}>
+                            <li key={p}>
                               <Button
-                                className={`btn btn-primary me-3 ${styles.btn} `}
+                                className={`btn btn-primary me-3 ${
+                                  styles.btn
+                                } ${p === page ? styles.active : ''}`}
                                 onClick={() => {
                                   query.page = p
                                   router.push(`?` + new URLSearchParams(query))

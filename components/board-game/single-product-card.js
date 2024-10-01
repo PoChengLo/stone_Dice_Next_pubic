@@ -50,7 +50,7 @@ export default function SingleProductCard({ product }) {
       <Modal.Body className={`${styles.white_to_text}`}>
         {productName}{' '}
       </Modal.Body>
-      <Modal.Footer className={`${styles.white_to_text}`}>
+      <Modal.Footer className={`${styles.white_to_text} ${styles.modal_m}`}>
         <Button
           variant="secondary"
           className={`${styles.btn}`}
@@ -76,7 +76,7 @@ export default function SingleProductCard({ product }) {
   )
   return (
     <>
-      <div className={`card mb-3 ${styles.singleCard}`}>
+      <div className={`card mb-3 ${styles.single_card}`}>
         <div className="row g-0">
           {/* 商品圖片 */}
           <div className="col-12 col-xxl-6 d-flex justify-content-center">
@@ -103,10 +103,10 @@ export default function SingleProductCard({ product }) {
                   NT$ {product.price.toLocaleString()}
                 </h2>
               </div>
-              <div className="d-flex">
-                <p className="card-text">數量</p>
+              <div className="d-flex align-items-center">
+                <h3 className="card-text my-0 py-0">數量</h3>
                 <FiMinus
-                  className={`${styles.icons} mx-1`}
+                  className={`${styles.icons} mx-3`}
                   onClick={() => {
                     const newSingleQuantity = singleQuantity - 1
                     if (newSingleQuantity >= 1) {
@@ -114,9 +114,9 @@ export default function SingleProductCard({ product }) {
                     }
                   }}
                 />
-                <p className="card-text mx-1">{singleQuantity}</p>
+                <h3 className="my-0 py-0 mx-3">{singleQuantity}</h3>
                 <FiPlus
-                  className={`${styles.icons} mx-1`}
+                  className={`${styles.icons} mx-3`}
                   onClick={() => {
                     const newSingleQuantity = singleQuantity + 1
                     setSingleQuantity(newSingleQuantity)
@@ -156,9 +156,9 @@ export default function SingleProductCard({ product }) {
                     // 呈現跳出對話盒
                     showModal(product.prod_name)
                   }}
-                  className={`btn btn-primary ${styles.btn}`}
+                  className={`btn btn-primary ${styles.btn} ${styles.p}`}
                 >
-                  <p>加入購物車</p>
+                  加入購物車
                 </Button>
               </div>
               {messageModal}

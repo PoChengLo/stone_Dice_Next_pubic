@@ -125,10 +125,10 @@ function SideCartOffcanvas({ ...props }) {
             <h4>NT${finalTotal}</h4>
           </div>
           <div className="d-flex flex-column">
-            <Link href="./" className="btn btn-primary mb-3">
+            <Link href={'/board-game'} className="btn btn-primary mb-3">
               繼續購物
             </Link>
-            <Link href="./user-info" className="btn btn-primary">
+            <Link href="/board-game/user-info" className="btn btn-primary">
               前往結帳
             </Link>
           </div>

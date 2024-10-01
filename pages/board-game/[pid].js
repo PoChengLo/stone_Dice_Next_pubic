@@ -63,7 +63,7 @@ export default function ProductPage() {
   return (
     <>
       <Navbar />{' '}
-      <div id={`${styles.backgroundImage}`} className="pt-5">
+      <div id={`${styles.backgroundImage_pid}`} className="pt-5">
         <div className="container pt-5">
           {/* 商品圖片，商品介紹 */}
           <div className="row">
@@ -72,12 +72,7 @@ export default function ProductPage() {
             </div>
           </div>
           {/* 商品背景故事，會員商品評論 */}
-          <div className="row mt-xxl-5">
-            <div className="col">
-              <BgCommit prodDesc={product.prod_desc} />
-            </div>
-          </div>
-
+          <BgCommit prodDesc={product.prod_desc} />
           {/* 相關熱門商品 */}
           {/* <div className="row">
           <div className="col">

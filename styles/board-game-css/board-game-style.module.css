@@ -11,6 +11,12 @@
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: rgba(127, 90, 61, 0.7);
   --bs-btn-disabled-border-color: #f8f0e5;
+  font-size: 18px;
+}
+
+.active {
+  background-color: #d7bf7d;
+  color: #1f1f1f;
 }
 
 .card {
@@ -26,37 +32,61 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 18px;
 }
 .card .p {
   color: #d7bf7d;
 }
 
-.singleCard {
+.card_box {
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+
+.card_box:hover {
+  box-shadow: 0px 0px 20px 2px rgba(215, 191, 125, 0.5);
+}
+
+.single_card {
   --bs-card-bg: none;
   border: none;
   color: #f8f0e5;
 }
-.singleCard .card_body {
+.single_card .card_body {
   height: 100%;
   width: 100%;
 }
-.singleCard .card_body .icons {
-  font-size: 24px;
+.single_card .card_body .icons {
+  font-size: 30px;
 }
-.singleCard .card_body .a {
+.single_card .card_body .a {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 18px;
 }
 
-.p_tabs {
-  color: #f8f0e5;
+.nav_tab_bg_commit {
+  --bs-nav-tabs-link-active-color: #f8f0e5;
+  --bs-nav-tabs-link-active-bg: #4e4e4e;
+  --bs-nav-tabs-link-active-border-color: none;
 }
 
-.nav_pills_form {
-  --bs-nav-pills-link-active-color: #ffffff;
-  --bs-nav-pills-link-active-bg: #010101;
+.bg_commit {
+  color: #f8f0e5;
+}
+.bg_commit ul li button {
+  background-color: none;
+  color: #f8f0e5;
+}
+.bg_commit ul li button:hover {
+  background-color: #6e6e6e;
+  color: #f8f0e5;
+}
+.bg_commit .card_commit {
+  background: none;
+  color: #f8f0e5;
+  border: none;
 }
 
 .white_to_text {
@@ -92,9 +122,14 @@
   .side_class_m {
     display: none;
   }
-  #backgroundImage {
+  #backgroundImage_index {
     width: 1920px;
     height: 1500px;
+    background-image: url("../../public/board-game/bg-smoke.png");
+  }
+  #backgroundImage_pid {
+    width: 1920px;
+    height: 1200px;
     background-image: url("../../public/board-game/bg-smoke.png");
   }
   .card {
@@ -104,9 +139,14 @@
   }
 }
 @media (max-width: 576px) {
-  #backgroundImage {
+  #backgroundImage_index {
     width: 430px;
-    height: 1450px;
+    height: 1550px;
+    background-image: url("../../public/board-game/bg-smoke.png");
+  }
+  #backgroundImage_pid {
+    width: 430px;
+    height: 1300px;
     background-image: url("../../public/board-game/bg-smoke.png");
   }
   .white_to_text {
@@ -166,7 +206,37 @@
   .card_body {
     display: flex;
     width: 160px;
+    height: 100%;
     padding: 16px 12px;
     flex-direction: column;
+  }
+  .card_body .a {
+    font-size: 12px;
+  }
+  .modal_m {
+    width: 100%;
+    height: 50px;
+  }
+  .single_card .card_body .icons {
+    font-size: 16px;
+  }
+  .single_card .card_body .a {
+    width: 100%;
+    font-size: 12px;
+  }
+  .bg_commit ul li button {
+    font-size: 12px;
+  }
+  .bg_commit ul li button:hover {
+    background-color: #6e6e6e;
+    color: #f8f0e5;
+  }
+  .bg_commit .card_commit {
+    background: none;
+    color: #f8f0e5;
+    border: none;
+  }
+  .bg_commit .p {
+    margin: 0px;
   }
 }/*# sourceMappingURL=board-game-style.module.css.map */

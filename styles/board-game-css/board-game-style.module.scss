@@ -1,3 +1,4 @@
+// 按鈕
 .btn {
   --bs-btn-color: #f8f0e5;
   --bs-btn-hover-color: #1f1f1f;
@@ -11,7 +12,14 @@
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: rgba(127, 90, 61, 0.7);
   --bs-btn-disabled-border-color: #f8f0e5;
+  font-size: 18px;
 }
+.active {
+  background-color: #d7bf7d;
+  color: #1f1f1f;
+}
+
+// 商品卡片
 .card {
   color: #f8f0e5;
   .card_body {
@@ -24,13 +32,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 18px;
   }
   .p {
     color: #d7bf7d;
   }
 }
 
-.singleCard {
+.card_box {
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+.card_box:hover {
+  box-shadow: 0px 0px 20px 2px rgba(215, 191, 125, 0.5);
+}
+
+// 單獨商品卡片
+.single_card {
   --bs-card-bg: none;
   border: none;
   color: #f8f0e5;
@@ -38,7 +56,7 @@
     height: 100%;
     width: 100%;
     .icons {
-      font-size: 24px;
+      font-size: 30px;
     }
     .a {
       display: flex;
@@ -49,15 +67,43 @@
   }
 }
 
-.p_tabs {
+// tab 分頁顏色 pid
+.nav_tab_bg_commit {
+  --bs-nav-tabs-link-active-color: #f8f0e5;
+  --bs-nav-tabs-link-active-bg: #4e4e4e;
+  --bs-nav-tabs-link-active-border-color: none;
+}
+
+// 背景及評論
+.bg_commit {
   color: #f8f0e5;
+
+  ul {
+    li {
+      button {
+        background-color: none;
+        color: #f8f0e5;
+      }
+      button:hover {
+        background-color: #6e6e6e;
+        color: #f8f0e5;
+      }
+    }
+  }
+
+  .card_commit {
+    background: none;
+    color: #f8f0e5;
+    border: none;
+  }
 }
 
-.nav_pills_form {
-  --bs-nav-pills-link-active-color: #ffffff;
-  --bs-nav-pills-link-active-bg: #010101;
-}
+// .nav_pills_form {
+//   --bs-nav-pills-link-active-color: #ffffff;
+//   --bs-nav-pills-link-active-bg: #010101;
+// }
 
+// 輸入框，下拉式選單
 .white_to_text {
   background-color: #f8f0e5;
   color: #1f1f1f;
@@ -70,11 +116,11 @@
   border: none;
 }
 
+// 購物車
 #buttonCart {
   color: #f4565c;
   background: none;
   border: none;
-
   p {
     display: flex;
     align-items: center;
@@ -87,13 +133,21 @@
   }
 }
 
+// 1920*1080
 @media (min-width: 577px) {
   .side_class_m {
     display: none;
   }
-  #backgroundImage {
+  // 首頁背景
+  #backgroundImage_index {
     width: 1920px;
     height: 1500px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+  // 單獨頁背景
+  #backgroundImage_pid {
+    width: 1920px;
+    height: 1200px;
     background-image: url('../../public/board-game/bg-smoke.png');
   }
   .card {
@@ -103,25 +157,34 @@
   }
 }
 
+// 430 * 932
 @media (max-width: 576px) {
-  // 商品總覽頁面
-
-  #backgroundImage {
+  // 首頁背景
+  #backgroundImage_index {
     width: 430px;
-    height: 1450px;
+    height: 1550px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+  #backgroundImage_pid {
+    width: 430px;
+    height: 1300px;
     background-image: url('../../public/board-game/bg-smoke.png');
   }
 
+  // 輸入框，下拉式選單
   .white_to_text {
     font-size: 12px;
     height: 24px;
   }
 
+  // 首頁隱藏部分
   #prod_tag,
   #filter_order,
   #side_class {
     display: none;
   }
+
+  // 手機版側邊欄按鈕
   .side_class_m {
     display: flex;
     height: 24px;
@@ -137,6 +200,7 @@
   .side_class_offcanvas {
     max-width: 300px;
   }
+
   // 商品卡片
   .card_img_top {
     width: 140px;
@@ -171,7 +235,52 @@
   .card_body {
     display: flex;
     width: 160px;
+    height: 100%;
     padding: 16px 12px;
     flex-direction: column;
+    .a {
+      font-size: 12px;
+    }
+  }
+
+  // modal
+  .modal_m {
+    width: 100%;
+    height: 50px;
+  }
+
+  // 單獨卡片
+  .single_card {
+    .card_body {
+      .icons {
+        font-size: 16px;
+      }
+      .a {
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+  }
+  .bg_commit {
+    ul {
+      li {
+        button {
+          font-size: 12px;
+        }
+        button:hover {
+          background-color: #6e6e6e;
+          color: #f8f0e5;
+        }
+      }
+    }
+
+    .card_commit {
+      background: none;
+      color: #f8f0e5;
+      border: none;
+    }
+    .p {
+      margin: 0px;
+    }
   }
 }
