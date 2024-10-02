@@ -62,7 +62,12 @@ function SideCartOffcanvas({ ...props }) {
           購物車
         </p>
       </Button>
-      <Offcanvas show={show} onHide={handleClose} {...props}>
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        {...props}
+        className={`${styles.side_cart}`}
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>購物車</Offcanvas.Title>
         </Offcanvas.Header>
@@ -70,31 +75,38 @@ function SideCartOffcanvas({ ...props }) {
           {/* 單張卡片 */}
           {items.map((v, i) => {
             return (
-              <div className="card mb-3" key={v.id}>
-                <div className="row g-0">
-                  <div className="col-md-4 align-middle">
+              <div className={`card mb-3 ${styles.card_offcanvas}`} key={v.id}>
+                <div className={`row g-0 `}>
+                  <div
+                    className={`col-4 align-middle  d-flex justify-content-xxl-center justify-content-start align-items-center`}
+                  >
                     <Image
                       src={v.prod_img}
-                      className="img-fluid rounded-start"
+                      className={`img-fluid rounded-start`}
                       alt="..."
                       width={110}
                       height={110}
                     />
                   </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
+                  <div className="col-8 ">
+                    <div className={`card-body ${styles.card_body_offcanvas}`}>
                       <div className="row">
                         <div className="col">
-                          <h6 className="card-title">{v.prod_name} </h6>
-                          <p className="card-text">NT${v.price}</p>
-                          <div className="d-flex justify-content-between">
-                            <div className="d-flex">
+                          <p className="card-title">{v.prod_name} </p>
+                          <p className="card-text">
+                            NT${v.price.toLocaleString()}
+                          </p>
+                          <div className="d-flex justify-content-between ">
+                            <div className="d-flex justify-content-center align-items-center">
                               <FiMinus
                                 onClick={() => {
                                   decrement(v.id)
                                 }}
+                                className={`${styles.icons}`}
                               />
-                              <p className="card-text">{v.quantity}</p>
+                              <p className={`card-text ${styles.p}`}>
+                                {v.quantity}
+                              </p>
                               <FiPlus
                                 onClick={() => {
                                   increment(v.id)
@@ -105,12 +117,14 @@ function SideCartOffcanvas({ ...props }) {
                               onClick={() => {
                                 removeItem(v.id)
                               }}
+                              className={`${styles.icons}`}
                             />
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <hr className={`${styles.hr} mt-1`} />
                 </div>
               </div>
             )
@@ -118,18 +132,24 @@ function SideCartOffcanvas({ ...props }) {
 
           <div className="d-flex justify-content-between">
             <p>小計</p>
-            <p>NT${preTotal}</p>
+            <p>NT${preTotal.toLocaleString()}</p>
           </div>
           <div className="d-flex justify-content-between">
             <h4>總計</h4>
-            <h4>NT${finalTotal}</h4>
+            <h4>NT${finalTotal.toLocaleString()}</h4>
           </div>
           <div className="d-flex flex-column">
-            <Link href={'/board-game'} className="btn btn-primary mb-3">
+            <Link
+              href={'/board-game'}
+              className={`btn btn-primary mb-3 ${styles.btn}`}
+            >
               繼續購物
             </Link>
-            <Link href="/board-game/user-info" className="btn btn-primary">
-              前往結帳
+            <Link
+              href="/board-game/cart"
+              className={`btn btn-primary mb-3 ${styles.btn}`}
+            >
+              前往購物車
             </Link>
           </div>
         </Offcanvas.Body>

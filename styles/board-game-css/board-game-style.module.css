@@ -66,6 +66,16 @@
   font-size: 18px;
 }
 
+.h4 {
+  font-size: 20px;
+  color: #f8f0e5;
+}
+
+.h5 {
+  font-size: 14px;
+  color: #f8f0e5;
+}
+
 .nav_tab_bg_commit {
   --bs-nav-tabs-link-active-color: #f8f0e5;
   --bs-nav-tabs-link-active-bg: #4e4e4e;
@@ -118,18 +128,95 @@
   margin-right: 5px;
 }
 
+.side_cart {
+  --bs-offcanvas-color: #1f1f1f;
+  --bs-offcanvas-bg: #f8f0e5;
+}
+.side_cart .card_offcanvas {
+  --bs-card-bg: #f8f0e5;
+  --bs-card-color: #1f1f1f;
+  height: 156px;
+  width: 348px;
+  border: none;
+  border-radius: 0%;
+}
+.side_cart .card_offcanvas .card_body_offcanvas {
+  padding: 6px;
+}
+.side_cart .card_offcanvas .p {
+  margin: 0;
+}
+.side_cart .card_offcanvas .hr {
+  height: 1px;
+  border: none;
+  margin: 0px;
+  opacity: 1;
+  background: rgb(127, 90, 61);
+  background: linear-gradient(90deg, rgb(127, 90, 61) 0%, rgb(215, 191, 125) 100%);
+}
+
+.cart {
+  color: #f8f0e5;
+}
+.cart .p {
+  margin: 0px;
+}
+.cart .steps_active {
+  color: #d7bf7d;
+}
+.cart .steps_no_active {
+  color: #6e7c9e;
+}
+.cart .cart_icon {
+  color: #d7bf7d;
+}
+.cart .cart_icon_no_active {
+  color: #6e7c9e;
+}
+.cart .hr {
+  width: 180px;
+  height: 1px;
+  background-color: #d7bf7d;
+  border: none;
+  margin: 0px;
+  opacity: 1;
+}
+.cart .hr_active {
+  background-color: #d7bf7d;
+}
+.cart .hr_no_active {
+  background-color: #6e7c9e;
+}
+.cart .cart_main {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(153, 153, 153, 0.3) 100%);
+  backdrop-filter: blur(25px);
+  border-radius: 10px;
+}
+.cart .cart_card {
+  --bs-card-bg: none;
+  border: 1px solid #f8f0e5;
+  color: #f8f0e5;
+}
+.cart .cart_card .cart_card_icon {
+  font-size: 24px;
+}
+.cart .cart_hr {
+  height: 1px;
+  border: none;
+  margin: 0px;
+  opacity: 1;
+  background: rgb(127, 90, 61);
+  background: linear-gradient(90deg, rgb(127, 90, 61) 0%, rgb(215, 191, 125) 100%);
+}
+
 @media (min-width: 577px) {
   .side_class_m {
     display: none;
   }
-  #backgroundImage_index {
-    width: 1920px;
-    height: 1500px;
-    background-image: url("../../public/board-game/bg-smoke.png");
-  }
-  #backgroundImage_pid {
-    width: 1920px;
-    height: 1200px;
+  #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40px;
     background-image: url("../../public/board-game/bg-smoke.png");
   }
   .card {
@@ -139,14 +226,10 @@
   }
 }
 @media (max-width: 576px) {
-  #backgroundImage_index {
-    width: 430px;
-    height: 1550px;
-    background-image: url("../../public/board-game/bg-smoke.png");
-  }
-  #backgroundImage_pid {
-    width: 430px;
-    height: 1300px;
+  #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
     background-image: url("../../public/board-game/bg-smoke.png");
   }
   .white_to_text {
@@ -238,5 +321,30 @@
   }
   .bg_commit .p {
     margin: 0px;
+  }
+  .side_cart {
+    --bs-offcanvas-width: 300px;
+  }
+  .side_cart .card_offcanvas {
+    margin: 0px;
+    width: 276px;
+    height: 116px;
+  }
+  .cart .hr {
+    width: 1px;
+    height: 30px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .cart .cart_card .cart_card_icon {
+    font-size: 16px;
+  }
+  .cart .h4 {
+    font-size: 16px;
+  }
+  .cart .h5 {
+    font-size: 12px;
   }
 }/*# sourceMappingURL=board-game-style.module.css.map */

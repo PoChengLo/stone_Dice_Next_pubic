@@ -76,7 +76,7 @@ export default function BoardGame() {
   return (
     <>
       <Navbar />
-      <div id={`${styles.backgroundImage_index}`} className="pt-5">
+      <div id={`${styles.backgroundImage}`} className="pt-5">
         <div className="container pt-5">
           {/* 搜尋欄，標籤 */}
           <div className="row my-xxl-3">

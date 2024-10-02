@@ -66,6 +66,14 @@
     }
   }
 }
+.h4 {
+  font-size: 20px;
+  color: #f8f0e5;
+}
+.h5 {
+  font-size: 14px;
+  color: #f8f0e5;
+}
 
 // tab 分頁顏色 pid
 .nav_tab_bg_commit {
@@ -116,7 +124,7 @@
   border: none;
 }
 
-// 購物車
+// 購物車按鈕
 #buttonCart {
   color: #f4565c;
   background: none;
@@ -133,21 +141,112 @@
   }
 }
 
+// 側邊欄購物車
+.side_cart {
+  --bs-offcanvas-color: #1f1f1f;
+  --bs-offcanvas-bg: #f8f0e5;
+  .card_offcanvas {
+    --bs-card-bg: #f8f0e5;
+    --bs-card-color: #1f1f1f;
+    height: 156px;
+    width: 348px;
+    border: none;
+    border-radius: 0%;
+    .card_body_offcanvas {
+      padding: 6px;
+    }
+    .p {
+      margin: 0;
+    }
+    .hr {
+      height: 1px;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+      background: rgb(127, 90, 61);
+      background: linear-gradient(
+        90deg,
+        rgba(127, 90, 61, 1) 0%,
+        rgba(215, 191, 125, 1) 100%
+      );
+    }
+  }
+}
+
+// 購物車
+.cart {
+  color: #f8f0e5;
+  .p {
+    margin: 0px;
+  }
+  .steps_active {
+    color: #d7bf7d;
+  }
+  .steps_no_active {
+    color: #6e7c9e;
+  }
+  .cart_icon {
+    color: #d7bf7d;
+  }
+  .cart_icon_no_active {
+    color: #6e7c9e;
+  }
+  .hr {
+    width: 180px;
+    height: 1px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .hr_active {
+    background-color: #d7bf7d;
+  }
+  .hr_no_active {
+    background-color: #6e7c9e;
+  }
+  .cart_main {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(153, 153, 153, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: 10px;
+  }
+  .cart_card {
+    --bs-card-bg: none;
+    border: 1px solid #f8f0e5;
+    color: #f8f0e5;
+
+    .cart_card_icon {
+      font-size: 24px;
+    }
+  }
+  .cart_hr {
+    height: 1px;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+    background: rgb(127, 90, 61);
+    background: linear-gradient(
+      90deg,
+      rgba(127, 90, 61, 1) 0%,
+      rgba(215, 191, 125, 1) 100%
+    );
+  }
+}
+
 // 1920*1080
 @media (min-width: 577px) {
   .side_class_m {
     display: none;
   }
-  // 首頁背景
-  #backgroundImage_index {
-    width: 1920px;
-    height: 1500px;
-    background-image: url('../../public/board-game/bg-smoke.png');
-  }
-  // 單獨頁背景
-  #backgroundImage_pid {
-    width: 1920px;
-    height: 1200px;
+  // 背景
+  #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40px;
     background-image: url('../../public/board-game/bg-smoke.png');
   }
   .card {
@@ -159,15 +258,11 @@
 
 // 430 * 932
 @media (max-width: 576px) {
-  // 首頁背景
-  #backgroundImage_index {
-    width: 430px;
-    height: 1550px;
-    background-image: url('../../public/board-game/bg-smoke.png');
-  }
-  #backgroundImage_pid {
-    width: 430px;
-    height: 1300px;
+  //背景
+  #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
     background-image: url('../../public/board-game/bg-smoke.png');
   }
 
@@ -197,6 +292,8 @@
       padding: 0px;
     }
   }
+
+  // 側邊欄
   .side_class_offcanvas {
     max-width: 300px;
   }
@@ -281,6 +378,37 @@
     }
     .p {
       margin: 0px;
+    }
+  }
+
+  // 側邊欄購物車
+  .side_cart {
+    --bs-offcanvas-width: 300px;
+    .card_offcanvas {
+      margin: 0px;
+      width: 276px;
+      height: 116px;
+    }
+  }
+  .cart {
+    .hr {
+      width: 1px;
+      height: 30px;
+      background-color: #d7bf7d;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+    }
+    .cart_card {
+      .cart_card_icon {
+        font-size: 16px;
+      }
+    }
+    .h4 {
+      font-size: 16px;
+    }
+    .h5 {
+      font-size: 12px;
     }
   }
 }
