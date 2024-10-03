@@ -198,7 +198,21 @@ export default function BoardGame() {
           <div className="row">
             {/* 側邊欄 */}
             <div className="col-2 m-auto" id={`${styles.side_class}`}>
-              <SideClass />
+              <SideClass
+                onClick={(e) => {
+                  const query = { ...router.query }
+                  switch (e.target.dataset.value) {
+                    case 'hot-sale':
+                      query.sort = `prod_sales > 600`
+                      query.order = 'asc'
+                      break
+                    default:
+                      delete query.sort
+                      delete query.order
+                  }
+                  router.push(`?` + new URLSearchParams(query))
+                }}
+              />
             </div>
             {/* 商品卡片 */}
             <div className="col-12 col-xxl-10 ">
