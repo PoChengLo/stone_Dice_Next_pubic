@@ -275,7 +275,16 @@ export default function LarpId() {
             height: 670,
             backgroundColor: 'rgb(82, 95, 117)',
           }}
-        />
+        >
+          <iframe
+            title="library"
+            width="100%"
+            height="100%"
+            allowFullScreen
+            style={{ borderStyle: 'none' }}
+            src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https%3A//th.bing.com/th/id/OIG4.HR2FAo.9utuvXwdMUn0p%3Fw%3D1024%26h%3D1024%26rs%3D1%26pid%3DImgDetMain&autoLoad=true"
+          ></iframe>{' '}
+        </div>
         {/* 立即預約分隔線 */}
         <div id="order">
           <Line title="立即預約" />

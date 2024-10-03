@@ -5,6 +5,7 @@
 }
 .card:hover {
   box-shadow: 0px 4px 26.5px 0px #7f5a3d;
+  transition: all 0.5s ease;
 }
 .btn {
   background-color: #7f5a3d;
@@ -18,6 +19,7 @@
   border-radius: 10px;
 }
 .btn:hover {
+  transition: all 0.5s ease;
   background: #d7bf7d;
   color: #1f1f1f;
 }

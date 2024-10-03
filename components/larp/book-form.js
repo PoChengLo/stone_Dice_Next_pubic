@@ -5,8 +5,6 @@ import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 import { useRouter } from 'next/router'
 import useBookFormState from '@/hooks/use-bookform-state'
-import { findIndex } from 'lodash'
-import useLocalStorage from '@/hooks/use-localstorage'
 
 export default function BookForm({ escapes = [], escape = [] }) {
   const router = useRouter()
@@ -26,7 +24,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
 
   // 初始化表單的值
   const initialFormValues = {
-    larpName: '',
+    larpName: selectId,
     loc: 0,
     date: '',
     datetime: '',
@@ -75,7 +73,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
     const selectId = Number(e.target.value)
     setSelectId(selectId)
     setSelectedLocationId('') // 重置館別選項
-    setSelectPeople('') // 重置人數選項
+    setSelectPeople(0) // 重置人數選項
     filterLoc(selectId)
     setPeoples([])
     setUniPrice(selectId)
@@ -127,6 +125,15 @@ export default function BookForm({ escapes = [], escape = [] }) {
       setSelectId(selectLarp.id)
       filterLoc(selectLarp.id)
       setUniPrice(selectLarp.price)
+
+      // 將預設的主題寫入 localStorage
+      setFormData((prevData) => ({
+        ...prevData,
+        larpName: selectLarp.id,
+      }))
+
+      // 寫入 localStorage
+      localStorage.setItem('larpName', selectLarp.id)
 
       // 根據預設主題生成對應的人數選項
       const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
