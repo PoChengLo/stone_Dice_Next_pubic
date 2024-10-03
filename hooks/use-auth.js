@@ -6,7 +6,7 @@ import { checkAuth, getFavs } from '@/services/user'
 const AuthContext = createContext(null)
 
 export const initUserData = {
-  id: 0,
+  id: '',
   username: '',
   google_uid: '',
   line_uid: '',
@@ -53,9 +53,17 @@ export const AuthProvider = ({ children }) => {
   const handleCheckAuth = async () => {
     const res = await checkAuth()
 
+    console.log('Response from checkAuth:', res)
+
     if (res.data.status === 'success') {
       const dbUser = res.data.data.user
       const userData = { ...initUserData }
+
+      if (dbUser.user_id) {
+        userData.id = dbUser.user_id // 設置後端的 user_id 到 userData 中
+      }
+
+      console.log('Assigned userData:', userData)
 
       // 手動對應後端欄位名稱到前端
       userData.id = dbUser.user_id || ''
@@ -68,9 +76,9 @@ export const AuthProvider = ({ children }) => {
       // 設到全域狀態中
       setAuth({ isAuth: true, userData })
     } else {
-      console.warn(res.data)
+      console.warn('Authentication failed:', res.data)
 
-      // 在這裡實作隱私頁面路由的跳轉
+      // 若驗證失敗，跳轉到登入頁面
       if (protectedRoutes.includes(router.pathname)) {
         router.push(loginRoute)
       }
