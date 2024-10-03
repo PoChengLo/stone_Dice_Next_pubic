@@ -44,7 +44,7 @@ export default function LoginPage() {
 
   // 處理登入
   const handleLogin = async (event) => {
-    event.preventDefault() // 阻止表單的默認行為
+    event.preventDefault()
     try {
       const res = await login(user)
 
@@ -56,11 +56,12 @@ export default function LoginPage() {
           const dbUser = res1.data.data.user
           const userData = { ...initUserData }
 
-          for (const key in userData) {
-            if (Object.hasOwn(dbUser, key)) {
-              userData[key] = dbUser[key]
-            }
-          }
+          userData.id = dbUser.user_id || jwtUser.id
+          userData.username = dbUser.user_name || jwtUser.username
+          userData.google_uid = dbUser.google_uid || null
+          userData.line_uid = dbUser.line_uid || jwtUser.line_uid
+          userData.email = dbUser.email || jwtUser.email
+          userData.name = dbUser.name || ''
 
           setAuth({
             isAuth: true,
@@ -68,7 +69,6 @@ export default function LoginPage() {
           })
 
           toast.success('已成功登入')
-          // 重定向到用戶的 home 頁面
           router.push(`/user-profile/${jwtUser.id}/home`)
         } else {
           toast.error('登入後無法得到會員資料')
@@ -161,7 +161,7 @@ export default function LoginPage() {
                   style={artImage}
                 />
                 <footer className={styles['copyright']}>
-                  © 2023 ALL RIGHTS RESERVED
+                  © 2024 THE DICE IN THE STONE
                 </footer>
               </div>
             </section>

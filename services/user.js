@@ -141,7 +141,18 @@ export const useUser = (id) => {
 
 // 解析accessToken用的函式
 export const parseJwt = (token) => {
-  const base64Payload = token.split('.')[1]
-  const payload = Buffer.from(base64Payload, 'base64')
-  return JSON.parse(payload.toString())
+  try {
+    const base64Payload = token.split('.')[1]
+    const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    )
+    return JSON.parse(jsonPayload)
+  } catch (error) {
+    console.error('Failed to parse JWT:', error)
+    return null
+  }
 }
