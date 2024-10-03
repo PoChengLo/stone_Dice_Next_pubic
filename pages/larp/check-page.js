@@ -38,7 +38,7 @@ export default function CheckPage() {
       const larpLocValue = larpLoc.loc_name
       setLoc(larpLocValue)
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (router.isReady) {
