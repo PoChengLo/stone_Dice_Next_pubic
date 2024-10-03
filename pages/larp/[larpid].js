@@ -9,6 +9,7 @@ import BookForm from '@/components/larp/book-form'
 import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
 import OrderRightNow from '@/components/larp/orderRightNow'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function LarpId() {
   const router = useRouter()
@@ -81,7 +82,7 @@ export default function LarpId() {
   return (
     <div className={styles.larpBody}>
       {/* 置頂大圖 */}
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="position-relative">
         <h1
           className={`position-absolute ${styles.larpName} strokeText`}
