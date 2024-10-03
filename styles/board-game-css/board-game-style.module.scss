@@ -38,7 +38,6 @@
     color: #d7bf7d;
   }
 }
-
 .card_box {
   transition: all 0.5s ease;
   border-radius: 10px;
@@ -105,11 +104,6 @@
     border: none;
   }
 }
-
-// .nav_pills_form {
-//   --bs-nav-pills-link-active-color: #ffffff;
-//   --bs-nav-pills-link-active-bg: #010101;
-// }
 
 // 輸入框，下拉式選單
 .white_to_text {
@@ -224,6 +218,240 @@
     }
   }
   .cart_hr {
+    height: 1px;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+    background: rgb(127, 90, 61);
+    background: linear-gradient(
+      90deg,
+      rgba(127, 90, 61, 1) 0%,
+      rgba(215, 191, 125, 1) 100%
+    );
+  }
+}
+
+// 填寫購買人資訊
+.user_info {
+  height: 1080px;
+  color: #f8f0e5;
+  .p {
+    font-size: 18px;
+    margin: 0;
+  }
+  .steps_active {
+    color: #d7bf7d;
+  }
+  .steps_no_active {
+    color: #6e7c9e;
+  }
+  .cart_icon {
+    color: #d7bf7d;
+  }
+  .cart_icon_no_active {
+    color: #6e7c9e;
+  }
+  .hr {
+    width: 180px;
+    height: 1px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .hr_active {
+    background-color: #d7bf7d;
+  }
+  .hr_no_active {
+    background-color: #6e7c9e;
+  }
+  .user_info_main {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(153, 153, 153, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: 10px;
+  }
+  .input_text {
+    color: #f8f0e5;
+  }
+  .nav_pills {
+    --bs-nav-pills-link-active-bg: #f8f0e5;
+    --bs-nav-pills-link-active-color: #1f1f1f;
+    --bs-nav-link-color: #f8f0e5;
+    --bs-nav-link-hover-color: #d7bf7d;
+    border: 1px solid #f8f0e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav_icons {
+    font-size: 24px;
+  }
+  .inputs {
+    width: 50%;
+  }
+  button {
+    margin-right: 2rem;
+    width: 200px;
+  }
+  .eticket {
+    height: 400px;
+  }
+  .user_info_border {
+    border: 1px solid #f8f0e5;
+    border-radius: 10px;
+  }
+}
+
+// 購物車側邊欄手風琴
+.side_cart_accordion {
+  --bs-accordion-bg: none;
+  --bs-accordion-box-shadow: none;
+  --bs-accordion-active-bg: none;
+  --bs-border-color: #f8f0e5;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-btn-color: #f8f0e5;
+  --bs-accordion-active-color: #f8f0e5;
+  --bs-accordion-color: #f8f0e5;
+  --bs-accordion-btn-icon-color: #f8f0e5;
+  --bs-accordion-btn-icon: none;
+  --bs-accordion-btn-active-icon: none;
+  h2 {
+    button {
+      font-size: 18px;
+    }
+  }
+  .accordion_icon {
+    margin-left: 1rem;
+  }
+}
+
+// 選擇運送與付款方式
+.pay_ship {
+  color: #f8f0e5;
+  .p {
+    font-size: 18px;
+    margin: 0;
+  }
+  .steps_active {
+    color: #d7bf7d;
+  }
+  .steps_no_active {
+    color: #6e7c9e;
+  }
+  .cart_icon {
+    color: #d7bf7d;
+  }
+  .cart_icon_no_active {
+    color: #6e7c9e;
+  }
+  .hr {
+    width: 180px;
+    height: 1px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .hr_active {
+    background-color: #d7bf7d;
+  }
+  .hr_no_active {
+    background-color: #6e7c9e;
+  }
+  .pay_ship_main {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(153, 153, 153, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: 10px;
+  }
+  .input_text {
+    color: #f8f0e5;
+  }
+  .nav_pills {
+    --bs-nav-pills-link-active-bg: #f8f0e5;
+    --bs-nav-pills-link-active-color: #1f1f1f;
+    --bs-nav-link-color: #f8f0e5;
+    --bs-nav-link-hover-color: #d7bf7d;
+    border: 1px solid #f8f0e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn_pay_ship {
+    --bs-btn-color: #f8f0e5;
+    --bs-btn-bg: none;
+    --bs-btn-border-color: #f8f0e5;
+    --bs-btn-active-bg: #f8f0e5;
+    --bs-btn-active-color: #1f1f1f;
+    --bs-btn-active-border-color: #f8f0e5;
+    width: 250px;
+    font-size: 18px;
+  }
+  .nav_icons {
+    font-size: 24px;
+  }
+  .inputs {
+    width: 50%;
+  }
+
+  .eticket {
+    height: 400px;
+  }
+  .pay_ship_border {
+    border: 1px solid #f8f0e5;
+    border-radius: 10px;
+  }
+  .pay_ship_border_method {
+    border: 1px solid #f8f0e5;
+    border-radius: 10px;
+    height: 370px;
+  }
+  .form_check_input {
+    appearance: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    --bs-checkbox-focus-box-shadow: none;
+  }
+  .form_check_input:checked {
+    background-color: #f8f0e5;
+    border-color: #f8f0e5;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .form_check_input:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  .form_check_input:checked::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://i.postimg.cc/Y2s9qFPk/check.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: none;
+    outline: none;
+  }
+}
+// 付款成功
+.success {
+  color: #f8f0e5;
+  .success_hr {
     height: 1px;
     border: none;
     margin: 0px;
@@ -410,5 +638,90 @@
     .h5 {
       font-size: 12px;
     }
+  }
+  .user_info {
+    .p {
+      font-size: 16px;
+    }
+    .hr {
+      width: 1px;
+      height: 30px;
+      background-color: #d7bf7d;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+    }
+    .side_cart_accordion_m {
+      display: none;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .eticket {
+      height: 450px;
+    }
+    .nav_icons {
+      font-size: 16px;
+    }
+    button {
+      width: 372px;
+      height: 32px;
+      margin: 0px;
+    }
+  }
+  .pay_ship {
+    .hr {
+      width: 1px;
+      height: 30px;
+      background-color: #d7bf7d;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+    }
+    .side_cart_accordion_m {
+      display: none;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav_icons {
+      font-size: 16px;
+    }
+  }
+  .pay_ship {
+    .p {
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .btn_pay_ship {
+      width: auto;
+      font-size: 12px;
+    }
+    .nav_icons {
+      font-size: 12px;
+    }
+    .pay_ship_border_method {
+      height: 360px;
+    }
+    .white_to_text {
+      height: 30px;
+    }
+    .input_text {
+      font-size: 10px;
+    }
+    .btn_pay_ship_2 {
+      width: 372px;
+    }
+  }
+
+  #success_pic {
+    width: 360px;
+    height: 40px;
   }
 }

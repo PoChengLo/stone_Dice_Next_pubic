@@ -81,16 +81,9 @@ export default function ProductCart() {
                   className={`${styles.cart_icon} ${styles.cart_icon_no_active} me-2`}
                 />{' '}
                 <p className={`${styles.p}  ${styles.steps_no_active}`}>
-                  選擇付款與運送方式
+                  選擇運送與付款方式
                 </p>
               </div>
-
-              {/* <Image
-                src="https://i.postimg.cc/Wz4sGbyw/steps-part.png"
-                alt=""
-                width={1536}
-                height={145}
-              /> */}
             </div>
           </div>
           {/* 主要區域 */}
@@ -215,7 +208,7 @@ export default function ProductCart() {
                   繼續購物
                 </Button>
                 <Button href="./user-info" className={`${styles.btn} `}>
-                  前往結帳
+                  填寫購買人資訊
                 </Button>
               </div>
             </div>

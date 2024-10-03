@@ -6,6 +6,8 @@ import ETicketTabs from '@/components/board-game/e-ticket-tabs'
 import Link from 'next/link'
 import { useCart } from '@/hooks/use-cart-state'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import styles from '@/styles/board-game-css/board-game-style.module.css'
+import { BsCircle } from 'react-icons/bs'
 
 export default function UserInfo() {
   // 會員物件狀態
@@ -67,87 +69,132 @@ export default function UserInfo() {
   return (
     <>
       <Navbar />
-      <div className="container">
-        {/* 步驟提示圖，購物車 */}
-        <div className="row">
-          <div className="col">
-            <Image
-              src="https://i.postimg.cc/GmQ2bZTt/steps-part2.png"
-              alt=""
-              width={1536}
-              height={145}
-            />
-          </div>
-        </div>
-        {/* 主要區域 */}
-        <div className="row">
-          {/* 側邊購物車明細，商品明細 */}
-          <div className="col-3">
-            <SideCartAccordion items={items} />
-          </div>
-          <div className="col-9">
-            <form>
-              {/* 聯絡人資訊，姓名，電話 */}
-              <div className="row">
-                <div className="col">
-                  <div className="mb-3">
-                    <label htmlFor="user-name" className="form-label">
-                      姓名
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="user-name"
-                      aria-describedby="user-name"
-                      placeholder="購買人姓名"
-                      defaultValue={`${user_info.user_name}`}
-                    />
-                    <div id="user-name-commit" className="form-text">
-                      超商取貨請使用本名，並記得攜帶身分證前往取貨
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="user-phone" className="form-label">
-                      聯絡電話
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="user-phone"
-                      placeholder="購買人聯絡電話，例如：0987654321"
-                      defaultValue={`${user_info.mobile}`}
-                    />
-                    <div id="user-phone-commit" className="form-text">
-                      取貨通知將以此電話聯繫，請勿加入任何空格或符號，使用超商取貨請務必填寫10碼手機，如：0987654321
-                    </div>
-                  </div>
-                </div>
+      <div id={`${styles.backgroundImage}`} className="pt-5">
+        <div className={`container pt-5 ${styles.user_info}`}>
+          {/* 步驟提示，填寫購買人資訊 */}
+          <div className="row my-3">
+            <div className="col d-flex align-items-xxl-center justify-content-xxl-evenly flex-xxl-row flex-column justify-content-evenly align-items-center">
+              <div className="d-flex align-items-center mb-2 mb-xxl-0">
+                <BsCircle className={`${styles.cart_icon} me-2`} />
+                <p className={`${styles.p} ${styles.steps_active}`}>
+                  確認購物車內容
+                </p>
               </div>
-              {/* 電子發票，公司統編，手機載具 */}
-              {/* 找測試用的API */}
-              <div className="row">
-                <div className="col">
-                  <label htmlFor="e-ticket" className="form-label">
-                    電子發票
-                  </label>
-                  <ETicketTabs />
-                </div>
-              </div>
+              <hr className={`${styles.hr} ${styles.hr_active}`} />
 
-              {/* 繼續購物，付款與運送，按鈕 */}
-              <div className="row">
-                <div className="col">
-                  <div className="d-flex justify-content-end">
-                    <Link href="./cart" className="btn btn-primary m-1">
-                      返回購物車
-                    </Link>
-                    <Link href="./pay-ship" className="btn btn-primary m-1">
-                      付款與運送
-                    </Link>
+              <div className="d-flex align-items-center  mb-2 mb-xxl-0">
+                <BsCircle
+                  className={`${styles.cart_icon} ${styles.cart_icon_active} me-2`}
+                />
+                <p className={`${styles.p} ${styles.steps_active}`}>
+                  填寫購買人資訊
+                </p>
+              </div>
+              <hr className={`${styles.hr} ${styles.hr_no_active}`} />
+
+              <div className="d-flex align-items-center  mt-2 mt-xxl-0">
+                <BsCircle
+                  className={`${styles.cart_icon} ${styles.cart_icon_no_active} me-2`}
+                />{' '}
+                <p className={`${styles.p}  ${styles.steps_no_active}`}>
+                  選擇運送與付款方式
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* 主要區域 */}
+          <div
+            className={`row my-5 mx-xxl-0  p-xxl-5 py-3  px-3 ${styles.user_info_main}`}
+          >
+            {/* 側邊購物車明細，商品明細 */}
+            <div className={`col-3 ${styles.side_cart_accordion_m}`}>
+              <SideCartAccordion items={items} />
+            </div>
+            <div className="col-xxl-9 col-12">
+              <form>
+                {/* 聯絡人資訊，姓名，電話 */}
+                <div className={`row ${styles.user_info_border}`}>
+                  <div className="col">
+                    <div className="my-3">
+                      <label
+                        htmlFor="user-name"
+                        className={`form-label my-xxl-3 my-1 ${styles.p}`}
+                      >
+                        姓名
+                      </label>
+                      <input
+                        type="text"
+                        className={`form-control ${styles.white_to_text}`}
+                        id="user-name"
+                        aria-describedby="user-name"
+                        placeholder="購買人姓名"
+                        defaultValue={`${user_info.user_name}`}
+                      />
+                      <div
+                        id="user-name-commit"
+                        className={`form-text mt-2 ${styles.input_text}`}
+                      >
+                        超商取貨請使用本名，並記得攜帶身分證前往取貨
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label
+                        htmlFor="user-phone"
+                        className={`form-label my-xxl-3 my-1 ${styles.p}`}
+                      >
+                        聯絡電話
+                      </label>
+                      <input
+                        type="text"
+                        className={`form-control ${styles.white_to_text}`}
+                        id="user-phone"
+                        placeholder="購買人聯絡電話，例如：0987654321"
+                        defaultValue={`${user_info.mobile}`}
+                      />
+                      <div
+                        id="user-phone-commit"
+                        className={`form-text mt-2 ${styles.input_text}`}
+                      >
+                        出貨通知將以此電話聯繫，請勿加入任何空格或符號，請務必填寫10碼手機，如：0987654321
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
+                {/* 電子發票，公司統編，手機載具 */}
+                {/* 找測試用的API */}
+                <div className={`row mt-3 ${styles.user_info_border}`}>
+                  <div className={`col ${styles.eticket}`}>
+                    <label
+                      htmlFor="e-ticket"
+                      className={`form-label my-xxl-3 my-1 ${styles.p}`}
+                    >
+                      電子發票
+                    </label>
+                    <ETicketTabs />
+                  </div>
+                </div>
+
+                {/* 繼續購物，付款與運送，按鈕 */}
+                <div className="row mt-3">
+                  <div className="col">
+                    <div className="">
+                      <Link
+                        href="./cart"
+                        className={`btn btn-primary me-xxl-3 ${styles.btn}`}
+                      >
+                        返回購物車
+                      </Link>
+                      <Link
+                        href="./pay-ship"
+                        className={`btn btn-primary my-xxl-3 mt-3 mb-1 ${styles.btn}`}
+                      >
+                        選擇運送與付款方式
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
