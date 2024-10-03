@@ -121,14 +121,15 @@ export default function BoardGame() {
               <button
                 className={`btn btn-primary  me-3 ${styles.btn} `}
                 onClick={() => {
-                  const query = { ...router.query }
-                  if (query.prod_name_like) {
-                    delete query.prod_name_like
-                    delete query.prod_desc_like
-                    delete query.prod_intro_like
-                    delete query.prod_rules_like
-                    router.push(`?` + new URLSearchParams(query))
-                  }
+                  // const query = { ...router.query }
+                  // if (query.prod_name_like) {
+                  //   // delete query.prod_name_like
+                  //   // delete query.prod_desc_like
+                  //   // delete query.prod_intro_like
+                  //   // delete query.prod_rules_like
+                  //   // router.push(`?` + new URLSearchParams(query))
+                  // }
+                  router.push(`?`)
                   // 清除搜尋欄狀態
                   setSearch('')
                   // 清除 search_input 的文字內容
@@ -233,6 +234,7 @@ export default function BoardGame() {
                     <ul className="pagination d-flex justify-content-center">
                       <li className="page-item">
                         <Button
+                          disabled={page == 1}
                           className={`btn btn-primary me-3 ${styles.btn} `}
                           onClick={() => {
                             const query = { ...router.query }
@@ -272,6 +274,7 @@ export default function BoardGame() {
                         })}
                       <li className="page-item">
                         <Button
+                          disabled={pageCount == page}
                           className={`btn btn-primary me-3 ${styles.btn} `}
                           onClick={() => {
                             const query = { ...router.query }
