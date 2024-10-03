@@ -1,18 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
-import ETicketTabs from '@/components/larp/e-ticket-tabs'
-import GroupButton from '@/components/larp/next-button'
+import ETicketTabs from '@/components/larp/e-ticket-tabs.js'
+import GroupButton from '@/components/larp/next-button.js'
+import useBookFormState from '@/hooks/use-bookform-state.js'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import { useRouter } from 'next/router'
 
 export default function CheckPage() {
+  const { formData: localData } = useBookFormState('bookForm', {})
+  // 儲存localStorage傳過來的ID
+  const [locations, setLocations] = useState([])
+  const [escapes, setEscapes] = useState([])
+  // 儲存上面ID轉換後的文字
+  const [loc, setLoc] = useState('')
+  const [esc, setEsc] = useState('')
+  const router = useRouter()
+
+  // 跟伺服器拿資料
+  const getData = async () => {
+    const baseURL = `http://127.0.0.1:3006/larp/check-page`
+    const res = await fetch(baseURL)
+    const resData = await res.json()
+    setEscapes(resData.escape)
+    setLocations(resData.location)
+  }
+
+  // 把從 localStorage 傳過來的larp id跟loc id 轉換成文字
+  useEffect(() => {
+    const larpName = escapes.find((e) => parseInt(localData.larpName) === e.id)
+    if (larpName) {
+      const larpNameValue = larpName.larp_name
+      setEsc(larpNameValue)
+    }
+
+    const larpLoc = locations.find((e) => parseInt(localData.loc) === e.loc_id)
+    if (larpLoc) {
+      const larpLocValue = larpLoc.loc_name
+      setLoc(larpLocValue)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (router.isReady) {
+      getData()
+    }
+  }, [router.isReady])
+
   return (
-    <div
-      className={styles.bodyBg}
-      // style={bodyBgStyle}
-    >
+    <div className={styles.bodyBg} style={{ padding: '60px' }}>
       {/* 導覽列 */}
-      <div className="text-white bg-dark" style={{ height: 60 }}>
-        我是navbar
-      </div>
+      <Navbar />
       <div className={styles.larpContainer}>
         {/* 立即預約進度條 */}
         <div
@@ -111,41 +148,41 @@ export default function CheckPage() {
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>預約主題</h4>
-                <h4>幽靈船的詛咒</h4>
+                <h4>{esc}</h4>
               </div>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>館別</h4>
-                <h4>台北館</h4>
+                <h4>{loc}</h4>
               </div>
             </div>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>日期</h4>
-                <h4>2024/09/05</h4>
+                <h4>{localData.date}</h4>
               </div>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>時段</h4>
-                <h4>10:00</h4>
+                <h4>{localData.datetime}</h4>
               </div>
             </div>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>人數</h4>
-                <h4>8人</h4>
+                <h4>{localData.people} 位</h4>
               </div>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>聯絡人信箱</h4>
-                <h4>flower@test.com</h4>
+                <h4>{localData.email}</h4>
               </div>
             </div>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>聯絡人姓名</h4>
-                <h4>小蘭花</h4>
+                <h4>{localData.name}</h4>
               </div>
               <div className={styles.orderMin}>
                 <h4 className={styles.orderTitle}>聯絡人電話</h4>
-                <h4>0912-345-678</h4>
+                <h4>{localData.mobile}</h4>
               </div>
             </div>
             <div
@@ -153,8 +190,8 @@ export default function CheckPage() {
               style={{ borderTop: '1px dashed #f8f0e5', paddingTop: 20 }}
             >
               <div div="" className={`${styles.orderMin} justify-content-end`}>
-                <h4 className="orderTitle">訂單金額</h4>
-                <h4>5,200 元</h4>
+                <h3 className="orderTitle">訂單金額</h3>
+                <h3>{localData.totalprice} 元</h3>
               </div>
             </div>
           </div>

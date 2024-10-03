@@ -3,8 +3,9 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
+import useBookFormState from '@/hooks/use-bookform-state'
+import { findIndex } from 'lodash'
 
 export default function BookForm({ escapes = [], escape = [] }) {
   const router = useRouter()
@@ -21,6 +22,34 @@ export default function BookForm({ escapes = [], escape = [] }) {
   const [mobile, setMobile] = useState('')
   // 儲存單價
   const [uniPrice, setUniPrice] = useState(0)
+
+  // 初始化表單的值
+  const initialFormValues = {
+    larpName: '',
+    loc: 0,
+    date: '',
+    datetime: '',
+    name: '',
+    people: 0,
+    mobile: '',
+    email: '',
+    totalprice: 0,
+  }
+  // 使用 useBookFormState Hook 管理表單狀態
+  const { formData, setFormData, BtnSubmit } = useBookFormState(
+    'bookForm',
+    initialFormValues
+  )
+
+  // 處理輸入變更
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    // 更新表單數據，並將其保存到 localStorage 中
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
 
   // 根據選擇的主題id 過濾對應的館別
   const filterLoc = (larpId) => {
@@ -51,10 +80,10 @@ export default function BookForm({ escapes = [], escape = [] }) {
     setUniPrice(selectId)
 
     // 選擇其他主題的時候，將人數選項恢復預設值
-    const peopleSelect = document.getElementById('peopleAmount')
-    if (peopleSelect) {
-      peopleSelect.value = ''
-    }
+    // const peopleSelect = document.getElementById('peopleAmount')
+    // if (peopleSelect) {
+    //   setPeoples('')
+    // }
 
     // 根據選中的主題更新單價
     const selectPrice = escapes.find((r) => r.id === selectId)
@@ -95,6 +124,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
     setMobile(value)
   }
 
+  // const BtnSubmit = (e) => {
+  //   e.preventDefault() // Prevent page reload on form submission
+  //   // Add validation or additional logic here if needed
+  //   handleSubmit() // This should submit the form data to your hook logic
+  //   router.push(`/larp/check-page`) // Navigate to confirmation page
+  // }
+
   // 根據escape.larp_name帶入預設主題
   useEffect(() => {
     const selectLarp = escapes.find((e) => e.larp_name === escape.larp_name)
@@ -127,6 +163,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
     }
   }, [escape.larp_name, escapes])
 
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      totalprice: uniPrice * selectPeople,
+    }))
+  }, [selectPeople, uniPrice])
+
   return (
     <>
       <div
@@ -150,8 +193,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
             <Form.Select
               aria-label="theme"
               aria-describedby="inputGroup-sizing-default"
+              name="larpName"
               value={selectId}
-              onChange={larpChange}
+              onChange={(e) => {
+                larpChange(e)
+                handleInputChange(e)
+              }}
             >
               <option disabled value="">
                 =====請選擇主題=====
@@ -178,8 +225,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
             <Form.Select
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              name="loc"
               value={selectedLocationId} // 使用狀態來設置value
-              onChange={handleLocationChange} // 使用函數
+              onChange={(e) => {
+                handleLocationChange(e)
+                handleInputChange(e)
+              }} // 使用函數
             >
               <option disabled value="">
                 =====請選擇館別=====
@@ -206,7 +257,8 @@ export default function BookForm({ escapes = [], escape = [] }) {
               placeholder="請點選左方行事曆選擇日期"
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
-              readOnly=""
+              name="date"
+              onChange={handleInputChange}
             />
           </InputGroup>
           {/* 時段 */}
@@ -220,11 +272,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
             <Form.Select
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              name="datetime"
+              onChange={handleInputChange}
             >
               <option>=====請選擇時段=====</option>
-              <option value="1">10:00</option>
-              <option value="2">14:00</option>
-              <option value="3">18:00</option>
+              <option value="10:00">10:00</option>
+              <option value="14:00">14:00</option>
+              <option value="18:00">18:00</option>
             </Form.Select>
           </InputGroup>
         </div>
@@ -238,10 +292,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
               姓名
             </InputGroup.Text>
             <Form.Control
+              name="name"
               type="text"
               placeholder="請輸入完整姓名"
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
+              onChange={handleInputChange}
             />
           </InputGroup>
           {/* 人數 */}
@@ -256,8 +312,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
               id="peopleAmount"
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              name="people"
               value={selectPeople}
-              onChange={(e) => setSelectPeople(e.target.value)}
+              onChange={(e) => {
+                setSelectPeople(e.target.value)
+                handleInputChange(e)
+              }}
             >
               <option value={0}>=====請選擇人數=====</option>
               {peoples.map((v, i) => (
@@ -284,8 +344,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
               aria-label="Mobile"
               aria-describedby="inputGroup-sizing-default"
               maxLength={10}
+              name="mobile"
               value={mobile}
-              onChange={mobileChange}
+              onChange={(e) => {
+                mobileChange(e)
+                handleInputChange(e)
+              }}
             />
           </InputGroup>
           {/* 信箱 */}
@@ -297,10 +361,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
               信箱
             </InputGroup.Text>
             <Form.Control
+              name="email"
               type="email"
               placeholder="請輸入有效電子信箱"
               aria-label="email"
               aria-describedby="inputGroup-sizing-default"
+              onChange={handleInputChange}
             />
           </InputGroup>
         </div>
@@ -316,7 +382,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
               價格
             </InputGroup.Text>
             <h3 className={styles.secondaryText} style={{ margin: 0 }}>
-              {uniPrice.toLocaleString()} 元 / 位
+              {uniPrice} 元 / 位
             </h3>
           </InputGroup>
           <InputGroup
@@ -328,26 +394,29 @@ export default function BookForm({ escapes = [], escape = [] }) {
             >
               總金額
             </InputGroup.Text>
-            <h3 className={styles.secondaryText} style={{ margin: 0 }}>
-              {(uniPrice * selectPeople).toLocaleString()} 元
+            <h3
+              className={styles.secondaryText}
+              style={{ margin: 0 }}
+              name="totalprice"
+            >
+              {formData.totalprice.toLocaleString()} 元
             </h3>
           </InputGroup>
         </div>
-        <Link href={`/larp/check-page`}>
-          <Button
-            className="position-absolute end-0"
-            style={{
-              padding: '8px 29px',
-              marginRight: 64,
-              backgroundColor: '#FFFFFF',
-              border: 'none',
-              color: '#1f1f1f',
-            }}
-            type="submit"
-          >
-            預約
-          </Button>
-        </Link>
+        <Button
+          className="position-absolute end-0"
+          style={{
+            padding: '8px 29px',
+            marginRight: 64,
+            backgroundColor: '#FFFFFF',
+            border: 'none',
+            color: '#1f1f1f',
+          }}
+          type="submit"
+          onClick={BtnSubmit}
+        >
+          預約
+        </Button>
       </div>
     </>
   )
