@@ -130,7 +130,7 @@ export default function UserProfile() {
                     size={30}
                     style={{ marginRight: '16px' }}
                   />
-                  活動紀錄
+                  我的活動
                 </a>
                 <a
                   className={styles['sidebar-link']}
