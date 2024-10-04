@@ -424,22 +424,6 @@
   background: linear-gradient(90deg, rgb(127, 90, 61) 0%, rgb(215, 191, 125) 100%);
 }
 
-#buttonCart {
-  color: #f4565c;
-  background: none;
-  border: none;
-}
-#buttonCart p {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  margin: 0px;
-}
-#buttonCart p svg {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
 @media (min-width: 577px) {
   .side_class_m {
     display: none;
