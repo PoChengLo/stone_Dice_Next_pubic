@@ -81,7 +81,7 @@ export default function SingleProductCard({ product }) {
           {/* 商品圖片 */}
           <div className="col-12 col-xxl-6 d-flex justify-content-center">
             <Image
-              src={product.prod_img}
+              src={`/board-game/product-pic/${product.prod_img}`}
               className="img-fluid rounded-start"
               alt="..."
               width={600}

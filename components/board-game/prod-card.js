@@ -71,7 +71,7 @@ function ProdCard({ product }) {
       >
         <Link href={`/board-game/${product.id}`}>
           <Image
-            src={product.prod_img}
+            src={`/board-game/product-pic/${product.prod_img}`}
             className={` ${styles.card_img_top}`}
             alt=""
             width={280}

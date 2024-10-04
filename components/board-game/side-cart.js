@@ -68,7 +68,7 @@ function SideCartOffcanvas({ ...props }) {
                     className={`col-4 align-middle  d-flex justify-content-xxl-center justify-content-start align-items-center`}
                   >
                     <Image
-                      src={v.prod_img}
+                      src={`/board-game/product-pic/${v.prod_img}`}
                       className={`img-fluid rounded-start`}
                       alt="..."
                       width={110}
