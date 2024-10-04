@@ -53,7 +53,13 @@ export const login = async (loginData = {}) => {
  * 登出用
  */
 export const logout = async () => {
-  return await axiosInstance.post('/auth/logout', {})
+  return await axiosInstance.post(
+    '/user-profile/logout',
+    {},
+    {
+      withCredentials: true, // 確保攜帶 cookie
+    }
+  )
 }
 /**
  * 載入會員id的資料用，需要登入後才能使用。此API路由會檢查JWT中的id是否符合本會員，不符合會失敗。
