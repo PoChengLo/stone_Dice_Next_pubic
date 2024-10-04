@@ -30,7 +30,7 @@ export default function PayShip() {
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
       // 先連到node伺服器後，導向至ECPay付款頁面
-      window.location.href = `http://localhost:3006/ecpay?amount=${finalTotal}`
+      window.location.href = `http://localhost:3006/ecpay/board-game?amount=${finalTotal}`
     }
   }
   // 付款方式選擇樣式
