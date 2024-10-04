@@ -18,7 +18,51 @@
   background-color: #d7bf7d;
   color: #1f1f1f;
 }
+#side_class {
+}
+// 側邊欄
+.side_class {
+  padding: 0px 30px;
+  width: 230px;
+  color: #f8f0e5;
+  border-right: 1px solid #d7bf7d;
 
+  .button {
+    color: #f8f0e5;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .hr {
+    height: 1px;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+    background: rgb(127, 90, 61);
+    background: linear-gradient(
+      90deg,
+      rgba(127, 90, 61, 1) 0%,
+      rgba(215, 191, 125, 1) 100%
+    );
+  }
+  .p {
+    margin: 0px;
+  }
+  .price_selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .price_title {
+      margin: 20px 0px;
+    }
+  }
+}
 // 商品卡片
 .card {
   color: #f8f0e5;
@@ -479,10 +523,20 @@
     padding-bottom: 40px;
     background-image: url('../../public/board-game/bg-smoke.png');
   }
+  // 列表背景
+  #backgroundImage_index {
+    width: 100%;
+    height: 1451px;
+    padding-bottom: 40px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
   .card {
     width: 320px;
     height: 500px;
     padding: 16px 12px;
+  }
+  .side_class_m_button {
+    display: none;
   }
 }
 
@@ -490,6 +544,13 @@
 @media (max-width: 576px) {
   //背景
   #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+  // 列表背景
+  #backgroundImage_index {
     width: 100%;
     height: 100%;
     padding-bottom: 20px;
@@ -522,10 +583,18 @@
       padding: 0px;
     }
   }
-
+  .p_offcanvas {
+    font-size: 12px;
+    margin: 0px;
+  }
   // 側邊欄
   .side_class_offcanvas {
+    background-color: #1f1f1f;
     max-width: 300px;
+
+    .white_to_text_selection {
+      height: 36px;
+    }
   }
 
   // 商品卡片
@@ -550,6 +619,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 330px;
   }
   .btns {
     display: flex;
@@ -643,7 +713,7 @@
   }
   .user_info {
     .p {
-      font-size: 16px;
+      font-size: 12px;
     }
     .hr {
       width: 1px;
@@ -672,6 +742,9 @@
       height: 32px;
       margin: 0px;
     }
+    .input_text {
+      font-size: 10px;
+    }
   }
   .pay_ship {
     .hr {
@@ -694,8 +767,6 @@
     .nav_icons {
       font-size: 16px;
     }
-  }
-  .pay_ship {
     .p {
       font-size: 12px;
       margin: 0;

@@ -102,7 +102,9 @@ export default function ShipMethod() {
             </label>
           </div>
           <div className="d-flex">
-            <button className={`btn btn-primary mt-3 ${styles.btn}`}>
+            <button
+              className={`btn btn-primary mt-3 ${styles.btn} ${styles.btn_pay_ship_2}`}
+            >
               選擇門市
             </button>
           </div>
