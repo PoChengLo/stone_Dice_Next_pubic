@@ -141,7 +141,7 @@ export default function Success() {
             <div className="col">
               <div className="d-flex ">
                 <Link
-                  href="/user-info"
+                  href="/user-profile"
                   className={`btn btn-primary me-3 mt-3 ${styles.btn}`}
                 >
                   前往會員中心

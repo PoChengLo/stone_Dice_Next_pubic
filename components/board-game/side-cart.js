@@ -51,10 +51,23 @@ function SideCartOffcanvas({ ...props }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="me-2">
-        <BsCart4 />
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        className="me-2"
+        id={`${styles.buttonCart}`}
+      >
+        <p>
+          <BsCart4 />
+          購物車
+        </p>
       </Button>
-      <Offcanvas show={show} onHide={handleClose} {...props}>
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        {...props}
+        className={`${styles.side_cart}`}
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>購物車</Offcanvas.Title>
         </Offcanvas.Header>
@@ -126,10 +139,13 @@ function SideCartOffcanvas({ ...props }) {
             <h4>NT${finalTotal.toLocaleString()}</h4>
           </div>
           <div className="d-flex flex-column">
-            <Link href="./" className="btn btn-primary mb-3">
+            <Link href="./" className={`btn btn-primary mb-3 ${styles.btn}`}>
               繼續購物
             </Link>
-            <Link href="./user-info" className="btn btn-primary">
+            <Link
+              href="./user-info"
+              className={`btn btn-primary mb-3 ${styles.btn}`}
+            >
               前往結帳
             </Link>
           </div>
