@@ -19,6 +19,44 @@
   color: #1f1f1f;
 }
 
+.side_class {
+  padding: 0px 30px;
+  width: 230px;
+  color: #f8f0e5;
+  border-right: 1px solid #d7bf7d;
+}
+.side_class .button {
+  color: #f8f0e5;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.side_class .hr {
+  height: 1px;
+  border: none;
+  margin: 0px;
+  opacity: 1;
+  background: rgb(127, 90, 61);
+  background: linear-gradient(90deg, rgb(127, 90, 61) 0%, rgb(215, 191, 125) 100%);
+}
+.side_class .p {
+  margin: 0px;
+}
+.side_class .price_selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.side_class .price_selection .price_title {
+  margin: 20px 0px;
+}
+
 .card {
   color: #f8f0e5;
 }
@@ -122,10 +160,12 @@
   align-items: center;
   font-size: 16px;
   margin: 0px;
+  margin-bottom: 5px;
 }
 #buttonCart p svg {
   vertical-align: middle;
   margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .side_cart {
@@ -424,22 +464,6 @@
   background: linear-gradient(90deg, rgb(127, 90, 61) 0%, rgb(215, 191, 125) 100%);
 }
 
-#buttonCart {
-  color: #f4565c;
-  background: none;
-  border: none;
-}
-#buttonCart p {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  margin: 0px;
-}
-#buttonCart p svg {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
 @media (min-width: 577px) {
   .side_class_m {
     display: none;
@@ -450,14 +474,29 @@
     padding-bottom: 40px;
     background-image: url("../../public/board-game/bg-smoke.png");
   }
+  #backgroundImage_index {
+    width: 100%;
+    height: 1451px;
+    padding-bottom: 40px;
+    background-image: url("../../public/board-game/bg-smoke.png");
+  }
   .card {
     width: 320px;
     height: 500px;
     padding: 16px 12px;
   }
+  .side_class_m_button {
+    display: none;
+  }
 }
 @media (max-width: 576px) {
   #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    background-image: url("../../public/board-game/bg-smoke.png");
+  }
+  #backgroundImage_index {
     width: 100%;
     height: 100%;
     padding-bottom: 20px;
@@ -484,8 +523,16 @@
     margin: 0px;
     padding: 0px;
   }
+  .p_offcanvas {
+    font-size: 12px;
+    margin: 0px;
+  }
   .side_class_offcanvas {
+    background-color: #1f1f1f;
     max-width: 300px;
+  }
+  .side_class_offcanvas .white_to_text_selection {
+    height: 36px;
   }
   .card_img_top {
     width: 140px;
@@ -508,6 +555,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 330px;
   }
   .btns {
     display: flex;
@@ -579,7 +627,7 @@
     font-size: 12px;
   }
   .user_info .p {
-    font-size: 16px;
+    font-size: 12px;
   }
   .user_info .hr {
     width: 1px;
@@ -607,6 +655,9 @@
     width: 372px;
     height: 32px;
     margin: 0px;
+  }
+  .user_info .input_text {
+    font-size: 10px;
   }
   .pay_ship .hr {
     width: 1px;

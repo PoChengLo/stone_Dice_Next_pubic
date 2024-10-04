@@ -1,70 +1,71 @@
-import React from 'react'
+import Form from 'react-bootstrap/Form'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 
-export default function SideClass({ onClick = () => {} }) {
+export default function SideClass({ onClick = () => {}, onChange = () => {} }) {
   return (
     <>
-      <ul className="list-group side-bar">
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-          value="hello"
-          onClick={onClick}
-          data-value="hot-sale"
-        ></li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        ></li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        ></li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        ></li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-          onClick={onClick}
-          data-value="派對"
-        >
-          派對遊戲
-        </li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        >
-          親子互動
-        </li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        >
-          陣營對抗
-        </li>
-        <li
-          className="list-group-item list-group-item-action bg-transparent text-warning"
-          type="button"
-        >
-          策略遊戲
-        </li>
-      </ul>
-      <div className="card bg-transparent text-warning">
-        <div className="card-body">
-          <h5 className="card-title">價格</h5>
-          <div className="row">
-            <div className="col-5">
-              <input type="text" className="form-control" placeholder="$" />
-            </div>
-            <div className="col-2">
-              <p>~</p>
-            </div>
-            <div className="col-5">
-              <input type="text" className="form-control" placeholder="$" />
-            </div>
-          </div>
+      <div className={`${styles.side_class} `} id={`${styles.side_class}`}>
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>彼此競爭</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>闔家歡樂</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>親子互動</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>輕鬆小品</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>資源收集</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>策略遊戲</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+
+        <div>
+          <button className={`${styles.button}`}>
+            <h4 className={`${styles.p}`}>腦力計算</h4>
+          </button>
+        </div>
+        <hr className={`${styles.hr}`} />
+
+        <div className={`${styles.price_selection}`}>
+          <h4 className={`${styles.p} ${styles.price_title}`}>價格區間篩選</h4>
+          <Form.Select
+            aria-label="price-selection"
+            onChange={onChange}
+            className={`${styles.white_to_text}`}
+          >
+            <option value="default">所有價格</option>
+            <option value="1">NT$1,000 ~ NT$1,499</option>
+            <option value="2">NT$1,500 ~ NT$1,999</option>
+            <option value="3">NT$2,000 ~ NT$2,499</option>
+            <option value="4">NT$2,500 ~ NT$2,999</option>
+          </Form.Select>
         </div>
       </div>
     </>

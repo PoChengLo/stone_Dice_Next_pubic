@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
-function OffCanvasExample({ ...props }) {
+import Form from 'react-bootstrap/Form'
+import { useRouter } from 'next/router'
+
+function OffCanvasExample({
+  onChange = () => {},
+  onClick = () => {},
+  ...props
+}) {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -13,9 +20,9 @@ function OffCanvasExample({ ...props }) {
       <Button
         variant="primary"
         onClick={handleShow}
-        className={`${styles.side_class_m} ${styles.btn}`}
+        className={` ${styles.btn} ${styles.side_class_m_button}`}
       >
-        <p>桌遊分類</p>
+        <p className={`${styles.p_offcanvas}`}>桌遊分類</p>
       </Button>
       <Offcanvas
         show={show}
@@ -24,89 +31,75 @@ function OffCanvasExample({ ...props }) {
         className={`${styles.side_class_offcanvas}`}
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>桌遊分類</Offcanvas.Title>
+          <Offcanvas.Title className={``}>桌遊分類</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {/* 側邊欄 */}
           <div className="col-12 m-auto">
-            <ul className="list-group side-bar">
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                熱賣桌遊
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                店家推薦
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                最新到貨
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                降價促銷
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                派對遊戲
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                親子互動
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                陣營對抗
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                策略遊戲
-              </li>
-              <li
-                className="list-group-item list-group-item-action bg-transparent text-primary"
-                type="button"
-              >
-                桌遊周邊/配件
-              </li>
-            </ul>
-            <div className="card bg-transparent text-primary">
-              <div className="card-body">
-                <h5 className="card-title">價格</h5>
-                <div className="row">
-                  <div className="col-5">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="$"
-                    />
-                  </div>
-                  <div className="col-2">
-                    <p>~</p>
-                  </div>
-                  <div className="col-5">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="$"
-                    />
-                  </div>
-                </div>
+            <div className={`${styles.side_class} `}>
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>彼此競爭</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>闔家歡樂</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>親子互動</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>輕鬆小品</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>資源收集</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>策略遊戲</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+
+              <div>
+                <button className={`${styles.button}`}>
+                  <h4 className={`${styles.p}`}>腦力計算</h4>
+                </button>
+              </div>
+              <hr className={`${styles.hr}`} />
+
+              <div className={`${styles.price_selection}`}>
+                <h4 className={`${styles.p} ${styles.price_title}`}>
+                  價格區間篩選
+                </h4>
+                <Form.Select
+                  aria-label="order-selection"
+                  onChange={onChange}
+                  className={`${styles.white_to_text} ${styles.white_to_text_selection}`}
+                >
+                  <option value="default">所有價格</option>
+                  <option value="1">NT$1,000 ~ NT$1,499</option>
+                  <option value="2">NT$1,500 ~ NT$1,999</option>
+                  <option value="3">NT$2,000 ~ NT$2,499</option>
+                  <option value="4">NT$2,500 ~ NT$2,999</option>
+                </Form.Select>
               </div>
             </div>
           </div>
@@ -117,10 +110,54 @@ function OffCanvasExample({ ...props }) {
 }
 
 function SideClassM() {
+  const router = useRouter()
+
   return (
     <>
       {['start'].map((placement, idx) => (
-        <OffCanvasExample key={idx} placement={placement} name={placement} />
+        <OffCanvasExample
+          key={idx}
+          placement={placement}
+          name={placement}
+          onClick={(e) => {
+            const query = { ...router.query }
+            router.push(`?` + new URLSearchParams(query))
+          }}
+          onChange={(e) => {
+            const query = { ...router.query }
+            switch (e.target.value) {
+              case '1':
+                query.price_min = '1000'
+                query.price_max = '1499'
+                delete query.page
+
+                break
+              case '2':
+                query.price_min = '1500'
+                query.price_max = '1999'
+                delete query.page
+
+                break
+              case '3':
+                query.price_min = '2000'
+                query.price_max = '2499'
+                delete query.page
+
+                break
+              case '4':
+                query.price_min = '2500'
+                query.price_max = '2999'
+                delete query.page
+
+                break
+              default:
+                delete query.price_min
+                delete query.price_max
+                delete query.page
+            }
+            router.push(`?` + new URLSearchParams(query))
+          }}
+        />
       ))}
     </>
   )

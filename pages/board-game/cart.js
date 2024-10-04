@@ -97,7 +97,7 @@ export default function ProductCart() {
                     <div className="row g-0 p-3">
                       <div className="col-xxl-2 col-4">
                         <Image
-                          src={v.prod_img}
+                          src={`/board-game/product-pic/${v.prod_img}`}
                           className="img-fluid rounded-start"
                           alt="..."
                           width={130}

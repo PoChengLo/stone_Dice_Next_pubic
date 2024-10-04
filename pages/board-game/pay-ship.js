@@ -115,7 +115,7 @@ export default function PayShip() {
                   <div className="w-100 d-flex justify-content-start">
                     <button
                       type="button"
-                      className={`btn btn-primary my-3 ${styles.btn}`}
+                      className={`btn btn-primary my-3 ${styles.btn} ${styles.btn_pay_ship_2}`}
                     >
                       選擇優惠卷
                     </button>
