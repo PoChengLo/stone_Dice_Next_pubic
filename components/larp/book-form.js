@@ -5,7 +5,6 @@ import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 import { useRouter } from 'next/router'
 import useBookFormState from '@/hooks/use-bookform-state'
-import { findIndex } from 'lodash'
 
 export default function BookForm({ escapes = [], escape = [] }) {
   const router = useRouter()
@@ -25,7 +24,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
 
   // 初始化表單的值
   const initialFormValues = {
-    larpName: '',
+    larpName: selectId,
     loc: 0,
     date: '',
     datetime: '',
@@ -74,16 +73,10 @@ export default function BookForm({ escapes = [], escape = [] }) {
     const selectId = Number(e.target.value)
     setSelectId(selectId)
     setSelectedLocationId('') // 重置館別選項
-    setSelectPeople('') // 重置人數選項
+    setSelectPeople(0) // 重置人數選項
     filterLoc(selectId)
     setPeoples([])
     setUniPrice(selectId)
-
-    // 選擇其他主題的時候，將人數選項恢復預設值
-    // const peopleSelect = document.getElementById('peopleAmount')
-    // if (peopleSelect) {
-    //   setPeoples('')
-    // }
 
     // 根據選中的主題更新單價
     const selectPrice = escapes.find((r) => r.id === selectId)
@@ -124,23 +117,6 @@ export default function BookForm({ escapes = [], escape = [] }) {
     setMobile(value)
   }
 
-  // const BtnSubmit = (e) => {
-  //   e.preventDefault() // Prevent page reload on form submission
-  //   // Add validation or additional logic here if needed
-  //   handleSubmit() // This should submit the form data to your hook logic
-  //   router.push(`/larp/check-page`) // Navigate to confirmation page
-  // }
-
-  // 根據escape.larp_name帶入預設主題
-  useEffect(() => {
-    const selectLarp = escapes.find((e) => e.larp_name === escape.larp_name)
-    if (selectLarp) {
-      setSelectId(selectLarp.id)
-      filterLoc(selectLarp.id)
-      setUniPrice(selectLarp.price)
-    }
-  }, [escape.larp_name, escapes])
-
   // 網站載入的時候，生成人數選項，只生成一次
   useEffect(() => {
     // 根據escape.larp_name帶入預設主題
@@ -148,6 +124,16 @@ export default function BookForm({ escapes = [], escape = [] }) {
     if (selectLarp) {
       setSelectId(selectLarp.id)
       filterLoc(selectLarp.id)
+      setUniPrice(selectLarp.price)
+
+      // 將預設的主題寫入 localStorage
+      setFormData((prevData) => ({
+        ...prevData,
+        larpName: selectLarp.id,
+      }))
+
+      // 寫入 localStorage
+      localStorage.setItem('larpName', selectLarp.id)
 
       // 根據預設主題生成對應的人數選項
       const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)

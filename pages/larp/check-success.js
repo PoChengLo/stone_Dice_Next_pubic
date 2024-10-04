@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
-import PaymentTabs from '@/components/larp/payment-tabs'
 import GroupButton from '@/components/larp/next-button'
 import { FaCircleCheck } from 'react-icons/fa6'
 
@@ -114,7 +113,11 @@ export default function CheckPage() {
                 若因個人原因遲到，將壓縮玩家自身的遊玩時間，謝謝配合！
               </h4>
             </div>
-            <GroupButton />
+            <GroupButton
+              back="回到首頁"
+              next="前往訂單列表"
+              backSrc={`/larp`}
+            />
           </div>
         </div>
       </div>

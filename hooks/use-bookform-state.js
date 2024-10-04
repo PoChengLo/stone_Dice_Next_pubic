@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router.js'
 import useLocalStorage from './use-localstorage.js'
 import OrderModal from '../components/larp/order-Modal.js'
+import { useEffect } from 'react'
 
 export default function useBookFormState(bookForm, initialFormValues) {
   // 使用 useLocalStorage 來儲存表單的資料

@@ -30,3 +30,20 @@
 #larpLocation button:hover {
   color: #d7bf7d;
 }
+
+@media (max-width: 576px) {
+  .h2Font {
+    font-size: 18px;
+  }
+  .larpContainer {
+    width: 80%;
+    margin: 40px auto 0 auto;
+  }
+  #larpLocation button {
+    height: 40px;
+    width: 100px;
+  }
+  .dropDown {
+    margin-top: 20px;
+  }
+}

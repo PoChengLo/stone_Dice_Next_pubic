@@ -71,7 +71,6 @@ export default function LarpPage() {
       />
     ))
   }
-
   return (
     <div className={styles.larpBody}>
       <Navbar />
@@ -94,7 +93,7 @@ export default function LarpPage() {
             } btn btn-primary btn-lg`}
             onClick={() => handleLoc('台北館')}
           >
-            <h2>台北館</h2>
+            <h2 className={styles.h2Font}>台北館</h2>
           </button>
           <button
             type="button"
@@ -103,7 +102,7 @@ export default function LarpPage() {
             } btn btn-primary btn-lg`}
             onClick={() => handleLoc('台中館')}
           >
-            <h2>台中館</h2>
+            <h2 className={styles.h2Font}>台中館</h2>
           </button>
           <button
             type="button"
@@ -112,12 +111,12 @@ export default function LarpPage() {
             } btn btn-primary btn-lg`}
             onClick={() => handleLoc('高雄館')}
           >
-            <h2>高雄館</h2>
+            <h2 className={styles.h2Font}>高雄館</h2>
           </button>
         </div>
 
         {/* 篩選小助理 */}
-        <ButtonGroup>
+        <ButtonGroup className={styles.dropDown}>
           <DropdownButton
             as={ButtonGroup}
             title={
@@ -134,6 +133,7 @@ export default function LarpPage() {
               {escapes.map((v, i) => (
                 <Form.Check
                   key={i + 1}
+                  value={v}
                   type="checkbox"
                   label={v.tag_name}
                   checked={fantasyChecked}

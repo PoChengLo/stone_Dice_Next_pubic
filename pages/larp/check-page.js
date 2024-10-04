@@ -38,7 +38,7 @@ export default function CheckPage() {
       const larpLocValue = larpLoc.loc_name
       setLoc(larpLocValue)
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (router.isReady) {
@@ -47,7 +47,7 @@ export default function CheckPage() {
   }, [router.isReady])
 
   return (
-    <div className={styles.bodyBg} style={{ padding: '60px' }}>
+    <div className={styles.bodyBg} style={{ padding: '60px', height: '100vh' }}>
       {/* 導覽列 */}
       <Navbar />
       <div className={styles.larpContainer}>
@@ -191,22 +191,11 @@ export default function CheckPage() {
             >
               <div div="" className={`${styles.orderMin} justify-content-end`}>
                 <h3 className="orderTitle">訂單金額</h3>
-                <h3>{localData.totalprice} 元</h3>
+                <h3>{localData.totalprice.toLocaleString('zh-tw', 0)} 元</h3>
               </div>
             </div>
           </div>
-          {/* 付款資訊 */}
-          <h4
-            className={styles.secondaryText}
-            style={{ marginTop: 76, padding: 10 }}
-          >
-            付款資訊
-          </h4>
-          <div className={styles.orderInfo}>
-            <h4 className={styles.orderTitle}>電子發票</h4>
-            <ETicketTabs />
-          </div>
-          <GroupButton />
+          <GroupButton back="回上頁" next="下一步" nextSrc={`check-payment`} />
         </div>
       </div>
     </div>

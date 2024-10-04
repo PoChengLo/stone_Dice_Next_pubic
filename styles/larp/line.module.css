@@ -1,6 +1,11 @@
 .primaryText {
   color: #d7bf7d;
   letter-spacing: 8px;
+  padding: 0 30px;
+  font-size: 40px;
+}
+.titleMargin {
+  padding: 90px 20% 0 20%;
 }
 .secondarText {
   color: #f8f0e5;
@@ -15,4 +20,15 @@
   justify-content: space-between;
   align-items: center;
   margin: 90px auto 0 auto;
+}
+
+@media (max-width: 576px) {
+  .primaryText {
+    font-size: 18px;
+    padding: 0 20px;
+    margin-bottom: 0;
+  }
+  .titleMargin {
+    padding: 0;
+  }
 }
