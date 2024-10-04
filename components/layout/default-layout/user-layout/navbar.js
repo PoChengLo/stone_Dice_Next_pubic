@@ -22,6 +22,7 @@ export default function Navbar() {
               alt=""
               width={197}
               height={60}
+              priority={false} // {false} | {true}
             />
           </a>
         </div>
@@ -67,10 +68,6 @@ export default function Navbar() {
           <ul>
             <li>
               <SideCart />
-              {/* <a href="#">
-                <BsCart4 />
-                購物車
-              </a> */}
             </li>
             <li>
               <a href="#">

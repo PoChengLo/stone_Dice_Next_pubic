@@ -1,37 +1,34 @@
 import React from 'react'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 
-export default function SideClass() {
+export default function SideClass({ onClick = () => {} }) {
   return (
     <>
       <ul className="list-group side-bar">
         <li
           className="list-group-item list-group-item-action bg-transparent text-warning"
           type="button"
-        >
-          熱賣桌遊
-        </li>
+          value="hello"
+          onClick={onClick}
+          data-value="hot-sale"
+        ></li>
         <li
           className="list-group-item list-group-item-action bg-transparent text-warning"
           type="button"
-        >
-          店家推薦
-        </li>
+        ></li>
         <li
           className="list-group-item list-group-item-action bg-transparent text-warning"
           type="button"
-        >
-          新品上架
-        </li>
+        ></li>
         <li
           className="list-group-item list-group-item-action bg-transparent text-warning"
           type="button"
-        >
-          降價促銷
-        </li>
+        ></li>
         <li
           className="list-group-item list-group-item-action bg-transparent text-warning"
           type="button"
+          onClick={onClick}
+          data-value="派對"
         >
           派對遊戲
         </li>
