@@ -3,6 +3,7 @@ import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
+import { useShip711StoreOpener } from '@/hooks/use-ship-711-store'
 
 export default function ShipMethod() {
   // 通路選擇樣式修改
@@ -29,6 +30,10 @@ export default function ShipMethod() {
       <BsCircle className={`me-xxl-2 ${styles.nav_icons}`} />
     )
   }
+  const { store711, openWindow, closeWindow } = useShip711StoreOpener(
+    'http://localhost:3006/shipment/711',
+    { autoCloseMins: 3 } // x分鐘沒完成選擇會自動關閉，預設5分鐘。
+  )
 
   return (
     <>
@@ -104,6 +109,9 @@ export default function ShipMethod() {
           <div className="d-flex">
             <button
               className={`btn btn-primary mt-3 ${styles.btn} ${styles.btn_pay_ship_2}`}
+              onClick={() => {
+                openWindow()
+              }}
             >
               選擇門市
             </button>
@@ -113,12 +121,16 @@ export default function ShipMethod() {
             className={`form-control mt-3  ${styles.white_to_text} `}
             id="convenient-store-name"
             placeholder="超商名稱"
+            value={store711.storename}
+            disabled
           />{' '}
           <input
             type="text"
             className={`form-control mt-3  ${styles.white_to_text} `}
             id="convenient-store-address"
             placeholder="超商地址"
+            value={store711.storeaddress}
+            disabled
           />
         </Tab>
         <Tab
