@@ -20,7 +20,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
   // 儲存單價
   const [uniPrice, setUniPrice] = useState(0)
   // 儲存總價
-  const totalprice = 0
+  const [totalPrice, setTotalPrice] = useState(0)
 
   // 初始化表單的值
   const initialFormValues = {
@@ -39,6 +39,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
     'bookForm',
     initialFormValues
   )
+
+  // 監聽 formData 狀態變化，並同步更新 localStorage
+  useEffect(() => {
+    if (formData) {
+      localStorage.setItem('bookForm', JSON.stringify(formData))
+    }
+  }, [formData])
 
   // 處理輸入變更
   const handleInputChange = (e) => {
@@ -130,11 +137,10 @@ export default function BookForm({ escapes = [], escape = [] }) {
       setFormData((prevData) => ({
         ...prevData,
         larpName: selectLarp.id,
-        totalprice: totalprice,
       }))
 
       // 寫入 localStorage
-      localStorage.setItem('larpName', selectLarp.id)
+      // localStorage.setItem('larpName', selectLarp.id)
 
       // 根據預設主題生成對應的人數選項
       const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
@@ -148,13 +154,16 @@ export default function BookForm({ escapes = [], escape = [] }) {
         setPeoples(option)
       }
     }
-  }, [])
+  }, [escapes, escape.larp_name])
 
   useEffect(() => {
+    const Total = uniPrice * selectPeople
+    setTotalPrice(Total)
     setFormData((prevData) => ({
       ...prevData,
-      totalprice: uniPrice * selectPeople,
+      totalprice: Total,
     }))
+    localStorage.setItem('totalprice', Total)
   }, [selectPeople])
 
   return (
@@ -386,7 +395,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
               style={{ margin: 0 }}
               name="totalprice"
             >
-              {formData.totalprice.toLocaleString()} 元
+              {totalPrice.toLocaleString()} 元
             </h3>
           </InputGroup>
         </div>
