@@ -21,7 +21,7 @@ export default function PaymentTabs() {
       >
         <Tab
           tabClassName={styles.navButton}
-          tabStyle={{ border: '1px solid #F8F0E5' }}
+          tabstyle={{ border: '1px solid #F8F0E5' }}
           eventKey="user-vehicle"
           title={
             <div className="d-flex">
@@ -49,7 +49,7 @@ export default function PaymentTabs() {
         ></Tab>
         <Tab
           tabClassName={styles.navButton}
-          tabStyle={{ border: '1px solid #F8F0E5' }}
+          tabstyle={{ border: '1px solid #F8F0E5' }}
           eventKey="company-vehicle"
           title={
             <div className="d-flex">

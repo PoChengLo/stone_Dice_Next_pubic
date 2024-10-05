@@ -3,20 +3,52 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
+import useBookFormState from '@/hooks/use-bookform-state'
 
 export default function BookForm({ escapes = [], escape = [] }) {
   const router = useRouter()
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
-  const [selectedLocationId, setSelectedLocationId] = useState('') // 儲存當前選擇的館別
-  // 儲存人數選項
+  // 儲存當前選擇的館別
+  const [selectedLocationId, setSelectedLocationId] = useState('')
   const [peoples, setPeoples] = useState([])
   // 儲存篩選後的館別
   const [filteredLocations, setFilteredLocations] = useState([])
   // 控制選中的人數選項
   const [selectPeople, setSelectPeople] = useState('')
+  // 儲存手機號碼
+  const [mobile, setMobile] = useState('')
+  // 儲存單價
+  const [uniPrice, setUniPrice] = useState(0)
+
+  // 初始化表單的值
+  const initialFormValues = {
+    larpName: selectId,
+    loc: 0,
+    date: '',
+    datetime: '',
+    name: '',
+    people: 0,
+    mobile: '',
+    email: '',
+    totalprice: 0,
+  }
+  // 使用 useBookFormState Hook 管理表單狀態
+  const { formData, setFormData, BtnSubmit } = useBookFormState(
+    'bookForm',
+    initialFormValues
+  )
+
+  // 處理輸入變更
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    // 更新表單數據，並將其保存到 localStorage 中
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
 
   // 根據選擇的主題id 過濾對應的館別
   const filterLoc = (larpId) => {
@@ -41,14 +73,15 @@ export default function BookForm({ escapes = [], escape = [] }) {
     const selectId = Number(e.target.value)
     setSelectId(selectId)
     setSelectedLocationId('') // 重置館別選項
-    setSelectPeople('') // 重置人數選項
+    setSelectPeople(0) // 重置人數選項
     filterLoc(selectId)
     setPeoples([])
+    setUniPrice(selectId)
 
-    // 選擇其他主題的時候，將人數選項恢復預設值
-    const peopleSelect = document.getElementById('peopleAmount')
-    if (peopleSelect) {
-      peopleSelect.value = ''
+    // 根據選中的主題更新單價
+    const selectPrice = escapes.find((r) => r.id === selectId)
+    if (selectPrice) {
+      setUniPrice(selectPrice.price)
     }
 
     // 根據選中的主題立即更新人數選項
@@ -76,14 +109,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
     setSelectedLocationId(selectedLocationId) // 設置選擇的館別狀態
   }
 
-  // 根據escape.larp_name帶入預設主題
-  useEffect(() => {
-    const selectLarp = escapes.find((e) => e.larp_name === escape.larp_name)
-    if (selectLarp) {
-      setSelectId(selectLarp.id)
-      filterLoc(selectLarp.id)
-    }
-  }, [escape.larp_name, escapes])
+  // 手機號碼正規化
+  const regex = /^09[0-9]{8}$/
+
+  const mobileChange = (e) => {
+    const value = e.target.value
+    setMobile(value)
+  }
 
   // 網站載入的時候，生成人數選項，只生成一次
   useEffect(() => {
@@ -92,6 +124,16 @@ export default function BookForm({ escapes = [], escape = [] }) {
     if (selectLarp) {
       setSelectId(selectLarp.id)
       filterLoc(selectLarp.id)
+      setUniPrice(selectLarp.price)
+
+      // 將預設的主題寫入 localStorage
+      setFormData((prevData) => ({
+        ...prevData,
+        larpName: selectLarp.id,
+      }))
+
+      // 寫入 localStorage
+      localStorage.setItem('larpName', selectLarp.id)
 
       // 根據預設主題生成對應的人數選項
       const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
@@ -106,6 +148,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
       }
     }
   }, [escape.larp_name, escapes])
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      totalprice: uniPrice * selectPeople,
+    }))
+  }, [selectPeople, uniPrice])
 
   return (
     <>
@@ -130,8 +179,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
             <Form.Select
               aria-label="theme"
               aria-describedby="inputGroup-sizing-default"
+              name="larpName"
               value={selectId}
-              onChange={larpChange}
+              onChange={(e) => {
+                larpChange(e)
+                handleInputChange(e)
+              }}
             >
               <option disabled value="">
                 =====請選擇主題=====
@@ -158,8 +211,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
             <Form.Select
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              name="loc"
               value={selectedLocationId} // 使用狀態來設置value
-              onChange={handleLocationChange} // 使用函數
+              onChange={(e) => {
+                handleLocationChange(e)
+                handleInputChange(e)
+              }} // 使用函數
             >
               <option disabled value="">
                 =====請選擇館別=====
@@ -186,7 +243,8 @@ export default function BookForm({ escapes = [], escape = [] }) {
               placeholder="請點選左方行事曆選擇日期"
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
-              readOnly=""
+              name="date"
+              onChange={handleInputChange}
             />
           </InputGroup>
           {/* 時段 */}
@@ -200,16 +258,35 @@ export default function BookForm({ escapes = [], escape = [] }) {
             <Form.Select
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              name="datetime"
+              onChange={handleInputChange}
             >
               <option>=====請選擇時段=====</option>
-              <option value="1">10:00</option>
-              <option value="2">14:00</option>
-              <option value="3">18:00</option>
+              <option value="10:00">10:00</option>
+              <option value="14:00">14:00</option>
+              <option value="18:00">18:00</option>
             </Form.Select>
           </InputGroup>
         </div>
-        {/* 人數 */}
-        <div className="d-flex" style={{ width: '50%' }}>
+        {/* 姓名 */}
+        <div className="d-flex">
+          <InputGroup className={styles.inputGroup}>
+            <InputGroup.Text
+              className={styles.inputGroupText}
+              id="inputGroup-sizing-default"
+            >
+              姓名
+            </InputGroup.Text>
+            <Form.Control
+              name="name"
+              type="text"
+              placeholder="請輸入完整姓名"
+              aria-label="Username"
+              aria-describedby="inputGroup-sizing-default"
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+          {/* 人數 */}
           <InputGroup className={styles.inputGroup}>
             <InputGroup.Text
               className={styles.inputGroupText}
@@ -221,10 +298,14 @@ export default function BookForm({ escapes = [], escape = [] }) {
               id="peopleAmount"
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
+              name="people"
               value={selectPeople}
-              onChange={(e) => setSelectPeople(e.target.value)}
+              onChange={(e) => {
+                setSelectPeople(e.target.value)
+                handleInputChange(e)
+              }}
             >
-              <option>=====請選擇人數=====</option>
+              <option value={0}>=====請選擇人數=====</option>
               {peoples.map((v, i) => (
                 <option key={i} value={v}>
                   {v} 位
@@ -234,22 +315,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
           </InputGroup>
         </div>
         {/* input */}
-        {/* 姓名 */}
         <div className="d-flex">
-          <InputGroup className={styles.inputGroup}>
-            <InputGroup.Text
-              className={styles.inputGroupText}
-              id="inputGroup-sizing-default"
-            >
-              姓名
-            </InputGroup.Text>
-            <Form.Control
-              type="text"
-              placeholder="請輸入完整姓名"
-              aria-label="Username"
-              aria-describedby="inputGroup-sizing-default"
-            />
-          </InputGroup>
           {/* 電話 */}
           <InputGroup className={styles.inputGroup}>
             <InputGroup.Text
@@ -260,14 +326,19 @@ export default function BookForm({ escapes = [], escape = [] }) {
             </InputGroup.Text>
             <Form.Control
               type="text"
-              placeholder="請輸入完整手機號碼，如09XX-XXX-XXX"
+              placeholder="請輸入完整手機號碼，如09XXXXXXXX"
               aria-label="Mobile"
               aria-describedby="inputGroup-sizing-default"
+              maxLength={10}
+              name="mobile"
+              value={mobile}
+              onChange={(e) => {
+                mobileChange(e)
+                handleInputChange(e)
+              }}
             />
           </InputGroup>
-        </div>
-        {/* 信箱 */}
-        <div className="d-flex">
+          {/* 信箱 */}
           <InputGroup className={styles.inputGroup}>
             <InputGroup.Text
               className={styles.inputGroupText}
@@ -276,12 +347,16 @@ export default function BookForm({ escapes = [], escape = [] }) {
               信箱
             </InputGroup.Text>
             <Form.Control
+              name="email"
               type="email"
               placeholder="請輸入有效電子信箱"
               aria-label="email"
               aria-describedby="inputGroup-sizing-default"
+              onChange={handleInputChange}
             />
           </InputGroup>
+        </div>
+        <div className="d-flex">
           {/* 金額 */}
           <InputGroup
             className={`${styles.inputGroup} d-flex justify-content-between align-items-center`}
@@ -290,28 +365,44 @@ export default function BookForm({ escapes = [], escape = [] }) {
               className={styles.inputGroupText}
               id="inputGroup-sizing-default"
             >
-              金額
+              價格
             </InputGroup.Text>
             <h3 className={styles.secondaryText} style={{ margin: 0 }}>
-              {escape.price} 元
+              {uniPrice} 元 / 位
+            </h3>
+          </InputGroup>
+          <InputGroup
+            className={`${styles.inputGroup} d-flex justify-content-between align-items-center`}
+          >
+            <InputGroup.Text
+              className={styles.inputGroupText}
+              id="inputGroup-sizing-default"
+            >
+              總金額
+            </InputGroup.Text>
+            <h3
+              className={styles.secondaryText}
+              style={{ margin: 0 }}
+              name="totalprice"
+            >
+              {formData.totalprice.toLocaleString()} 元
             </h3>
           </InputGroup>
         </div>
-        <Link href={`/larp/check-page`}>
-          <Button
-            className="position-absolute end-0"
-            style={{
-              padding: '8px 29px',
-              marginRight: 64,
-              backgroundColor: '#FFFFFF',
-              border: 'none',
-              color: '#1f1f1f',
-            }}
-            type="submit"
-          >
-            預約
-          </Button>
-        </Link>
+        <Button
+          className="position-absolute end-0"
+          style={{
+            padding: '8px 29px',
+            marginRight: 64,
+            backgroundColor: '#FFFFFF',
+            border: 'none',
+            color: '#1f1f1f',
+          }}
+          type="submit"
+          onClick={BtnSubmit}
+        >
+          預約
+        </Button>
       </div>
     </>
   )

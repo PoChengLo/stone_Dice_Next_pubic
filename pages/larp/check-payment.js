@@ -1,15 +1,28 @@
 import React from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
 import PaymentTabs from '@/components/larp/payment-tabs'
-import GroupButton from '@/components/larp/next-button'
+import ETicketTabs from '@/components/larp/e-ticket-tabs.js'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import useBookFormState from '@/hooks/use-bookform-state'
+import { Button } from 'react-bootstrap'
 
-export default function CheckPage() {
+export default function CheckPayment() {
+  const { formData: localData } = useBookFormState('bookForm', {})
+
+  const finalTotal = localData.totalprice
+
+  // 導向至ECPay付款頁面
+  const goECPay = () => {
+    if (window.confirm('確認要導向至ECPay進行付款?')) {
+      // 先連到node伺服器後，導向至ECPay付款頁面
+      window.location.href = `http://localhost:3006/ecpay/larp?amount=${finalTotal}`
+    }
+  }
+
   return (
-    <div className={`${styles.bodyBg}`} style={{ height: '100vh' }}>
+    <div className={`${styles.bodyBg}`} style={{ paddingTop: '60px' }}>
       {/* 導覽列 */}
-      <div className="text-white bg-dark" style={{ height: 60 }}>
-        我是navbar
-      </div>
+      <Navbar />
       <div className={styles.larpContainer}>
         {/* 立即預約進度條 */}
         <div
@@ -95,6 +108,7 @@ export default function CheckPage() {
           </div>
         </div>
         {/* 表單 */}
+
         {/* 訂單資料 */}
         <div id={styles.infoGroup} className={styles.secondaryText}>
           {/* 付款資訊 */}
@@ -105,7 +119,28 @@ export default function CheckPage() {
             <h4>請選擇支付工具</h4>
             <PaymentTabs />
           </div>
-          <GroupButton />
+          {/* 付款資訊 */}
+          <h4
+            className={styles.secondaryText}
+            style={{ marginTop: 76, padding: 10 }}
+          >
+            發票資訊
+          </h4>
+          <div className={styles.orderInfo}>
+            <h4 className={styles.orderTitle}>電子發票</h4>
+            <ETicketTabs />
+          </div>
+          <div
+            className="d-flex justify-content-center"
+            style={{ gap: '40px', margin: '40px auto 0 auto' }}
+          >
+            <Button className={styles.btnstyle} type="submit">
+              回上頁
+            </Button>
+            <Button className={styles.btnstyle} type="submit" onClick={goECPay}>
+              下一步
+            </Button>
+          </div>
         </div>
       </div>
     </div>

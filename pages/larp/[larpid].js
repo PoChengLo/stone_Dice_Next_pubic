@@ -9,6 +9,7 @@ import BookForm from '@/components/larp/book-form'
 import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
 import OrderRightNow from '@/components/larp/orderRightNow'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function LarpId() {
   const router = useRouter()
@@ -90,22 +91,28 @@ export default function LarpId() {
           {escape.larp_name}
         </h1>
         <Image src={escape.larp_top_img} alt="" className="w-100" />
+        {/* 立即預約按鈕 */}
+        <Link
+          href="#order"
+          scroll={true}
+          className={styles.orderButton}
+          style={{ zIndex: '1' }}
+        >
+          {/* <OrderRightNow /> */}
+          <Image
+            // width={'auto'}
+            // height={'45px'}
+            className={styles.svgImg}
+            src="../larp/img/svgButton.png"
+            alt=""
+          />
+        </Link>
       </div>
-      {/* 立即預約按鈕 */}
-      <Link
-        href="#order"
-        scroll={true}
-        className={styles.orderButton}
-        style={{ zIndex: '1' }}
-      >
-        <OrderRightNow />
-      </Link>
-      {/* </div> */}
       <div className={styles.larpContainer} id={styles.larpStory}>
         {/* 故事背景分隔線 */}
         <Line title="故事背景" />
         {/* 故事內容 */}
-        <h4>{escape.larp_intro}</h4>
+        <h4 className={styles.h4Text}>{escape.larp_intro}</h4>
       </div>
       {/* 第一段大圖 */}
       <div id={styles.p1} className="position-relative">
@@ -134,8 +141,9 @@ export default function LarpId() {
           {/* 人數 */}
           <div className="d-inline flex-column text-white text-center">
             <svg
-              width={100}
-              height={99}
+              // width={100}
+              // height={99}
+              className={styles.svgBtn}
               viewBox="0 0 100 99"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +282,16 @@ export default function LarpId() {
             height: 670,
             backgroundColor: 'rgb(82, 95, 117)',
           }}
-        />
+        >
+          <iframe
+            title="library"
+            width="100%"
+            height="100%"
+            allowFullScreen
+            style={{ borderStyle: 'none' }}
+            src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https%3A//th.bing.com/th/id/OIG4.HR2FAo.9utuvXwdMUn0p%3Fw%3D1024%26h%3D1024%26rs%3D1%26pid%3DImgDetMain&autoLoad=true"
+          ></iframe>{' '}
+        </div>
         {/* 立即預約分隔線 */}
         <div id="order">
           <Line title="立即預約" />
@@ -283,7 +300,6 @@ export default function LarpId() {
         <div
           id={styles.orderStep}
           className="d-flex justify-content-around align-items-center"
-          style={{ margin: '60px 189px 0 189px' }}
         >
           <div
             className="d-flex align-items-center"
