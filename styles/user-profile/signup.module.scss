@@ -7,78 +7,102 @@
 }
 
 .main-container {
-  
-  width: 75%;
-  height: 90%;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  width: 70%;
+  height: 85%;
   background: #d7cebe;
   overflow: hidden;
   border-radius: 24px;
   box-shadow: 0px 0px 40px 10px rgba(255, 245, 160, 0.2);
 }
 
-.login-section {
-  justify-content: center;
-  gap: 20px;
-  flex-shrink: 0;
-  display: flex;
-  width: 100%;
-  height: auto;
-  align-items: center;
+.art-section {
+  flex: 4.5; // 佔用 40% 的空間
+  height: 100%;
+  position: relative;
 }
 
-.login-form {
-  align-items: center;
+.art-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-section {
+  flex: 5.5; // 佔用 60% 的空間
   display: flex;
   flex-direction: column;
-  width: 55%;
-  justify-content: flex-start;
+  padding: 40px;
+  position: relative; // 為絕對定位的子元素做準備
 }
 
 .welcome-title {
   color: rgba(68, 68, 68, 1);
-  margin-top: 50px;
+  font-size: 2.5rem;
+  text-align: left;
+  width: 100%;
+  position: absolute; // 絕對定位
+  top: 40px; // 與 login-section 的 padding 一致
+  left: 40px; // 與 login-section 的 padding 一致
 }
 
-.welcome-description {
-  color: var(--Secondary-text, #313957);
-  letter-spacing: 0.2px;
-  margin-top: 20px;
+.form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px; // 限制表單最大寬度
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 16px;
-  align-self: stretch;
+  gap: 10px;
+  width: 100%;
 }
 
-
 .submit-button {
-  align-self: stretch;
+  width: 80%;
   border-radius: 12px;
   background: var(--d-9-bf-8-f, #a6977c);
-  background-color: var(--d-9-bf-8-f, #a6977c);
   margin-top: 24px;
-  width: 80%;
   font-size: 20px;
   color: rgba(255, 255, 255, 1);
   text-align: center;
   letter-spacing: 0.2px;
+  border: none;
+  cursor: pointer;
+  height: 50px;
+  line-height: 50px;
 }
 
-
-
-.divider-line {
+.signup-prompt {
+  color: rgba(18, 43, 49, 1);
+  letter-spacing: 0.18px;
+  text-align: left;
+  margin-top: 30px;
   width: 100%;
-  height: 3px;
-  background: #a6977c;
-  margin: 10px;
-}
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
 
+  a {
+    color: rgba(217, 38, 38, 1);
+    text-decoration: none;
+    margin-left: 5px;
+  }
+}
 
 .copyright {
   color: rgba(149, 156, 182, 1);
@@ -87,13 +111,3 @@
   bottom: 0.5%;
   right: 1%;
 }
-
-.art-section {
-
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 100%;
-}
-
-
