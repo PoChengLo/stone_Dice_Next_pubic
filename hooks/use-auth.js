@@ -47,6 +47,9 @@ export const AuthProvider = ({ children }) => {
     '/user-profile/user-setting',
     '/user-profile/home',
     '/user-profile/profile-password',
+    '/larp/check-page',
+    '/larp/check-payment',
+    '/larp/success',
   ]
 
   // 檢查會員認証用

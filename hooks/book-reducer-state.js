@@ -1,6 +1,6 @@
 export const initItems = []
 
-export const initStates = {
+export const initState = {
   items: initItems,
   isEmpty: true,
   bookTotal: 0,
@@ -9,10 +9,11 @@ export const initStates = {
 // 置於上述items陣列中的每個項目的物件模型
 // id, quantity, price為必要屬性
 const item = {
-  id: '',
+  userId: 0,
+  id: 0,
   price: 0,
-  larpName: '',
-  larpLoc: '',
+  larpName: 0,
+  larpLoc: 0,
   datetime: '',
   contact: '',
   email: '',
@@ -30,4 +31,28 @@ export const updateOne = (items, updateItem) => {
     if (String(item.id) === String(updateItem.id)) return updateItem
     else return item
   })
+}
+
+export const totalPrice = (items) =>
+  items.map((item) => ({
+    ...item,
+    totalprice: item.price * item.people,
+  }))
+
+// 最後將更新後的state，與initialState整理成新的state
+export const generateBookState = (state, items) => {
+  // isEmpty為布林值
+  const isEmpty = items.length === 0
+
+  return {
+    ...initState,
+    ...state,
+    totalPrice: totalPrice(items),
+    isEmpty,
+  }
+}
+
+// 初始化用
+export const init = (items) => {
+  return generateBookState({}, items)
 }

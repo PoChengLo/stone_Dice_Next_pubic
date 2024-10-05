@@ -25,7 +25,7 @@ export default function CheckPage() {
     setLocations(resData.location)
   }
 
-  // 把從 localStorage 傳過來的larp id跟loc id 轉換成文字
+  //把從 localStorage 傳過來的larp id跟loc id 轉換成文字
   useEffect(() => {
     const larpName = escapes.find((e) => parseInt(localData.larpName) === e.id)
     if (larpName) {

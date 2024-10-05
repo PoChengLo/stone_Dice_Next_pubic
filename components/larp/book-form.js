@@ -3,11 +3,9 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
-import { useRouter } from 'next/router'
 import useBookFormState from '@/hooks/use-bookform-state'
 
 export default function BookForm({ escapes = [], escape = [] }) {
-  const router = useRouter()
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
   // 儲存當前選擇的館別
@@ -21,6 +19,8 @@ export default function BookForm({ escapes = [], escape = [] }) {
   const [mobile, setMobile] = useState('')
   // 儲存單價
   const [uniPrice, setUniPrice] = useState(0)
+  // 儲存總價
+  const totalprice = 0
 
   // 初始化表單的值
   const initialFormValues = {
@@ -130,6 +130,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
       setFormData((prevData) => ({
         ...prevData,
         larpName: selectLarp.id,
+        totalprice: totalprice,
       }))
 
       // 寫入 localStorage
@@ -147,14 +148,14 @@ export default function BookForm({ escapes = [], escape = [] }) {
         setPeoples(option)
       }
     }
-  }, [escape.larp_name, escapes])
+  }, [])
 
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
       totalprice: uniPrice * selectPeople,
     }))
-  }, [selectPeople, uniPrice])
+  }, [selectPeople])
 
   return (
     <>
