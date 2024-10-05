@@ -1,7 +1,7 @@
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import useLocalStorage from '@/hooks/use-localstorage'
 import toast from 'react-hot-toast'
+import axiosInstance from '@/services/axios-instance'
 
 export default function useLogout() {
   const router = useRouter()
@@ -12,55 +12,57 @@ export default function useLogout() {
 
   const handleLogout = async () => {
     try {
-      // 從 localStorage 或其他地方獲取 token（如果有的話）
-      const accessToken = localStorage.getItem('accessToken')
-
-      const res = await axios.post(
-        'http://localhost:3006/user-profile/logout',
+      // 發送登出請求到後端
+      await axiosInstance.post(
+        '/user-profile/logout',
         {},
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            // 如果使用 Authorization header，加上：
-            ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
-          },
-        }
+        { withCredentials: true }
       )
 
-      // 清除所有本地存儲的認證信息
+      // 清除本地存儲的認證信息
+      localStorage.removeItem('accessToken')
+
+      // 重置 axios 實例的默認 headers
+      axiosInstance.defaults.headers.common['Authorization'] = ''
+
+      // 更新本地認證狀態
       setAuth({
         isAuth: false,
         userData: {},
       })
-      localStorage.removeItem('accessToken') // 如果有存儲 token
 
       toast.success('已成功登出')
       router.push('/user-profile/login')
     } catch (error) {
       console.error('登出失敗:', error)
 
-      // 更詳細的錯誤處理
-      if (error.response) {
-        // 伺服器回應的錯誤
-        toast.error(error.response.data.message || '登出失敗')
-      } else if (error.request) {
-        // 請求發送失敗
-        toast.error('無法連接到伺服器')
-      } else {
-        // 其他錯誤
-        toast.error('發生未知錯誤')
-      }
-
-      // 如果遇到 401，可能是 token 已經失效，直接清除本地存儲並重導向
       if (error.response?.status === 401) {
+        // 如果是 401 錯誤，直接清除認證信息並重定向
         setAuth({
           isAuth: false,
           userData: {},
         })
         localStorage.removeItem('accessToken')
+        axiosInstance.defaults.headers.common['Authorization'] = ''
         router.push('/user-profile/login')
+        return
       }
+
+      if (error.response) {
+        toast.error(error.response.data.message || '登出失敗')
+      } else if (error.request) {
+        toast.error('無法連接到伺服器')
+      } else {
+        toast.error('發生未知錯誤')
+      }
+
+      // 即使發生錯誤，也清除本地認證狀態
+      setAuth({
+        isAuth: false,
+        userData: {},
+      })
+      localStorage.removeItem('accessToken')
+      axiosInstance.defaults.headers.common['Authorization'] = ''
     }
   }
 
