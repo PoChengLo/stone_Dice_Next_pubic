@@ -6,23 +6,14 @@ import useSWR from 'swr'
  */
 export const checkAuth = async () => {
   try {
-    console.log(
-      'Sending checkAuth request to:',
-      `${axiosInstance.defaults.baseURL}/user-profile/check`
-    )
     const response = await axiosInstance.get('/user-profile/check')
     console.log('checkAuth response:', response.data)
     return response
   } catch (error) {
-    console.error('checkAuth error:', error)
-    if (error.response) {
-      console.error('Error response:', error.response.data)
-      console.error('Error status:', error.response.status)
-      console.error('Error headers:', error.response.headers)
-    } else if (error.request) {
-      console.error('No response received:', error.request)
-    } else {
-      console.error('Error', error.message)
+    if (error.response && error.response.status === 401) {
+      console.log('User is not authenticated')
+      // 可以在這裡處理未認證的情況，比如清除本地存儲
+      localStorage.removeItem('accessToken')
     }
     throw error
   }
@@ -73,13 +64,20 @@ export const login = async (loginData = {}) => {
  * 登出用
  */
 export const logout = async () => {
-  return await axiosInstance.post(
-    '/user-profile/logout',
-    {},
-    {
-      withCredentials: true, // 確保攜帶 cookie
-    }
-  )
+  try {
+    await axiosInstance.post(
+      '/user-profile/logout',
+      {},
+      { withCredentials: true }
+    )
+    // 清除本地存儲的認證信息
+    localStorage.removeItem('accessToken')
+    // 重置 axios 實例的默認 headers
+    axiosInstance.defaults.headers.common['Authorization'] = ''
+  } catch (error) {
+    console.error('Logout error:', error)
+    throw error
+  }
 }
 /**
  * 載入會員id的資料用，需要登入後才能使用。此API路由會檢查JWT中的id是否符合本會員，不符合會失敗。

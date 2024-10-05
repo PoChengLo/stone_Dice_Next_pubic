@@ -18,17 +18,53 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     isAuth: false,
     userData: initUserData,
+    isLoading: true, // 新增 isLoading 狀態
   })
-
-  // 我的最愛清單使用
   const [favorites, setFavorites] = useState([])
+  const router = useRouter()
+
+  const loginRoute = '/user-profile/login'
+  const protectedRoutes = [
+    '/user-profile/user-setting',
+    '/user-profile/home',
+    '/user-profile/profile-password',
+  ]
 
   const handleGetFavorites = async () => {
-    const res = await getFavs()
-    if (res.data.status === 'success') {
-      setFavorites(res.data.data.favorites)
+    try {
+      const res = await getFavs()
+      if (res.data.status === 'success') {
+        setFavorites(res.data.data.favorites)
+      }
+    } catch (error) {
+      console.error('Error fetching favorites:', error)
     }
   }
+
+  const handleCheckAuth = async () => {
+    if (auth.isLoading) return // 如果正在加載，不進行檢查
+
+    setAuth((prev) => ({ ...prev, isLoading: true }))
+    try {
+      const res = await checkAuth()
+      if (res.data.status === 'success') {
+        const dbUser = res.data.data.user
+        const userData = { ...initUserData, ...dbUser }
+        setAuth({ isAuth: true, userData, isLoading: false })
+      } else {
+        setAuth({ isAuth: false, userData: initUserData, isLoading: false })
+      }
+    } catch (error) {
+      console.error('Authentication check failed:', error)
+      setAuth({ isAuth: false, userData: initUserData, isLoading: false })
+    }
+  }
+
+  useEffect(() => {
+    if (router.isReady && !auth.isAuth && !auth.isLoading) {
+      handleCheckAuth()
+    }
+  }, [router.isReady])
 
   useEffect(() => {
     if (auth.isAuth) {
@@ -36,62 +72,17 @@ export const AuthProvider = ({ children }) => {
     } else {
       setFavorites([])
     }
-  }, [auth])
+  }, [auth.isAuth])
 
-  const router = useRouter()
-
-  // 登入頁路由
-  const loginRoute = '/user-profile/login'
-  // 隱私頁面路由，未登入時會，檢查後跳轉至登入頁
-  const protectedRoutes = [
-    '/user-profile/user-setting',
-    '/user-profile/home',
-    '/user-profile/profile-password',
-  ]
-
-  // 檢查會員認証用
-  const handleCheckAuth = async () => {
-    const res = await checkAuth()
-
-    console.log('Response from checkAuth:', res)
-
-    if (res.data.status === 'success') {
-      const dbUser = res.data.data.user
-      const userData = { ...initUserData }
-
-      if (dbUser.user_id) {
-        userData.id = dbUser.user_id // 設置後端的 user_id 到 userData 中
-      }
-
-      console.log('Assigned userData:', userData)
-
-      // 手動對應後端欄位名稱到前端
-      userData.id = dbUser.user_id || ''
-      userData.username = dbUser.user_name || ''
-      userData.google_uid = dbUser.google_uid || ''
-      userData.line_uid = dbUser.line_uid || ''
-      userData.email = dbUser.email || ''
-      userData.name = dbUser.name || ''
-
-      // 設到全域狀態中
-      setAuth({ isAuth: true, userData })
-    } else {
-      console.warn('Authentication failed:', res.data)
-
-      // 若驗證失敗，跳轉到登入頁面
-      if (protectedRoutes.includes(router.pathname)) {
-        router.push(loginRoute)
-      }
-    }
-  }
-
-  // didMount(初次渲染)後，向伺服器要求檢查會員是否登入中
   useEffect(() => {
-    if (router.isReady && !auth.isAuth) {
-      handleCheckAuth()
+    if (
+      !auth.isLoading &&
+      !auth.isAuth &&
+      protectedRoutes.includes(router.pathname)
+    ) {
+      router.push(loginRoute)
     }
-    // eslint-disable-next-line
-  }, [router.isReady, router.pathname])
+  }, [auth, router.pathname])
 
   return (
     <AuthContext.Provider

@@ -11,15 +11,18 @@ const axiosInstance = axios.create({
 })
 
 // 添加請求攔截器
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('accessToken')
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      console.log('Unauthorized, redirecting to login')
+      // 清除本地存儲的認證信息
+      localStorage.removeItem('accessToken')
+      // 重定向到登入頁面
+      window.location.href = '/login'
     }
-    return config
-  },
-  (error) => Promise.reject(error)
+    return Promise.reject(error)
+  }
 )
 
 // 保留原有的 fetcher 函數
