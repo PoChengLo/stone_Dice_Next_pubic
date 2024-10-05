@@ -1,41 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import styles from '@/styles/user-profile/input-field.module.scss'
 
-const inputStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'flex-star',
-  gap: '10px',
-  alignSelf: 'stretch',
-}
-
-const fieldStyle = {
-  borderRadius: '12px',
-  border: '1px solid #D4D7E3',
-  width: '80%',
-  background: '#F7FBFF',
-  padding: '10px',
-}
-
-const InputField = ({ label, type, placeholder, value, onChange, name }) => {
+const InputField = ({ label, type, value, onChange, name }) => {
   return (
-    <div className="input-group" style={inputStyle}>
-      <label className="input-label" htmlFor={`${type}Input`}>
+    <div className={styles.input_container}>
+      <input
+        className={styles.input}
+        type={type}
+        id={`${name}Input`}
+        placeholder=" " // 使用空格作為佔位符
+        value={value}
+        onChange={onChange}
+        name={name}
+      />
+      <label className={styles.label} htmlFor={`${name}Input`}>
         {label}
       </label>
-      <div className="input-wrapper">
-        <input
-          className="input-field"
-          type={type}
-          id={`${type}Input`}
-          placeholder={placeholder}
-          aria-label={label}
-          style={fieldStyle}
-          value={value}
-          onChange={onChange}
-          name={name}
-        />
-      </div>
     </div>
   )
 }

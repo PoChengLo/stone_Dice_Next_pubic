@@ -5,7 +5,27 @@ import useSWR from 'swr'
  * 檢查會員狀態使用
  */
 export const checkAuth = async () => {
-  return await axiosInstance.get('/auth/check')
+  try {
+    console.log(
+      'Sending checkAuth request to:',
+      `${axiosInstance.defaults.baseURL}/user-profile/check`
+    )
+    const response = await axiosInstance.get('/user-profile/check')
+    console.log('checkAuth response:', response.data)
+    return response
+  } catch (error) {
+    console.error('checkAuth error:', error)
+    if (error.response) {
+      console.error('Error response:', error.response.data)
+      console.error('Error status:', error.response.status)
+      console.error('Error headers:', error.response.headers)
+    } else if (error.request) {
+      console.error('No response received:', error.request)
+    } else {
+      console.error('Error', error.message)
+    }
+    throw error
+  }
 }
 /**
  * Google Login(Firebase)登入用，providerData為登入後得到的資料

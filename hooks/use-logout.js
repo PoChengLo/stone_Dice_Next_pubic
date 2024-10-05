@@ -16,7 +16,7 @@ export default function useLogout() {
       const accessToken = localStorage.getItem('accessToken')
 
       const res = await axios.post(
-        'http://localhost:3006/backend/user-profile/logout',
+        'http://localhost:3006/user-profile/logout',
         {},
         {
           withCredentials: true,

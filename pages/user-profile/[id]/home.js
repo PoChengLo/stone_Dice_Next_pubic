@@ -40,7 +40,7 @@ export default function UserProfile() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:3006/backend/user-profile/${id}/home`)
+        .get(`http://localhost:3006/user-profile/${id}/home`)
         .then((res) => {
           if (res.data.status === 'success') {
             setUserData(res.data.data.user)
