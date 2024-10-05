@@ -5,24 +5,20 @@ import Link from 'next/link'
 
 function LarpCard({ larpImg, larpName, larpPrice, seeMoreLink, orderLink }) {
   return (
-    <Card
-      className={`${styles.card} card bg-transparent`}
-      style={{ maxWidth: '342px', height: '752px', color: '#f8f0e5' }}
-    >
+    <Card className={`${styles.card} card bg-transparent`}>
       <Image
         src={larpImg}
-        className="card-img-top"
-        style={{
-          height: '603px',
-          objectFit: 'cover',
-        }}
+        className={`${styles.cardImg} card-img-top`}
         alt=""
       />
-      <Card.Body className="card-body">
+      <Card.Body className={`${styles.cardBody} card-body`}>
         <Card.Title>
-          <h4 className="card-title text-center"> {larpName}</h4>
+          <h4 className={`${styles.cardTitle} card-title text-center`}>
+            {' '}
+            {larpName}
+          </h4>
         </Card.Title>
-        <p className="card-text">$ {larpPrice} 元 /位</p>
+        <p className={`${styles.cardText} card-text`}>$ {larpPrice} 元 /位</p>
         <div className={`d-flex justify-content-between ${styles.btns}`}>
           <Link href={orderLink} className={`btn ${styles.btn}`}>
             主題預約

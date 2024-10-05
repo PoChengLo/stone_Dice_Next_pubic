@@ -76,23 +76,31 @@ export default function BoardGame() {
   return (
     <>
       <Navbar />
-      <div id={`${styles.backgroundImage}`} className="py-5">
-        <div className="container py-3">
+      <div id={`${styles.backgroundImage_index}`} className="pt-5">
+        <div className="container pt-5">
           {/* 搜尋欄，標籤 */}
-          <div className="row my-3">
-            <div className="col-12 col-xxl-6  ">
+          <div className="row my-xxl-3">
+            <div className="col-12 col-xxl-6 ">
               <input
                 type="text"
-                className="form-control"
+                className={`form-control mb-3 ${styles.white_to_text}`}
                 id="search_input"
-                placeholder="請輸入關鍵字，可以是商品名稱、背景故事、遊戲介紹或遊戲規則"
+                placeholder="請輸入關鍵字搜尋"
                 onInput={(e) => {
                   const search_input = e.target.value
                   setSearch(search_input)
                 }}
               />
+              {/* <button
+                className={`btn btn-primary ${styles.btn} `}
+                id={`${styles.prod_tag}`}
+              >
+                單人遊戲
+              </button> */}
+            </div>
+            <div className=" col-12 col-xxl-6  d-flex mb-3 ">
               <button
-                className={`btn btn-primary ${styles.btn}`}
+                className={`btn btn-primary me-3 ${styles.btn} `}
                 onClick={() => {
                   const query = { ...router.query }
                   if (search) {
@@ -107,42 +115,31 @@ export default function BoardGame() {
                   }
                 }}
               >
-                <p>
-                  搜尋
-                  <BsSearch />
-                </p>
+                搜尋
+                <BsSearch className="ms-2" />
               </button>
               <button
-                className={`btn btn-primary ${styles.btn}`}
+                className={`btn btn-primary  me-3 ${styles.btn} `}
                 onClick={() => {
-                  const query = { ...router.query }
-                  if (query.prod_name_like) {
-                    delete query.prod_name_like
-                    delete query.prod_desc_like
-                    delete query.prod_intro_like
-                    delete query.prod_rules_like
-                    router.push(`?` + new URLSearchParams(query))
-                  }
+                  router.push(`?`)
                   // 清除搜尋欄狀態
                   setSearch('')
                   // 清除 search_input 的文字內容
                   document.getElementById('search_input').value = ''
                 }}
               >
-                <p>清除搜尋</p>
+                清除搜尋
               </button>
-              <SideClassM />
-            </div>
-            <div className=" col-xxl-6" id={`${styles.prod_tag}`}>
-              <button className={`btn btn-primary ${styles.btnPrimary}`}>
-                單人遊戲
-              </button>
+              <SideClassM className={``} />
             </div>
           </div>
           {/* 總共商品數，下拉式選單，卡片，詳細資訊 */}
           <div className="row" id={`${styles.filter_order}`}>
-            <div className="col">
-              <button type="button" className="btn btn-primary me-3">
+            <div className="col ">
+              <button
+                type="button"
+                className={`btn btn-primary me-3 ${styles.btn} `}
+              >
                 總計共{total}件商品
               </button>
               <div className="btn-group me-3">
@@ -174,10 +171,16 @@ export default function BoardGame() {
                   }}
                 />
               </div>
-              <button type="button" className="btn btn-primary me-3">
+              <button
+                type="button"
+                className={`btn btn-primary me-3 ${styles.btn} `}
+              >
                 <BsGridFill />
               </button>
-              <button type="button" className="btn btn-primary me-3">
+              <button
+                type="button"
+                className={`btn btn-primary me-3 ${styles.btn} `}
+              >
                 <BsCardText />
               </button>
             </div>
@@ -187,26 +190,72 @@ export default function BoardGame() {
         <div className="container-fluid p-xxl-5">
           <div className="row">
             {/* 側邊欄 */}
-            <div className="col-2 m-auto" id={`${styles.side_bar}`}>
-              <SideClass />
+            <div
+              className="col-2 d-flex flex-xxl-start flex-xxl-column"
+              id={`${styles.side_class_div}`}
+            >
+              <SideClass
+                onClick={(e) => {
+                  const query = { ...router.query }
+                  router.push(`?` + new URLSearchParams(query))
+                }}
+                onChange={(e) => {
+                  const query = { ...router.query }
+                  switch (e.target.value) {
+                    case '1':
+                      query.price_min = '1000'
+                      query.price_max = '1499'
+                      delete query.page
+
+                      break
+                    case '2':
+                      query.price_min = '1500'
+                      query.price_max = '1999'
+                      delete query.page
+
+                      break
+                    case '3':
+                      query.price_min = '2000'
+                      query.price_max = '2499'
+                      delete query.page
+
+                      break
+                    case '4':
+                      query.price_min = '2500'
+                      query.price_max = '2999'
+                      delete query.page
+
+                      break
+                    default:
+                      delete query.price_min
+                      delete query.price_max
+                      delete query.page
+                  }
+                  router.push(`?` + new URLSearchParams(query))
+                }}
+              />
             </div>
             {/* 商品卡片 */}
             <div className="col-12 col-xxl-10 ">
               <div className={`row`}>
                 {products.map((product) => (
-                  <div className="col-6 col-xxl-3" key={product.id}>
+                  <div
+                    className={`col-6 col-xxl-3 d-flex justify-content-center `}
+                    key={product.id}
+                  >
                     <ProdCard product={product} />
                   </div>
                 ))}
               </div>
               {/* 分頁按鈕 */}
-
-              <div className="row">
+              <div className="row mt-3 ">
                 <div className="col">
                   <nav aria-label="Page navigation example d-flex justify-content-center">
                     <ul className="pagination d-flex justify-content-center">
                       <li className="page-item">
                         <Button
+                          disabled={page == 1}
+                          className={`btn btn-primary me-3 ${styles.btn} `}
                           onClick={() => {
                             const query = { ...router.query }
                             const prePage = page - 1
@@ -228,8 +277,11 @@ export default function BoardGame() {
                           const p = page - 2 + i
                           if (p < 1 || p > pageCount) return null
                           return (
-                            <li key={p} className={page === p ? 'active' : ''}>
+                            <li key={p}>
                               <Button
+                                className={`btn btn-primary me-3 ${
+                                  styles.btn
+                                } ${p === page ? styles.active : ''}`}
                                 onClick={() => {
                                   query.page = p
                                   router.push(`?` + new URLSearchParams(query))
@@ -242,6 +294,8 @@ export default function BoardGame() {
                         })}
                       <li className="page-item">
                         <Button
+                          disabled={pageCount == page}
+                          className={`btn btn-primary me-3 ${styles.btn} `}
                           onClick={() => {
                             const query = { ...router.query }
                             const nextPage = page + 1

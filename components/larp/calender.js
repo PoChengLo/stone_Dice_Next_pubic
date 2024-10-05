@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '@/styles/larp/calender.module.css'
 
 export default function Calender() {
+  const [calToday, setCalToday] = useState()
+
   return (
     <div className={styles.bookContainer}>
       <div className={styles.calendar}>
