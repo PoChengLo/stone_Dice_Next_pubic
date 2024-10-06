@@ -57,7 +57,7 @@ export default function Navbar() {
               alt=""
               width={197}
               height={60}
-              priority={false} // {false} | {true}
+              priority={true} // {false} | {true}
             />
           </a>
         </div>

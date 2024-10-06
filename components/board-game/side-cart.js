@@ -54,13 +54,16 @@ function SideCartOffcanvas({ ...props }) {
       <Button
         variant="primary"
         onClick={handleShow}
-        className="me-2"
+        className="me-3"
         id={`${styles.buttonCart}`}
       >
         <p>
           <BsCart4 />
           購物車
         </p>
+        <div className={`${styles.items_length}`}>
+          <p>{items.length}</p>
+        </div>
       </Button>
       <Offcanvas
         show={show}

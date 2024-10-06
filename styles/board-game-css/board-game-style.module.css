@@ -154,6 +154,7 @@
   color: #f4565c;
   background: none;
   border: none;
+  position: relative;
 }
 #buttonCart p {
   display: flex;
@@ -166,6 +167,22 @@
   vertical-align: middle;
   margin-right: 5px;
   margin-bottom: 5px;
+}
+#buttonCart .items_length {
+  position: absolute;
+  top: -10px;
+  left: 90px;
+  background-color: #f4565c;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#buttonCart .items_length p {
+  color: #1f1f1f;
+  margin-bottom: 0px;
 }
 
 .side_cart {

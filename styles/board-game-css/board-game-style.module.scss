@@ -167,6 +167,7 @@
   color: #f4565c;
   background: none;
   border: none;
+  position: relative;
   p {
     display: flex;
     align-items: center;
@@ -177,6 +178,22 @@
       vertical-align: middle;
       margin-right: 5px;
       margin-bottom: 5px;
+    }
+  }
+  .items_length {
+    position: absolute;
+    top: -10px;
+    left: 90px;
+    background-color: #f4565c;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: #1f1f1f;
+      margin-bottom: 0px;
     }
   }
 }
