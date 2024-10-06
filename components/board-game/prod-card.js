@@ -58,7 +58,7 @@ function ProdCard({ product }) {
             router.push('/board-game/cart')
           }}
         >
-          前往購物車結帳3123
+          前往購物車結帳31222
         </Button>
       </Modal.Footer>
     </Modal>
