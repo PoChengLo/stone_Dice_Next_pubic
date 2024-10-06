@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
-import ETicketTabs from '@/components/larp/e-ticket-tabs.js'
 import GroupButton from '@/components/larp/next-button.js'
 import useBookFormState from '@/hooks/use-bookform-state.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
@@ -45,7 +44,6 @@ export default function CheckPage() {
       getData()
     }
   }, [router.isReady])
-
   return (
     <div className={styles.bodyBg} style={{ padding: '60px', height: '100vh' }}>
       {/* 導覽列 */}
