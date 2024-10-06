@@ -49,7 +49,9 @@ export default function LoginPage() {
       const res = await login(user)
 
       if (res.data.status === 'success') {
-        const jwtUser = parseJwt(res.data.data.accessToken)
+        const { accessToken } = res.data.data
+        localStorage.setItem('accessToken', accessToken) // 保存 token 到 localStorage
+        const jwtUser = parseJwt(accessToken)
         const res1 = await getUserById(jwtUser.id)
 
         if (res1.data.status === 'success') {
@@ -105,17 +107,15 @@ export default function LoginPage() {
                       label="Email"
                       name="email"
                       type="email"
-                      placeholder="Example@email.com"
-                      value={user.email} // 綁定 email 狀態
-                      onChange={handleFieldChange} // 綁定變更處理函數
+                      value={user.email}
+                      onChange={handleFieldChange}
                     />
                     <InputField
                       label="Password"
                       name="password"
                       type="password"
-                      placeholder="At least 8 characters"
-                      value={user.password} // 綁定 password 狀態
-                      onChange={handleFieldChange} // 綁定變更處理函數
+                      value={user.password}
+                      onChange={handleFieldChange}
                     />
                     <a href="#" className={styles['forgot-password']}>
                       Forgot Password?
