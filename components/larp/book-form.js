@@ -3,11 +3,9 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
-import { useRouter } from 'next/router'
 import useBookFormState from '@/hooks/use-bookform-state'
 
 export default function BookForm({ escapes = [], escape = [] }) {
-  const router = useRouter()
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
   // 儲存當前選擇的館別
@@ -21,6 +19,8 @@ export default function BookForm({ escapes = [], escape = [] }) {
   const [mobile, setMobile] = useState('')
   // 儲存單價
   const [uniPrice, setUniPrice] = useState(0)
+  // 儲存總價
+  const [totalPrice, setTotalPrice] = useState(0)
 
   // 初始化表單的值
   const initialFormValues = {
@@ -39,6 +39,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
     'bookForm',
     initialFormValues
   )
+
+  // 監聽 formData 狀態變化，並同步更新 localStorage
+  useEffect(() => {
+    if (formData) {
+      localStorage.setItem('bookForm', JSON.stringify(formData))
+    }
+  }, [formData])
 
   // 處理輸入變更
   const handleInputChange = (e) => {
@@ -133,7 +140,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
       }))
 
       // 寫入 localStorage
-      localStorage.setItem('larpName', selectLarp.id)
+      // localStorage.setItem('larpName', selectLarp.id)
 
       // 根據預設主題生成對應的人數選項
       const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
@@ -147,14 +154,17 @@ export default function BookForm({ escapes = [], escape = [] }) {
         setPeoples(option)
       }
     }
-  }, [escape.larp_name, escapes])
+  }, [escapes, escape.larp_name])
 
   useEffect(() => {
+    const Total = uniPrice * selectPeople
+    setTotalPrice(Total)
     setFormData((prevData) => ({
       ...prevData,
-      totalprice: uniPrice * selectPeople,
+      totalprice: Total,
     }))
-  }, [selectPeople, uniPrice])
+    localStorage.setItem('totalprice', Total)
+  }, [selectPeople])
 
   return (
     <>
@@ -385,7 +395,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
               style={{ margin: 0 }}
               name="totalprice"
             >
-              {formData.totalprice.toLocaleString()} 元
+              {totalPrice.toLocaleString()} 元
             </h3>
           </InputGroup>
         </div>
