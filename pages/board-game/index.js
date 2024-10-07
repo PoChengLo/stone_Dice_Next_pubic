@@ -121,7 +121,13 @@ export default function BoardGame() {
               <button
                 className={`btn btn-primary  me-3 ${styles.btn} `}
                 onClick={() => {
-                  router.push(`?`)
+                  const query = { ...router.query }
+                  delete query.prod_name_like
+                  delete query.prod_desc_like
+                  delete query.prod_intro_like
+                  delete query.prod_rules_like
+                  query.page = 1
+                  router.push(`?` + new URLSearchParams(query))
                   // 清除搜尋欄狀態
                   setSearch('')
                   // 清除 search_input 的文字內容

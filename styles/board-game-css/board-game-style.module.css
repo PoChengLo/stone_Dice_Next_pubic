@@ -150,6 +150,10 @@
   border: none;
 }
 
+.white_to_text:disabled {
+  background-color: #f8f0e5;
+}
+
 #buttonCart {
   color: #f4565c;
   background: none;

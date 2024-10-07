@@ -162,6 +162,10 @@
   border: none;
 }
 
+.white_to_text:disabled {
+  background-color: #f8f0e5;
+}
+
 // 購物車按鈕
 #buttonCart {
   color: #f4565c;
@@ -296,7 +300,6 @@
 
 // 填寫購買人資訊
 .user_info {
-  // height: 1080px;
   color: #f8f0e5;
   .p {
     font-size: 18px;

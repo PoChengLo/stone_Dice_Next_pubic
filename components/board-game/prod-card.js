@@ -33,7 +33,7 @@ function ProdCard({ product }) {
       show={show}
       onHide={handleClose}
       backdrop="static"
-      keyboard={false}
+      keyboard={true}
       className={``}
     >
       <Modal.Header closeButton className={`${styles.white_to_text}`}>
