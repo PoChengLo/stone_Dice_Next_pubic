@@ -142,11 +142,14 @@ function SideCartOffcanvas({ ...props }) {
             <h4>NT${finalTotal.toLocaleString()}</h4>
           </div>
           <div className="d-flex flex-column">
-            <Link href="./" className={`btn btn-primary mb-3 ${styles.btn}`}>
+            <Link
+              href="/board-game"
+              className={`btn btn-primary mb-3 ${styles.btn}`}
+            >
               繼續購物
             </Link>
             <Link
-              href="./user-info"
+              href="/board-game/user-info"
               className={`btn btn-primary mb-3 ${styles.btn}`}
             >
               前往結帳
