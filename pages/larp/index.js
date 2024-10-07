@@ -129,19 +129,22 @@ export default function LarpPage() {
             }
             id={`${styles.select} bg-vertical-dropdown-1`}
           >
-            <Form.Group className="mb-3" style={{ paddingLeft: '10px' }}>
-              {escapes.map((v, i) => (
-                <Form.Check
-                  key={i + 1}
-                  value={v}
-                  type="checkbox"
-                  label={v.tag_name}
-                  checked={fantasyChecked}
-                  onChange={handleFantasyChange}
-                  id="fantasyCheckbox"
-                />
-              ))}
-            </Form.Group>
+            <div className="mb-3">
+              <Form.Check
+                reverse
+                label="1"
+                name="group1"
+                // type={type}
+                // id={`reverse-${type}-1`}
+              />
+              <Form.Check
+                reverse
+                label="2"
+                name="group1"
+                // type={type}
+                // id={`reverse-${type}-2`}
+              />
+            </div>
           </DropdownButton>
         </ButtonGroup>
         {/* 密室逃脫卡片 */}

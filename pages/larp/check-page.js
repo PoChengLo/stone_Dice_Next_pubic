@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
-import ETicketTabs from '@/components/larp/e-ticket-tabs.js'
 import GroupButton from '@/components/larp/next-button.js'
 import useBookFormState from '@/hooks/use-bookform-state.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
@@ -25,7 +24,7 @@ export default function CheckPage() {
     setLocations(resData.location)
   }
 
-  // 把從 localStorage 傳過來的larp id跟loc id 轉換成文字
+  //把從 localStorage 傳過來的larp id跟loc id 轉換成文字
   useEffect(() => {
     const larpName = escapes.find((e) => parseInt(localData.larpName) === e.id)
     if (larpName) {
@@ -45,7 +44,6 @@ export default function CheckPage() {
       getData()
     }
   }, [router.isReady])
-
   return (
     <div className={styles.bodyBg} style={{ padding: '60px', height: '100vh' }}>
       {/* 導覽列 */}

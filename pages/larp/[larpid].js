@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Image } from 'react-bootstrap'
 import styles from '@/styles/larp/Larp-info.module.css'
 import Link from 'next/link'
@@ -8,7 +8,6 @@ import Calender from '@/components/larp/calender'
 import BookForm from '@/components/larp/book-form'
 import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
-import OrderRightNow from '@/components/larp/orderRightNow'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function LarpId() {
@@ -78,11 +77,31 @@ export default function LarpId() {
       }
     }
   })
+  const sceneRef = useRef()
+
+  useEffect(() => {
+    // 確保這段代碼僅在客戶端運行
+    if (typeof window !== 'undefined') {
+      const PANOLENS = require('panolens') // 動態導入 PANOLENS
+
+      if (sceneRef.current) {
+        const panorama = new PANOLENS.ImagePanorama(
+          'https://i.postimg.cc/WbFRqfh9/fotor-ai-2024100511526.png'
+        )
+
+        const viewer = new PANOLENS.Viewer({
+          container: sceneRef.current, // 通過 ref 定位到 div
+        })
+
+        viewer.add(panorama)
+      }
+    }
+  }, [])
 
   return (
     <div className={styles.larpBody}>
       {/* 置頂大圖 */}
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="position-relative">
         <h1
           className={`position-absolute ${styles.larpName} strokeText`}
@@ -141,9 +160,8 @@ export default function LarpId() {
           {/* 人數 */}
           <div className="d-inline flex-column text-white text-center">
             <svg
-              // width={100}
-              // height={99}
-              className={styles.svgBtn}
+              width={100}
+              height={99}
               viewBox="0 0 100 99"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -279,18 +297,15 @@ export default function LarpId() {
           id={styles.VRspace}
           style={{
             width: '100%',
-            height: 670,
+            height: 856,
             backgroundColor: 'rgb(82, 95, 117)',
           }}
         >
-          <iframe
-            title="library"
-            width="100%"
-            height="100%"
-            allowFullScreen
-            style={{ borderStyle: 'none' }}
-            src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https%3A//th.bing.com/th/id/OIG4.HR2FAo.9utuvXwdMUn0p%3Fw%3D1024%26h%3D1024%26rs%3D1%26pid%3DImgDetMain&autoLoad=true"
-          ></iframe>{' '}
+          <div
+            id="scene"
+            ref={sceneRef}
+            style={{ width: '100%', height: '100%' }}
+          ></div>
         </div>
         {/* 立即預約分隔線 */}
         <div id="order">

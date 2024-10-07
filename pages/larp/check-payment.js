@@ -11,6 +11,36 @@ export default function CheckPayment() {
 
   const finalTotal = localData.totalprice
 
+  const date = new Date()
+  const dateTimeDate = date.toISOString().slice(0, 19).replace('T', ' ')
+
+  // 資料傳回後端
+  const sbAPI = async () => {
+    // 資料傳回後端前新增一些資料欄位
+    const sbData = {
+      ...localData,
+      ordTime: dateTimeDate, // place_time
+    }
+    try {
+      const res = await fetch(`http://localhost:3006/larp/ord-api`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sbData),
+      })
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      const data = await res.json()
+      console.log('資料回傳成功', data)
+    } catch (error) {
+      console.log('資料回傳失敗', error)
+    }
+  }
+
   // 導向至ECPay付款頁面
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
@@ -137,7 +167,14 @@ export default function CheckPayment() {
             <Button className={styles.btnstyle} type="submit">
               回上頁
             </Button>
-            <Button className={styles.btnstyle} type="submit" onClick={goECPay}>
+            <Button
+              className={styles.btnstyle}
+              type="submit"
+              onClick={() => {
+                sbAPI
+                goECPay
+              }}
+            >
               下一步
             </Button>
           </div>
