@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
+import { useCart } from '@/hooks/use-cart-state'
 
 export default function Success() {
+  const { clearCart } = useCart()
+
+  useEffect(() => {
+    clearCart()
+  }, [])
   return (
     <>
       <Navbar />
@@ -20,6 +26,7 @@ export default function Success() {
                 width={738}
                 height={84}
                 id={`${styles.success_pic}`}
+                priority={true} // {false} | {true}
               />
             </div>
           </div>
