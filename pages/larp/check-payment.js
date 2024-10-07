@@ -9,8 +9,6 @@ import { Button } from 'react-bootstrap'
 export default function CheckPayment() {
   const { formData: localData } = useBookFormState('bookForm', {})
 
-  const finalTotal = localData.totalprice
-
   const date = new Date()
   const dateTimeDate = date.toISOString().slice(0, 19).replace('T', ' ')
 
@@ -31,16 +29,21 @@ export default function CheckPayment() {
       })
 
       if (!res.ok) {
-        throw new Error('Network response was not ok')
+        throw new Error('伺服器連接失敗')
       }
 
       const data = await res.json()
+      if (data.success == true) {
+        goECPay()
+      }
+
       console.log('資料回傳成功', data)
     } catch (error) {
-      console.log('資料回傳失敗', error)
+      console.log('資料回傳失敗', error.message)
     }
   }
 
+  const finalTotal = localData.totalprice
   // 導向至ECPay付款頁面
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
@@ -48,6 +51,14 @@ export default function CheckPayment() {
       window.location.href = `http://localhost:3006/ecpay/larp?amount=${finalTotal}`
     }
   }
+
+  // const goToPay = async () => {
+  //   // 如果資料有正確回傳到後端再付款
+  //   const result = await sbAPI()
+  //   if (result.success == true) {
+  //     goECPay()
+  //   }
+  // }
 
   return (
     <div className={`${styles.bodyBg}`} style={{ paddingTop: '60px' }}>
@@ -167,14 +178,7 @@ export default function CheckPayment() {
             <Button className={styles.btnstyle} type="submit">
               回上頁
             </Button>
-            <Button
-              className={styles.btnstyle}
-              type="submit"
-              onClick={() => {
-                sbAPI
-                goECPay
-              }}
-            >
+            <Button className={styles.btnstyle} type="submit" onClick={sbAPI}>
               下一步
             </Button>
           </div>

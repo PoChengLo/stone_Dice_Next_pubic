@@ -163,7 +163,6 @@ export default function BookForm({ escapes = [], escape = [] }) {
       ...prevData,
       totalprice: Total,
     }))
-    localStorage.setItem('totalprice', Total)
   }, [selectPeople])
 
   return (
