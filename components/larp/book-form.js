@@ -21,8 +21,13 @@ export default function BookForm({ escapes = [], escape = [] }) {
   const [uniPrice, setUniPrice] = useState(0)
   // 儲存總價
   const [totalPrice, setTotalPrice] = useState(0)
+  // ---- 儲存被預約的時間 start ----
+  const [ordedTime, setOrdedTime] = useState([]) // 已被預約的時間
+  const [selectDate, setSelectDate] = useState('') // 記錄被選定的日期
+  const [selectTimes, setSelectTimes] = useState('')
+  // ---- 儲存被預約的時間 end ----
 
-  // 初始化表單的值
+  // 初始化表單localStorage的值
   const initialFormValues = {
     larpName: selectId,
     loc: 0,
@@ -139,9 +144,6 @@ export default function BookForm({ escapes = [], escape = [] }) {
         larpName: selectLarp.id,
       }))
 
-      // 寫入 localStorage
-      // localStorage.setItem('larpName', selectLarp.id)
-
       // 根據預設主題生成對應的人數選項
       const numRange = selectLarp.larp_people.match(/(\d+)-(\d+)/)
       if (numRange) {
@@ -156,6 +158,21 @@ export default function BookForm({ escapes = [], escape = [] }) {
     }
   }, [escapes, escape.larp_name])
 
+  // 選擇日期的時候，發fetch跟後端要已經預約的時間段
+  useEffect(() => {
+    if (selectDate) {
+      fetch(
+        `http://127.0.0.1:3006/larp/orded-time?larpName=1&loc=1&date=${selectDate}`
+      )
+        .then((res) => res.json)
+        .then((result) => {
+          setOrdedTime(result.ordedTime)
+        })
+        .catch((error) => console.error('此時段已額滿', error))
+    }
+  }, [selectDate])
+
+  // 選擇人數時，同步變更總金額
   useEffect(() => {
     const Total = uniPrice * selectPeople
     setTotalPrice(Total)
@@ -253,7 +270,10 @@ export default function BookForm({ escapes = [], escape = [] }) {
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
               name="date"
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e)
+                setSelectDate(e.target.value)
+              }}
             />
           </InputGroup>
           {/* 時段 */}
@@ -270,10 +290,12 @@ export default function BookForm({ escapes = [], escape = [] }) {
               name="datetime"
               onChange={handleInputChange}
             >
-              <option>=====請選擇時段=====</option>
-              <option value="10:00">10:00</option>
-              <option value="14:00">14:00</option>
-              <option value="18:00">18:00</option>
+              <option value="">=====請選擇時段=====</option>
+              {['10:00', '14:00', '18:00'].map((v) => (
+                <option key={v} value={v} disabled={ordedTime.includes(v)}>
+                  {v}
+                </option>
+              ))}
             </Form.Select>
           </InputGroup>
         </div>
