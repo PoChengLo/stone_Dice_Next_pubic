@@ -113,8 +113,18 @@ export const resetPassword = async (email = '', password = '', token = '') => {
 /**
  * 註冊用
  */
-export const register = async (user = {}) => {
-  return await axiosInstance.post('/users', user)
+export const register = async (userData = {}) => {
+  try {
+    const response = await axiosInstance.post('/user-profile/signup', userData)
+    console.log('Registration response:', response.data)
+    return response
+  } catch (error) {
+    console.error(
+      'Registration error:',
+      error.response ? error.response.data : error.message
+    )
+    throw error
+  }
 }
 /**
  * 修改會員一般資料用(排除password, username, email)
