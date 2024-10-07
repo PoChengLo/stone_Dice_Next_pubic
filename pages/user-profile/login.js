@@ -21,12 +21,12 @@ const backgroundStyle = {
 
 // 藝術圖像樣式設定
 const artImage = {
-  objectFit: 'cover',
-  objectPosition: 'center',
+  position: 'absolute',
+  top: '0',
+  left: '0',
   width: '100%',
   height: '100%',
-  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-  minWidth: '240px',
+  objectFit: 'cover',
 }
 
 export default function LoginPage() {
@@ -144,7 +144,10 @@ export default function LoginPage() {
                       </div>
                       <p className={styles['signup-prompt']}>
                         <span>還沒有帳號嗎？</span>
-                        <a href="#" style={{ color: 'rgba(217,38,38,1)' }}>
+                        <a
+                          href="/user-profile/signup"
+                          style={{ color: 'rgba(217,38,38,1)' }}
+                        >
                           Sign up
                         </a>
                       </p>
@@ -160,10 +163,10 @@ export default function LoginPage() {
                   height={820}
                   style={artImage}
                 />
-                <footer className={styles['copyright']}>
-                  © 2024 THE DICE IN THE STONE
-                </footer>
               </div>
+              <footer className={styles['copyright']}>
+                © 2024 THE DICE IN THE STONE
+              </footer>
             </section>
           </main>
         </div>
