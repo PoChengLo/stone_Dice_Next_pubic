@@ -8,6 +8,7 @@ import { useCart } from '@/hooks/use-cart-state'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsCircle } from 'react-icons/bs'
+import { Button } from 'react-bootstrap'
 
 export default function UserInfo() {
   // 會員物件狀態
@@ -177,20 +178,54 @@ export default function UserInfo() {
                 {/* 繼續購物，付款與運送，按鈕 */}
                 <div className="row mt-3">
                   <div className="col">
-                    <div className="">
-                      <Link
-                        href="./cart"
-                        className={`btn btn-primary me-xxl-3 ${styles.btn}`}
+                    <Button
+                      onClick={() => {
+                        const query = { ...router.query }
+                        try {
+                          router.push(`/board-game/cart`)
+                        } catch (e) {
+                          console.log(e)
+                        }
+                      }}
+                      className={` me-xxl-3 ${styles.btn}`}
+                    >
+                      返回購物車
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        const query = { ...router.query }
+                        try {
+                          router.push(
+                            `/board-game/pay-ship?user_id=${user_info.user_id}`
+                          )
+                        } catch (e) {
+                          console.log(e)
+                        }
+                      }}
+                      className={` my-xxl-3  mt-3 mb-1 ${styles.btn}`}
+                    >
+                      選擇運送與付款方式
+                    </Button>
+                    {/* <Button href="./" className={`${styles.btn} mb-3`}>
+                        繼續購物
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          const query = { ...router.query }
+                          if (authInfo.isAuth) {
+                            query.user_id = authInfo.userData.id
+                            router.push(
+                              `/board-game/user-info?` +
+                                new URLSearchParams(query)
+                            )
+                          } else {
+                            router.push('/user-profile/login')
+                          }
+                        }}
+                        className={`${styles.btn} `}
                       >
-                        返回購物車
-                      </Link>
-                      <Link
-                        href="./pay-ship"
-                        className={`btn btn-primary my-xxl-3 mt-3 mb-1 ${styles.btn}`}
-                      >
-                        選擇運送與付款方式
-                      </Link>
-                    </div>
+                        填寫購買人資訊
+                      </Button> */}
                   </div>
                 </div>
               </form>

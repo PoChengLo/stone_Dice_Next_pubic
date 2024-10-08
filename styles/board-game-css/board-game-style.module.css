@@ -471,6 +471,9 @@
   box-shadow: none;
   outline: none;
 }
+.pay_ship .btn {
+  width: 200px;
+}
 
 .success {
   color: #f8f0e5;
@@ -710,7 +713,7 @@
     font-size: 12px;
   }
   .pay_ship .pay_ship_border_method {
-    height: 360px;
+    height: 440px;
   }
   .pay_ship .white_to_text {
     height: 30px;
