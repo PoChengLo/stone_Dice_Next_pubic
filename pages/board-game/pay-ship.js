@@ -7,24 +7,42 @@ import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
 import { Button } from 'react-bootstrap'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 export default function PayShip() {
+  // 設定會員資料
+  const [authInfo, setAuthInfo] = useState({ isAuth: false })
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
-  const {
-    cart,
-    items,
-    addItem,
-    removeItem,
-    updateItem,
-    updateItemQty,
-    clearCart,
-    isInCart,
-    increment,
-    decrement,
-  } = useCart()
+  const { items } = useCart()
+  const router = useRouter()
 
   const finalTotal = items
     .map((item) => item.subtotal)
     .reduce((acc, curr) => acc + curr, 0)
+
+  // 會員物件狀態
+  const [recipientInfo, setRecipientInfo] = useState([])
+
+  // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
+  const getRecipientInfo = async (user_id) => {
+    if (!authInfo.userData || !authInfo.userData.id) {
+      console.error('User data is not available')
+      return
+    }
+
+    const baseURL = `http://127.0.0.1:3006/board-game/pay-ship?user_id=${authInfo.userData.id}`
+    try {
+      const res = await fetch(baseURL)
+      const resData = await res.json()
+      console.log(resData.data.recipient)
+      // 設定到狀態中
+      if (Array.isArray(resData.data.recipient)) {
+        setRecipientInfo(resData.data.recipient)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   // 導向至ECPay付款頁面
   const goECPay = () => {
@@ -45,6 +63,41 @@ export default function PayShip() {
       <BsCircle className={`me-xxl-2 ${styles.nav_icons}`} />
     )
   }
+
+  // 修正 Next hydration 問題
+  // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {}
+
+    setHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (authInfo) {
+      setHydrated(true)
+      // 這裡可以確保一定可以得到router.query的值
+      console.log(router.query)
+      // 向伺服器要求資料
+      getRecipientInfo(router.query.user_id)
+    }
+    // 以下為省略eslint檢查一行，這裡再加上router.query意義會有所不同目前會是多餘的
+    // eslint-disable-next-line
+  }, [authInfo])
+
+  if (!hydrated) {
+    return null
+  }
+  // 修正 end
+
   return (
     <>
       <Navbar />
@@ -126,7 +179,7 @@ export default function PayShip() {
               <div className={`row mb-3 ${styles.pay_ship_border}`}>
                 <div className="col">
                   <label
-                    htmlFor="e-ticket"
+                    htmlFor="recipient-info"
                     className={`form-label my-xxl-3 my-2 ${styles.p}`}
                   >
                     收件人資訊
@@ -137,11 +190,13 @@ export default function PayShip() {
                     defaultValue={'default'}
                   >
                     <option value={'default'}>選擇常用收件人</option>
-                    <option value={1}>吉伊卡哇</option>
-                    <option value={2}>小八貓</option>
-                    <option value={2}>兔兔</option>
-                    <option value={3}>新增收件人</option>
+                    {recipientInfo.map((v, i) => (
+                      <option key={v.recipient_id} value={v.recipient_id}>
+                        {v.recipient}
+                      </option>
+                    ))}
                   </select>
+
                   <div className="mb-3">
                     <label
                       htmlFor="new-recipient-name"
@@ -183,7 +238,7 @@ export default function PayShip() {
                       取貨通知將以此電話聯繫，請勿加入任何空格或符號，使用超商取貨請務必填寫10碼手機，如：0987654321
                     </div>
                   </div>
-                  <div className="form-check mb-xxl-3">
+                  {/* <div className="form-check mb-xxl-3">
                     <input
                       className={`form-check-input ${styles.form_check_input}`}
                       type="checkbox"
@@ -197,7 +252,7 @@ export default function PayShip() {
                     >
                       將新增收件人加入常用收件人
                     </label>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* 配送方式，超商取貨，宅配，面交 */}
@@ -278,11 +333,22 @@ export default function PayShip() {
               <div className="row">
                 <div className="col">
                   <Button
-                    href="./user-info"
+                    onClick={() => {
+                      const query = { ...router.query }
+                      if (authInfo.isAuth) {
+                        query.user_id = authInfo.userData.id
+                        router.push(
+                          `/board-game/user-info?` + new URLSearchParams(query)
+                        )
+                      } else {
+                        router.push('/user-profile/login')
+                      }
+                    }}
                     className={` me-xxl-3 ${styles.btn} ${styles.btn_pay_ship_2} `}
                   >
                     回到上一頁
                   </Button>
+
                   <Button
                     className={`  my-3 ${styles.btn} ${styles.btn_pay_ship_2}`}
                     onClick={goECPay}

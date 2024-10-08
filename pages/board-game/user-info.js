@@ -12,7 +12,7 @@ import { Button } from 'react-bootstrap'
 
 export default function UserInfo() {
   // 會員物件狀態
-  const [user_info, setUser_info] = useState({
+  const [userInfo, setUserInfo] = useState({
     user_id: 0,
     user_name: '',
     mobile: '',
@@ -31,7 +31,7 @@ export default function UserInfo() {
         typeof resData.data.user[0] === 'object' &&
         resData.data.user[0].user_id
       ) {
-        setUser_info(resData.data.user[0])
+        setUserInfo(resData.data.user[0])
       }
     } catch (e) {
       console.log(e)
@@ -129,7 +129,7 @@ export default function UserInfo() {
                         id="user-name"
                         aria-describedby="user-name"
                         placeholder="購買人姓名"
-                        defaultValue={`${user_info.user_name}`}
+                        defaultValue={`${userInfo.user_name}`}
                       />
                       <div
                         id="user-name-commit"
@@ -150,7 +150,7 @@ export default function UserInfo() {
                         className={`form-control ${styles.white_to_text}`}
                         id="user-phone"
                         placeholder="購買人聯絡電話，例如：0987654321"
-                        defaultValue={`${user_info.mobile}`}
+                        defaultValue={`${userInfo.mobile}`}
                       />
                       <div
                         id="user-phone-commit"
@@ -196,7 +196,7 @@ export default function UserInfo() {
                         const query = { ...router.query }
                         try {
                           router.push(
-                            `/board-game/pay-ship?user_id=${user_info.user_id}`
+                            `/board-game/pay-ship?user_id=${userInfo.user_id}`
                           )
                         } catch (e) {
                           console.log(e)
