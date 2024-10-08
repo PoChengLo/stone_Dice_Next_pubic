@@ -1,8 +1,11 @@
-import React from 'react'
 import Image from 'next/image'
 import UserButton from '@/components/layout/default-layout/user-layout/user-button'
 import styles from '@/styles/user-profile/main-user-profile.module.scss'
 import { BsPencilSquare } from 'react-icons/bs'
+import React, { useState, useEffect } from 'react'
+import { getUserById, updateProfile } from '@/services/user'
+import { useAuth } from '@/hooks/use-auth'
+import toast, { Toaster } from 'react-hot-toast'
 
 const imageStyle = {
   borderRadius: '50%',
@@ -22,7 +25,58 @@ const secondImageStyle = {
     'drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.10)) drop-shadow(0px 9px 9px rgba(0, 0, 0, 0.09)) drop-shadow(0px 20px 12px rgba(0, 0, 0, 0.05)) drop-shadow(0px 35px 14px rgba(0, 0, 0, 0.01)) drop-shadow(0px 55px 15px rgba(0, 0, 0, 0.00))',
 }
 
+const initUserProfile = {
+  user_name: '',
+  email: '',
+  phone: '',
+  birth_date: '',
+}
+
 export default function MainProfile() {
+  const { auth } = useAuth()
+  const [userProfile, setUserProfile] = useState(initUserProfile)
+  const [hasProfile, setHasProfile] = useState(false)
+
+  const getUserData = async (id) => {
+    const res = await getUserById(id) // 調用後端API取得使用者資料
+    if (res.data.status === 'success') {
+      const dbUser = res.data.data.user
+      const dbUserProfile = { ...initUserProfile }
+
+      for (const key in dbUserProfile) {
+        if (Object.hasOwn(dbUser, key)) {
+          dbUserProfile[key] = dbUser[key] || ''
+        }
+      }
+
+      setUserProfile(dbUserProfile)
+      toast.success('會員資料載入成功')
+    } else {
+      toast.error('會員資料載入失敗')
+    }
+  }
+
+  useEffect(() => {
+    if (auth.isAuth) {
+      getUserData(auth.userData.id) // 登入後從後端獲取資料
+    }
+  }, [auth])
+
+  const handleFieldChange = (e) => {
+    setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const res = await updateProfile(auth.userData.id, userProfile) // 更新資料
+    if (res.data.status === 'success') {
+      toast.success('會員資料修改成功')
+    } else {
+      toast.error('會員資料修改失敗')
+    }
+  }
+
+  if (!auth.isAuth) return <></>
   return (
     <>
       <div className={styles['main-blogs']}>
@@ -86,7 +140,12 @@ export default function MainProfile() {
         <tbody>
           <tr>
             <td>使用者帳號</td>
-            <td>SuperAdmin2024</td>
+            <input
+              type="text"
+              name="user_name"
+              value={userProfile.user_name}
+              disabled
+            />
             <td> </td>
           </tr>
         </tbody>
@@ -121,19 +180,19 @@ export default function MainProfile() {
       </table>
       <div className={styles['line']} />
       <div className={styles['small-header']}>詳細資料</div>
-      <div className={styles['user-info']}>
+      <from className={styles['user-info']}>
         <div className={styles['input-bar']}>
           暱稱：
           <input type="text" placeholder="長度限制二到十三個字" />
         </div>
         <div className={styles['input-bar']}>
           性別：
-          <select>
+          <select name="gender">
             <option value="">請選擇</option>
-            <option value="">男</option>
-            <option value="">女</option>
-            <option value="">非二元性別</option>
-            <option value="">不願透露</option>
+            <option value="male">男</option>
+            <option value="female">女</option>
+            <option value="nonbinary">非二元性別</option>
+            <option value="preferNotSay">不願透露</option>
           </select>
         </div>
         <div className={styles['input-bar']}>
@@ -146,13 +205,13 @@ export default function MainProfile() {
             placeholder="請選擇"
           />
         </div>
-      </div>
+      </from>
       <div className={styles['line']} />
       <div className={styles['small-header']}>電子報</div>
       <div className={styles['checkbox-group']}>
         <div className={styles['checkbox-item']}>
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" name="isSubscribedGeneral" />
             <span className={styles['main-text']}>
               我願意訂閱活動優惠電子報
             </span>
@@ -164,7 +223,7 @@ export default function MainProfile() {
 
         <div className={styles['checkbox-item']}>
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" name="isSubscribedPersonal" />
             <span className={styles['main-text']}>
               我願意接收個人化商品資訊
             </span>

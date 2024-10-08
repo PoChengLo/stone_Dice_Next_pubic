@@ -26,7 +26,7 @@
   overflow: auto;
   margin-top: 50px;
   margin-bottom: 20px;
-  background: rgba(166, 151, 124, 0.8);
+  background: rgba(166, 151, 124, 0.9);
   border-radius: 20px;
   box-shadow: -615px 600px 241px 0px rgba(0, 0, 0, 0),
     -394px 384px 220px 0px rgba(0, 0, 0, 0.01),
@@ -163,8 +163,30 @@
   background-size: 14px;
   color: #404040;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
+.input-bar select {
+  position: relative;
+  padding-right: 40px; /* 調整padding 為箭頭留出空間 */
+  background-image: url('/user-profile/caret-down-solid.svg');
+  background-repeat: no-repeat;
+  background-position: right 18px center; /* 箭頭圖標的位置 */
+  background-size: 12px;
+  cursor: pointer;
+}
+
+.input-bar input[type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+}
+
+.input-bar input::placeholder {
+  color: #888;
+}
 .main-blog {
   display: flex;
   flex-direction: column;
@@ -310,10 +332,31 @@
   align-items: center;
 }
 
-.checkbox-item input[type='checkbox'] {
+.checkbox-item input {
   width: 20px;
   height: 20px;
   margin-right: 8px;
+  appearance: none; /* 隱藏默認的 checkbox */
+  border: 2px solid #888;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 勾選時的樣式 */
+.checkbox-item input:checked {
+  background-color: #FFD700; /* 勾選時的背景色 */
+  border-color: #FFD700;
+}
+
+.checkbox-item input:checked::before {
+  content: '✔';
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 確保居中 */
 }
 
 .main-text {
