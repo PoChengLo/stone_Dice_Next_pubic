@@ -5,7 +5,7 @@ import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 import useBookFormState from '@/hooks/use-bookform-state'
 
-export default function BookForm({ escapes = [], escape = [] }) {
+export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
   // 儲存當前選擇的館別
@@ -22,9 +22,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
   // 儲存總價
   const [totalPrice, setTotalPrice] = useState(0)
   // ---- 儲存被預約的時間 start ----
-  const [ordedTime, setOrdedTime] = useState([]) // 已被預約的時間
   const [selectDate, setSelectDate] = useState('') // 記錄被選定的日期
-  const [selectTimes, setSelectTimes] = useState('')
   // ---- 儲存被預約的時間 end ----
 
   // 初始化表單localStorage的值
@@ -129,6 +127,29 @@ export default function BookForm({ escapes = [], escape = [] }) {
     setMobile(value)
   }
 
+  const isDisabled = ordlist.some((item) => {
+    console.log(`Checking item:`, item) // 檢查每個 item 的內容
+    console.log(`Comparing: ord_theme (${typeof item.ord_theme}) )`)
+    console.log(
+      `Comparing: parseInt(formData.loc) (${parseInt(
+        formData.loc
+      )}) === selectedLocationId (${selectedLocationId})`
+    )
+    console.log(
+      `Comparing: formData.date (${formData.date}) === selectDate (${selectDate})`
+    )
+    console.log(`Comparing: item.ord_time (${item.ord_time}) === `)
+
+    return (
+      item.ord_theme === selectId &&
+      parseInt(formData.loc) === selectedLocationId &&
+      formData.date === selectDate &&
+      item.ord_time
+    )
+  })
+
+  console.log(`isDisabled: ${isDisabled}`)
+
   // 網站載入的時候，生成人數選項，只生成一次
   useEffect(() => {
     // 根據escape.larp_name帶入預設主題
@@ -158,7 +179,7 @@ export default function BookForm({ escapes = [], escape = [] }) {
     }
   }, [escapes, escape.larp_name])
 
-  // 選擇日期的時候，發fetch跟後端要已經預約的時間段
+  // 選擇日期的時候，同步確認
   // useEffect(() => {
   //   if (selectDate) {
   //     fetch(
@@ -292,18 +313,54 @@ export default function BookForm({ escapes = [], escape = [] }) {
               onChange={handleInputChange}
             >
               <option value="">=====請選擇時段=====</option>
-              <option value="10:00:00">10:00</option>
+              {['10:00', '14:00', '18:00'].map((v, i) => {
+                // 檢查該時段是否已被預約
+                console.log(selectId, parseInt(formData.loc), formData.date, v)
+                const isDisabled = ordlist.some(
+                  (item) =>
+                    item.ord_theme === selectId &&
+                    parseInt(formData.loc) === selectedLocationId &&
+                    formData.date === selectDate &&
+                    item.ord_time === v
+                )
+                console.log(
+                  typeof ordlist.ord_theme,
+                  typeof selectId,
+                  typeof ordlist.ord_loc,
+                  typeof selectedLocationId,
+                  typeof formData.date,
+                  typeof selectDate,
+                  typeof ordlist.ord_time,
+                  typeof v
+                )
+
+                return (
+                  <option key={v} value={v} disabled={isDisabled}>
+                    {v}
+                  </option>
+                )
+              })}
+              {/* <option value="10:00:00">10:00</option>
               <option value="14:00:00">14:00</option>
-              <option value="18:00:00">18:00</option>
-              {/* {['10:00', '14:00', '18:00'].map((v) => (
-                <option
-                  key={v}
-                  value={v}
-                  disabled={ordedTime.ord_time.includes(v)}
-                >
-                  {v}
-                </option>
-              ))} */}
+              <option value="18:00:00">18:00</option> */}
+              {/* {['10:00', '14:00', '18:00'].map((v) => {
+                console.log(ordlist)
+                const isDisabled =
+                  selectId === ordlist.ord_theme &&
+                  filteredLocations === ordlist.ord_loc &&
+                  selectDate === ordlist.ord_date &&
+                  formData.datetime ===
+                    ordlist.some((item) => item.ord_datetime.includes(v))
+                console.log(typeof selectedLocationId)
+                console.log(
+                  `Comparing: ${selectId} === ${formData.ord_theme}, ${selectedLocationId} === ${formData.ord_loc}, ${formData.ord_date} === ${selectDate}`
+                )
+                return (
+                  <option key={v} value={v} disabled={isDisabled}>
+                    {v}
+                  </option>
+                )
+              })} */}
             </Form.Select>
           </InputGroup>
         </div>

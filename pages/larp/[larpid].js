@@ -30,6 +30,7 @@ export default function LarpId() {
   })
 
   const [escapes, setEscapes] = useState([])
+  const [ordlist, setOrdlist] = useState([])
 
   //跟伺服器抓資料
   const getEscape = async (larpid) => {
@@ -44,6 +45,9 @@ export default function LarpId() {
       // 檢查resData.single是否為陣列，且長度至少為1
       if (Array.isArray(resData.single) && resData.single.length > 0) {
         setEscape(resData.single[0])
+      }
+      if (Array.isArray(resData.order) && resData.order.length > 0) {
+        setOrdlist(resData.order)
       }
     } catch (e) {
       console.error(e)
@@ -412,12 +416,10 @@ export default function LarpId() {
           <Calender />
           {/* 預約表單 */}
           <BookForm
-            // larpName={escape.larp_name}
-            // price={escape.price}
-            // NameValue={escapes.id}
             allName={escapes.larp_name}
             escapes={escapes}
             escape={escape}
+            ordlist={ordlist}
           />
         </div>
         {/* 玩家反饋分隔線 */}
