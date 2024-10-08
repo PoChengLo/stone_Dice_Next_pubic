@@ -159,18 +159,19 @@ export default function BookForm({ escapes = [], escape = [] }) {
   }, [escapes, escape.larp_name])
 
   // 選擇日期的時候，發fetch跟後端要已經預約的時間段
-  useEffect(() => {
-    if (selectDate) {
-      fetch(
-        `http://127.0.0.1:3006/larp/orded-time?larpName=1&loc=1&date=${selectDate}`
-      )
-        .then((res) => res.json)
-        .then((result) => {
-          setOrdedTime(result.ordedTime)
-        })
-        .catch((error) => console.error('此時段已額滿', error))
-    }
-  }, [selectDate])
+  // useEffect(() => {
+  //   if (selectDate) {
+  //     fetch(
+  //       `http://127.0.0.1:3006/larp/orded-time?larpName=1&loc=1&date=${selectDate}`
+  //     )
+  //       .then((res) => res.json)
+  //       .then((result) => {
+  //         setOrdedTime(result.ordedTime)
+  //         console.log(ordedTime)
+  //       })
+  //       .catch((error) => console.error('此時段已額滿', error))
+  //   }
+  // }, [selectDate])
 
   // 選擇人數時，同步變更總金額
   useEffect(() => {
@@ -291,11 +292,18 @@ export default function BookForm({ escapes = [], escape = [] }) {
               onChange={handleInputChange}
             >
               <option value="">=====請選擇時段=====</option>
-              {['10:00', '14:00', '18:00'].map((v) => (
-                <option key={v} value={v} disabled={ordedTime.includes(v)}>
+              <option value="10:00:00">10:00</option>
+              <option value="14:00:00">14:00</option>
+              <option value="18:00:00">18:00</option>
+              {/* {['10:00', '14:00', '18:00'].map((v) => (
+                <option
+                  key={v}
+                  value={v}
+                  disabled={ordedTime.ord_time.includes(v)}
+                >
                   {v}
                 </option>
-              ))}
+              ))} */}
             </Form.Select>
           </InputGroup>
         </div>

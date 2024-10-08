@@ -10,6 +10,8 @@ export default function CheckPayment() {
   const { formData: localData } = useBookFormState('bookForm', {})
 
   const date = new Date()
+  // 將得到的時間轉換成台灣時間
+  date.setHours(date.getHours() + 8)
   const dateTimeDate = date.toISOString().slice(0, 19).replace('T', ' ')
 
   // 資料傳回後端
