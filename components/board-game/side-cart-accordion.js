@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
 
 function SideCartAccordion({ items }) {
-  console.log(items)
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleAccordion = () => {
@@ -68,7 +67,7 @@ function SideCartAccordion({ items }) {
           {' '}
           <div className="d-flex justify-content-between">
             <p>小計</p>
-            <p>NT${preTotal}</p>
+            <p>NT${preTotal.toLocaleString()}</p>
           </div>
           <div className="d-flex justify-content-between">
             <p>運費</p>
@@ -80,7 +79,7 @@ function SideCartAccordion({ items }) {
           </div>
           <div className="d-flex justify-content-between">
             <h4>應付總額</h4>
-            <h4>NT${finalTotal}</h4>
+            <h4>NT${finalTotal.toLocaleString()}</h4>
           </div>
         </Accordion.Body>
       </Accordion.Item>

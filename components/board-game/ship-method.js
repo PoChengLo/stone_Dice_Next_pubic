@@ -5,7 +5,7 @@ import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
 import { useShip711StoreOpener } from '@/hooks/use-ship-711-store'
 
-export default function ShipMethod() {
+export default function ShipMethod({ address }) {
   // 通路選擇樣式修改
   const [activeTab, setActiveTab] = useState('convenience-store')
   const handleSelect = (key) => {
@@ -145,7 +145,7 @@ export default function ShipMethod() {
           >
             宅配地址
           </label>
-          <div className="d-flex flex-xxl-row flex-column">
+          {/* <div className="d-flex flex-xxl-row flex-column">
             <select
               className={`form-select me-xxl-4 mt-2 mt-xxl-0   ${styles.white_to_text} `}
               aria-label="country"
@@ -172,12 +172,13 @@ export default function ShipMethod() {
               id="postcode"
               placeholder="郵遞區號"
             />
-          </div>
+          </div> */}
           <input
             type="text"
-            className={`form-control my-xxl-4 mt-3  mb-3 mb-xxl-0 ${styles.white_to_text} `}
+            className={`form-control my-xxl-3 mt-3  mb-3 mb-xxl-0 ${styles.white_to_text} `}
             id="user-recipient-address"
             placeholder="請詳細填寫宅配地址：路/巷/弄/號/樓"
+            value={`${address}`}
           />
           <label
             htmlFor="user-recipient-time-select"
