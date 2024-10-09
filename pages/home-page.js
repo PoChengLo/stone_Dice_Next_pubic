@@ -33,7 +33,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const titleTimer = setTimeout(() => setShowTitle(true), 8000)
-    const hideTitleTimer = setTimeout(() => setShowTitle(false), 18000)
+    const hideTitleTimer = setTimeout(() => setShowTitle(false), 16000)
 
     return () => {
       clearTimeout(titleTimer)
@@ -65,8 +65,10 @@ const HomePage = () => {
               <Image
                 src="/user-profile/a-horizontal-logo-for-the-board-game-e-commerce-st-wFd7X15XTUqPGFVfIlZtTg-pQqTY0_UTKCR8FckmdvWoQ.png"
                 alt="The Dice in the Stone logo"
+                layout="intrinsic"
                 width={1200}
                 height={600}
+                className={styles.centerImage}
               />
             </motion.div>
           )}
