@@ -228,7 +228,7 @@ const MainProfile = ({ userData: initialUserData }) => {
             <input
               type="checkbox"
               name="is_subscribed_general"
-              checked={userData.is_subscribed_general === 1} // 將 1 轉換為 true
+              checked={userData.is_subscribed_general === 1}
               onChange={handleChange}
             />
             <span className={styles['main-text']}>

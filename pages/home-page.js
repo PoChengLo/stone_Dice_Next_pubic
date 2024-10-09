@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import styles from '@/styles/user-profile/home-page.module.scss'
+import { FocusCardsDemo } from '@/components/layout/default-layout/user-layout/focus-cards-demo'
 
 const HomePage = () => {
   const [showImages, setShowImages] = useState(false)
@@ -54,15 +55,20 @@ const HomePage = () => {
         </video>
         <AnimatePresence>
           {showTitle && (
-            <motion.h1
+            <motion.div
               className={styles.title}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1 }}
             >
-              The Dice in the Stone
-            </motion.h1>
+              <Image
+                src="/user-profile/a-horizontal-logo-for-the-board-game-e-commerce-st-wFd7X15XTUqPGFVfIlZtTg-pQqTY0_UTKCR8FckmdvWoQ.png"
+                alt="The Dice in the Stone logo"
+                width={1200}
+                height={600}
+              />
+            </motion.div>
           )}
         </AnimatePresence>
       </header>
@@ -112,6 +118,11 @@ const HomePage = () => {
           ))}
         </div>
       </main>
+
+      {/* 在主頁的最下面添加 FocusCards 區塊 */}
+      <section className={styles.focusCardsSection}>
+        <FocusCardsDemo />
+      </section>
     </div>
   )
 }

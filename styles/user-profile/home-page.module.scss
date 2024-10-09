@@ -3,7 +3,7 @@
   min-height: 100vh;
   background-color: black;
   color: gold;
-  overflow-x: hidden;
+  overflow-x: hidden; /* 防止水平滾動 */
 }
 
 .header {
@@ -19,6 +19,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 1; /* 確保影片在最上層 */
 }
 
 .title {
@@ -38,12 +39,30 @@
 .main {
   position: relative;
   padding: 4rem 2rem;
-  overflow-x: hidden;
+  z-index: 1; /* 保持內容在影片之上，但卡片之下 */
+  overflow: hidden; /* 防止出現多餘滾動條 */
 }
 
-.contentWrapper {
-  position: relative;
-  overflow: hidden;
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15rem;
+  margin: 6rem 0;
+  z-index: 1;
+}
+
+.imageWrapper {
+  width: 300px;
+  height: 300px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+  margin-top: 15rem;
+  z-index: 1;
 }
 
 .lightBeam {
@@ -53,63 +72,32 @@
   transform: translateX(-50%);
   width: 2px;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 215, 0, 0),
-    rgba(255, 215, 0, 1),
-    rgba(255, 215, 0, 0)
-  );
+  background: linear-gradient(to bottom, transparent, gold, transparent);
   opacity: 0.5;
   z-index: 1;
-  pointer-events: none;
+  animation: light-beam-flow 3s ease-in-out infinite;
 }
 
-.imageContainer {
+.focusCardsSection {
+  padding: 4rem 2rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 15rem;
-  margin: 6rem 0;
-}
-
-.imageWrapper {
-  width: 300px;
-  height: 300px;
-}
-
-.textContainer {
+  background-color: #222;
+  z-index: 0; /* 將 FocusCards 設置為底層，避免遮擋其他元素 */
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
-  margin-top: 10rem;
-  overflow: hidden;
+  margin-top: 20px;
 }
 
-.textBlock {
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-.floatingText {
-  font-size: 1.5rem;
-  line-height: 1.6;
-  padding-top: 20px;
-  color: white;
-  text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
+@keyframes light-beam-flow {
   0% {
-    transform: translateY(0px);
+    opacity: 0.5;
   }
   50% {
-    transform: translateY(-10px);
+    opacity: 1;
   }
   100% {
-    transform: translateY(0px);
+    opacity: 0.5;
   }
 }
 
@@ -130,33 +118,5 @@
 
   .floatingText {
     font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 320px) {
-  .main {
-    padding: 2rem 1rem;
-  }
-
-  .imageWrapper {
-    width: 150px;
-    height: 150px;
-  }
-
-  .imageContainer {
-    gap: 4rem;
-  }
-
-  .textContainer {
-    gap: 4rem;
-    margin-top: 5rem;
-  }
-
-  .floatingText {
-    font-size: 1rem;
-  }
-
-  .title {
-    font-size: 1.5rem;
   }
 }
