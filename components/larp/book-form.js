@@ -23,6 +23,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
   const [totalPrice, setTotalPrice] = useState(0)
   // ---- 儲存被預約的時間 start ----
   const [selectDate, setSelectDate] = useState('') // 記錄被選定的日期
+  const [selectTime, setSelectTime] = useState('')
   // ---- 儲存被預約的時間 end ----
 
   // 初始化表單localStorage的值
@@ -116,6 +117,28 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     }
   }
 
+  const isDisabled = (time) => {
+    if (ordlist && ordlist.length > 0) {
+      // 使用迴圈來遍歷已預訂的時間
+      for (let i = 0; i < ordlist.length; i++) {
+        if (ordlist[i].ord_time === time) {
+          return true // 如果找到相同的時間，返回 true (禁用該選項)
+        }
+      }
+    }
+    return false // 如果沒有找到，則該選項是可用的
+  }
+  //   if (
+  //     ordlist.ord_theme === selectId &&
+  //     ordlist.ord_loc === selectedLocationId &&
+  //     ordlist.ord_date === selectDate
+  //   ) {
+  //     if (ordlist.ord_time.filter((time) => time === selectTime)) {
+  //       return true
+  //     }
+  //   }
+  // }
+
   const handleLocationChange = (e) => {
     const selectedLocationId = e.target.value // 取得選擇的館別ID
     setSelectedLocationId(selectedLocationId) // 設置選擇的館別狀態
@@ -128,29 +151,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     const value = e.target.value
     setMobile(value)
   }
-
-  const isDisabled = ordlist.some((item) => {
-    // console.log(`Checking item:`, item) // 檢查每個 item 的內容
-    // console.log(`Comparing: ord_theme (${typeof item.ord_theme}) )`)
-    // console.log(
-    //   `Comparing: parseInt(formData.loc) (${parseInt(
-    //     formData.loc
-    //   )}) === selectedLocationId (${selectedLocationId})`
-    // )
-    // console.log(
-    //   `Comparing: formData.date (${formData.date}) === selectDate (${selectDate})`
-    // )
-    // console.log(`Comparing: item.ord_time (${item.ord_time}) === `)
-
-    return (
-      item.ord_theme === selectId &&
-      parseInt(formData.loc) === selectedLocationId &&
-      formData.date === selectDate &&
-      item.ord_time
-    )
-  })
-
-  // console.log(`isDisabled: ${isDisabled}`)
 
   // 網站載入的時候，生成人數選項，只生成一次
   useEffect(() => {
@@ -180,23 +180,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
       }
     }
   }, [escapes, escape.larp_name])
-
-  // 選擇日期的時候，同步確認
-  // useEffect(() => {
-  //   if (selectDate) {
-  //     fetch(
-  //       `http://127.0.0.1:3006/larp/orded-time?larpName=1&loc=1&date=${selectDate}`
-  //     )
-  //       .then((res) => res.json)
-  //       .then((result) => {
-  //         setOrdedTime(result.ordedTime)
-  //         console.log(ordedTime)
-  //       })
-  //       .catch((error) => console.error('此時段已額滿', error))
-  //   }
-  // }, [selectDate])
-
-  // 提取 localStorage 的 auth 資料，使用useState 放入變數
 
   // 選擇人數時，同步變更總金額
   useEffect(() => {
@@ -317,33 +300,15 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
               onChange={handleInputChange}
             >
               <option value="">=====請選擇時段=====</option>
-              {['10:00', '14:00', '18:00'].map((v, i) => {
-                // 檢查該時段是否已被預約
-                // console.log(selectId, parseInt(formData.loc), formData.date, v)
-                const isDisabled = ordlist.some(
-                  (item) =>
-                    item.ord_theme === selectId &&
-                    parseInt(formData.loc) === selectedLocationId &&
-                    formData.date === selectDate &&
-                    item.ord_time === v
-                )
-                // console.log(
-                //   typeof ordlist.ord_theme,
-                //   typeof selectId,
-                //   typeof ordlist.ord_loc,
-                //   typeof selectedLocationId,
-                //   typeof formData.date,
-                //   typeof selectDate,
-                //   typeof ordlist.ord_time,
-                //   typeof v
-                // )
-
-                return (
-                  <option key={v} value={v} disabled={isDisabled}>
-                    {v}
-                  </option>
-                )
-              })}
+              <option value="10:00:00" disabled={isDisabled('10:00:00')}>
+                10:00
+              </option>
+              <option value="14:00:00" disabled={isDisabled('14:00:00')}>
+                14:00
+              </option>
+              <option value="18:00:00" disabled={isDisabled('18:00:00')}>
+                18:00
+              </option>
             </Form.Select>
           </InputGroup>
         </div>
