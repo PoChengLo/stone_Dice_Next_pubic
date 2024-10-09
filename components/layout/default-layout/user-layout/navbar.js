@@ -65,12 +65,12 @@ export default function Navbar() {
           <ul>
             <li>
               <div className={styles['main-item']}>
-                <a href="#">桌遊商品</a>
+                <a href="board-game">桌遊商品</a>
               </div>
             </li>
             <li>
               <div className={styles['main-item']}>
-                <a href="#">密室逃脫</a>
+                <a href="larp">密室逃脫</a>
               </div>
             </li>
             <li>
