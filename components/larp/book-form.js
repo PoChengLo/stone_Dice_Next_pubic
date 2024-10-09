@@ -27,6 +27,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
 
   // 初始化表單localStorage的值
   const initialFormValues = {
+    userid: 0,
     larpName: selectId,
     loc: 0,
     date: '',
@@ -37,6 +38,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     email: '',
     totalprice: 0,
   }
+
   // 使用 useBookFormState Hook 管理表單狀態
   const { formData, setFormData, BtnSubmit } = useBookFormState(
     'bookForm',
@@ -128,17 +130,17 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
   }
 
   const isDisabled = ordlist.some((item) => {
-    console.log(`Checking item:`, item) // 檢查每個 item 的內容
-    console.log(`Comparing: ord_theme (${typeof item.ord_theme}) )`)
-    console.log(
-      `Comparing: parseInt(formData.loc) (${parseInt(
-        formData.loc
-      )}) === selectedLocationId (${selectedLocationId})`
-    )
-    console.log(
-      `Comparing: formData.date (${formData.date}) === selectDate (${selectDate})`
-    )
-    console.log(`Comparing: item.ord_time (${item.ord_time}) === `)
+    // console.log(`Checking item:`, item) // 檢查每個 item 的內容
+    // console.log(`Comparing: ord_theme (${typeof item.ord_theme}) )`)
+    // console.log(
+    //   `Comparing: parseInt(formData.loc) (${parseInt(
+    //     formData.loc
+    //   )}) === selectedLocationId (${selectedLocationId})`
+    // )
+    // console.log(
+    //   `Comparing: formData.date (${formData.date}) === selectDate (${selectDate})`
+    // )
+    // console.log(`Comparing: item.ord_time (${item.ord_time}) === `)
 
     return (
       item.ord_theme === selectId &&
@@ -148,7 +150,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     )
   })
 
-  console.log(`isDisabled: ${isDisabled}`)
+  // console.log(`isDisabled: ${isDisabled}`)
 
   // 網站載入的時候，生成人數選項，只生成一次
   useEffect(() => {
@@ -193,6 +195,8 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
   //       .catch((error) => console.error('此時段已額滿', error))
   //   }
   // }, [selectDate])
+
+  // 提取 localStorage 的 auth 資料，使用useState 放入變數
 
   // 選擇人數時，同步變更總金額
   useEffect(() => {
@@ -315,7 +319,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
               <option value="">=====請選擇時段=====</option>
               {['10:00', '14:00', '18:00'].map((v, i) => {
                 // 檢查該時段是否已被預約
-                console.log(selectId, parseInt(formData.loc), formData.date, v)
+                // console.log(selectId, parseInt(formData.loc), formData.date, v)
                 const isDisabled = ordlist.some(
                   (item) =>
                     item.ord_theme === selectId &&
@@ -323,16 +327,16 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
                     formData.date === selectDate &&
                     item.ord_time === v
                 )
-                console.log(
-                  typeof ordlist.ord_theme,
-                  typeof selectId,
-                  typeof ordlist.ord_loc,
-                  typeof selectedLocationId,
-                  typeof formData.date,
-                  typeof selectDate,
-                  typeof ordlist.ord_time,
-                  typeof v
-                )
+                // console.log(
+                //   typeof ordlist.ord_theme,
+                //   typeof selectId,
+                //   typeof ordlist.ord_loc,
+                //   typeof selectedLocationId,
+                //   typeof formData.date,
+                //   typeof selectDate,
+                //   typeof ordlist.ord_time,
+                //   typeof v
+                // )
 
                 return (
                   <option key={v} value={v} disabled={isDisabled}>
@@ -340,27 +344,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
                   </option>
                 )
               })}
-              {/* <option value="10:00:00">10:00</option>
-              <option value="14:00:00">14:00</option>
-              <option value="18:00:00">18:00</option> */}
-              {/* {['10:00', '14:00', '18:00'].map((v) => {
-                console.log(ordlist)
-                const isDisabled =
-                  selectId === ordlist.ord_theme &&
-                  filteredLocations === ordlist.ord_loc &&
-                  selectDate === ordlist.ord_date &&
-                  formData.datetime ===
-                    ordlist.some((item) => item.ord_datetime.includes(v))
-                console.log(typeof selectedLocationId)
-                console.log(
-                  `Comparing: ${selectId} === ${formData.ord_theme}, ${selectedLocationId} === ${formData.ord_loc}, ${formData.ord_date} === ${selectDate}`
-                )
-                return (
-                  <option key={v} value={v} disabled={isDisabled}>
-                    {v}
-                  </option>
-                )
-              })} */}
             </Form.Select>
           </InputGroup>
         </div>
