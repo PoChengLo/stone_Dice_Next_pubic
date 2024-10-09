@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/styles/style.css'
 import { CartProvider } from '@/hooks/use-cart-state'
 import { AuthProvider } from '@/hooks/use-auth'
-import '@/styles/tailwind-styles.css'
 import { useEffect } from 'react'
 
 export default function MyApp({ Component, pageProps }) {
