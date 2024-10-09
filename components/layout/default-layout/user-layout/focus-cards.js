@@ -1,52 +1,82 @@
-'use client'
-import Image from 'next/image'
 import React, { useState } from 'react'
-import { cn } from '@/utils/utils'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import styles from '@/styles/user-profile/focus-cards.module.scss'
 
-export const Card = React.memo(({ card, index, hovered, setHovered }) => (
-  <div
-    onMouseEnter={() => setHovered(index)}
-    onMouseLeave={() => setHovered(null)}
-    className={cn(
-      'rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out',
-      hovered !== null && hovered !== index && 'blur-sm scale-[0.98]'
-    )}
+const Card = ({ card, isSelected, onClick }) => (
+  <motion.div
+    className={`${styles.card} ${isSelected ? styles.selectedCard : ''}`}
+    onClick={onClick}
+    layout
+    initial={{ scale: 1 }}
+    animate={{ scale: isSelected ? 1.1 : 1 }}
+    transition={{ duration: 0.3 }}
   >
     <Image
-      src={card.src}
+      src={card.image}
       alt={card.title}
-      fill
-      className="object-cover absolute inset-0"
+      layout="fill"
+      objectFit="cover"
+      className={styles.cardImage}
     />
-    <div
-      className={cn(
-        'absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300',
-        hovered === index ? 'opacity-100' : 'opacity-0'
-      )}
+    <motion.div
+      className={styles.cardOverlay}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isSelected ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
     >
-      <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
-        {card.title}
-      </div>
-    </div>
-  </div>
-))
+      <h3 className={styles.cardTitle}>{card.title}</h3>
+    </motion.div>
+  </motion.div>
+)
 
-Card.displayName = 'Card'
+const FocusCardsDemo = () => {
+  const [selectedCard, setSelectedCard] = useState(null)
 
-export function FocusCards({ cards }) {
-  const [hovered, setHovered] = useState(null)
+  const cards = [
+    {
+      title: 'Forest Adventure',
+      image:
+        'https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      title: 'Valley of life',
+      image:
+        'https://images.unsplash.com/photo-1600271772470-bd22a42787b3?q=80&w=3072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      title: 'Sala behta hi jayega',
+      image:
+        'https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      title: 'Camping is for pros',
+      image:
+        'https://images.unsplash.com/photo-1486915309851-b0cc1f8a0084?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      title: 'The road not taken',
+      image:
+        'https://images.unsplash.com/photo-1507041957456-9c397ce39c97?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      title: 'The First Rule',
+      image: 'https://assets.aceternity.com/the-first-rule.png',
+    },
+  ]
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
+    <div className={styles.cardsContainer}>
       {cards.map((card, index) => (
         <Card
-          key={card.title}
+          key={index}
           card={card}
-          index={index}
-          hovered={hovered}
-          setHovered={setHovered}
+          isSelected={selectedCard === index}
+          onClick={() => setSelectedCard(index === selectedCard ? null : index)}
         />
       ))}
     </div>
   )
 }
+
+export default FocusCardsDemo
