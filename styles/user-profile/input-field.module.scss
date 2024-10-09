@@ -1,6 +1,7 @@
 .input_container {
   position: relative;
-  display: inline-block;
+  display: flex; // 使用 flex 使 label 和 input 垂直居中
+  align-items: center; // 元素垂直居中
   width: 80%;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -24,8 +25,9 @@
     background-color: white;
     border-color: #555;
 
-    & ~ .label {
-      transform: translateY(-60px);
+    & + .label {
+      top: -10px; /* 確保上浮後的位置 */
+      font-size: 1rem; /* 保持字體大小不變 */
       color: #555;
     }
   }
@@ -39,33 +41,20 @@
   position: absolute;
   left: 10px;
   top: 50%;
-  height: 100%;
-  transform: translateY(-50%);
-  transition: transform 200ms, color 200ms;
+  transform: translateY(-50%); /* 確保 label 文字垂直居中 */
+  transition: all 0.3s ease; /* 平滑的過渡效果 */
   pointer-events: none;
-  color: #555;
-  padding: 5px;
-  background-color: transparent;
-  align-items: center;
+  color: #666;
+  padding: 0 5px;
+  font-size: 1rem;
 }
 
 .helper_text {
-  font-size: 9px;
+  font-size: 0.8rem;
   color: #888;
   margin-top: 5px;
 
   &.error_text {
     color: #ff0000;
   }
-}
-
-.input:focus ~ .label::before,
-.input:not(:placeholder-shown) ~ .label::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  height: 2px;
-  z-index: -1;
 }

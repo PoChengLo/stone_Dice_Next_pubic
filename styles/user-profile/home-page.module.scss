@@ -41,6 +41,11 @@
   overflow-x: hidden;
 }
 
+.contentWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
 .lightBeam {
   position: absolute;
   top: 0;
@@ -48,9 +53,15 @@
   transform: translateX(-50%);
   width: 2px;
   height: 100%;
-  background: linear-gradient(to bottom, transparent, gold, transparent);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 215, 0, 0),
+    rgba(255, 215, 0, 1),
+    rgba(255, 215, 0, 0)
+  );
   opacity: 0.5;
   z-index: 1;
+  pointer-events: none;
 }
 
 .imageContainer {
@@ -67,19 +78,24 @@
 }
 
 .textContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12rem;
-  margin-top: 15rem;
+  gap: 8rem;
+  margin-top: 10rem;
+  overflow: hidden;
 }
 
 .textBlock {
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .floatingText {
   font-size: 1.5rem;
   line-height: 1.6;
+  padding-top: 20px;
   color: white;
   text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
   animation: float 3s ease-in-out infinite;
@@ -114,5 +130,33 @@
 
   .floatingText {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .main {
+    padding: 2rem 1rem;
+  }
+
+  .imageWrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .imageContainer {
+    gap: 4rem;
+  }
+
+  .textContainer {
+    gap: 4rem;
+    margin-top: 5rem;
+  }
+
+  .floatingText {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
   }
 }

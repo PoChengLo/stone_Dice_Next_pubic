@@ -8,6 +8,7 @@ import useLocalStorage from '@/hooks/use-localstorage'
 import toast, { Toaster } from 'react-hot-toast'
 import { initUserData } from '@/hooks/use-auth'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 // 背景樣式設定
 const backgroundStyle = {
@@ -144,12 +145,12 @@ export default function LoginPage() {
                       </div>
                       <p className={styles['signup-prompt']}>
                         <span>還沒有帳號嗎？</span>
-                        <a
+                        <Link
                           href="/user-profile/signup"
                           style={{ color: 'rgba(217,38,38,1)' }}
                         >
                           Sign up
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </div>

@@ -9,16 +9,19 @@ const HomePage = () => {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   })
 
   const leftImageX = useTransform(scrollYProgress, [0, 0.3], ['-100%', '0%'])
   const rightImageX = useTransform(scrollYProgress, [0.2, 0.5], ['100%', '0%'])
-  const lightBeamY = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+  const lightBeamY = useTransform(scrollYProgress, [0, 1], ['-50%', '100%'])
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
+
+      if (scrollPosition > windowHeight * 0.5) {
         setShowImages(true)
       }
     }
@@ -28,13 +31,8 @@ const HomePage = () => {
   }, [])
 
   useEffect(() => {
-    const titleTimer = setTimeout(() => {
-      setShowTitle(true)
-    }, 8000)
-
-    const hideTitleTimer = setTimeout(() => {
-      setShowTitle(false)
-    }, 18000)
+    const titleTimer = setTimeout(() => setShowTitle(true), 8000)
+    const hideTitleTimer = setTimeout(() => setShowTitle(false), 18000)
 
     return () => {
       clearTimeout(titleTimer)
@@ -70,8 +68,6 @@ const HomePage = () => {
       </header>
 
       <main className={styles.main}>
-        <motion.div className={styles.lightBeam} style={{ y: lightBeamY }} />
-
         {showImages && (
           <div className={styles.imageContainer}>
             <motion.div
@@ -102,6 +98,7 @@ const HomePage = () => {
         )}
 
         <div className={styles.textContainer}>
+          <motion.div className={styles.lightBeam} style={{ y: lightBeamY }} />
           {themedTexts.map((text, index) => (
             <motion.div
               key={index}

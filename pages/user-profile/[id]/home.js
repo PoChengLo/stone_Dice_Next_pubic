@@ -58,7 +58,7 @@ export default function UserProfile() {
   const renderContent = () => {
     switch (activeContent) {
       case 'profile':
-        return <MainProfile />
+        return <MainProfile userData={userData} /> // 傳遞 userData 到 MainProfile
       case 'account':
         return <UserSetting />
       case 'shipping':
@@ -73,7 +73,7 @@ export default function UserProfile() {
         return <WebsiteSettings />
 
       default:
-        return <MainProfile />
+        return <MainProfile userData={userData} /> // 傳遞 userData 到 MainProfile
     }
   }
 
@@ -175,7 +175,10 @@ export default function UserProfile() {
             </div>
           </div>
 
-          <div className={styles['main-container']}>{renderContent()}</div>
+          <div className={styles['main-container']}>
+            {' '}
+            {userData ? renderContent() : <p>Loading...</p>}
+          </div>
         </div>
       </div>
     </>

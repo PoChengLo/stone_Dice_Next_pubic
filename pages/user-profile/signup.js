@@ -85,7 +85,7 @@ export default function SignupPage() {
 
       if (response.data.status === 'success') {
         // 註冊成功，轉到登入頁面
-        router.push('user-profile/login?registered=true')
+        router.push('/user-profile/login')
       } else {
         setSubmitError(response.data.message || '註冊失敗，請稍後再試')
       }
