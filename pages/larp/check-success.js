@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
 import GroupButton from '@/components/larp/next-button'
 import { FaCircleCheck } from 'react-icons/fa6'
+import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 
 export default function CheckPage() {
   useEffect(() => {
@@ -9,11 +10,12 @@ export default function CheckPage() {
   }, [])
 
   return (
-    <div className={`${styles.bodyBg}`} style={{ height: '100vh' }}>
+    <div
+      className={`${styles.bodyBg}`}
+      style={{ height: '100vh', padding: '60px' }}
+    >
       {/* 導覽列 */}
-      <div className="text-white bg-dark" style={{ height: 60 }}>
-        我是navbar
-      </div>
+      <Navbar />
       <div className={styles.larpContainer}>
         {/* 立即預約進度條 */}
         <div
