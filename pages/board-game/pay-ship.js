@@ -23,6 +23,9 @@ export default function PayShip() {
   // 會員物件狀態
   const [recipientInfo, setRecipientInfo] = useState([])
 
+  // 常用收件人，姓名，電話，地址 input value 設定
+  const [selectRecipient, setSelectRecipient] = useState({})
+
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getRecipientInfo = async (user_id) => {
     if (!authInfo.userData || !authInfo.userData.id) {
@@ -77,8 +80,6 @@ export default function PayShip() {
         setAuthInfo(auth_info)
       }
     } catch (e) {}
-
-    setHydrated(true)
   }, [])
 
   useEffect(() => {
@@ -92,6 +93,16 @@ export default function PayShip() {
     // 以下為省略eslint檢查一行，這裡再加上router.query意義會有所不同目前會是多餘的
     // eslint-disable-next-line
   }, [authInfo])
+
+  console.log(recipientInfo)
+  console.log(selectRecipient)
+
+  useEffect(() => {
+    const recipient_name = document.querySelector('#new-recipient-name')
+    console.log(recipient_name)
+    const recipient_phone = document.querySelector('#new-recipient-phone')
+    console.log(recipient_phone)
+  }, [])
 
   if (!hydrated) {
     return null
@@ -188,10 +199,14 @@ export default function PayShip() {
                     className={`form-select ${styles.white_to_text}`}
                     aria-label="user-recipient"
                     defaultValue={'default'}
+                    onChange={(e) => {
+                      const select_recipient = Number(e.target.value)
+                      setSelectRecipient(recipientInfo[select_recipient])
+                    }}
                   >
                     <option value={'default'}>選擇常用收件人</option>
                     {recipientInfo.map((v, i) => (
-                      <option key={v.recipient_id} value={v.recipient_id}>
+                      <option key={v.recipient_id} value={i}>
                         {v.recipient}
                       </option>
                     ))}
@@ -210,6 +225,7 @@ export default function PayShip() {
                       id="new-recipient-name"
                       aria-describedby="new-recipient-name"
                       placeholder="收件人姓名"
+                      value={`${selectRecipient.recipient}`}
                     />
                     <div
                       id="new-recipient-name-commit"
@@ -230,6 +246,7 @@ export default function PayShip() {
                       className={`form-control ${styles.white_to_text}`}
                       id="new-recipient-phone"
                       placeholder="收件人聯絡電話，例如：0987654321"
+                      value={`${selectRecipient.contact_number}`}
                     />
                     <div
                       id="new-recipient-phone-commit"
@@ -258,7 +275,7 @@ export default function PayShip() {
               {/* 配送方式，超商取貨，宅配，面交 */}
               <div className={`row mb-3 ${styles.pay_ship_border_method}`}>
                 <div className="col">
-                  <ShipMethod />
+                  <ShipMethod address={`${selectRecipient.address}`} />
                 </div>
               </div>
               {/* 付款方式，綠界付款，Line Pay */}
@@ -316,6 +333,7 @@ export default function PayShip() {
                     className={`form-control ${styles.white_to_text}`}
                     id="pay-ship-commit"
                     placeholder="填寫您的備註"
+                    value={`${selectRecipient.note}`}
                   />
                   <label
                     htmlFor="payment"
