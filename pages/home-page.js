@@ -4,25 +4,31 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import styles from '@/styles/user-profile/home-page.module.scss'
 
 const HomePage = () => {
+  const [showImages, setShowImages] = useState(false)
   const [showTitle, setShowTitle] = useState(false)
   const containerRef = useRef(null)
-  const textContainerRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   })
 
-  const { scrollYProgress: textScrollProgress } = useScroll({
-    target: textContainerRef,
-    offset: ['start end', 'end start'],
-  })
+  const leftImageX = useTransform(scrollYProgress, [0, 0.3], ['-100%', '0%'])
+  const rightImageX = useTransform(scrollYProgress, [0.2, 0.5], ['100%', '0%'])
+  const lightBeamY = useTransform(scrollYProgress, [0, 1], ['-50%', '100%'])
 
-  const leftImageX = useTransform(scrollYProgress, [0.3, 0.5], ['-100%', '0%'])
-  const rightImageX = useTransform(scrollYProgress, [0.5, 0.7], ['100%', '0%'])
-  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
 
-  // 調整 lightBeam 的動畫範圍，使其與 textContainer 的滾動同步
-  const lightBeamY = useTransform(textScrollProgress, [0, 1], ['0%', '100%'])
+      if (scrollPosition > windowHeight * 0.5) {
+        setShowImages(true)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const titleTimer = setTimeout(() => setShowTitle(true), 8000)
@@ -62,11 +68,11 @@ const HomePage = () => {
       </header>
 
       <main className={styles.main}>
-        <div className={styles.contentWrapper}>
+        {showImages && (
           <div className={styles.imageContainer}>
             <motion.div
               className={styles.imageWrapper}
-              style={{ x: leftImageX, opacity: imageOpacity }}
+              style={{ x: leftImageX }}
             >
               <Image
                 src="/user-profile/animal_hitsuji.png"
@@ -78,7 +84,7 @@ const HomePage = () => {
             </motion.div>
             <motion.div
               className={styles.imageWrapper}
-              style={{ x: rightImageX, opacity: imageOpacity }}
+              style={{ x: rightImageX }}
             >
               <Image
                 src="/user-profile/dog_shetland_sheepdog.png"
@@ -89,24 +95,21 @@ const HomePage = () => {
               />
             </motion.div>
           </div>
+        )}
 
-          <div className={styles.textContainer} ref={textContainerRef}>
+        <div className={styles.textContainer}>
+          <motion.div className={styles.lightBeam} style={{ y: lightBeamY }} />
+          {themedTexts.map((text, index) => (
             <motion.div
-              className={styles.lightBeam}
-              style={{ y: lightBeamY }}
-            />
-            {themedTexts.map((text, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: index * 0.5 }}
-                className={styles.textBlock}
-              >
-                <p className={styles.floatingText}>{text}</p>
-              </motion.div>
-            ))}
-          </div>
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: index * 0.5 }}
+              className={styles.textBlock}
+            >
+              <p className={styles.floatingText}>{text}</p>
+            </motion.div>
+          ))}
         </div>
       </main>
     </div>
