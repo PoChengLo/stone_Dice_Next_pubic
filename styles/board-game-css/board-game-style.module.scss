@@ -513,6 +513,9 @@
     box-shadow: none;
     outline: none;
   }
+  .btn {
+    width: 200px;
+  }
 }
 // 付款成功
 .success {
@@ -800,7 +803,7 @@
       font-size: 12px;
     }
     .pay_ship_border_method {
-      height: 360px;
+      height: 440px;
     }
     .white_to_text {
       height: 30px;

@@ -149,10 +149,10 @@ function SideCartOffcanvas({ ...props }) {
               繼續購物
             </Link>
             <Link
-              href="/board-game/user-info"
+              href="/board-game/cart"
               className={`btn btn-primary mb-3 ${styles.btn}`}
             >
-              前往結帳
+              查看購物車
             </Link>
           </div>
         </Offcanvas.Body>

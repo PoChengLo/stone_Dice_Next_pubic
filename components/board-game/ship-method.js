@@ -47,7 +47,7 @@ export default function ShipMethod() {
         <Tab
           eventKey="convenience-store"
           title={<>{getTabIcon('convenience-store')} 超商取貨</>}
-          tabClassName={` me-xxl-4 me-3 ${styles.btn} ${styles.nav_pills} `}
+          tabClassName={` me-xxl-4 me-0 mb-xxl-0 mb-3 ${styles.btn} ${styles.nav_pills} `}
         >
           {/* 超商取貨內容 */}
           <label
@@ -136,7 +136,7 @@ export default function ShipMethod() {
         <Tab
           eventKey="recipient-address"
           title={<>{getTabIcon('recipient-address')} 宅配</>}
-          tabClassName={`me-xxl-4 me-3 ${styles.btn} ${styles.nav_pills} `}
+          tabClassName={`me-xxl-4 me-0 mb-xxl-0 mb-3 ${styles.btn} ${styles.nav_pills} `}
         >
           {/* 宅配內容 */}
           <label

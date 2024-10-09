@@ -13,6 +13,7 @@ import { Button } from 'react-bootstrap'
 import { BsCircle, BsTrash } from 'react-icons/bs'
 import { useAuth } from '@/hooks/use-auth'
 import useLocalStorage from '@/hooks/use-localstorage'
+import { useRouter } from 'next/router'
 
 export default function ProductCart() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
@@ -28,10 +29,6 @@ export default function ProductCart() {
     increment,
     decrement,
   } = useCart()
-  const auth = useAuth()
-  console.log(auth)
-  const user_info = useAuth(auth)
-  console.log(user_info)
 
   const preTotal = items
     .map((item) => item.subtotal)
@@ -41,14 +38,28 @@ export default function ProductCart() {
     .map((item) => item.subtotal)
     .reduce((acc, curr) => acc + curr, 0)
 
-  console.log()
   // console.log('preTotal:', preTotal, 'finalTotal:', finalTotal)
+
+  // 設定會員資料
+  const [authInfo, setAuthInfo] = useState({ isAuth: false })
+
+  // 判斷是否登入會員
+  const router = useRouter()
 
   // 修正 Next hydration 問題
   // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {}
+
     setHydrated(true)
   }, [])
 
@@ -57,6 +68,9 @@ export default function ProductCart() {
   }
   // 修正 end
 
+  // console.log(authInfo)
+  // console.log(authInfo.userData)
+  // console.log(authInfo.userData.id)
   return (
     <>
       <Navbar />
@@ -215,7 +229,17 @@ export default function ProductCart() {
                   繼續購物
                 </Button>
                 <Button
-                  href="./user-info?user_id=2024001"
+                  onClick={() => {
+                    const query = { ...router.query }
+                    if (authInfo.isAuth) {
+                      query.user_id = authInfo.userData.id
+                      router.push(
+                        `/board-game/user-info?` + new URLSearchParams(query)
+                      )
+                    } else {
+                      router.push('/user-profile/login')
+                    }
+                  }}
                   className={`${styles.btn} `}
                 >
                   填寫購買人資訊
