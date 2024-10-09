@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
 import GroupButton from '@/components/larp/next-button'
 import { FaCircleCheck } from 'react-icons/fa6'
 
 export default function CheckPage() {
+  useEffect(() => {
+    localStorage.removeItem('bookForm')
+  }, [])
+
   return (
     <div className={`${styles.bodyBg}`} style={{ height: '100vh' }}>
       {/* 導覽列 */}
