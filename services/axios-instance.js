@@ -19,7 +19,7 @@ axiosInstance.interceptors.response.use(
       // 清除本地存儲的認證信息
       localStorage.removeItem('accessToken')
       // 重定向到登入頁面
-      window.location.href = '/login'
+      window.location.href = '/user-profile/login'
     }
     return Promise.reject(error)
   }

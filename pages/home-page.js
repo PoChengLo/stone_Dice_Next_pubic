@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import FocusCardsDemo from '@/components/layout/default-layout/user-layout/focus-cards' // 引入 FocusCards 組件
 import styles from '@/styles/user-profile/home-page.module.scss'
-import { FocusCardsDemo } from '@/components/layout/default-layout/user-layout/focus-cards-demo'
 
 const HomePage = () => {
   const [showImages, setShowImages] = useState(false)
@@ -121,9 +121,8 @@ const HomePage = () => {
         </div>
       </main>
 
-      {/* 在主頁的最下面添加 FocusCards 區塊 */}
       <section className={styles.focusCardsSection}>
-        <FocusCardsDemo />
+        <FocusCardsDemo /> {/* 傳入卡片資料的組件 */}
       </section>
     </div>
   )
