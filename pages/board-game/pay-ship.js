@@ -14,6 +14,7 @@ export default function PayShip() {
   const [authInfo, setAuthInfo] = useState({ isAuth: false })
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
   const { items } = useCart()
+  // console.log('items', items)
   const router = useRouter()
 
   const finalTotal = items
@@ -52,7 +53,7 @@ export default function PayShip() {
     try {
       const res = await fetch(baseURL)
       const resData = await res.json()
-      console.log(resData.data.recipient)
+      // console.log(resData.data.recipient)
       // 設定到狀態中
       if (Array.isArray(resData.data.recipient)) {
         setRecipientInfo(resData.data.recipient)
@@ -94,14 +95,16 @@ export default function PayShip() {
       if (auth_info) {
         setAuthInfo(auth_info)
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   }, [])
 
   useEffect(() => {
     if (authInfo) {
       setHydrated(true)
       // 這裡可以確保一定可以得到router.query的值
-      console.log(router.query)
+      // console.log(router.query)
       // 向伺服器要求資料
       getRecipientInfo(router.query.user_id)
     }
@@ -113,6 +116,34 @@ export default function PayShip() {
     return null
   }
   // 修正 end
+
+  const saveOrder = async () => {
+    const orderData = {
+      items,
+      finalTotal,
+      selectRecipient,
+      selectedPay,
+    }
+    try {
+      const res = await fetch(
+        `http://localhost:3006/board-game/pay-ship?user_id=${authInfo.userData.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData),
+        }
+      )
+      const resData = await res.json()
+      console.log(resData)
+      if (resData.success == true) {
+        goECPay()
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <>
@@ -391,7 +422,7 @@ export default function PayShip() {
 
                   <Button
                     className={`  my-3 ${styles.btn} ${styles.btn_pay_ship_2}`}
-                    onClick={goECPay}
+                    onClick={saveOrder}
                   >
                     立即結帳
                   </Button>

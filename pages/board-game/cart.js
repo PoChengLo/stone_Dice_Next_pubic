@@ -42,6 +42,7 @@ export default function ProductCart() {
 
   // 設定會員資料
   const [authInfo, setAuthInfo] = useState({ isAuth: false })
+  console.log(authInfo)
 
   // 判斷是否登入會員
   const router = useRouter()
@@ -58,7 +59,9 @@ export default function ProductCart() {
       if (auth_info) {
         setAuthInfo(auth_info)
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
 
     setHydrated(true)
   }, [])
@@ -195,7 +198,7 @@ export default function ProductCart() {
             <div className="col-xxl-4 col-12 p-xxl-5 p-3 d-flex flex-column justify-content-center">
               <div className="d-flex justify-content-between mb-3">
                 <h4>小計</h4>
-                <h4>{preTotal.toLocaleString()}</h4>
+                <h4>NT$ {preTotal.toLocaleString()}</h4>
               </div>
               <hr className={`${styles.cart_hr}`} />
               <div className="my-3">
@@ -220,7 +223,7 @@ export default function ProductCart() {
               </div>
               <div className="d-flex justify-content-between mb-3">
                 <h4>總計</h4>
-                <h4>{finalTotal.toLocaleString()}</h4>
+                <h4>NT$ {finalTotal.toLocaleString()}</h4>
               </div>
               <hr className={`${styles.cart_hr}`} />
 

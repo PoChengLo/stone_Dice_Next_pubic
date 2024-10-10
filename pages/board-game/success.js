@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
@@ -6,11 +6,30 @@ import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { useCart } from '@/hooks/use-cart-state'
 
 export default function Success() {
+  // 清除購物車
   const { clearCart } = useCart()
 
+  // 會員資料
+  const [authInfo, setAuthInfo] = useState({ isAuth: false })
+
+  // 獲取
+
+  // 執行清除購物車
   useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    // 清除購物車
     clearCart()
   }, [])
+
   return (
     <>
       <Navbar />
@@ -119,12 +138,12 @@ export default function Success() {
           <div className="row mt-3">
             <div className="col">
               <div className=" d-flex mt-3 justify-content-between">
-                <h3>帳單地址</h3>
+                <h3>會員載具</h3>
               </div>
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
-                <p>會員地址</p>
+                <p>/XX4567</p>
               </div>
               <hr className={`${styles.success_hr}`} />
             </div>
