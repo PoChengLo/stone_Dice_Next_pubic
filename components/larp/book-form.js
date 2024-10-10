@@ -94,7 +94,7 @@ export default function BookForm({
     filterLoc(selectId)
     setPeoples([])
     setUniPrice(selectId)
-    setSelectDate('')
+    setSelectTime('')
 
     // 根據選中的主題更新單價
     const selectPrice = escapes.find((r) => r.id === selectId)
@@ -124,16 +124,17 @@ export default function BookForm({
 
   const isDisabled = (time) => {
     if (ordlist && ordlist.length > 0) {
-      // 使用迴圈來遍歷已預訂的時間
+      // 遍歷已預訂的時間，並檢查選擇的日期
       for (let i = 0; i < ordlist.length; i++) {
-        if (ordlist[i].ord_time === time) {
-          return true // 如果找到相同的時間，返回 true (禁用該選項)
+        // 假設 ordlist[i].ord_date 是日期字串，例如 "YYYY-MM-DD"
+        const isSameDate = ordlist[i].ord_date === selectedDate
+        if (isSameDate && ordlist[i].ord_time === time) {
+          return true // 如果找到相同的日期和時間，則禁用該選項
         }
       }
     }
     return false // 如果沒有找到，則該選項是可用的
   }
-
   const handleLocationChange = (e) => {
     const selectedLocationId = e.target.value // 取得選擇的館別ID
     setSelectedLocationId(selectedLocationId) // 設置選擇的館別狀態
@@ -297,7 +298,11 @@ export default function BookForm({
               aria-label="loc"
               aria-describedby="inputGroup-sizing-default"
               name="datetime"
-              onChange={handleInputChange}
+              onChange={(e) => {
+                setSelectTime(e.target.value)
+                handleInputChange(e)
+              }}
+              value={selectTime}
             >
               <option value="">=====請選擇時段=====</option>
               <option value="10:00:00" disabled={isDisabled('10:00:00')}>
