@@ -35,13 +35,21 @@ export default function CheckPayment() {
       }
 
       const data = await res.json()
-      if (data.success == true) {
-        goECPay()
-      }
+      console.log('API response', data)
 
-      console.log('資料回傳成功', data)
+      if (data.success == true && data.ord_id) {
+        // 成功儲存預約資料後，將 ord_id 存到localStorage
+        console.log('ord_id:', data.ord_id) // 檢查 ord_id 是否有效
+        localStorage.setItem('ord_id', data.ord_id)
+        goECPay()
+        console.log('資料回傳成功', data)
+      } else {
+        // 處理儲存失敗的情況
+        console.log('失敗的回應資料:', data) // 顯示失敗時的回應資料
+        alert('預約失敗，請稍後再試')
+      }
     } catch (error) {
-      console.log('資料回傳失敗', error.message)
+      console.error('Error:', error)
     }
   }
 
@@ -53,14 +61,6 @@ export default function CheckPayment() {
       window.location.href = `http://localhost:3006/ecpay/larp?amount=${finalTotal}`
     }
   }
-
-  // const goToPay = async () => {
-  //   // 如果資料有正確回傳到後端再付款
-  //   const result = await sbAPI()
-  //   if (result.success == true) {
-  //     goECPay()
-  //   }
-  // }
 
   return (
     <div className={`${styles.bodyBg}`} style={{ paddingTop: '60px' }}>
@@ -181,7 +181,7 @@ export default function CheckPayment() {
               回上頁
             </Button>
             <Button className={styles.btnstyle} type="submit" onClick={sbAPI}>
-              下一步
+              付款
             </Button>
           </div>
         </div>

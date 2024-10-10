@@ -61,6 +61,12 @@ export default function LarpId() {
     setEscapes(resData.all)
   }
 
+  const [selectedDate, setSelectedDate] = useState('')
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date)
+  }
+
   //id改變的時候，重新載入資料
   useEffect(() => {
     if (router.isReady) {
@@ -413,9 +419,10 @@ export default function LarpId() {
         {/* 預約 */}
         <div id={styles.bookGroup} className="d-flex" style={{ marginTop: 20 }}>
           {/* 行事曆 */}
-          <Calender />
+          <Calender onDateChange={handleDateChange} />
           {/* 預約表單 */}
           <BookForm
+            selectedDate={selectedDate} // 傳日期的值給bookForm
             allName={escapes.larp_name}
             escapes={escapes}
             escape={escape}
