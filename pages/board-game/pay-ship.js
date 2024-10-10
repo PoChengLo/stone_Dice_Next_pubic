@@ -45,7 +45,7 @@ export default function PayShip() {
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getRecipientInfo = async (user_id) => {
     if (!authInfo.userData || !authInfo.userData.id) {
-      console.error('User data is not available')
+      console.log('User data is not available')
       return
     }
 
@@ -67,7 +67,7 @@ export default function PayShip() {
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
       // 先連到node伺服器後，導向至ECPay付款頁面
-      window.location.href = `http://localhost:3006/ecpay/board-game?amount=${finalTotal}`
+      window.location.href = `http://localhost:3006/ecpay/board-game?amount=${finalTotal}&user_id=${authInfo.userData.id}`
     }
   }
   // 付款方式選擇樣式
@@ -265,6 +265,12 @@ export default function PayShip() {
                       id="new-recipient-name"
                       aria-describedby="new-recipient-name"
                       placeholder="收件人姓名"
+                      onChange={(e) =>
+                        setSelectRecipient({
+                          ...selectRecipient,
+                          recipient: e.target.value,
+                        })
+                      }
                       value={selectRecipient?.recipient || ''}
                     />
                     <div
@@ -286,6 +292,12 @@ export default function PayShip() {
                       className={`form-control ${styles.white_to_text}`}
                       id="new-recipient-phone"
                       placeholder="收件人聯絡電話，例如：0987654321"
+                      onChange={(e) =>
+                        setSelectRecipient({
+                          ...selectRecipient,
+                          contact_number: e.target.value,
+                        })
+                      }
                       value={selectRecipient?.contact_number || ''}
                     />
                     <div
