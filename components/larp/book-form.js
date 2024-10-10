@@ -47,7 +47,6 @@ export default function BookForm({
     initialFormValues
   )
 
-  const [selectDate, setSelectDate] = useState(selectedDate || '') // 記錄被選定的日期
   // ---- 儲存被預約的時間 start ----
   const [selectTime, setSelectTime] = useState('')
   // ---- 儲存被預約的時間 end ----

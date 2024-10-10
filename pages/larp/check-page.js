@@ -145,41 +145,41 @@ export default function CheckPage() {
           <div className={styles.orderInfo}>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>預約主題</h4>
+                <h4 className={styles.orderText}>預約主題</h4>
                 <h4>{esc}</h4>
               </div>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>館別</h4>
+                <h4 className={styles.orderText}>館別</h4>
                 <h4>{loc}</h4>
               </div>
             </div>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>日期</h4>
+                <h4 className={styles.orderText}>日期</h4>
                 <h4>{localData.date}</h4>
               </div>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>時段</h4>
+                <h4 className={styles.orderText}>時段</h4>
                 <h4>{localData.datetime}</h4>
               </div>
             </div>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>人數</h4>
+                <h4 className={styles.orderText}>人數</h4>
                 <h4>{localData.people} 位</h4>
               </div>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>聯絡人信箱</h4>
+                <h4 className={styles.orderText}>聯絡人信箱</h4>
                 <h4>{localData.email}</h4>
               </div>
             </div>
             <div className={styles.orderLine}>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>聯絡人姓名</h4>
+                <h4 className={styles.orderText}>聯絡人姓名</h4>
                 <h4>{localData.name}</h4>
               </div>
               <div className={styles.orderMin}>
-                <h4 className={styles.orderTitle}>聯絡人電話</h4>
+                <h4 className={styles.orderText}>聯絡人電話</h4>
                 <h4>{localData.mobile}</h4>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function CheckPage() {
               style={{ borderTop: '1px dashed #f8f0e5', paddingTop: 20 }}
             >
               <div div="" className={`${styles.orderMin} justify-content-end`}>
-                <h3 className="orderTitle">訂單金額</h3>
+                <h3 className="orderText">訂單金額</h3>
                 <h3>{localData.totalprice.toLocaleString('zh-tw', 0)} 元</h3>
               </div>
             </div>

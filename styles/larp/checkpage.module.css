@@ -49,6 +49,15 @@
   border-radius: 10px;
   border: 1px solid #f8f0e5;
 }
+.orderDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 23px;
+  align-self: stretch;
+  border-top: 1px dashed #f8f0e5;
+  padding-top: 30px;
+}
 .orderLine {
   display: flex;
   padding-right: 150px;
@@ -63,6 +72,10 @@
   gap: 54px;
 }
 .orderTitle {
+  width: 100px;
+  flex-shrink: 0;
+}
+.orderText {
   width: 100px;
   flex-shrink: 0;
 }
