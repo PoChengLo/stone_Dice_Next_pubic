@@ -5,7 +5,12 @@ import styles from '@/styles/larp/bookform.module.css'
 import Button from 'react-bootstrap/Button'
 import useBookFormState from '@/hooks/use-bookform-state'
 
-export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
+export default function BookForm({
+  escapes = [],
+  escape = [],
+  ordlist = [],
+  selectedDate,
+}) {
   // 儲存被選擇的主題id
   const [selectId, setSelectId] = useState('')
   // 儲存當前選擇的館別
@@ -21,10 +26,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
   const [uniPrice, setUniPrice] = useState(0)
   // 儲存總價
   const [totalPrice, setTotalPrice] = useState(0)
-  // ---- 儲存被預約的時間 start ----
-  const [selectDate, setSelectDate] = useState('') // 記錄被選定的日期
-  const [selectTime, setSelectTime] = useState('')
-  // ---- 儲存被預約的時間 end ----
 
   // 初始化表單localStorage的值
   const initialFormValues = {
@@ -45,7 +46,11 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     'bookForm',
     initialFormValues
   )
-  const { formData: localTime } = useBookFormState('time', initialFormValues)
+
+  const [selectDate, setSelectDate] = useState(selectedDate || '') // 記錄被選定的日期
+  // ---- 儲存被預約的時間 start ----
+  const [selectTime, setSelectTime] = useState('')
+  // ---- 儲存被預約的時間 end ----
 
   // 監聽 formData 狀態變化，並同步更新 localStorage
   useEffect(() => {
@@ -53,14 +58,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
       localStorage.setItem('bookForm', JSON.stringify(formData))
     }
   }, [formData])
-
-  // 監聽 formData 狀態變化，並同步更新 localStorage
-  useEffect(() => {
-    if (localTime) {
-      localStorage.setItem('time', JSON.stringify(localTime))
-      setSelectDate(localTime.date)
-    }
-  }, [localTime])
 
   // 處理輸入變更
   const handleInputChange = (e) => {
@@ -97,7 +94,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     filterLoc(selectId)
     setPeoples([])
     setUniPrice(selectId)
-    localStorage.removeItem('time')
+    setSelectDate('')
 
     // 根據選中的主題更新單價
     const selectPrice = escapes.find((r) => r.id === selectId)
@@ -179,6 +176,13 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     }
   }, [escapes, escape.larp_name])
 
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      date: selectedDate,
+    }))
+  }, [selectedDate])
+
   // 選擇人數時，同步變更總金額
   useEffect(() => {
     const Total = uniPrice * selectPeople
@@ -188,12 +192,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
       totalprice: Total,
     }))
   }, [selectPeople])
-
-  useEffect(() => {
-    if (localTime.date !== selectDate) {
-      setSelectDate(localTime.date)
-    }
-  }, [selectDate, localTime.date])
 
   return (
     <>
@@ -283,7 +281,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
               name="date"
-              value={localTime.date || ''}
+              value={selectedDate ? selectedDate.toString() : ''}
               readOnly
             />
           </InputGroup>

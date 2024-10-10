@@ -3,7 +3,7 @@ import styles from '@/styles/larp/calender.module.css'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 import useBookFormState from '@/hooks/use-bookform-state'
 
-export default function Calender() {
+export default function Calender({ onDateChange }) {
   const initialFormValues = {
     date: '',
   }
@@ -53,6 +53,12 @@ export default function Calender() {
   const handleDateClick = (day) => {
     const selected = new Date(currentYear, currentMonth, day)
     setSelectedDate(selected)
+    const formattedDate = formatDate(selected)
+    onDateChange(formattedDate)
+    setFormData((prevData) => ({
+      ...prevData,
+      date: formattedDate,
+    }))
   }
 
   const handlePreviousMonth = () => {
@@ -79,13 +85,6 @@ export default function Calender() {
     const day = String(date.getDate()).padStart(2, '0')
     return `${year}-${month}-${day}`
   }
-
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      date: formatDate(selectedDate),
-    }))
-  }, [selectedDate])
 
   return (
     <div className={styles.container}>
@@ -149,13 +148,6 @@ export default function Calender() {
             )
           })}
         </div>
-
-        {/* 顯示選取的日期 */}
-        {selectedDate && (
-          <div className="selected-date-info">
-            Selected Date: {formatDate(selectedDate)}
-          </div>
-        )}
       </div>
     </div>
   )
