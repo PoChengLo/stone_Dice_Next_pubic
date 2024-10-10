@@ -45,6 +45,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     'bookForm',
     initialFormValues
   )
+  const { formData: localTime } = useBookFormState('time', initialFormValues)
 
   // 監聽 formData 狀態變化，並同步更新 localStorage
   useEffect(() => {
@@ -52,6 +53,14 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
       localStorage.setItem('bookForm', JSON.stringify(formData))
     }
   }, [formData])
+
+  // 監聽 formData 狀態變化，並同步更新 localStorage
+  useEffect(() => {
+    if (localTime) {
+      localStorage.setItem('time', JSON.stringify(localTime))
+      setSelectDate(localTime.date)
+    }
+  }, [localTime])
 
   // 處理輸入變更
   const handleInputChange = (e) => {
@@ -75,8 +84,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     const onlyLoc = locationInfo.filter(
       (v, i, esc) => esc.findIndex((loc) => loc.loc_id === v.loc_id) === i
     )
-    console.log('Filtered Locations:', onlyLoc) // 檢查過濾結果
-
     // 把篩選出來的館別設定回去
     setFilteredLocations(onlyLoc)
   }
@@ -90,6 +97,7 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     filterLoc(selectId)
     setPeoples([])
     setUniPrice(selectId)
+    localStorage.removeItem('time')
 
     // 根據選中的主題更新單價
     const selectPrice = escapes.find((r) => r.id === selectId)
@@ -128,16 +136,6 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
     }
     return false // 如果沒有找到，則該選項是可用的
   }
-  //   if (
-  //     ordlist.ord_theme === selectId &&
-  //     ordlist.ord_loc === selectedLocationId &&
-  //     ordlist.ord_date === selectDate
-  //   ) {
-  //     if (ordlist.ord_time.filter((time) => time === selectTime)) {
-  //       return true
-  //     }
-  //   }
-  // }
 
   const handleLocationChange = (e) => {
     const selectedLocationId = e.target.value // 取得選擇的館別ID
@@ -190,6 +188,12 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
       totalprice: Total,
     }))
   }, [selectPeople])
+
+  useEffect(() => {
+    if (localTime.date !== selectDate) {
+      setSelectDate(localTime.date)
+    }
+  }, [selectDate, localTime.date])
 
   return (
     <>
@@ -274,15 +278,13 @@ export default function BookForm({ escapes = [], escape = [], ordlist = [] }) {
               日期
             </InputGroup.Text>
             <Form.Control
-              type="date"
+              type="text"
               placeholder="請點選左方行事曆選擇日期"
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
               name="date"
-              onChange={(e) => {
-                handleInputChange(e)
-                setSelectDate(e.target.value)
-              }}
+              value={localTime.date || ''}
+              readOnly
             />
           </InputGroup>
           {/* 時段 */}

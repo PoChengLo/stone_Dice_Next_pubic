@@ -1,187 +1,162 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '@/styles/larp/calender.module.css'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
+import useBookFormState from '@/hooks/use-bookform-state'
 
-// 月份名稱
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
-
-// 函數：獲取指定月份的天數
-function daysInMonth(month, year) {
-  return new Date(year, month, 0).getDate()
-}
-
-// 函數：將日期轉換為序數後綴（如：15 -> 15th）
-function getOrdinalSuffix(day) {
-  if (day > 3 && day < 21) return 'th' // 處理11到19
-  switch (day % 10) {
-    case 1:
-      return 'st'
-    case 2:
-      return 'nd'
-    case 3:
-      return 'rd'
-    default:
-      return 'th'
+export default function Calender() {
+  const initialFormValues = {
+    date: '',
   }
-}
+  const { formData, setFormData } = useBookFormState('time', initialFormValues)
 
-const Calendar = () => {
-  // 根據台灣時間獲取當前日期（UTC+8）
-  const now = new Date(
-    new Date().toLocaleString('en-US', { timeZone: 'Asia/Taipei' })
-  )
-  const currentDay = now.getDate()
-  const currentMonth = now.getMonth()
-  const currentYear = now.getFullYear()
-  const currentDayOfWeek = now.toLocaleString('en-US', { weekday: 'long' })
+  // 月份名稱
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+  const today = new Date()
+  const [selectedDate, setSelectedDate] = useState('')
+  const [currentMonth, setCurrentMonth] = useState(today.getMonth())
+  const [currentYear, setCurrentYear] = useState(today.getFullYear())
 
-  const [monthIndex, setMonthIndex] = useState(currentMonth)
-  const [year, setYear] = useState(currentYear)
-  const [selectedDate, setSelectedDate] = useState(null) // 狀態：保存選擇的日期
+  const getDaysInMonth = (month, year) => {
+    const date = new Date(year, month, 1)
+    const days = []
+    const firstDayIndex = date.getDay()
+    const lastDay = new Date(year, month + 1, 0).getDate()
 
-  // 函數：切換到下個月
-  const nextMonth = () => {
-    if (monthIndex === 11) {
-      setMonthIndex(0)
-      setYear(year + 1)
-    } else {
-      setMonthIndex(monthIndex + 1)
+    // 前面的空白日期
+    for (let i = 0; i < firstDayIndex; i++) {
+      days.push(null)
     }
+
+    // 月份的實際日期
+    for (let i = 1; i <= lastDay; i++) {
+      days.push(i)
+    }
+
+    return days
   }
 
-  // 函數：切換到上個月
-  const prevMonth = () => {
-    if (monthIndex === 0) {
-      setMonthIndex(11)
-      setYear(year - 1)
-    } else {
-      setMonthIndex(monthIndex - 1)
-    }
-  }
+  const days = getDaysInMonth(currentMonth, currentYear)
 
-  // 獲取選擇的月份和年份的天數
-  const monthDayCount = daysInMonth(monthIndex + 1, year)
-  const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-
-  // 獲取該月份的第一天（0-6，0是星期天，1是星期一，...，6是星期六）
-  const firstDayOfMonth = new Date(year, monthIndex, 1).getDay()
-
-  // 調整以使星期一成為第一天
-  const adjustedFirstDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1
-
-  // 填充第一行空位，根據第一天是星期幾進行填充
-  const emptyDays = Array.from({ length: adjustedFirstDay })
-
-  // 判斷該日期是否早於今天
-  const isDateInPast = (day) => {
-    if (
-      year < currentYear ||
-      (year === currentYear && monthIndex < currentMonth)
-    ) {
-      return true
-    }
-    if (
-      year === currentYear &&
-      monthIndex === currentMonth &&
-      day < currentDay
-    ) {
-      return true
-    }
-    return false
-  }
-
-  // 處理選擇日期的點擊事件
   const handleDateClick = (day) => {
     const selected = new Date(currentYear, currentMonth, day)
     setSelectedDate(selected)
   }
 
-  // 函數：處理選擇的日期
-  const setDataId = (day) => {
-    if (!isDateInPast(day)) {
-      // 禁止選擇今天之前的日期
-      setSelectedDate(day)
+  const handlePreviousMonth = () => {
+    if (currentMonth === 0) {
+      setCurrentMonth(11)
+      setCurrentYear(currentYear - 1)
+    } else {
+      setCurrentMonth(currentMonth - 1)
     }
   }
+
+  const handleNextMonth = () => {
+    if (currentMonth === 11) {
+      setCurrentMonth(0)
+      setCurrentYear(currentYear + 1)
+    } else {
+      setCurrentMonth(currentMonth + 1)
+    }
+  }
+
+  const formatDate = (date) => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      date: formatDate(selectedDate),
+    }))
+  }, [selectedDate])
 
   return (
     <div className={styles.container}>
       <div className={styles.calendar}>
         <div className={styles.header}>
-          {/* 顯示今天的詳細日期 */}
-          {/* <h2>{`${currentDayOfWeek} ${currentDay}${getOrdinalSuffix(
-            currentDay
-          )}`}</h2> */}
-          <FaAngleLeft
-            onClick={prevMonth}
-            onKeyDown={(e) => e.key === 'Enter' && prevMonth()}
-            role="button"
-            tabIndex="0"
-          />
+          <FaAngleLeft variant="link" onClick={handlePreviousMonth} />
           <h3>
-            {months[monthIndex]} {year}
+            {months[currentMonth]} {currentYear}
           </h3>
-          <FaAngleRight
-            onClick={nextMonth}
-            onKeyDown={(e) => e.key === 'Enter' && nextMonth()}
-            role="button"
-            tabIndex="0"
-          />
+          <FaAngleRight variant="link" onClick={handleNextMonth} />
         </div>
+
         <div className={styles.days}>
-          {days.map((day, index) => (
-            <div key={index} className={styles.day_item}>
-              {day}
-            </div>
-          ))}
+          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(
+            (day, index) => (
+              <div key={index} className={styles.day_item}>
+                {day}
+              </div>
+            )
+          )}
         </div>
+
         <div className={styles.dates}>
-          {emptyDays.map((_, index) => (
-            <div key={index} className={styles.empty_date}></div>
-          ))}
-          {[...Array(monthDayCount)].map((_, i) => {
-            const dayNumber = i + 1
+          {days.map((day, index) => {
             const isToday =
-              dayNumber === currentDay &&
-              monthIndex === currentMonth &&
-              year === currentYear
-            const isSelected = dayNumber === selectedDate
-            const inPast = isDateInPast(dayNumber)
+              day === today.getDate() &&
+              currentMonth === today.getMonth() &&
+              currentYear === today.getFullYear()
+            const isSelected =
+              day &&
+              selectedDate &&
+              day === selectedDate.getDate() &&
+              currentMonth === selectedDate.getMonth() &&
+              currentYear === selectedDate.getFullYear()
+            const isPast =
+              day &&
+              day < today.getDate() &&
+              currentMonth === today.getMonth() &&
+              currentYear === today.getFullYear()
 
             return (
               <div
-                key={i}
+                key={index}
                 className={`${styles.date_item} ${
                   isToday ? styles.today : ''
                 } ${isSelected ? styles.selected : ''} ${
-                  inPast ? styles.past : ''
+                  isPast ? styles.past : ''
                 }`}
-                onClick={() => setDataId(dayNumber)}
-                onKeyDown={(e) => e.key === 'Enter' && setDataId(dayNumber)}
+                onClick={() => day && handleDateClick(day)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    day && handleDateClick(day)
+                  }
+                }}
+                tabIndex={0}
                 role="button"
-                tabIndex="0"
+                aria-disabled={isPast}
               >
-                {dayNumber}
+                {day}
               </div>
             )
           })}
         </div>
+
+        {/* 顯示選取的日期 */}
+        {selectedDate && (
+          <div className="selected-date-info">
+            Selected Date: {formatDate(selectedDate)}
+          </div>
+        )}
       </div>
     </div>
   )
 }
-
-export default Calendar
