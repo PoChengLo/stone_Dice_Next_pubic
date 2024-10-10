@@ -198,56 +198,54 @@ export default function CheckSuccess() {
                 >
                   訂單明細
                 </h4>
-                <div className={styles.orderLine}>
+                <div className={styles.orderLine1}>
                   <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>訂單編號</h4>
+                    <h4 className={styles.orderText}>訂單編號</h4>
                     <h4>{ordData.ord_id}</h4>
                   </div>
-                </div>
-                <div className={styles.orderLine}>
                   <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>預約主題</h4>
-                    <h4>{themeName}</h4>
-                  </div>
-                  <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>館別</h4>
-                    <h4>{locationName}</h4>
+                    <h4 className={styles.orderText}>訂單金額</h4>
+                    <h4>{ordData.ord_total.toLocaleString('zh-tw', 0)} 元</h4>
                   </div>
                 </div>
-                <div className={styles.orderLine}>
+                <div className={styles.orderLine1}>
                   <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>日期</h4>
-                    <h4>{ordData.ord_date}</h4>
-                  </div>
-                  <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>時段</h4>
-                    <h4>{ordData.ord_time}</h4>
-                  </div>
-                </div>
-                <div className={styles.orderLine}>
-                  <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>人數</h4>
-                    <h4>{ordData.ord_people} 位</h4>
-                  </div>
-                  <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>聯絡人信箱</h4>
-                    <h4>{ordData.ord_email}</h4>
-                  </div>
-                </div>
-                <div className={styles.orderLine}>
-                  <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>聯絡人姓名</h4>
+                    <h4 className={styles.orderText}>聯絡人姓名</h4>
                     <h4>{ordData.ord_name}</h4>
                   </div>
                   <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>聯絡人電話</h4>
+                    <h4 className={styles.orderText}>聯絡人電話</h4>
                     <h4>{ordData.ord_mobile}</h4>
                   </div>
                 </div>
-                <div className={styles.orderLine}>
+                <div className={styles.orderLine1}>
                   <div className={styles.orderMin}>
-                    <h4 className={styles.orderTitle}>訂單金額</h4>
-                    <h4>{ordData.ord_total.toLocaleString('zh-tw', 0)} 元</h4>
+                    <h4 className={styles.orderText}>聯絡人信箱</h4>
+                    <h4>{ordData.ord_email}</h4>
+                  </div>
+                  <div className={styles.orderMin}>
+                    <h4 className={styles.orderText}>人數</h4>
+                    <h4>{ordData.ord_people} 位</h4>
+                  </div>
+                </div>
+                <div className={styles.orderLine1}>
+                  <div className={styles.orderMin}>
+                    <h4 className={styles.orderText}>預約主題</h4>
+                    <h4>{themeName}</h4>
+                  </div>
+                  <div className={styles.orderMin}>
+                    <h4 className={styles.orderText}>館別</h4>
+                    <h4>{locationName}</h4>
+                  </div>
+                </div>
+                <div className={styles.orderLine1}>
+                  <div className={styles.orderMin}>
+                    <h4 className={styles.orderText}>日期</h4>
+                    <h4>{ordData.ord_date}</h4>
+                  </div>
+                  <div className={styles.orderMin}>
+                    <h4 className={styles.orderText}>時段</h4>
+                    <h4>{ordData.ord_time}</h4>
                   </div>
                 </div>
               </div>

@@ -65,6 +65,14 @@
   align-items: flex-start;
   align-self: stretch;
 }
+.orderLine1 {
+  display: flex;
+  padding-right: 100px;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  padding-left: 40px;
+}
 .orderMin {
   display: flex;
   width: 304px;
@@ -76,6 +84,8 @@
   flex-shrink: 0;
 }
 .orderText {
+  display: flex;
+  justify-content: flex-end;
   width: 100px;
   flex-shrink: 0;
 }
