@@ -8,6 +8,7 @@ import OrderSelection from '@/components/board-game/order-selection'
 import SideClass from '../../components/board-game/side-class'
 import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+import NavbarM from '@/components/layout/default-layout/user-layout/navbarM'
 
 export default function BoardGame() {
   const router = useRouter()
@@ -75,6 +76,7 @@ export default function BoardGame() {
 
   return (
     <>
+      <NavbarM />
       <Navbar />
       <div id={`${styles.backgroundImage_index}`} className="pt-5">
         <div className="container pt-5">
