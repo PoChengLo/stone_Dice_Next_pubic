@@ -4,25 +4,8 @@ import styles from '@/styles/user-profile/main-user-profile.module.scss'
 import { BsPencilSquare } from 'react-icons/bs'
 import React, { useState } from 'react'
 import axios from 'axios'
-import Swal from 'sweetalert2'
-
-const imageStyle = {
-  borderRadius: '50%',
-  flexShrink: '0',
-  objectFit: 'cover',
-  boxShadow:
-    '130px 107px 47px 0px rgba(0, 0, 0, 0.00), 83px 68px 43px 0px rgba(0, 0, 0, 0.01), 47px 38px 36px 0px rgba(0, 0, 0, 0.05), 21px 17px 27px 0px rgba(0, 0, 0, 0.09), 5px 4px 15px 0px rgba(0, 0, 0, 0.10)',
-  position: 'relative',
-  border: '17px solid #A6977C',
-}
-
-const secondImageStyle = {
-  position: 'absolute',
-  top: '50%',
-  right: '10%',
-  filter:
-    'drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.10)) drop-shadow(0px 9px 9px rgba(0, 0, 0, 0.09)) drop-shadow(0px 20px 12px rgba(0, 0, 0, 0.05)) drop-shadow(0px 35px 14px rgba(0, 0, 0, 0.01)) drop-shadow(0px 55px 15px rgba(0, 0, 0, 0.00))',
-}
+import showCustomSwal from './sweet-alert'
+import ImageUpload from './image-upload'
 
 const MainProfile = ({ userData: initialUserData }) => {
   // 使用 useState 將 userData 初始化為從 props 傳入的值
@@ -65,27 +48,13 @@ const MainProfile = ({ userData: initialUserData }) => {
       )
 
       if (response.data.status === 'success') {
-        Swal.fire({
-          title: '資料更新成功',
-          text: '您的資料已經成功更新',
-          icon: 'success',
-          confirmButtonText: 'OK!',
-        })
+        showCustomSwal('資料更新成功', '您的資料已經成功更新', 'success')
+        window.dispatchEvent(new Event('userDataUpdated'))
       } else {
-        Swal.fire({
-          title: '更新失敗',
-          text: response.data.message,
-          icon: 'error',
-          confirmButtonText: 'OK!',
-        })
+        showCustomSwal('更新失敗', response.data.message, 'error')
       }
     } catch (error) {
-      Swal.fire({
-        title: '伺服器錯誤',
-        text: '請稍後再試',
-        icon: 'error',
-        confirmButtonText: '確認',
-      })
+      showCustomSwal('伺服器錯誤', '請稍後再試', 'error')
     }
   }
 
@@ -93,22 +62,7 @@ const MainProfile = ({ userData: initialUserData }) => {
     <>
       <div className={styles['main-blogs']}>
         <div className={styles['main-blog']}>
-          <Image
-            src="https://i.postimg.cc/XYZ6wqcD/26-2.jpg"
-            alt=""
-            width={260}
-            height={260}
-            style={imageStyle}
-          />
-          <a href="#">
-            <Image
-              src="https://i.postimg.cc/dtzxD7Ks/cccccrrr.png"
-              alt=""
-              width={80}
-              height={80}
-              style={secondImageStyle}
-            />
-          </a>
+          <ImageUpload initialImage={userData.user_img} />
           <div className={styles['main-blog-author']}>
             <div className={styles['author-img-wrapper']}></div>
             <div className={styles['author-detail']}>
@@ -170,10 +124,10 @@ const MainProfile = ({ userData: initialUserData }) => {
             <td>手機號碼</td>
             <td>{userData.mobile}</td>
             <td>
-              <a href="#">
+              <button onClick={() => {}}>
                 <BsPencilSquare />
                 修改
-              </a>
+              </button>
             </td>
           </tr>
         </tbody>

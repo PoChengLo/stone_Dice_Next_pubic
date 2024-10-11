@@ -1,0 +1,21 @@
+/* 自定義彈窗的樣式 */
+.swal-popup {
+  border-radius: 12px; /* 邊框圓角 */
+  padding: 20px; /* 調整內邊距 */
+}
+
+/* 自定義確認按鈕的樣式 */
+.swal-confirm-button {
+  background-color: #423c32 !important; /* 按鈕背景顏色 */
+  color: white; /* 按鈕文字顏色 */
+  border-radius: 12px; /* 圓角 */
+  padding: 10px 20px; /* 調整內邊距 */
+  text-align: center; /* 文字水平居中 */
+  line-height: 1.5; /* 調整行高，讓按鈕內容垂直居中 */
+  display: inline-flex; /* 使用 flex 來調整按鈕內的文字居中 */
+  align-items: center; /* 垂直居中對齊 */
+  justify-content: center; /* 水平居中對齊 */
+  height: 40px; /* 設置按鈕的高度 */
+  box-shadow: none; /* 去掉按鈕陰影 */
+  outline: none; /* 去掉按鈕外框 */
+}

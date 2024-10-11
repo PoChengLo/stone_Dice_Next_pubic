@@ -113,7 +113,9 @@
   width: 192px;
   padding: 9px 39px;
 }
-.btnstyle:hover {
-  background-color: #d7bf7d;
-  color: #4e4e4e;
+
+.btnstyle:hover,
+.btnstyle:active {
+  background-color: #d7bf7d !important;
+  color: #4e4e4e !important;
 }

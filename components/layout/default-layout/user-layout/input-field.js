@@ -19,6 +19,14 @@ const InputField = ({
   return (
     <div className={styles.input_container}>
       <div className={styles.input_wrapper}>
+        <label
+          className={`${styles.label} ${
+            isFocused || value ? styles.label_float : ''
+          }`}
+          htmlFor={`${name}Input`}
+        >
+          {label}
+        </label>
         <input
           className={`${styles.input} ${isFocused ? styles.input_focus : ''} ${
             error ? styles.error : ''
@@ -32,18 +40,14 @@ const InputField = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        <label
-          className={`${styles.label} ${
-            isFocused || value ? styles.label_float : ''
-          }`}
-          htmlFor={`${name}Input`}
-        >
-          {label}
-        </label>
       </div>
-      <p className={`${styles.helper_text} ${error ? styles.error_text : ''}`}>
-        {error ? helperText : defaultHelperText}
-      </p>
+      <div className={styles.helper_wrapper}>
+        <p
+          className={`${styles.helper_text} ${error ? styles.error_text : ''}`}
+        >
+          {error ? helperText : defaultHelperText}
+        </p>
+      </div>
     </div>
   )
 }
