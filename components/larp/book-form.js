@@ -126,7 +126,10 @@ export default function BookForm({
       // 遍歷已預訂的時間，並檢查選擇的日期
       for (let i = 0; i < ordlist.length; i++) {
         // 假設 ordlist[i].ord_date 是日期字串，例如 "YYYY-MM-DD"
-        const isSameDate = ordlist[i].ord_date === selectedDate
+        const isSameDate =
+          ordlist[i].ord_theme === selectId &&
+          ordlist[i].ord_loc === parseInt(selectedLocationId) &&
+          ordlist[i].ord_date === selectedDate
         if (isSameDate && ordlist[i].ord_time === time) {
           return true // 如果找到相同的日期和時間，則禁用該選項
         }
