@@ -1,24 +1,26 @@
 .input_container {
   position: relative;
-  display: flex; // 使用 flex 使 label 和 input 垂直居中
-  align-items: center; // 元素垂直居中
+  display: flex;
+  flex-direction: column;
   width: 80%;
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .input {
-  border: none;
-  background: none;
-  outline: none;
   width: 100%;
-  line-height: 1.5;
-  background: #ddd;
-  padding: 5px 10px;
-  border: #888 solid 2px;
-  border-radius: 12px;
+  padding: 10px;
   font-size: 1rem;
-  transition: background 200ms, border-color 200ms;
+  border-radius: 12px;
+  border: 2px solid #888;
+  background: #ddd;
+  transition: background 200ms, border-color 200ms, all 0.3s ease;
 
   &:focus,
   &:not(:placeholder-shown) {
@@ -26,35 +28,44 @@
     border-color: #555;
 
     & + .label {
-      top: -10px; /* 確保上浮後的位置 */
-      font-size: 1rem; /* 保持字體大小不變 */
+      top: -12px;
       color: #555;
     }
-  }
-
-  &.error {
-    border-color: #ff0000;
   }
 }
 
 .label {
   position: absolute;
-  left: 10px;
   top: 50%;
-  transform: translateY(-50%); /* 確保 label 文字垂直居中 */
-  transition: all 0.3s ease; /* 平滑的過渡效果 */
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
   pointer-events: none;
-  color: #666;
+  color: #888;
   padding: 0 5px;
   font-size: 1rem;
+}
+
+.label_float {
+  top: -11px;
+  color: #555;
+}
+
+.helper_wrapper {
+  margin-top: 10px;
 }
 
 .helper_text {
   font-size: 0.8rem;
   color: #888;
-  margin-top: 5px;
+ margin-left: 10px;
+  white-space: nowrap; /* 確保換行 */
+}
 
-  &.error_text {
-    color: #ff0000;
-  }
+.error {
+  border-color: #ff0000;
+}
+
+.error_text {
+  color: #ff0000;
 }
