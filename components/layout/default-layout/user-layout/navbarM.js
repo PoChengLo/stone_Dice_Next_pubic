@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from './navbar.module.scss'
+import styles from './navbarM.module.scss'
 import {
   BsPersonCircle,
   BsFillSignpostFill,
@@ -7,10 +7,12 @@ import {
   BsFillBagHeartFill,
   BsBoxArrowInRight,
 } from 'react-icons/bs'
-import SideCart from '@/components/board-game/side-cart'
+import SideCartM from '@/components/board-game/side-cartM'
 import React, { useState, useRef, useEffect } from 'react'
 import useLogout from '@/hooks/use-logout'
 import Link from 'next/link'
+import Dropdown from 'react-bootstrap/Dropdown'
+import { FiMenu } from 'react-icons/fi'
 
 const imageStyle = {
   borderRadius: '50%',
@@ -49,20 +51,45 @@ export default function Navbar() {
   }
 
   return (
-    <header>
+    <header className={styles.header}>
       <nav className={styles.nav}>
-        <div className={styles['logo-image']}>
-          <a href="./">
+        <div className={`${styles.logo_image}`}>
+          <Link href="./">
             <Image
-              src="https://i.postimg.cc/VLShYqpZ/Rectangle-2.png"
+              src="user-profile/navbarM_logo.png"
               alt=""
-              width={197}
+              width={67}
               height={60}
               priority={true} // {false} | {true}
             />
-          </a>
+          </Link>
+          <div>
+            <Dropdown>
+              <Dropdown.Toggle className={`${styles.btn}`}>
+                <FiMenu />
+              </Dropdown.Toggle>
+              <Dropdown.Menu className={`${styles.a_bg}`}>
+                <Dropdown.Item className={`${styles.a}`} href="/board-game">
+                  桌遊商品
+                </Dropdown.Item>
+                <Dropdown.Item className={`${styles.a}`} href="/larp">
+                  密室逃脫
+                </Dropdown.Item>
+                <Dropdown.Item className={`${styles.a}`} href="#">
+                  劇本殺
+                </Dropdown.Item>
+                <Dropdown.Item className={`${styles.a}`} href="#">
+                  活動頁面
+                </Dropdown.Item>
+                <Dropdown.Item className={`${styles.a}`} href="#">
+                  關於我們
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         </div>
-        <div className={styles['main-list']}>
+
+        {/* <div className={styles['main-list']}>
           <ul>
             <li>
               <div className={styles['main-item']}>
@@ -76,41 +103,37 @@ export default function Navbar() {
             </li>
             <li>
               <div className={styles['main-item']}>
-                <a href="#">劇本殺</a>
+                <Link href="#">劇本殺</Link>
               </div>
             </li>
             <li>
               <div className={styles['main-item']}>
-                <a href="#">活動頁面</a>
+                <Link href="#">活動頁面</Link>
               </div>
             </li>
             <li className={styles['dropdown']}>
               <div className={styles['main-item']}>
-                <a href="#">關於我們</a>
+                <Link href="#">關於我們</Link>
                 <ul className={styles['dropdown-menu']}>
                   <li>
-                    <a href="#">團隊理念</a>
+                    <Link href="#">團隊理念</Link>
                   </li>
                   <li>
-                    <a href="#">店面資訊</a>
+                    <Link href="#">店面資訊</Link>
                   </li>
                 </ul>
               </div>
             </li>
           </ul>
-        </div>
+        </div> */}
 
-        <div className={styles['user-list']}>
+        <div className={`${styles.user_list}`}>
           <ul>
             <li>
-              <SideCart />
+              <SideCartM />
             </li>
             <li>
-              <a href="#">
-                <h6>歡迎回來！汪汪大隊長</h6>
-              </a>
-            </li>
-            <li className={styles['avatar-wrapper']} ref={avatarRef}>
+              {' '}
               <Image
                 src="https://i.postimg.cc/XYZ6wqcD/26-2.jpg"
                 alt="用戶頭像"
@@ -120,6 +143,8 @@ export default function Navbar() {
                 onClick={toggleAvatarMenu}
               />
             </li>
+
+            <li className={styles['avatar-wrapper']} ref={avatarRef}></li>
           </ul>
 
           <div
@@ -136,28 +161,28 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className={styles.menuItem}>
-                <a href="#">
+                <Link href="#">
                   <BsFillFileTextFill />
                   <span>我的訂單</span>
-                </a>
+                </Link>
               </li>
               <li className={styles.menuItem}>
-                <a href="#">
+                <Link href="#">
                   <BsFillBagHeartFill />
                   <span>我的收藏</span>
-                </a>
+                </Link>
               </li>
               <li className={styles.menuItem}>
-                <a href="#">
+                <Link href="#">
                   <BsFillSignpostFill />
                   <span>預約的活動</span>
-                </a>
+                </Link>
               </li>
               <li className={styles.menuItem}>
-                <a href="#" onClick={handleLogout}>
+                <Link href="#" onClick={handleLogout}>
                   <BsBoxArrowInRight />
                   <span>登出</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
