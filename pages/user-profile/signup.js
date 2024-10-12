@@ -4,6 +4,7 @@ import InputField from '@/components/layout/default-layout/user-layout/input-fie
 import styles from '@/styles/user-profile/signup.module.scss'
 import Image from 'next/image'
 import { register } from '@/services/user'
+import Link from 'next/link'
 
 const backgroundStyle = {
   height: '100vh',
@@ -176,7 +177,7 @@ export default function SignupPage() {
                 </form>
                 <p className={styles['signup-prompt']}>
                   <span>已經有帳號了？</span>
-                  <a href="/login">登入</a>
+                  <Link href="/user-profile/login">登入</Link>
                 </p>
               </div>
             </div>
