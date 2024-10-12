@@ -63,7 +63,7 @@ export default function LarpPage() {
     return filteredEscapes.map((r) => (
       <Card
         key={r.id}
-        larpImg={r.larp_img}
+        larpImg={`/larp/img/larp-product/${r.larp_img}`}
         larpName={r.larp_name}
         larpPrice={r.price}
         orderLink={`/larp/${r.id}#order`}
