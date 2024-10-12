@@ -74,12 +74,21 @@ export default function CheckSuccess() {
 
   useEffect(() => {
     localStorage.removeItem('bookForm')
-    // localStorage.removeItem('ord_id')
+    localStorage.removeItem('ord_id')
     localStorage.removeItem('time')
   }, [router.isReady])
 
+  const mobileReFormat = () => {
+    if (ordData.ord_mobile) {
+      return `${ordData.ord_mobile.slice(0, 4)}-${ordData.ord_mobile.slice(
+        4,
+        7
+      )}-${ordData.ord_mobile.slice(7)}`
+    }
+  }
+
   return (
-    <div className={`${styles.bodyBg}`} style={{ padding: '60px' }}>
+    <div className={`${styles.bodyBg}`} style={{ paddingTop: '60px' }}>
       {/* 導覽列 */}
       <Navbar />
       <div className={styles.larpContainer}>
@@ -203,7 +212,7 @@ export default function CheckSuccess() {
                   </div>
                   <div className={styles.orderMin}>
                     <h4 className={styles.orderText}>訂單金額</h4>
-                    <h4>{ordData.ord_total.toLocaleString('zh-tw')} 元</h4>
+                    <h4>{ordData.ord_total} 元</h4>
                   </div>
                 </div>
                 <div className={styles.orderLine1}>
@@ -213,7 +222,7 @@ export default function CheckSuccess() {
                   </div>
                   <div className={styles.orderMin}>
                     <h4 className={styles.orderText}>聯絡人電話</h4>
-                    <h4>{ordData.ord_mobile}</h4>
+                    <h4>{mobileReFormat(ordData.ord_mobile)}</h4>
                   </div>
                 </div>
                 <div className={styles.orderLine1}>
