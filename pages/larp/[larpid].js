@@ -315,19 +315,25 @@ export default function LarpId() {
         {/* 環境預覽分隔線 */}
         <Line title="環境預覽" />
         {/* 環境預覽API */}
-        <div
-          id={styles.VRspace}
-          style={{
-            width: '100%',
-            height: 856,
-            backgroundColor: 'rgb(82, 95, 117)',
-          }}
-        >
+        <div>
+          <h4 style={{ margin: '0', marginTop: '60px', color: '#f8f0e5' }}>
+            縮放操作：請使用滑鼠滾輪來放大或縮小視圖 ;
+            拖曳功能：按住滑鼠左鍵並拖曳可左右移動畫面。
+          </h4>
           <div
-            id="scene"
-            ref={sceneRef}
-            style={{ width: '100%', height: '100%' }}
-          ></div>
+            id={styles.VRspace}
+            style={{
+              width: '100%',
+              height: 856,
+              marginTop: '10px',
+            }}
+          >
+            <div
+              id="scene"
+              ref={sceneRef}
+              style={{ width: '100%', height: '100%' }}
+            ></div>
+          </div>
         </div>
         {/* 立即預約分隔線 */}
         <div id="order">

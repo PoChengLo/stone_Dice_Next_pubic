@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Line from '@/components/larp/title-line'
 import AccordionItem from '@/components/larp/Accordion'
 import Calender from '@/components/larp/calender'
-import BookForm from '@/components/larp/book-form'
+import BookForm from '@/components/larp/mystery-form.js'
 import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
@@ -68,6 +68,8 @@ export default function MysteryId() {
     setSelectedDate(date)
   }
 
+  const perPrice = parseInt(escape.price) / parseInt(escape.larp_people)
+
   //id改變的時候，重新載入資料
   useEffect(() => {
     if (router.isReady) {
@@ -123,53 +125,87 @@ export default function MysteryId() {
               height={623}
             />
           </div>
-          <div>
-            <h1 className={`${styles.larpName}`}>{escape.larp_name}</h1>
+          <div className={styles.zone}>
+            <h1 className={`${styles.larpName} text-center`}>
+              {escape.larp_name}
+            </h1>
             {/* 故事背景分隔線 */}
-            <Line title="故事背景" />
+            <div
+              className={`${styles.titleMargin} d-flex w-100 justify-content-evenly align-items-center`}
+            >
+              <div
+                className="flex-fill"
+                style={{ height: '1px', backgroundColor: '#d7bf7d' }}
+              />
+              <h3
+                className="text-center"
+                style={{
+                  padding: '0px 30px',
+                  fontSize: '40px',
+                  letterSpacing: '10px',
+                }}
+              >
+                故事背景
+              </h3>
+              <div className={`${styles.line} flex-fill`} />
+            </div>
             {/* 故事內容 */}
-            <h4 className={styles.h4Text}>{escape.larp_intro}</h4>
+            <h4
+              className={`${styles.h4Text} text-center`}
+              style={{ letterSpacing: '4px', lineHeight: '2rem' }}
+            >
+              {escape.larp_intro}
+            </h4>
             {/* 立即預約按鈕 */}
             <Link
               href="#order"
               scroll={true}
-              // className={styles.orderButton}
-              style={{ zIndex: '1' }}
+              style={{ zIndex: '1', display: 'flex', justifyContent: 'center' }}
             >
-              {/* <OrderRightNow /> */}
               <Image
                 className={styles.svgImg}
-                src="../larp/img/svgButton.png"
+                src="../larp/img/mystreyBtn.png"
                 alt=""
               />
             </Link>
           </div>
-          <div></div>
         </div>
       </div>
-      <div className={styles.larpContainer} id={styles.larpStory}></div>
-      {/* 第一段大圖 */}
-      <div id={styles.p1} className="position-relative">
-        <Image
-          alt=""
-          src={`/larp/img/larp-product/${escape.larp_p1_img}`}
-          width={'100%'}
-        />
-        <div className={styles.p1Text}>
-          <h3>{escape.larp_title1}</h3>
-          <h4>{escape.larp_p1}</h4>
-        </div>
-      </div>
-      {/* 第二段大圖 */}
-      <div id={styles.p2} className="position-relative">
-        <Image
-          alt=""
-          src={`/larp/img/larp-product/${escape.larp_p2_img}`}
-          width={'100%'}
-        />
-        <div className={styles.p2Text}>
-          <h3>{escape.larp_title2}</h3>
-          <h4>{escape.larp_p2}</h4>
+      <div className={styles.larpContainer} id={styles.larpStory}>
+        {/* 角色設定分隔線 */}
+        <Line title="角色設定" />
+        {/* 角色內容 */}
+        <div>
+          {escape.actor_list &&
+            escape.actor_list.map((v) => (
+              <div
+                key={v.actor_id}
+                className="d-flex"
+                style={{
+                  color: '#F8F0E5',
+                  borderImage: `url('/larp/img/dashed.png') 20 round `,
+                  borderStyle: 'solid',
+                  borderWidth: '0 0 20px 0',
+                  padding: '60px 0px 15px 0',
+                }}
+              >
+                <Image
+                  src={`/larp/img/larp-product/${v.actor_img}`}
+                  alt=""
+                  width={136}
+                  height={136}
+                />
+                <div className="ms-5">
+                  <h4 className="mt-3">{v.actor}</h4>
+                  <p className="m-0 mt-4" style={{ letterSpacing: '2px' }}>
+                    {v.actor_job}
+                  </p>
+                  <p className="m-0 mt-1" style={{ letterSpacing: '2px' }}>
+                    {v.actor_intro}
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <div className={styles.larpContainer}>
@@ -279,7 +315,7 @@ export default function MysteryId() {
             </svg>
             <div>
               <h3>遊玩價錢</h3>
-              <h3>{escape.price} /人</h3>
+              <h3>{perPrice} 元 /人</h3>
             </div>
           </div>
           {/* 時間 */}
@@ -316,19 +352,25 @@ export default function MysteryId() {
         {/* 環境預覽分隔線 */}
         <Line title="環境預覽" />
         {/* 環境預覽API */}
-        <div
-          id={styles.VRspace}
-          style={{
-            width: '100%',
-            height: 856,
-            backgroundColor: 'rgb(82, 95, 117)',
-          }}
-        >
+        <div>
+          <h4 style={{ margin: '0', marginTop: '60px', color: '#f8f0e5' }}>
+            縮放操作：請使用滑鼠滾輪來放大或縮小視圖 ;
+            拖曳功能：按住滑鼠左鍵並拖曳可左右移動畫面。
+          </h4>
           <div
-            id="scene"
-            ref={sceneRef}
-            style={{ width: '100%', height: '100%' }}
-          ></div>
+            id={styles.VRspace}
+            style={{
+              width: '100%',
+              height: 856,
+              marginTop: '10px',
+            }}
+          >
+            <div
+              id="scene"
+              ref={sceneRef}
+              style={{ width: '100%', height: '100%' }}
+            ></div>
+          </div>
         </div>
         {/* 立即預約分隔線 */}
         <div id="order">

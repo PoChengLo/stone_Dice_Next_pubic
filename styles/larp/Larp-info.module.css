@@ -133,6 +133,22 @@
   width: auto;
   height: 50px;
 }
+/* 論壇輪播 */
+.carousel-item {
+  background-color: #333; /* Dark background for contrast */
+  color: white; /* White text for readability */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.carousel-item h5 {
+  margin-bottom: 10px;
+}
+
+.carousel-item p {
+  margin: 5px 0;
+}
+
 @media (max-width: 576px) {
   #bookGroup {
     flex-direction: column;
