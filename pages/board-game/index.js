@@ -10,7 +10,7 @@ import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import NavbarM from '@/components/layout/default-layout/user-layout/navbarM'
 
-export default function BoardGame() {
+export default function BoardGame({ onClick }) {
   const router = useRouter()
   // 商品物件陣列狀態
   // 注意1: 初始值至少要空陣列，初次渲染使用的是初始值
@@ -29,6 +29,18 @@ export default function BoardGame() {
 
   // 搜尋關鍵字
   const [search, setSearch] = useState('')
+
+  const [product, setProduct] = useState({
+    id: 0,
+    prod_img: '',
+    prod_name: '',
+    prod_desc: '',
+    prod_intro: '',
+    prod_rules: '',
+    prod_people: '',
+    prod_time: '',
+    price: 0,
+  })
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getProducts = async () => {
@@ -73,6 +85,10 @@ export default function BoardGame() {
     // 向伺服器要求資料
     getProducts()
   }, [router])
+
+  const handleCardClick = (product) => {
+    setProduct(product)
+  }
 
   return (
     <>
@@ -165,7 +181,7 @@ export default function BoardGame() {
                         break
                       case '3':
                         query.sort = 'prod_sales'
-                        query.order = 'asc'
+                        query.order = 'desc'
                         break
                       case '4':
                         query.sort = 'prod_update'
@@ -251,7 +267,7 @@ export default function BoardGame() {
                     className={`col-6 col-xxl-3 d-flex justify-content-center `}
                     key={product.id}
                   >
-                    <ProdCard product={product} />
+                    <ProdCard product={product} onClick={handleCardClick} />
                   </div>
                 ))}
               </div>

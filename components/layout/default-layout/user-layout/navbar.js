@@ -13,10 +13,7 @@ import {
 import SideCart from '@/components/board-game/side-cart'
 import useLogout from '@/hooks/use-logout'
 
-import Link from 'next/link'
-
 import { checkAuth } from '@/services/user'
-
 
 const imageStyle = {
   borderRadius: '50%',
@@ -204,7 +201,6 @@ export default function Navbar() {
               />
             </li>
           </ul>
-
 
           {/* 頭像下拉選單 */}
           {isAvatarMenuOpen && (
