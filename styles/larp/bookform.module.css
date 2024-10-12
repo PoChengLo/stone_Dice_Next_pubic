@@ -11,3 +11,9 @@
 .secondaryText {
   color: #f8f0e5;
 }
+
+.demoBtn {
+  background-color: transparent !important;
+  color: transparent !important;
+  border: none;
+}

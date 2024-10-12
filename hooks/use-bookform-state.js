@@ -31,21 +31,55 @@ export default function useBookFormState(bookForm, initialFormValues) {
     setHydrated(true)
   }, [])
 
-  const BtnSubmit = (e) => {
-    e.preventDefault()
+  // const BtnSubmit = (e) => {
+  //   e.preventDefault()
 
-    const query = { ...router.query }
-    if (authInfo.isAuth) {
-      query.user_id = authInfo.userData.id
-      setFormData((prevData) => ({
-        ...prevData,
-        userid: query.user_id,
-      }))
-      router.push(`/larp/check-page?` + new URLSearchParams(query))
-    } else {
-      router.push('/user-profile/login')
-    }
-  }
+  //   // 表單驗證
+  //   if (
+  //     selectId === 0 ||
+  //     selectedLocationId === '' ||
+  //     selectedLocationId === '' ||
+  //     selectTime === '' ||
+  //     contact.length <= 2 ||
+  //     selectPeople === '' ||
+  //     mobile === '' ||
+  //     userEmail === ''
+  //   ) {
+  //     return (
+  //       <div
+  //         className="modal show"
+  //         style={{ display: 'block', position: 'initial' }}
+  //       >
+  //         <Modal.Dialog>
+  //           <Modal.Header closeButton>
+  //             <Modal.Title>Modal title</Modal.Title>
+  //           </Modal.Header>
 
-  return { formData, setFormData, BtnSubmit }
+  //           <Modal.Body>
+  //             <p>Modal body text goes here.</p>
+  //           </Modal.Body>
+
+  //           <Modal.Footer>
+  //             <Button variant="secondary">Close</Button>
+  //             <Button variant="primary">Save changes</Button>
+  //           </Modal.Footer>
+  //         </Modal.Dialog>
+  //       </div>
+  //     )
+  //   }
+
+  //   const query = { ...router.query }
+  //   if (authInfo.isAuth) {
+  //     query.user_id = authInfo.userData.id
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       userid: query.user_id,
+  //     }))
+  //     router.push(`/larp/check-page?` + new URLSearchParams(query))
+  //   } else {
+  //     router.push('/user-profile/login')
+  //   }
+  // }
+
+  return { formData, setFormData }
 }

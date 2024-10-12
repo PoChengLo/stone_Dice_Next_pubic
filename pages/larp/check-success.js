@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 export default function CheckSuccess() {
   const router = useRouter()
-  const [ordData, setOrdData] = useState('')
+  const [ordData, setOrdData] = useState({})
   // 跟伺服器拿資料
   const getData = async (ord_id) => {
     try {
@@ -33,16 +33,8 @@ export default function CheckSuccess() {
     if (ord_id) {
       getData(ord_id)
     }
-
-    // 清除ord_id以防止再次調用
-    return () => {
-      localStorage.removeItem('ord_id')
-    }
   }, [router.isReady]) // 可以根據需要添加依賴項
 
-  if (!ordData) {
-    return <div>Loading...</div>
-  }
   const theme = [
     { id: 1, name: '失落的魔法書' },
     { id: 2, name: '禁忌實驗室' },
@@ -79,6 +71,12 @@ export default function CheckSuccess() {
 
   // 獲取地點名稱，若找到則返回名稱，否則返回 null 或者其他適當值
   const locationName = location ? location.name : null
+
+  useEffect(() => {
+    localStorage.removeItem('bookForm')
+    // localStorage.removeItem('ord_id')
+    localStorage.removeItem('time')
+  }, [router.isReady])
 
   return (
     <div className={`${styles.bodyBg}`} style={{ padding: '60px' }}>
@@ -205,7 +203,7 @@ export default function CheckSuccess() {
                   </div>
                   <div className={styles.orderMin}>
                     <h4 className={styles.orderText}>訂單金額</h4>
-                    <h4>{ordData.ord_total.toLocaleString('zh-tw', 0)} 元</h4>
+                    <h4>{ordData.ord_total.toLocaleString('zh-tw')} 元</h4>
                   </div>
                 </div>
                 <div className={styles.orderLine1}>

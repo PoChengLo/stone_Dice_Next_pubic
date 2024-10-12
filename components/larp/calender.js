@@ -120,10 +120,7 @@ export default function Calender({ onDateChange }) {
               currentMonth === selectedDate.getMonth() &&
               currentYear === selectedDate.getFullYear()
             const isPast =
-              day &&
-              day < today.getDate() &&
-              currentMonth === today.getMonth() &&
-              currentYear === today.getFullYear()
+              day && new Date(currentYear, currentMonth, day) < today
 
             return (
               <div

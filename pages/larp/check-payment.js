@@ -15,7 +15,7 @@ export default function CheckPayment() {
   const dateTimeDate = date.toISOString().slice(0, 19).replace('T', ' ')
 
   // 資料傳回後端
-  const sbAPI = async () => {
+  const saveAPI = async () => {
     // 資料傳回後端前新增一些資料欄位
     const sbData = {
       ...localData,
@@ -180,7 +180,7 @@ export default function CheckPayment() {
             <Button className={styles.btnstyle} type="submit">
               回上頁
             </Button>
-            <Button className={styles.btnstyle} type="submit" onClick={sbAPI}>
+            <Button className={styles.btnstyle} type="submit" onClick={saveAPI}>
               付款
             </Button>
           </div>

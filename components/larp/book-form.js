@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
+import React, { useEffect, useRef, useState } from 'react'
+import { Form, Button, Modal, InputGroup } from 'react-bootstrap'
+// import InputGroup from 'react-bootstrap/InputGroup'
 import styles from '@/styles/larp/bookform.module.css'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import useBookFormState from '@/hooks/use-bookform-state'
+// import Modal from 'react-bootstrap/Modal'
+import { useRouter } from 'next/router'
 
 export default function BookForm({
   escapes = [],
@@ -26,6 +28,10 @@ export default function BookForm({
   const [uniPrice, setUniPrice] = useState(0)
   // 儲存總價
   const [totalPrice, setTotalPrice] = useState(0)
+  const [userName, setUserName] = useState('')
+  const [userEmail, setUserEmail] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const formRef = useRef()
 
   // 初始化表單localStorage的值
   const initialFormValues = {
@@ -42,7 +48,7 @@ export default function BookForm({
   }
 
   // 使用 useBookFormState Hook 管理表單狀態
-  const { formData, setFormData, BtnSubmit } = useBookFormState(
+  const { formData, setFormData } = useBookFormState(
     'bookForm',
     initialFormValues
   )
@@ -118,6 +124,66 @@ export default function BookForm({
       } else {
         setPeoples([])
       }
+    }
+  }
+  // 設定會員資料
+  const [authInfo, setAuthInfo] = useState({ isAuth: false })
+  const router = useRouter()
+  // 判斷是否登入會員
+  // 修正 Next hydration 問題
+  // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+
+    setHydrated(true)
+  }, [])
+
+  const BtnSubmit = (e) => {
+    e.preventDefault()
+
+    // console.log('selectId:', selectId)
+    // console.log('selectedLocationId:', selectedLocationId)
+    // console.log('selectTime:', selectTime)
+    // console.log('contact:', userName)
+    // console.log('selectPeople:', selectPeople)
+    // console.log('mobile:', mobile)
+    // console.log('userEmail:', userEmail)
+
+    // 表單驗證
+    if (
+      selectId === 0 ||
+      selectedLocationId === '' ||
+      selectedLocationId === '' ||
+      selectTime === '' ||
+      userName.length <= 2 ||
+      selectPeople === '' ||
+      mobile === '' ||
+      userEmail === ''
+    ) {
+      setShowModal(true)
+      return
+    }
+
+    const query = { ...router.query }
+    if (authInfo.isAuth) {
+      query.user_id = authInfo.userData.id
+      setFormData((prevData) => ({
+        ...prevData,
+        userid: query.user_id,
+      }))
+      router.push(`/larp/check-page?` + new URLSearchParams(query))
+    } else {
+      router.push('/user-profile/login')
     }
   }
 
@@ -199,11 +265,13 @@ export default function BookForm({
   return (
     <>
       <div
+        ref={formRef}
         id={styles.bookForm}
         className="flex-fill position-relative align-content-between"
         style={{
           padding: '60px 64px 30px 64px',
           borderLeft: '1px solid #d7bf7d',
+          position: 'relative',
         }}
       >
         {/* 下拉式選單 */}
@@ -308,13 +376,13 @@ export default function BookForm({
             >
               <option value="">=====請選擇時段=====</option>
               <option value="10:00:00" disabled={isDisabled('10:00:00')}>
-                10:00
+                10:00 {isDisabled('10:00:00') === true ? '預約已滿' : ''}
               </option>
               <option value="14:00:00" disabled={isDisabled('14:00:00')}>
-                14:00
+                14:00 {isDisabled('14:00:00') === true ? '預約已滿' : ''}
               </option>
               <option value="18:00:00" disabled={isDisabled('18:00:00')}>
-                18:00
+                18:00 {isDisabled('18:00:00') === true ? '預約已滿' : ''}
               </option>
             </Form.Select>
           </InputGroup>
@@ -331,10 +399,14 @@ export default function BookForm({
             <Form.Control
               name="name"
               type="text"
+              value={userName}
               placeholder="請輸入完整姓名"
               aria-label="Username"
               aria-describedby="inputGroup-sizing-default"
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e)
+                setUserName(e.target.value)
+              }}
             />
           </InputGroup>
           {/* 人數 */}
@@ -399,11 +471,15 @@ export default function BookForm({
             </InputGroup.Text>
             <Form.Control
               name="email"
+              value={userEmail}
               type="email"
               placeholder="請輸入有效電子信箱"
               aria-label="email"
               aria-describedby="inputGroup-sizing-default"
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e)
+                setUserEmail(e.target.value)
+              }}
             />
           </InputGroup>
         </div>
@@ -441,6 +517,27 @@ export default function BookForm({
           </InputGroup>
         </div>
         <Button
+          className={styles.demoBtn}
+          onClick={() => {
+            const newMobile = '0989517425'
+            const newUserName = '張家麒'
+            const newUserEmail = 'jesh1321@gmail.com'
+
+            setMobile(newMobile)
+            setUserName(newUserName)
+            setUserEmail(newUserEmail)
+
+            setFormData((prevData) => ({
+              ...prevData,
+              name: newUserName,
+              mobile: newMobile,
+              email: newUserEmail,
+            }))
+          }}
+        >
+          DEMO資料
+        </Button>
+        <Button
           className="position-absolute end-0"
           style={{
             padding: '8px 29px',
@@ -454,6 +551,56 @@ export default function BookForm({
         >
           預約
         </Button>
+        <Modal
+          container={formRef}
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          style={{
+            position: 'absolute',
+            left: '-200px',
+          }}
+        >
+          <Modal.Body
+            style={{
+              borderColor: '#1f1f1f',
+              borderRadius: '10px',
+              height: '25vh',
+              position: 'relative',
+            }}
+          >
+            <h3
+              className="d-flex text-center text-secondary"
+              style={{
+                fontWeight: '1000',
+                justifyContent: 'center',
+                alignItems: 'center',
+                lineHeight: '2.5rem',
+                position: 'absolute',
+                top: 'calc((100% - 80px) / 3)',
+                left: 'calc((100% - 192px) / 2)',
+              }}
+            >
+              資料尚未填寫完整
+              <br />
+              請輸入完整資料
+            </h3>
+            <Button
+              className="position-relative"
+              style={{
+                left: 'calc((100% - 58px) / 2)',
+                top: '80%',
+                backgroundColor: '#ffc440',
+                border: 'none',
+                color: '#1f1f1f',
+                fontSize: '20px',
+              }}
+              variant="secondary"
+              onClick={() => setShowModal(false)}
+            >
+              關閉
+            </Button>
+          </Modal.Body>
+        </Modal>
       </div>
     </>
   )
