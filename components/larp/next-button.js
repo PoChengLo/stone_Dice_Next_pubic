@@ -7,6 +7,7 @@ export default function GroupButton({
   nextSrc = '',
   back,
   next,
+  onClick,
 }) {
   return (
     <>
@@ -14,7 +15,12 @@ export default function GroupButton({
         className="d-flex justify-content-center"
         style={{ gap: '40px', margin: '40px auto 0 auto' }}
       >
-        <Button className={styles.btnstyle} type="submit" href={backSrc}>
+        <Button
+          className={styles.btnstyle}
+          type="submit"
+          href={backSrc}
+          onClick={onClick}
+        >
           {back}
         </Button>
         <Button className={styles.btnstyle} type="submit" href={nextSrc}>

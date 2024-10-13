@@ -49,12 +49,29 @@
   border-radius: 10px;
   border: 1px solid #f8f0e5;
 }
+.orderDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 23px;
+  align-self: stretch;
+  border-top: 1px dashed #f8f0e5;
+  padding-top: 30px;
+}
 .orderLine {
   display: flex;
   padding-right: 150px;
   justify-content: space-between;
   align-items: flex-start;
   align-self: stretch;
+}
+.orderLine1 {
+  display: flex;
+  padding-right: 100px;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  padding-left: 40px;
 }
 .orderMin {
   display: flex;
@@ -63,6 +80,12 @@
   gap: 54px;
 }
 .orderTitle {
+  width: 100px;
+  flex-shrink: 0;
+}
+.orderText {
+  display: flex;
+  justify-content: flex-end;
   width: 100px;
   flex-shrink: 0;
 }
@@ -90,7 +113,9 @@
   width: 192px;
   padding: 9px 39px;
 }
-.btnstyle:hover {
-  background-color: #d7bf7d;
-  color: #4e4e4e;
+
+.btnstyle:hover,
+.btnstyle:active {
+  background-color: #d7bf7d !important;
+  color: #4e4e4e !important;
 }

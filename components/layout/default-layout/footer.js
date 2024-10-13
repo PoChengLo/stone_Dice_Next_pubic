@@ -33,36 +33,36 @@ export default function Footer() {
         <div className={styles.content}>
           <div>
             <div>
-              <b>Eldew</b>
-              <Link href="#">Secuce</Link>
-              <Link href="#">Drupand</Link>
+              <b>會員相關</b>
+              <Link href="/user-profile/login">登入會員</Link>
+              {/* <Link href="#">Drupand</Link>
               <Link href="#">Oceash</Link>
               <Link href="#">Ugefe</Link>
-              <Link href="#">Babed</Link>
+              <Link href="#">Babed</Link> */}
             </div>
             <div>
-              <b>Spotha</b>
-              <Link href="#">Miskasa</Link>
-              <Link href="#">Agithe</Link>
+              <b>密室逃脫相關</b>
+              <Link href="/larp">進入密室逃脫頁面</Link>
+              {/* <Link href="#">Agithe</Link>
               <Link href="#">Scesha</Link>
-              <Link href="#">Lulle</Link>
+              <Link href="#">Lulle</Link> */}
             </div>
             <div>
-              <b>Chashakib</b>
-              <Link href="#">Chogauw</Link>
-              <Link href="#">Phachuled</Link>
+              <b>桌遊商品相關</b>
+              <Link href="/board-game">進入桌遊商品列表頁</Link>
+              {/* <Link href="#">Phachuled</Link>
               <Link href="#">Tiebeft</Link>
               <Link href="#">Ocid</Link>
               <Link href="#">Izom</Link>
-              <Link href="#">Ort</Link>
+              <Link href="#">Ort</Link> */}
             </div>
-            <div>
+            {/* <div>
               <b>Athod</b>
               <Link href="#">Pamuz</Link>
               <Link href="#">Vapert</Link>
               <Link href="#">Neesk</Link>
               <Link href="#">Omemanen</Link>
-            </div>
+            </div> */}
           </div>
           <div>
             <Link

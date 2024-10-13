@@ -14,6 +14,7 @@ export default function PayShip() {
   const [authInfo, setAuthInfo] = useState({ isAuth: false })
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
   const { items } = useCart()
+  // console.log('items', items)
   const router = useRouter()
 
   const finalTotal = items
@@ -24,12 +25,27 @@ export default function PayShip() {
   const [recipientInfo, setRecipientInfo] = useState([])
 
   // 常用收件人，姓名，電話，地址 input value 設定
-  const [selectRecipient, setSelectRecipient] = useState({})
+  const [selectRecipient, setSelectRecipient] = useState({
+    address: '',
+    contact_number: '',
+    default: '',
+    note: '',
+    postal_code: '',
+    product_delivery: '',
+    recipient: '',
+    recipient_id: '',
+    store_firm: '',
+    store_id: '',
+    user_id: '',
+  })
+
+  // 優惠卷輸入欄狀態
+  const [discount, setDiscount] = useState('')
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getRecipientInfo = async (user_id) => {
     if (!authInfo.userData || !authInfo.userData.id) {
-      console.error('User data is not available')
+      console.log('User data is not available')
       return
     }
 
@@ -37,7 +53,7 @@ export default function PayShip() {
     try {
       const res = await fetch(baseURL)
       const resData = await res.json()
-      console.log(resData.data.recipient)
+      // console.log(resData.data.recipient)
       // 設定到狀態中
       if (Array.isArray(resData.data.recipient)) {
         setRecipientInfo(resData.data.recipient)
@@ -51,7 +67,7 @@ export default function PayShip() {
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
       // 先連到node伺服器後，導向至ECPay付款頁面
-      window.location.href = `http://localhost:3006/ecpay/board-game?amount=${finalTotal}`
+      window.location.href = `http://localhost:3006/ecpay/board-game?amount=${finalTotal}&user_id=${authInfo.userData.id}`
     }
   }
   // 付款方式選擇樣式
@@ -79,14 +95,16 @@ export default function PayShip() {
       if (auth_info) {
         setAuthInfo(auth_info)
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   }, [])
 
   useEffect(() => {
     if (authInfo) {
       setHydrated(true)
       // 這裡可以確保一定可以得到router.query的值
-      console.log(router.query)
+      // console.log(router.query)
       // 向伺服器要求資料
       getRecipientInfo(router.query.user_id)
     }
@@ -94,20 +112,38 @@ export default function PayShip() {
     // eslint-disable-next-line
   }, [authInfo])
 
-  console.log(recipientInfo)
-  console.log(selectRecipient)
-
-  useEffect(() => {
-    const recipient_name = document.querySelector('#new-recipient-name')
-    console.log(recipient_name)
-    const recipient_phone = document.querySelector('#new-recipient-phone')
-    console.log(recipient_phone)
-  }, [])
-
   if (!hydrated) {
     return null
   }
   // 修正 end
+
+  const saveOrder = async () => {
+    const orderData = {
+      items,
+      finalTotal,
+      selectRecipient,
+      selectedPay,
+    }
+    try {
+      const res = await fetch(
+        `http://localhost:3006/board-game/pay-ship?user_id=${authInfo.userData.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData),
+        }
+      )
+      const resData = await res.json()
+      console.log(resData)
+      if (resData.success == true) {
+        goECPay()
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <>
@@ -169,6 +205,10 @@ export default function PayShip() {
                     className={`form-control ${styles.white_to_text}`}
                     id="discount-input"
                     placeholder="優惠卷代碼"
+                    onChange={(e) => {
+                      const new_data = e.target.value
+                      setDiscount(new_data)
+                    }}
                   />
                   <div
                     id="discount-help"
@@ -225,7 +265,13 @@ export default function PayShip() {
                       id="new-recipient-name"
                       aria-describedby="new-recipient-name"
                       placeholder="收件人姓名"
-                      value={`${selectRecipient.recipient}`}
+                      onChange={(e) =>
+                        setSelectRecipient({
+                          ...selectRecipient,
+                          recipient: e.target.value,
+                        })
+                      }
+                      value={selectRecipient?.recipient || ''}
                     />
                     <div
                       id="new-recipient-name-commit"
@@ -246,7 +292,13 @@ export default function PayShip() {
                       className={`form-control ${styles.white_to_text}`}
                       id="new-recipient-phone"
                       placeholder="收件人聯絡電話，例如：0987654321"
-                      value={`${selectRecipient.contact_number}`}
+                      onChange={(e) =>
+                        setSelectRecipient({
+                          ...selectRecipient,
+                          contact_number: e.target.value,
+                        })
+                      }
+                      value={selectRecipient?.contact_number || ''}
                     />
                     <div
                       id="new-recipient-phone-commit"
@@ -275,7 +327,16 @@ export default function PayShip() {
               {/* 配送方式，超商取貨，宅配，面交 */}
               <div className={`row mb-3 ${styles.pay_ship_border_method}`}>
                 <div className="col">
-                  <ShipMethod address={`${selectRecipient.address}`} />
+                  <ShipMethod
+                    selectRecipient={selectRecipient}
+                    onChange={(e) => {
+                      const new_data = e.target.value
+                      setSelectRecipient({
+                        ...selectRecipient,
+                        address: new_data,
+                      })
+                    }}
+                  />
                 </div>
               </div>
               {/* 付款方式，綠界付款，Line Pay */}
@@ -333,7 +394,11 @@ export default function PayShip() {
                     className={`form-control ${styles.white_to_text}`}
                     id="pay-ship-commit"
                     placeholder="填寫您的備註"
-                    value={`${selectRecipient.note}`}
+                    onChange={(e) => {
+                      const new_data = e.target.value
+                      setSelectRecipient({ ...selectRecipient, note: new_data })
+                    }}
+                    value={selectRecipient?.note || ''}
                   />
                   <label
                     htmlFor="payment"
@@ -369,7 +434,7 @@ export default function PayShip() {
 
                   <Button
                     className={`  my-3 ${styles.btn} ${styles.btn_pay_ship_2}`}
-                    onClick={goECPay}
+                    onClick={saveOrder}
                   >
                     立即結帳
                   </Button>

@@ -16,6 +16,7 @@ export default function UserInfo() {
     user_id: 0,
     user_name: '',
     mobile: '',
+    real_name: '',
   })
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
@@ -129,7 +130,7 @@ export default function UserInfo() {
                         id="user-name"
                         aria-describedby="user-name"
                         placeholder="購買人姓名"
-                        defaultValue={`${userInfo.user_name}`}
+                        defaultValue={`${userInfo.real_name}`}
                       />
                       <div
                         id="user-name-commit"

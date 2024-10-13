@@ -5,17 +5,18 @@ import ETicketTabs from '@/components/larp/e-ticket-tabs.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import useBookFormState from '@/hooks/use-bookform-state'
 import { Button } from 'react-bootstrap'
+import { useRouter } from 'next/router'
 
 export default function CheckPayment() {
   const { formData: localData } = useBookFormState('bookForm', {})
-
+  const router = useRouter()
   const date = new Date()
   // 將得到的時間轉換成台灣時間
   date.setHours(date.getHours() + 8)
   const dateTimeDate = date.toISOString().slice(0, 19).replace('T', ' ')
 
   // 資料傳回後端
-  const sbAPI = async () => {
+  const saveAPI = async () => {
     // 資料傳回後端前新增一些資料欄位
     const sbData = {
       ...localData,
@@ -31,17 +32,25 @@ export default function CheckPayment() {
       })
 
       if (!res.ok) {
+        alert('預約失敗，請稍後再試')
+        router.push('/larp')
         throw new Error('伺服器連接失敗')
       }
 
       const data = await res.json()
-      if (data.success == true) {
-        goECPay()
-      }
+      console.log('API response', data)
 
-      console.log('資料回傳成功', data)
+      if (data.success == true && data.ord_id) {
+        // 成功儲存預約資料後，將 ord_id 存到localStorage
+        console.log('ord_id:', data.ord_id) // 檢查 ord_id 是否有效
+        localStorage.setItem('ord_id', data.ord_id)
+        goECPay()
+      } else {
+        // 處理儲存失敗的情況
+        console.log('失敗的回應資料:', data) // 顯示失敗時的回應資料
+      }
     } catch (error) {
-      console.log('資料回傳失敗', error.message)
+      console.error('Error:', error)
     }
   }
 
@@ -53,14 +62,6 @@ export default function CheckPayment() {
       window.location.href = `http://localhost:3006/ecpay/larp?amount=${finalTotal}`
     }
   }
-
-  // const goToPay = async () => {
-  //   // 如果資料有正確回傳到後端再付款
-  //   const result = await sbAPI()
-  //   if (result.success == true) {
-  //     goECPay()
-  //   }
-  // }
 
   return (
     <div className={`${styles.bodyBg}`} style={{ paddingTop: '60px' }}>
@@ -180,8 +181,8 @@ export default function CheckPayment() {
             <Button className={styles.btnstyle} type="submit">
               回上頁
             </Button>
-            <Button className={styles.btnstyle} type="submit" onClick={sbAPI}>
-              下一步
+            <Button className={styles.btnstyle} type="submit" onClick={saveAPI}>
+              付款
             </Button>
           </div>
         </div>

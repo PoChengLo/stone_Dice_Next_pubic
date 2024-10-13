@@ -3,22 +3,16 @@ import { Image } from 'react-bootstrap'
 import styles from '@/styles/larp/Larp.module.css'
 import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/larp-card'
-import DropdownButton from '@/components/larp/select-button.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { BsListUl } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 
 export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
   // 儲存當前被選擇的館別
   const [locSelect, setLocSelect] = useState('')
-
-  const [fantasyChecked, setFantasyChecked] = useState(false)
-
-  const handleFantasyChange = () => {
-    setFantasyChecked(!fantasyChecked)
-  }
 
   // 跟伺服器抓資料
   const getEscapes = async () => {
@@ -63,7 +57,7 @@ export default function LarpPage() {
     return filteredEscapes.map((r) => (
       <Card
         key={r.id}
-        larpImg={r.larp_img}
+        larpImg={`/larp/img/larp-product/${r.larp_img}`}
         larpName={r.larp_name}
         larpPrice={r.price}
         orderLink={`/larp/${r.id}#order`}
@@ -83,7 +77,7 @@ export default function LarpPage() {
       />
       <div className={styles.larpContainer}>
         {/* 遊戲主題分隔線 */}
-        <Line title="遊戲主題" />
+        <Line title="密室主題" />
         {/* 館別按鈕 */}
         <div id={styles.larpLocation} className="d-flex justify-content-evenly">
           <button
@@ -130,20 +124,27 @@ export default function LarpPage() {
             id={`${styles.select} bg-vertical-dropdown-1`}
           >
             <div className="mb-3">
-              <Form.Check
-                reverse
-                label="1"
-                name="group1"
-                // type={type}
-                // id={`reverse-${type}-1`}
-              />
-              <Form.Check
-                reverse
-                label="2"
-                name="group1"
-                // type={type}
-                // id={`reverse-${type}-2`}
-              />
+              {[
+                '奇幻',
+                '冒險',
+                '魔法',
+                '科幻',
+                '驚悚',
+                '懸疑',
+                '海洋',
+                '恐怖',
+                '靈異',
+                '探險',
+                '解謎',
+              ].map((type) => (
+                <Dropdown.Item key={`default-${type}`} eventKey={type}>
+                  <Form.Check
+                    type="checkbox"
+                    id={`default-${type}`}
+                    label={type}
+                  />
+                </Dropdown.Item>
+              ))}
             </div>
           </DropdownButton>
         </ButtonGroup>

@@ -8,7 +8,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import { useCart } from '@/hooks/use-cart-state'
 
-function ProdCard({ product }) {
+function ProdCard({ product, onClick }) {
   // 跳轉使用
   const router = useRouter()
   // 對話盒使用
@@ -68,6 +68,7 @@ function ProdCard({ product }) {
     <div className={`${styles.card_box} p-1`}>
       <Card
         className={`card border-0  d-flex align-items-xxl-center  bg-transparent  ${styles.card}`}
+        onClick={() => onClick(product)}
       >
         <Link href={`/board-game/${product.id}`}>
           <Image

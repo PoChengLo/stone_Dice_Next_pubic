@@ -31,6 +31,13 @@
   color: #d7bf7d;
 }
 
+.dropDown button {
+  margin-top: 25px;
+  background-color: #d7bf7d !important;
+  color: #1f1f1f !important;
+  border: none !important;
+}
+
 @media (max-width: 576px) {
   .h2Font {
     font-size: 18px;

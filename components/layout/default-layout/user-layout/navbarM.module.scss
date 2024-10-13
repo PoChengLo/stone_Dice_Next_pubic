@@ -1,0 +1,196 @@
+.header {
+  position: absolute;
+}
+.nav {
+  width: 90%;
+  height: 60px;
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 1000;
+  border-radius: 2px;
+  background-color: #262626;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: space-around;
+  .main-list {
+    display: none;
+  }
+  .user-list {
+    // display: none;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+  }
+  .btn {
+    --bs-btn-color: #d9bf8f;
+
+    --bs-btn-hover-color: #f8f0e5;
+    --bs-btn-bg: #262626;
+    --bs-btn-border-color: #d9bf8f;
+    --bs-btn-hover-bg: #1f1f1f;
+    --bs-btn-hover-border-color: #f8f0e5;
+    --bs-btn-active-bg: #1f1f1f;
+    --bs-btn-active-color: #f8f0e5;
+    --bs-btn-active-border-color: #ffffff;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: rgba(127, 90, 61, 0.7);
+    --bs-btn-disabled-border-color: #f8f0e5;
+    font-size: 18px;
+  }
+  .a_bg {
+    background-color: #1f1f1f;
+  }
+  .a {
+    color: #d9bf8f;
+    border-bottom: 0.2px solid #d9bf8f;
+  }
+  .avatarMenu {
+    position: absolute;
+    top: 3.5rem;
+    right: 0;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background-color: #262626;
+    padding: 0;
+    overflow: hidden;
+    transform: translateY(-15px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 150ms ease, opacity 150ms ease, visibility 150ms ease;
+
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .menuItem {
+    background-color: #262626;
+    transition: background-color 150ms ease;
+
+    &:first-child {
+      margin-top: 1rem;
+    }
+
+    // 最後一個選項增加下padding
+    &:last-child {
+      margin-bottom: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid #404040;
+    }
+
+    &:hover {
+      background-color: #333333;
+    }
+
+    &:last-child:hover {
+      background-color: #262626;
+    }
+
+    a {
+      padding: 5px 16px;
+      text-decoration: none;
+      color: #d9bf8f !important;
+      display: flex;
+      align-items: center;
+      transition: color 150ms ease;
+      position: relative; // 為下劃線效果添加定位
+
+      // 修改下劃線效果
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0px;
+        left: 16px; // 改為與 padding-left 相同
+        background-color: #d9bf8f;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: calc(100% - 32px); // 減去左右 padding (16px * 2)
+      }
+
+      svg {
+        margin-right: 12px;
+        font-size: 18px;
+        color: #d9bf8f;
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    &:last-child {
+      border-top: 2px solid #404040;
+
+      a {
+        color: #d9bf8f !important;
+
+        svg {
+          color: #d9bf8f;
+        }
+      }
+    }
+  }
+
+  .user_list {
+    margin: auto;
+    margin-right: 10px;
+    position: relative;
+
+    ul {
+      width: 100%;
+      display: flex;
+      padding: 0;
+      gap: 25px;
+      list-style: none;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      min-height: 60px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      cursor: pointer;
+
+      img {
+        transition: transform 150ms ease;
+      }
+
+      &:hover img {
+        transform: scale(1.05);
+      }
+    }
+  }
+  .logo_image {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+    align-items: center;
+  }
+}
+
+@media (min-width: 577px) {
+  .nav {
+    display: none;
+  }
+}

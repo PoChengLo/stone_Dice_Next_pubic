@@ -1,16 +1,85 @@
-import React, { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { useCart } from '@/hooks/use-cart-state'
+import { useRouter } from 'next/router'
 
 export default function Success() {
+  // 清除購物車
   const { clearCart } = useCart()
 
+  // 會員資料
+  const [authInfo, setAuthInfo] = useState({
+    isAuth: false,
+    userData: { id: 0 },
+  })
+
+  // 獲取資料並放入state裡面
+  const [newOrderData, setNewOrderData] = useState({
+    ord_id: 0,
+    ord_date: '',
+    user_id: 0,
+    ord_total: 0,
+    ord_pay: 0,
+    ord_recipient_name: '',
+    ord_contact_number: '',
+    ord_contact_address: '',
+  })
+
+  // 獲取資料並放入state裡面
+  const [newOrderItem, setNewOrderItem] = useState([
+    {
+      ord_detail_id: 0,
+      ord_id: 0,
+      id: 0,
+      prod_name: '',
+      item_price: 0,
+      item_qty: 0,
+      item_total: 0,
+      prod_comm: null,
+      prod_star: null,
+    },
+  ])
+
+  // 獲取訂單資料
+  const getOrderList = async () => {
+    if (!authInfo.userData || !authInfo.userData.id) {
+      console.log('Order List is not available')
+      return
+    }
+    const baseURL = `http://127.0.0.1:3006/board-game/success?user_id=${authInfo.userData.id}`
+    try {
+      const res = await fetch(baseURL)
+      const resData = await res.json()
+      setNewOrderData(resData.new_ord[0])
+      setNewOrderItem(resData.new_ord_item)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    // 清除購物車
     clearCart()
   }, [])
+
+  // 獲取訂單，監聽auth_info
+  useEffect(() => {
+    getOrderList()
+  }, [authInfo])
+
   return (
     <>
       <Navbar />
@@ -35,31 +104,31 @@ export default function Success() {
             <div className="col">
               <div className=" d-flex mt-3 justify-content-between">
                 <h3>訂單編號</h3>
-                <h3>1111111111</h3>
+                <h3>{newOrderData.ord_id}</h3>
               </div>
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
-                <p>訂單日期</p>
-                <p>1989-06-04</p>
+                <p>訂單日期與時間</p>
+                <p>{newOrderData.ord_date}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
                 <p>會員編號</p>
-                <p>11111111</p>
+                <p>{newOrderData.user_id}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
                 <p>收件人姓名</p>
-                <p>張飛</p>
+                <p>{newOrderData.ord_recipient_name}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
                 <p>收件人電話</p>
-                <p>0987654321</p>
+                <p>{newOrderData.ord_contact_number}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
             </div>
@@ -71,22 +140,25 @@ export default function Success() {
                 <h3>訂單項目</h3>
               </div>
               <hr className={`${styles.success_hr}`} />
+              {newOrderItem.map((v, i) => (
+                <div key={v.ord_detail_id}>
+                  <div className="mt-3">
+                    <p>{v.prod_name}</p>
+                  </div>
+                  <div className=" d-flex mt-3 justify-content-between">
+                    <p>{`NT$ ${v.item_price.toLocaleString()} * 數量 ${
+                      v.item_qty
+                    }`}</p>
 
-              <div className=" d-flex mt-3 justify-content-between">
-                <p>訂單商品價格*數量</p>
-                <p>$NT2,220</p>
-              </div>
-              <hr className={`${styles.success_hr}`} />
-
-              <div className=" d-flex mt-3 justify-content-between">
-                <p>訂單商品價格*數量</p>
-                <p>$NT2,500</p>
-              </div>
-              <hr className={`${styles.success_hr}`} />
+                    <p>NT$ {v.item_total.toLocaleString()}</p>
+                  </div>
+                  <hr className={`${styles.success_hr}`} />
+                </div>
+              ))}
 
               <div className=" d-flex mt-3 justify-content-between">
                 <p>小計：</p>
-                <p>$NT5,840</p>
+                <p>NT$ {newOrderData.ord_total.toLocaleString()}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
 
@@ -98,7 +170,7 @@ export default function Success() {
 
               <div className=" d-flex mt-3 justify-content-between">
                 <p>優惠卷折扣</p>
-                <p>-NT$60</p>
+                <p>N/A</p>
               </div>
               <hr className={`${styles.success_hr}`} />
 
@@ -110,7 +182,7 @@ export default function Success() {
 
               <div className=" d-flex mt-3 justify-content-between">
                 <p>總計：</p>
-                <p>$NT5,840</p>
+                <p>NT$ {newOrderData.ord_total.toLocaleString()}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
             </div>
@@ -119,12 +191,12 @@ export default function Success() {
           <div className="row mt-3">
             <div className="col">
               <div className=" d-flex mt-3 justify-content-between">
-                <h3>帳單地址</h3>
+                <h3>會員載具</h3>
               </div>
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
-                <p>會員地址</p>
+                <p>/XX4567</p>
               </div>
               <hr className={`${styles.success_hr}`} />
             </div>
@@ -138,7 +210,7 @@ export default function Success() {
               <hr className={`${styles.success_hr}`} />
 
               <div className=" d-flex mt-3 justify-content-between">
-                <p>收件人地址</p>
+                <p>{newOrderData.ord_contact_address}</p>
               </div>
               <hr className={`${styles.success_hr}`} />
             </div>
@@ -148,7 +220,7 @@ export default function Success() {
             <div className="col">
               <div className="d-flex ">
                 <Link
-                  href="/user-profile"
+                  href={`/user-profile/${authInfo.userData.id}/home`}
                   className={`btn btn-primary me-3 mt-3 ${styles.btn}`}
                 >
                   前往會員中心
