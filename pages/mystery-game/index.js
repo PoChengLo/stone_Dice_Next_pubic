@@ -3,11 +3,11 @@ import { Image } from 'react-bootstrap'
 import styles from '@/styles/larp/Larp.module.css'
 import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/mystery-card.js'
-import DropdownButton from '@/components/larp/select-button.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { BsListUl } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 
 export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
@@ -124,8 +124,27 @@ export default function LarpPage() {
             id={`${styles.select} bg-vertical-dropdown-1`}
           >
             <div className="mb-3">
-              <Form.Check reverse label="1" name="group1" />
-              <Form.Check reverse label="2" name="group1" />
+              {[
+                '奇幻',
+                '冒險',
+                '魔法',
+                '科幻',
+                '驚悚',
+                '懸疑',
+                '海洋',
+                '恐怖',
+                '靈異',
+                '探險',
+                '解謎',
+              ].map((type) => (
+                <Dropdown.Item key={`default-${type}`} eventKey={type}>
+                  <Form.Check
+                    type="checkbox"
+                    id={`default-${type}`}
+                    label={type}
+                  />
+                </Dropdown.Item>
+              ))}
             </div>
           </DropdownButton>
         </ButtonGroup>

@@ -150,7 +150,7 @@ export default function Navbar() {
             </li>
             <li>
               <div className={styles['main-item']}>
-                <Link href="#">劇本殺</Link>
+                <Link href="/mystery-game">劇本殺</Link>
               </div>
             </li>
             <li>

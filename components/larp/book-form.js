@@ -151,14 +151,6 @@ export default function BookForm({
   const BtnSubmit = (e) => {
     e.preventDefault()
 
-    // console.log('selectId:', selectId)
-    // console.log('selectedLocationId:', selectedLocationId)
-    // console.log('selectTime:', selectTime)
-    // console.log('contact:', userName)
-    // console.log('selectPeople:', selectPeople)
-    // console.log('mobile:', mobile)
-    // console.log('userEmail:', userEmail)
-
     // 表單驗證
     if (
       selectId === 0 ||
@@ -181,7 +173,7 @@ export default function BookForm({
         ...prevData,
         userid: query.user_id,
       }))
-      router.push(`/larp/check-page?` + new URLSearchParams(query))
+      router.push(`/larp/check-page?id=${escape.id}`)
     } else {
       router.push('/user-profile/login')
     }

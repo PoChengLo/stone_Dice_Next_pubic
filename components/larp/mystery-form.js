@@ -142,7 +142,6 @@ export default function BookForm({
       selectedLocationId === '' ||
       selectTime === '' ||
       userName.length <= 2 ||
-      selectPeople === '' ||
       mobile === '' ||
       userEmail === ''
     ) {
@@ -157,7 +156,7 @@ export default function BookForm({
         ...prevData,
         userid: query.user_id,
       }))
-      router.push(`/larp/check-page?` + new URLSearchParams(query))
+      router.push(`/larp/check-page`)
     } else {
       router.push('/user-profile/login')
     }
