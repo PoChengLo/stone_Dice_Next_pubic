@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
 import GroupButton from '@/components/larp/next-button.js'
 import useBookFormState from '@/hooks/use-bookform-state.js'
@@ -22,6 +22,18 @@ export default function CheckPage() {
     const resData = await res.json()
     setEscapes(resData.escape)
     setLocations(resData.location)
+  }
+  const backClick = () => {
+    try {
+      const query = { ...router.query }
+      router.push(`/larp/${query.id}`)
+    } catch (e) {
+      alert('伺服器連線錯誤，5秒後自動跳轉回首頁')
+      setTimeout(() => {
+        router.push(`/larp`)
+        console.log(e)
+      }, 5000)
+    }
   }
 
   //把從 localStorage 傳過來的larp id跟loc id 轉換成文字
@@ -189,11 +201,16 @@ export default function CheckPage() {
             >
               <div div="" className={`${styles.orderMin} justify-content-end`}>
                 <h3 className="orderText">訂單金額</h3>
-                <h3>{localData.totalprice.toLocaleString('zh-tw', 0)} 元</h3>
+                <h3>{localData.totalprice} 元</h3>
               </div>
             </div>
           </div>
-          <GroupButton back="回上頁" next="下一步" nextSrc={`check-payment`} />
+          <GroupButton
+            onClick={backClick}
+            back="回上頁"
+            next="下一步"
+            nextSrc={`check-payment`}
+          />
         </div>
       </div>
     </div>

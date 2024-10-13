@@ -119,7 +119,11 @@ export default function LarpId() {
         >
           {escape.larp_name}
         </h1>
-        <Image src={escape.larp_top_img} alt="" className="w-100" />
+        <Image
+          src={`/larp/img/larp-product/${escape.larp_top_img}`}
+          alt=""
+          className="w-100"
+        />
         {/* 立即預約按鈕 */}
         <Link
           href="#order"
@@ -145,7 +149,11 @@ export default function LarpId() {
       </div>
       {/* 第一段大圖 */}
       <div id={styles.p1} className="position-relative">
-        <Image alt="" src={escape.larp_p1_img} width={'100%'} />
+        <Image
+          alt=""
+          src={`/larp/img/larp-product/${escape.larp_p1_img}`}
+          width={'100%'}
+        />
         <div className={styles.p1Text}>
           <h3>{escape.larp_title1}</h3>
           <h4>{escape.larp_p1}</h4>
@@ -153,7 +161,11 @@ export default function LarpId() {
       </div>
       {/* 第二段大圖 */}
       <div id={styles.p2} className="position-relative">
-        <Image alt="" src={escape.larp_p2_img} width={'100%'} />
+        <Image
+          alt=""
+          src={`/larp/img/larp-product/${escape.larp_p2_img}`}
+          width={'100%'}
+        />
         <div className={styles.p2Text}>
           <h3>{escape.larp_title2}</h3>
           <h4>{escape.larp_p2}</h4>
@@ -303,19 +315,25 @@ export default function LarpId() {
         {/* 環境預覽分隔線 */}
         <Line title="環境預覽" />
         {/* 環境預覽API */}
-        <div
-          id={styles.VRspace}
-          style={{
-            width: '100%',
-            height: 856,
-            backgroundColor: 'rgb(82, 95, 117)',
-          }}
-        >
+        <div>
+          <h4 style={{ margin: '0', marginTop: '60px', color: '#f8f0e5' }}>
+            縮放操作：請使用滑鼠滾輪來放大或縮小視圖 ;
+            拖曳功能：按住滑鼠左鍵並拖曳可左右移動畫面。
+          </h4>
           <div
-            id="scene"
-            ref={sceneRef}
-            style={{ width: '100%', height: '100%' }}
-          ></div>
+            id={styles.VRspace}
+            style={{
+              width: '100%',
+              height: 856,
+              marginTop: '10px',
+            }}
+          >
+            <div
+              id="scene"
+              ref={sceneRef}
+              style={{ width: '100%', height: '100%' }}
+            ></div>
+          </div>
         </div>
         {/* 立即預約分隔線 */}
         <div id="order">

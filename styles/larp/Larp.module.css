@@ -31,9 +31,10 @@
   color: #d7bf7d;
 }
 
-.dropDown{
+.dropDown button {
+  margin-top: 25px;
   background-color: #d7bf7d !important;
-  color:  rgba(127, 90, 61, 0.7) !important;
+  color: #1f1f1f !important;
   border: none !important;
 }
 
