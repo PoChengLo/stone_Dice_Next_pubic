@@ -261,6 +261,7 @@ export default function CheckSuccess() {
               back="回到首頁"
               next="前往訂單列表"
               backSrc={`/larp`}
+              nextSrc="#"
             />
           </div>
         </div>
