@@ -1,42 +1,16 @@
 import { useState, useEffect } from 'react'
+import styles from '@/styles/board-game-css/board-game-style.module.css'
+import { Modal, Button } from 'react-bootstrap'
 
 export default function AllOrderList() {
-  // 會員資料
   const [authInfo, setAuthInfo] = useState({
     isAuth: false,
     userData: { id: 0 },
   })
 
-  // 獲取資料並放入state裡面
-  const [orderData, setOrderData] = useState([
-    {
-      ord_id: 0,
-      ord_date: '',
-      user_id: 0,
-      ord_total: 0,
-      ord_pay: 0,
-      ord_recipient_name: '',
-      ord_contact_number: '',
-      ord_contact_address: '',
-    },
-  ])
+  const [orderData, setOrderData] = useState([])
+  const [queryData, setQueryData] = useState([])
 
-  // 獲取資料並放入state裡面
-  const [orderItem, setOrderItem] = useState([
-    {
-      ord_detail_id: 0,
-      ord_id: 0,
-      id: 0,
-      prod_name: '',
-      item_price: 0,
-      item_qty: 0,
-      item_total: 0,
-      prod_comm: null,
-      prod_star: null,
-    },
-  ])
-
-  // 獲取訂單資料
   const getOrderList = async () => {
     if (!authInfo.userData || !authInfo.userData.id) {
       console.log('Order List is not available')
@@ -47,14 +21,24 @@ export default function AllOrderList() {
       const res = await fetch(baseURL)
       const resData = await res.json()
       setOrderData(resData.data.all_ord_list)
-      // setNewOrderItem(resData.new_ord_item)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const getOrderItem = async (ord_id) => {
+    const baseURL = `http://127.0.0.1:3006/board-game/all-order-list?user_id=${authInfo.userData.id}&ord_id=${ord_id}`
+    try {
+      const res = await fetch(baseURL)
+      const resData = await res.json()
+      setQueryData(resData.data.query_ord_item)
+      console.log(queryData)
     } catch (e) {
       console.log(e)
     }
   }
 
   useEffect(() => {
-    // 提取 localStorage 的 auth 資料，使用useState 放入變數
     try {
       const auth_info = JSON.parse(localStorage.getItem('auth'))
       if (auth_info) {
@@ -65,21 +49,95 @@ export default function AllOrderList() {
     }
   }, [])
 
-  // 獲取訂單，監聽auth_info
   useEffect(() => {
     getOrderList()
   }, [authInfo])
-  console.log(orderData)
+
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const showModal = () => {
+    handleShow()
+  }
+
+  const messageModal = (
+    <Modal show={show} onHide={handleClose} keyboard={true} className={``}>
+      <Modal.Header closeButton className={`${styles.white_to_text}`}>
+        <Modal.Title>訂單詳情</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className={`${styles.white_to_text}`}>
+        {' '}
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>商品名稱</th>
+                <th>商品價格</th>
+                <th>商品數量</th>
+                <th>商品小計</th>
+              </tr>
+            </thead>
+            <tbody>
+              {queryData.map((v, i) => (
+                <tr key={v.ord_detail_id}>
+                  <td>{v.prod_name}</td>
+                  <td>{v.item_price.toLocaleString()}</td>
+                  <td>{v.item_qty}</td>
+                  <td>{v.item_total.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Modal.Body>
+      <Modal.Footer className={`${styles.white_to_text}`}></Modal.Footer>
+    </Modal>
+  )
+
   return (
     <>
-      {orderData.map((v, i) => (
-        <div key={v.ord_id}>
-          <h3>訂單編號{v.ord_id}</h3>
-          <p>訂單日期{v.ord_date}</p>
-          <p>訂單金額{v.ord_total}</p>
-          <p>付款狀態{v.ord_pay}</p>
-        </div>
-      ))}
+      {orderData.length > 0 ? (
+        orderData.map((v, i) => (
+          <div key={v.ord_id}>
+            <table>
+              <thead>
+                <tr>
+                  <th>訂單編號</th>
+                  <th>訂單日期</th>
+                  <th>訂單金額</th>
+                  <th>付款狀態</th>
+                  <th>查看訂單</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{v.ord_id}</td>
+                  <td>{v.ord_date}</td>
+                  <td>{v.ord_total}</td>
+                  <td>付款狀態：{!v.ord_pay ? `未付款` : `已付款`}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        if (getOrderItem(v.ord_id)) {
+                          showModal(queryData)
+                        } else {
+                          console.log('no data')
+                        }
+                      }}
+                    >
+                      查看
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ))
+      ) : (
+        <p>沒有訂單資料。</p>
+      )}
+      {messageModal}
     </>
   )
 }
