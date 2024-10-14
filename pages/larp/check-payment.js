@@ -178,7 +178,7 @@ export default function CheckPayment() {
             className="d-flex justify-content-center"
             style={{ gap: '40px', margin: '40px auto 0 auto' }}
           >
-            <Button className={styles.btnstyle} type="submit">
+            <Button className={styles.btnstyle} type="button">
               回上頁
             </Button>
             <Button className={styles.btnstyle} type="submit" onClick={saveAPI}>

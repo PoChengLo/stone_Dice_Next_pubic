@@ -1,7 +1,7 @@
 .main {
   display: grid;
   grid-template-rows: 1fr 8rem auto;
-  grid-template-areas: "main" "." "footer";
+  grid-template-areas: 'main' '.' 'footer';
   overflow-x: hidden;
   background: transparent;
   min-height: 10vh;
@@ -11,7 +11,7 @@
 
 .footer {
   z-index: 1;
-  --footer-background: #D9BF8F;
+  --footer-background: #d9bf8f;
   display: grid;
   position: relative;
   grid-area: footer;
@@ -25,7 +25,7 @@
   right: 0;
   height: 1rem;
   background: var(--footer-background);
-  filter: url("#blob");
+  filter: url('#blob');
 
   .bubble {
     position: absolute;
@@ -45,14 +45,20 @@
   grid-gap: 4rem;
   padding: 2rem;
   background: var(--footer-background);
+  padding: 40px 150px;
 
-  a,
-  p {
-    color: #F5F7FA;
+  a {
+    font-size: 14px;
     text-decoration: none;
+    margin-right: 10px;
   }
 
-  b {
+  .primary-text,
+  b,
+  h4,
+  h5,
+  a,
+  p {
     color: white;
   }
 
