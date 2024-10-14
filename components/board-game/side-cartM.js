@@ -55,7 +55,7 @@ function SideCartOffcanvas({ ...props }) {
         variant="primary"
         onClick={handleShow}
         className="ms-500"
-        id={`${styles.buttonCart}`}
+        id={`${styles.buttonCartM}`}
       >
         <p>
           <BsCart4 />

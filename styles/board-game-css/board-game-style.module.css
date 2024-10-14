@@ -189,6 +189,41 @@
   margin-bottom: 0px;
 }
 
+#buttonCartM {
+  color: #1f1f1f;
+  background: none;
+  border: none;
+  position: relative;
+}
+#buttonCartM p {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+#buttonCartM p svg {
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+#buttonCartM .items_length {
+  position: absolute;
+  top: -10px;
+  left: 90px;
+  background-color: #f4565c;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#buttonCartM .items_length p {
+  color: #1f1f1f;
+  margin-bottom: 0px;
+}
+
 .side_cart {
   --bs-offcanvas-color: #1f1f1f;
   --bs-offcanvas-bg: #f8f0e5;

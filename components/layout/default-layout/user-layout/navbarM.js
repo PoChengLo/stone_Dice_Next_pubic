@@ -54,15 +54,6 @@ export default function Navbar() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={`${styles.logo_image}`}>
-          <Link href="./">
-            <Image
-              src="user-profile/navbarM_logo.png"
-              alt=""
-              width={67}
-              height={60}
-              priority={true} // {false} | {true}
-            />
-          </Link>
           <div>
             <Dropdown>
               <Dropdown.Toggle className={`${styles.btn}`}>
@@ -88,7 +79,15 @@ export default function Navbar() {
             </Dropdown>
           </div>
         </div>
-
+        <Link href="./">
+          <Image
+            src="user-profile/navbarM_logo.png"
+            alt=""
+            width={67}
+            height={60}
+            priority={true} // {false} | {true}
+          />
+        </Link>
         {/* <div className={styles['main-list']}>
           <ul>
             <li>
@@ -126,12 +125,11 @@ export default function Navbar() {
             </li>
           </ul>
         </div> */}
-
+        <div className={`${styles.sideCart_M}`}>
+          <SideCartM />
+        </div>
         <div className={`${styles.user_list}`}>
           <ul>
-            <li>
-              <SideCartM />
-            </li>
             <li>
               {' '}
               <Image
