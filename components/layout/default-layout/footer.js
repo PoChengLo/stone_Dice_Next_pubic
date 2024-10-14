@@ -40,7 +40,7 @@ export default function Footer() {
               </h5>
               <h5>電話: (07) 969-9885</h5>
               <h5>
-                電子郵件: <a href="javascript:">info@stone.com</a>
+                電子郵件: <a href="#">info@stone.com</a>
               </h5>
             </div>
 

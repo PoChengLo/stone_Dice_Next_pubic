@@ -69,7 +69,7 @@ export default function UserProfile() {
       case 'favorite':
         return <MyFavorite />
       case 'order':
-        return <MyOrder />
+        return <MyOrder userId={id} />
       case 'settings':
         return <WebsiteSettings />
 

@@ -21,7 +21,7 @@ export default function LarpPage() {
     const res = await fetch(baseURL)
     const resData = await res.json()
 
-    console.log(resData)
+    // console.log(resData)
     setEscapes(resData)
   }
 
