@@ -23,7 +23,7 @@ export default function Footer() {
               style={{
                 '--size': bubble.size,
                 '--distance': bubble.distance,
-                '--position': bubble.position,
+                '--position': `${Math.random() * 98.7}%`,
                 '--time': bubble.time,
                 '--delay': bubble.delay,
               }}
@@ -64,7 +64,7 @@ export default function Footer() {
               <Link href="#">Omemanen</Link>
             </div> */}
           </div>
-          <div>
+          {/* <div>
             <Link
               className={styles.image}
               href="https://codepen.io/z-"
@@ -74,7 +74,7 @@ export default function Footer() {
               }}
             ></Link>
             <p>©2024 Not Really</p>
-          </div>
+          </div> */}
         </div>
       </div>
 

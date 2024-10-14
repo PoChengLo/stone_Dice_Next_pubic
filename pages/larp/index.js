@@ -8,6 +8,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { BsListUl } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
+import Footer from '@/components/layout/default-layout/footer'
 
 export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
@@ -156,6 +157,7 @@ export default function LarpPage() {
           {cardInfo()}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
