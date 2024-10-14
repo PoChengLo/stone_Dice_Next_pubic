@@ -63,12 +63,11 @@ const MainProfile = ({ userData: initialUserData }) => {
       <div className={styles['main-blogs']}>
         <div className={styles['main-blog']}>
           <ImageUpload initialImage={userData.user_img} />
-          <div className={styles['main-blog-author']}>
-            <div className={styles['author-img-wrapper']}></div>
-            <div className={styles['author-detail']}>
-              <div className={styles['author-info1']}>
-                個人圖片檔案限制 : 1MB以下 .JPEG, .PNG
-              </div>
+
+          <div className={styles['author-img-wrapper']}></div>
+          <div className={styles['author-detail']}>
+            <div className={styles['author-info1']}>
+              個人圖片檔案限制 : 1MB以下 .JPEG, .PNG
             </div>
           </div>
         </div>
@@ -77,12 +76,29 @@ const MainProfile = ({ userData: initialUserData }) => {
           <div className={styles['main-blog-title']}>
             <p>您好！{userData.nick_name}！維持宇宙和平的任務就靠您了！</p>
 
-            <p>目前消費累積金額 {userData.total_spending} 元 點數：15 點</p>
+            <p>
+              目前消費累積金額：{' '}
+              <span style={{ color: '#D92626', fontWeight: 'bold' }}>
+                {userData.total_spending}
+              </span>{' '}
+              元{' '}
+              <p>
+                點數：
+                <span style={{ color: '#D92626', fontWeight: 'bold' }}>
+                  {Math.ceil(userData.total_spending / 100)}
+                </span>{' '}
+                點
+              </p>
+            </p>
           </div>
           <div className={styles['main-blog-author']}>
             <div className={styles['author-img-wrapper']}>
               <Image
-                src="https://i.postimg.cc/bN4mc4Z3/9600ab6937c3a9c668afea4183baa0bb.png"
+                src={
+                  userData.total_spending < 1500
+                    ? 'https://i.postimg.cc/Dw5qKTj1/9600ab6937c3a9c668af11111111ea4183baa0bb.png'
+                    : 'https://i.postimg.cc/bN4mc4Z3/9600ab6937c3a9c668afea4183baa0bb.png'
+                }
                 alt=""
                 width={160}
                 height={160}
@@ -90,9 +106,26 @@ const MainProfile = ({ userData: initialUserData }) => {
             </div>
             <div className={styles['user-level']}>
               <p>
-                會員等級 <span>金骰子</span>
-                <br />
-                消費累積滿 5000 即可升級柏金骰子
+                會員等級：{' '}
+                {userData.total_spending < 1500 ? (
+                  <span style={{ color: 'brown', fontWeight: 'bold' }}>
+                    銅骰子
+                  </span>
+                ) : (
+                  <span style={{ color: '#FFC700', fontWeight: 'bold' }}>
+                    金骰子
+                  </span>
+                )}
+                <br />{' '}
+                {userData.total_spending < 1500 ? (
+                  <span style={{ fontWeight: 'bold', color: '#404040' }}>
+                    消費累積滿 1500 即可升級金骰子
+                  </span>
+                ) : (
+                  <span style={{ fontWeight: 'bold', color: '#404040' }}>
+                    消費累積滿 5000 即可升級柏金骰子
+                  </span>
+                )}
               </p>
             </div>
           </div>

@@ -10,6 +10,7 @@ import ActivityOrder from '@/components/layout/default-layout/user-layout/activi
 import MyFavorite from '@/components/layout/default-layout/user-layout/my-favorite'
 import MyOrder from '@/components/layout/default-layout/user-layout/my-order'
 import WebsiteSettings from '@/components/layout/default-layout/user-layout/website-settings'
+import TawkToChat from '@/components/layout/default-layout/user-layout/tawk-to-chat'
 
 import {
   BsPersonCircle,
@@ -179,6 +180,7 @@ export default function UserProfile() {
             {' '}
             {userData ? renderContent() : <p>Loading...</p>}
           </div>
+          <TawkToChat />
         </div>
       </div>
     </>
