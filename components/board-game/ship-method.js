@@ -5,7 +5,7 @@ import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
 import { useShip711StoreOpener } from '@/hooks/use-ship-711-store'
 
-export default function ShipMethod({ address }) {
+export default function ShipMethod({ selectRecipient, onChange = () => {} }) {
   // 通路選擇樣式修改
   const [activeTab, setActiveTab] = useState('convenience-store')
   const handleSelect = (key) => {
@@ -173,12 +173,14 @@ export default function ShipMethod({ address }) {
               placeholder="郵遞區號"
             />
           </div> */}
+
           <input
             type="text"
             className={`form-control my-xxl-3 mt-3  mb-3 mb-xxl-0 ${styles.white_to_text} `}
             id="user-recipient-address"
             placeholder="請詳細填寫宅配地址：路/巷/弄/號/樓"
-            value={`${address}`}
+            onChange={onChange}
+            value={selectRecipient?.address || ''}
           />
           <label
             htmlFor="user-recipient-time-select"

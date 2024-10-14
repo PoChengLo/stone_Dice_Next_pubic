@@ -1,24 +1,85 @@
 import { useRouter } from 'next/router.js'
 import useLocalStorage from './use-localstorage.js'
 import OrderModal from '../components/larp/order-Modal.js'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useBookFormState(bookForm, initialFormValues) {
   // 使用 useLocalStorage 來儲存表單的資料
   const [formData, setFormData] = useLocalStorage(bookForm, initialFormValues)
-
   const router = useRouter()
 
-  const BtnSubmit = (e) => {
-    e.preventDefault()
-    // 處理表單檢查邏輯
-    // if (loc.value = '') {
-    //   return
-    // }
+  // 設定會員資料
+  const [authInfo, setAuthInfo] = useState({ isAuth: false })
 
-    // return modalWindow()
-    router.push(`check-page`)
-  }
+  // 判斷是否登入會員
+  // 修正 Next hydration 問題
+  // https://stackoverflow.com/questions/72673362/error-text-content-does-not-match-server-rendered-html
+  const [hydrated, setHydrated] = useState(false)
 
-  return { formData, setFormData, BtnSubmit }
+  useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+
+    setHydrated(true)
+  }, [])
+
+  // const BtnSubmit = (e) => {
+  //   e.preventDefault()
+
+  //   // 表單驗證
+  //   if (
+  //     selectId === 0 ||
+  //     selectedLocationId === '' ||
+  //     selectedLocationId === '' ||
+  //     selectTime === '' ||
+  //     contact.length <= 2 ||
+  //     selectPeople === '' ||
+  //     mobile === '' ||
+  //     userEmail === ''
+  //   ) {
+  //     return (
+  //       <div
+  //         className="modal show"
+  //         style={{ display: 'block', position: 'initial' }}
+  //       >
+  //         <Modal.Dialog>
+  //           <Modal.Header closeButton>
+  //             <Modal.Title>Modal title</Modal.Title>
+  //           </Modal.Header>
+
+  //           <Modal.Body>
+  //             <p>Modal body text goes here.</p>
+  //           </Modal.Body>
+
+  //           <Modal.Footer>
+  //             <Button variant="secondary">Close</Button>
+  //             <Button variant="primary">Save changes</Button>
+  //           </Modal.Footer>
+  //         </Modal.Dialog>
+  //       </div>
+  //     )
+  //   }
+
+  //   const query = { ...router.query }
+  //   if (authInfo.isAuth) {
+  //     query.user_id = authInfo.userData.id
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       userid: query.user_id,
+  //     }))
+  //     router.push(`/larp/check-page?` + new URLSearchParams(query))
+  //   } else {
+  //     router.push('/user-profile/login')
+  //   }
+  // }
+
+  return { formData, setFormData }
 }

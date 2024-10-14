@@ -12,6 +12,7 @@ import {
 } from 'react-icons/bs'
 import SideCart from '@/components/board-game/side-cart'
 import useLogout from '@/hooks/use-logout'
+
 import { checkAuth } from '@/services/user'
 
 const imageStyle = {
@@ -152,7 +153,7 @@ export default function Navbar() {
             </li>
             <li>
               <div className={styles['main-item']}>
-                <Link href="#">劇本殺</Link>
+                <Link href="/mystery-game">劇本殺</Link>
               </div>
             </li>
             <li>
