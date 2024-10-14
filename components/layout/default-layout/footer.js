@@ -13,7 +13,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className={`${styles.main} primary-text`}>
+      <div className={`${styles.main} primary-text position-relative`}>
         <div className={styles.footer}>
           <div className={styles.bubbles}>
             {bubbles.map((bubble, index) => (
@@ -111,6 +111,30 @@ export default function Footer() {
                   訂閱
                 </button>
               </div>
+            </div>
+            <div
+              className="position-absolute"
+              style={{
+                top: '150px',
+                left: 'calc((100% - 221.2px) / 2)',
+                marginTop: '10px',
+              }}
+            >
+              <p>CopyRight © 2024 The Dice In The Stone</p>
+            </div>
+            <div
+              className="position-absolute"
+              style={{
+                top: '150px',
+                right: '50px',
+                marginTop: '10px',
+                fontSize: '16px',
+              }}
+            >
+              <p>
+                designed by{' '}
+                <Link href="https://codepen.io/z-">codepen.io/z-</Link>
+              </p>
             </div>
           </div>
         </div>
