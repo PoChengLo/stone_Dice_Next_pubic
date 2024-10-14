@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import styles from '@/styles/user-profile/reset-password.module.scss'
+import { requestOtpToken, verifyOtp, resetPassword } from '@/services/user'
+import SmokeBackground from '@/components/layout/default-layout/smoke-background'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
@@ -16,8 +17,10 @@ const ForgotPassword = () => {
       await handleRequestOtp()
     } else if (step === 1) {
       await handleVerifyOtp()
+    } else if (step === 2) {
+      await handleNewPassword()
     } else {
-      await handleResetPassword()
+      await handleConfirmPassword()
     }
   }
 
@@ -39,11 +42,9 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3006/request-otp', {
-        email,
-      })
+      const response = await requestOtpToken(email)
       if (response.data.status === 'success') {
-        alert('OTP 已發送，請檢查您的信箱')
+        alert('OTP 已發送，請檢查您的信箱。OTP 將在3分鐘後過期。')
         setIsSliding(true)
         setSlideDirection('left')
         setTimeout(() => {
@@ -55,7 +56,11 @@ const ForgotPassword = () => {
       }
     } catch (error) {
       console.error('請求 OTP 時出錯:', error)
-      alert('伺服器錯誤，請稍後再試')
+      if (error.response) {
+        alert(error.response.data.message || '伺服器錯誤，請稍後再試')
+      } else {
+        alert('網絡錯誤，請檢查您的網絡連接')
+      }
     }
   }
 
@@ -66,10 +71,7 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3006/verify-otp', {
-        email,
-        token: otp,
-      })
+      const response = await verifyOtp(email, otp)
       if (response.data.status === 'success') {
         alert('OTP 驗證成功')
         setIsSliding(true)
@@ -83,13 +85,31 @@ const ForgotPassword = () => {
       }
     } catch (error) {
       console.error('驗證 OTP 時出錯:', error)
-      alert('伺服器錯誤，請稍後再試')
+      if (error.response) {
+        alert(error.response.data.message || '伺服器錯誤，請稍後再試')
+      } else {
+        alert('網絡錯誤，請檢查您的網絡連接')
+      }
     }
   }
 
-  const handleResetPassword = async () => {
-    if (!newPassword || !confirmPassword) {
-      alert('請輸入新密碼並確認')
+  const handleNewPassword = () => {
+    if (!newPassword) {
+      alert('請輸入新密碼')
+      return
+    }
+
+    setIsSliding(true)
+    setSlideDirection('left')
+    setTimeout(() => {
+      setStep((prevStep) => prevStep + 1)
+      setIsSliding(false)
+    }, 150)
+  }
+
+  const handleConfirmPassword = async () => {
+    if (!confirmPassword) {
+      alert('請確認新密碼')
       return
     }
 
@@ -99,20 +119,20 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await axios.put('http://localhost:3006/reset-password', {
-        email,
-        token: otp,
-        newPassword,
-      })
+      const response = await resetPassword(email, newPassword, otp)
       if (response.data.status === 'success') {
         alert('密碼重置成功')
-        // 這裡可以重定向到登入頁面
+        window.location.href = 'http://localhost:3000/user-profile/login'
       } else {
         alert(response.data.message)
       }
     } catch (error) {
       console.error('重置密碼時出錯:', error)
-      alert('伺服器錯誤，請稍後再試')
+      if (error.response) {
+        alert(error.response.data.message || '伺服器錯誤，請稍後再試')
+      } else {
+        alert('網絡錯誤，請檢查您的網絡連接')
+      }
     }
   }
 
@@ -172,6 +192,18 @@ const ForgotPassword = () => {
                 placeholder="請輸入新密碼"
                 className={styles.input}
               />
+            </form>
+          </>
+        )
+      case 3:
+        return (
+          <>
+            <h2 className={styles.title}>確認新密碼</h2>
+            <p className={styles.text}>請再次輸入您的新密碼。</p>
+            <form
+              className={styles.inputGroup}
+              onSubmit={(e) => e.preventDefault()}
+            >
               <input
                 type="password"
                 value={confirmPassword}
@@ -189,6 +221,10 @@ const ForgotPassword = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.smokeBackground}>
+        <SmokeBackground />
+      </div>
+
       <div className={styles.box}>
         <div
           className={`${styles.formContainer} ${
@@ -208,10 +244,10 @@ const ForgotPassword = () => {
             </button>
           )}
           <button
-            className={step < 2 ? styles.nextButton : styles.submitButton}
+            className={step < 3 ? styles.nextButton : styles.submitButton}
             onClick={handleNext}
           >
-            {step < 2 ? '下一步' : '提交'}
+            {step < 3 ? '下一步' : '提交'}
           </button>
         </div>
       </div>

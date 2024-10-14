@@ -8,9 +8,9 @@ const buttonStyle = {
   borderRadius: '12px',
 }
 
-const SocialButton = ({ icon, text }) => {
+const SocialButton = ({ icon, text, className }) => {
   return (
-    <button className="social-button" style={buttonStyle}>
+    <button className={`social-button ${className || ''}`} style={buttonStyle}>
       <img src={icon} alt="" className="social-icon" />
       <span className="social-text">{text}</span>
     </button>

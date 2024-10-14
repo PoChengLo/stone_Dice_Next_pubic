@@ -3,6 +3,7 @@ import styles from '@/styles/user-profile/reset-password.module.scss'
 import axios from 'axios'
 import { useAuth } from '@/hooks/use-auth'
 import { useRouter } from 'next/router'
+import SmokeBackground from '@/components/layout/default-layout/smoke-background'
 
 const ResetPassword = () => {
   const { auth } = useAuth()
@@ -142,10 +143,8 @@ const ResetPassword = () => {
       case 0:
         return (
           <>
-            <h2 className={styles.title}>Reset Password</h2>
-            <p className={styles.text}>
-              Please enter your old password to continue.
-            </p>
+            <h2 className={styles.title}>重新設定密碼</h2>
+            <p className={styles.text}>請在這裡輸入您的舊密碼。</p>
             <form
               className={styles.inputGroup}
               onSubmit={(e) => e.preventDefault()}
@@ -163,8 +162,8 @@ const ResetPassword = () => {
       case 1:
         return (
           <>
-            <h2 className={styles.title}>Set New Password</h2>
-            <p className={styles.text}>Please enter your new password.</p>
+            <h2 className={styles.title}>設定新密碼</h2>
+            <p className={styles.text}>請在這裡設定您的新密碼</p>
             <form
               className={styles.inputGroup}
               onSubmit={(e) => e.preventDefault()}
@@ -182,8 +181,10 @@ const ResetPassword = () => {
       case 2:
         return (
           <>
-            <h2 className={styles.title}>Confirm New Password</h2>
-            <p className={styles.text}>Please confirm your new password.</p>
+            <h2 className={styles.title}>重新輸入您的新密碼</h2>
+            <p className={styles.text}>
+              新密碼必須和剛才輸入的相同，小心別打錯了！
+            </p>
             <form
               className={styles.inputGroup}
               onSubmit={(e) => e.preventDefault()}
@@ -213,6 +214,9 @@ const ResetPassword = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.smokeBackground}>
+        <SmokeBackground />
+      </div>
       <div className={styles.box}>
         <div
           className={`${styles.formContainer} ${
@@ -228,18 +232,15 @@ const ResetPassword = () => {
         >
           {step > 0 && (
             <button className={styles.backButton} onClick={handleBack}>
-              Back
+              返回
             </button>
           )}
-          {step < 2 ? (
-            <button className={styles.nextButton} onClick={handleNext}>
-              Next
-            </button>
-          ) : (
-            <button className={styles.submitButton} onClick={handleSubmit}>
-              Submit
-            </button>
-          )}
+          <button
+            className={step < 2 ? styles.nextButton : styles.submitButton}
+            onClick={step < 2 ? handleNext : handleSubmit}
+          >
+            {step < 2 ? '下一步' : '提交'}
+          </button>
         </div>
       </div>
     </div>
