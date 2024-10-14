@@ -62,11 +62,13 @@ export default function Navbar() {
             ? `http://localhost:3006/avatar/${
                 user.user_img
               }?t=${new Date().getTime()}`
-            : 'https://i.postimg.cc/cHyg58Bv/default.png'
+            : 'https://i.postimg.cc/C1L1cpS1/DALL-E-2024-10-14-03-01-56-Flat-minimalistic-user-icon-in-grayscale-and-gold-featuring-a-person.png'
         )
       } else {
         setIsLoggedIn(false)
-        setUserAvatar('https://i.postimg.cc/cHyg58Bv/default.png')
+        setUserAvatar(
+          'https://i.postimg.cc/C1L1cpS1/DALL-E-2024-10-14-03-01-56-Flat-minimalistic-user-icon-in-grayscale-and-gold-featuring-a-person.png'
+        )
         setUserName('訪客')
       }
     } catch (error) {

@@ -118,9 +118,12 @@ export default function LoginPage() {
                       value={user.password}
                       onChange={handleFieldChange}
                     />
-                    <a href="#" className={styles['forgot-password']}>
+                    <Link
+                      href="/user-profile/forgot-password"
+                      className={styles['forgot-password']}
+                    >
                       Forgot Password?
-                    </a>
+                    </Link>
                     <button type="submit" className={styles['submit-button']}>
                       Sign in
                     </button>

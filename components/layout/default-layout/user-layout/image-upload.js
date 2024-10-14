@@ -72,7 +72,10 @@ const ImageUpload = ({ initialImage }) => {
   return (
     <>
       <Image
-        src={previewImage || 'https://i.postimg.cc/cHyg58Bv/default.png'}
+        src={
+          previewImage ||
+          'https://i.postimg.cc/C1L1cpS1/DALL-E-2024-10-14-03-01-56-Flat-minimalistic-user-icon-in-grayscale-and-gold-featuring-a-person.png'
+        }
         alt="User Avatar"
         width={260}
         height={260}

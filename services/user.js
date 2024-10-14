@@ -98,16 +98,28 @@ export const getUserById = async (id = 0) => {
  * 忘記密碼/OTP 要求一次性密碼
  */
 export const requestOtpToken = async (email = '') => {
-  return await axiosInstance.post('/reset-password/otp', { email })
+  return await axiosInstance.post('/otp/request-otp', { email })
 }
+
+/**
+ * 驗證 OTP
+ */
+export const verifyOtp = async (email = '', token = '') => {
+  return await axiosInstance.post('/otp/verify-otp', { email, token })
+}
+
 /**
  * 忘記密碼/OTP 重設密碼
  */
-export const resetPassword = async (email = '', password = '', token = '') => {
-  return await axiosInstance.post('/reset-password/reset', {
+export const resetPassword = async (
+  email = '',
+  newPassword = '',
+  token = ''
+) => {
+  return await axiosInstance.put('/otp/reset-password', {
     email,
     token,
-    password,
+    newPassword,
   })
 }
 /**
