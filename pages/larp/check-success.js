@@ -8,6 +8,8 @@ import { useRouter } from 'next/router'
 export default function CheckSuccess() {
   const router = useRouter()
   const [ordData, setOrdData] = useState({})
+  const [authInfo, setAuthInfo] = useState({ isAuth: false })
+
   // 跟伺服器拿資料
   const getData = async (ord_id) => {
     try {
@@ -25,15 +27,6 @@ export default function CheckSuccess() {
       console.error('伺服器獲取資料失敗:', error)
     }
   }
-
-  useEffect(() => {
-    const ord_id = localStorage.getItem('ord_id')
-
-    // 確保ord_id存在時調用getData
-    if (ord_id) {
-      getData(ord_id)
-    }
-  }, [router.isReady]) // 可以根據需要添加依賴項
 
   const theme = [
     { id: 1, name: '失落的魔法書' },
@@ -71,6 +64,31 @@ export default function CheckSuccess() {
 
   // 獲取地點名稱，若找到則返回名稱，否則返回 null 或者其他適當值
   const locationName = location ? location.name : null
+
+  // 拿會員資料
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    // 提取 localStorage 的 auth 資料，使用useState 放入變數
+    try {
+      const auth_info = JSON.parse(localStorage.getItem('auth'))
+      if (auth_info) {
+        setAuthInfo(auth_info)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    setHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    const ord_id = localStorage.getItem('ord_id')
+
+    // 確保ord_id存在時調用getData
+    if (ord_id) {
+      getData(ord_id)
+    }
+  }, [router.isReady]) // 可以根據需要添加依賴項
 
   useEffect(() => {
     localStorage.removeItem('bookForm')
@@ -261,7 +279,11 @@ export default function CheckSuccess() {
               back="回到首頁"
               next="前往訂單列表"
               backSrc={`/larp`}
-              nextSrc="#"
+              nextSrc={
+                authInfo?.userData?.id
+                  ? `/user-profile/${authInfo.userData.id}/home`
+                  : ''
+              }
             />
           </div>
         </div>

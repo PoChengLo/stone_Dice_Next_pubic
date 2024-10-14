@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/styles/larp/checkpage.module.css'
 import GroupButton from '@/components/larp/next-button.js'
 import useBookFormState from '@/hooks/use-bookform-state.js'
