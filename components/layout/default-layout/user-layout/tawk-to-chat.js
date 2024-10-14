@@ -5,41 +5,69 @@ const TawkToChat = () => {
   const router = useRouter()
 
   useEffect(() => {
-    // 匹配特定的動態路由
     const pattern = /^\/user-profile\/\d+\/home$/
 
+    const loadTawkToScript = () => {
+      if (document.getElementById('tawkToScript')) {
+        return
+      }
+
+      // 動態創建腳本標籤
+      const script = document.createElement('script')
+      script.src = 'https://embed.tawk.to/670c920f4304e3196ad1274e/1ia4hl3c9'
+      script.async = true
+      script.charset = 'UTF-8'
+      script.setAttribute('crossorigin', '*')
+      script.id = 'tawkToScript'
+      document.body.appendChild(script)
+
+      script.onload = () => {
+        if (window.Tawk_API && pattern.test(router.asPath)) {
+          window.Tawk_API.showWidget()
+        }
+      }
+    }
+
+    const removeTawkToScript = () => {
+      // 移除 Tawk.to 的腳本
+      const tawkScript = document.getElementById('tawkToScript')
+      if (tawkScript) {
+        tawkScript.remove()
+      }
+
+      const tawkElements = document.querySelectorAll('iframe[src*="tawk.to"]')
+      tawkElements.forEach((element) => element.remove())
+
+      // 刪除全局變量，防止腳本殘留
+      if (window.Tawk_API) {
+        delete window.Tawk_API
+      }
+    }
+
+    // 根據當前路徑加載或移除腳本
     if (pattern.test(router.asPath)) {
-      // 只在符合路由模式的情況下加載 Tawk.to
-      if (!window.Tawk_API) {
-        var Tawk_API = Tawk_API || {}
-        var Tawk_LoadStart = new Date()
-
-        ;(function () {
-          var s1 = document.createElement('script')
-          s1.async = true
-          s1.src = 'https://embed.tawk.to/670c920f4304e3196ad1274e/1ia4hl3c9'
-          s1.charset = 'UTF-8'
-          s1.setAttribute('crossorigin', '*')
-          s1.setAttribute('id', 'tawkToScript')
-          var s0 = document.getElementsByTagName('script')[0]
-          s0.parentNode.insertBefore(s1, s0)
-        })()
-      } else {
-        window.Tawk_API.showWidget() // 如果已加載，則顯示小工具
-      }
+      loadTawkToScript()
     } else {
-      if (window.Tawk_API) {
-        window.Tawk_API.hideWidget() // 如果路由不匹配，則隱藏小工具
+      removeTawkToScript()
+    }
+
+    // 監聽路由變化
+    const handleRouteChange = (url) => {
+      if (pattern.test(url)) {
+        loadTawkToScript()
+      } else {
+        removeTawkToScript()
       }
     }
 
-    // 清理函數：解除事件監聽
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    // 清理函數：當組件卸載時，解除監聽並移除腳本
     return () => {
-      if (window.Tawk_API) {
-        window.Tawk_API.hideWidget() // 在離開時隱藏小工具
-      }
+      router.events.off('routeChangeComplete', handleRouteChange)
+      removeTawkToScript()
     }
-  }, [router.asPath])
+  }, [router.asPath, router.events])
 
   return null
 }
