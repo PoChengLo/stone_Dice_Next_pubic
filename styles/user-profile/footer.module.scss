@@ -1,11 +1,12 @@
 .main {
   display: grid;
-  grid-template-rows: 1fr 10rem auto;
+  grid-template-rows: 1fr 8rem auto;
   grid-template-areas: "main" "." "footer";
   overflow-x: hidden;
-  background: #262626;
-  min-height: 30vh;
+  background: transparent;
+  min-height: 10vh;
   font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
 }
 
 .footer {

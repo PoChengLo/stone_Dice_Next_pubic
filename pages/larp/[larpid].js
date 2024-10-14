@@ -9,6 +9,7 @@ import BookForm from '@/components/larp/book-form'
 import CarouselCard from '@/components/larp/Carousel'
 import { useRouter } from 'next/router'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import Footer from '@/components/layout/default-layout/footer'
 
 export default function LarpId() {
   const router = useRouter()
@@ -457,6 +458,7 @@ export default function LarpId() {
           <CarouselCard />
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
