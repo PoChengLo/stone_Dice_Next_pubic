@@ -61,7 +61,10 @@ function SideCartOffcanvas({ ...props }) {
           <BsCart4 />
           購物車
         </p>
-        <div className={`${styles.items_length}`}>
+        <div
+          className={`${styles.items_length}`}
+          style={{ display: items.length === 0 ? 'none' : 'flex' }}
+        >
           <p>{items.length}</p>
         </div>
       </Button>
