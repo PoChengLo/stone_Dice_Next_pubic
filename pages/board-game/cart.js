@@ -329,27 +329,18 @@ export default function ProductCart() {
             </div>
           </div>
           {/* 相關熱門商品 */}
-          <div className="row " style={{ left: '-30px', position: 'relative' }}>
-            <div className="col pb-5">
+          <div className="row  pb-5">
+            <div className="col px-xxl-3 pb-5">
               <h4 className={`${styles.h4}`}>熱門商品</h4>
-              <div className="row pb-5" style={{ width: '1400px' }}>
+              <div className="row">
                 {hotsales.map((v, i) => (
-                  <div key={v.id} className="col-6 col-xxl-3">
+                  <div
+                    key={v.id}
+                    className="col-6 col-xxl-3 d-flex flex-wrap flex-xxl-row justify-content-center"
+                  >
                     <ProdCard product={v} onClick={handleCardClick} />
                   </div>
                 ))}
-                {/* <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[0]} />
-                </div>
-                <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[1]} />
-                </div>
-                <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[2]} />
-                </div>
-                <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[3]} />
-                </div> */}
               </div>
             </div>
           </div>
