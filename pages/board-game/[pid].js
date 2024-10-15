@@ -5,6 +5,8 @@ import BgCommit from '@/components/board-game/bg-commit'
 import SingleProductCard from '@/components/board-game/single-product-card'
 import { useRouter } from 'next/router'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import NavbarM from '@/components/layout/default-layout/user-layout/navbarM'
+import Footer from '@/components/layout/default-layout/footer'
 
 export default function ProductPage() {
   // 商品物件狀態
@@ -123,7 +125,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <Navbar />{' '}
+      <Navbar /> <NavbarM />{' '}
       <div id={`${styles.backgroundImage}`} className="pt-5">
         <div className="container pt-5">
           {/* 商品圖片，商品介紹 */}
@@ -135,12 +137,15 @@ export default function ProductPage() {
           {/* 商品背景故事，會員商品評論 */}
           <BgCommit prodDesc={product.prod_desc} />
           {/* 相關熱門商品 */}
-          <div className="row" style={{ left: '-20px', position: 'relative' }}>
-            <div className="col">
+          <div className="row  pb-5">
+            <div className="col px-xxl-3 pb-5">
               <h4 className={`${styles.h4}`}>熱門商品</h4>
-              <div className="row" style={{ width: '1400px' }}>
+              <div className="row">
                 {hotsales.map((v, i) => (
-                  <div className="col-6 col-xxl-3">
+                  <div
+                    key={v.id}
+                    className="col-6 col-xxl-3 d-flex flex-wrap flex-xxl-row justify-content-center"
+                  >
                     <ProdCard product={v} onClick={handleCardClick} />
                   </div>
                 ))}
@@ -181,6 +186,9 @@ export default function ProductPage() {
           </div> */}
         </div>
       </div>
+      <div style={{ marginTop: '-130px' }}>
+        <Footer />
+      </div>{' '}
     </>
   )
 }

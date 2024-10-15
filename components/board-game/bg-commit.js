@@ -48,7 +48,8 @@ export default function BgCommit({ prodDesc }) {
       gender: null,
       is_subscribed_personal: '0',
       is_subscribed_general: '0',
-      buy_date: '2024/01/24 07:13:55',
+      buy_date: '2024/03/22 18:44:44',
+
       commit: '好玩，要是以後玩不到怎麼辦？！',
     },
     {
@@ -70,7 +71,8 @@ export default function BgCommit({ prodDesc }) {
       gender: null,
       is_subscribed_personal: '0',
       is_subscribed_general: '0',
-      buy_date: '2024/03/22 18:44:44',
+      buy_date: '2024/03/10 19:00:00',
+
       commit: '實際遊玩體驗非常棒。',
     },
     {
@@ -92,7 +94,8 @@ export default function BgCommit({ prodDesc }) {
       gender: null,
       is_subscribed_personal: '0',
       is_subscribed_general: '0',
-      buy_date: '2024/03/10 19:00:00',
+      buy_date: '2024/01/24 07:13:55',
+
       commit: '訂購之後很快就收到，優良網站。',
     },
   ]
