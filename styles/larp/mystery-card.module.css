@@ -37,10 +37,10 @@
   .card {
     margin-bottom: 30px;
     max-width: 140px;
-    height: 323px;
+    height: 240px;
   }
   .cardImg {
-    height: 229px;
+    height: 140px;
   }
   .card:hover {
     box-shadow: none;

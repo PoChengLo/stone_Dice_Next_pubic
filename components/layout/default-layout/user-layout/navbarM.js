@@ -66,7 +66,7 @@ export default function Navbar() {
                 <Dropdown.Item className={`${styles.a}`} href="/larp">
                   密室逃脫
                 </Dropdown.Item>
-                <Dropdown.Item className={`${styles.a}`} href="#">
+                <Dropdown.Item className={`${styles.a}`} href="/mystery-game">
                   劇本殺
                 </Dropdown.Item>
                 <Dropdown.Item className={`${styles.a}`} href="#">

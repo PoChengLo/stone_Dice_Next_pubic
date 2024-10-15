@@ -4,6 +4,7 @@ import styles from '@/styles/larp/Larp.module.css'
 import Line from '@/components/larp/title-line.js'
 import Card from '@/components/larp/mystery-card.js'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
+import NavbarM from '@/components/layout/default-layout/user-layout/navbarM'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { BsListUl } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
@@ -69,6 +70,7 @@ export default function LarpPage() {
   return (
     <div className={styles.larpBody}>
       <Navbar />
+      <NavbarM />
       <div className="position-relative">
         {/* 置頂大圖 */}
         <Image
@@ -83,8 +85,7 @@ export default function LarpPage() {
           當真相被隱藏
         </h1>
         <h1
-          className={`position-relative d-inline strokeTexts ${styles.mystery}`}
-          style={{ left: '-20px', bottom: '150px' }}
+          className={`position-relative d-inline strokeTexts ${styles.mystery} ${styles.mysteryDown}`}
         >
           誰能破解未來的謎團
         </h1>
@@ -130,7 +131,10 @@ export default function LarpPage() {
             title={
               <>
                 <BsListUl />
-                <p style={{ margin: '0 0 0 18px', display: 'inline-block' }}>
+                <p
+                  style={{ margin: '0 0 0 18px', display: 'inline-block' }}
+                  className={styles.siri}
+                >
                   篩選小助理
                 </p>
               </>
