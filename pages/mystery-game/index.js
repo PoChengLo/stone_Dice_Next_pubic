@@ -69,13 +69,26 @@ export default function LarpPage() {
   return (
     <div className={styles.larpBody}>
       <Navbar />
-      {/* 置頂大圖 */}
-      <Image
-        src="https://i.postimg.cc/qqgTnCn5/image.png"
-        alt="石之骰密室逃脫"
-        width={'100%'}
-        height={'auto'}
-      />
+      <div className="position-relative">
+        {/* 置頂大圖 */}
+        <Image
+          src="/larp/img/larp-product/1mystery-game.png"
+          alt="石之骰密室逃脫"
+          width={'100%'}
+          height={'auto'}
+        />
+        <h1
+          className={`position-relative d-inline strokeTexts ${styles.mystery}`}
+        >
+          當真相被隱藏
+        </h1>
+        <h1
+          className={`position-relative d-inline strokeTexts ${styles.mystery}`}
+          style={{ left: '-20px', bottom: '150px' }}
+        >
+          誰能破解未來的謎團
+        </h1>
+      </div>
       <div className={styles.larpContainer}>
         {/* 遊戲主題分隔線 */}
         <Line title="劇本主題" />
