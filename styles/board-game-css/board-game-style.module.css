@@ -567,6 +567,9 @@
   background-color: #ccc2a6;
 }
 
+.ord_modal {
+  color: #1f1f1f;
+}
 .ord_modal .table {
   width: 90%;
 }

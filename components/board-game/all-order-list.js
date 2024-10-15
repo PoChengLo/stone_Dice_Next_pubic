@@ -103,7 +103,10 @@ export default function AllOrderList() {
   return (
     <>
       <div className={`${styles.table_div}`}>
-        <h3 style={{ fontSize: '32px' }} className="mt-5 mb-3">
+        <h3
+          style={{ fontSize: '32px', color: '  #f8f0e5' }}
+          className="mt-5 mb-3"
+        >
           桌遊商品訂單紀錄
         </h3>
         {orderData.length > 0 ? (
