@@ -9,6 +9,7 @@ import { BsListUl } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import Footer from '@/components/layout/default-layout/footer'
+import NavbarM from '@/components/layout/default-layout/user-layout/navbarM'
 
 export default function LarpPage() {
   const [escapes, setEscapes] = useState([])
@@ -69,6 +70,7 @@ export default function LarpPage() {
   return (
     <div className={styles.larpBody}>
       <Navbar />
+      <NavbarM />
       {/* 置頂大圖 */}
       <Image
         src="https://i.postimg.cc/qqgTnCn5/image.png"
