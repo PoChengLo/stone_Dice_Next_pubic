@@ -149,18 +149,6 @@ export default function ProductPage() {
                     <ProdCard product={v} onClick={handleCardClick} />
                   </div>
                 ))}
-                {/* <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[0]} />
-                </div>
-                <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[1]} />
-                </div>
-                <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[2]} />
-                </div>
-                <div className="col-6 col-xxl-3">
-                  <ProdCard product={hotsales[3]} />
-                </div> */}
               </div>
             </div>
           </div>
