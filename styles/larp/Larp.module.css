@@ -30,6 +30,23 @@
 #larpLocation button:hover {
   color: #d7bf7d;
 }
+.mystery {
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  letter-spacing: 4.8px;
+  font-size: 60px;
+  font-weight: 600 !important;
+  text-shadow: 5px -3px 0 #30230b;
+  left: 250px;
+  bottom: 230px;
+  color: rgba(255, 209, 163, 0.8);
+}
+.mystery::before {
+  content: attr(data-storke);
+  position: absolute;
+  z-index: 0;
+  -webkit-text-stroke: 0px #000000;
+}
 
 .dropDown button {
   display: flex;
