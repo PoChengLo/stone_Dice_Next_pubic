@@ -161,76 +161,128 @@ const ReviewCarousel = () => {
       <div className="d-flex justify-content-between align-items-center">
         {/* 左边轮播卡片 */}
         <div
-          className="card text-center"
-          style={{ width: '300px', padding: '20px', opacity: 0.5 }}
+          className="card"
+          style={{
+            padding: '20px',
+            // opacity: 0.5,
+            backgroundColor: 'transparent',
+            color: '#f8f0e5',
+            border: '1px solid #f8f0e5',
+            borderRadius: '10px',
+            width: '25%',
+            height: '250px',
+          }}
         >
-          <Image
-            src={reviews[getLeftIndex()].image}
-            alt="Profile"
-            className="rounded-circle"
-            width="80"
-            height="80"
-          />
-          <h5 className="mt-3">{reviews[getLeftIndex()].name}</h5>
-          <p>{reviews[getLeftIndex()].date}</p>
-          <div>
-            {'★'.repeat(reviews[getLeftIndex()].stars) +
-              '☆'.repeat(5 - reviews[getLeftIndex()].stars)}
+          <div className="d-flex ms-3">
+            <Image
+              src={reviews[getLeftIndex()].image}
+              alt="Profile"
+              className="rounded-circle"
+              width="80"
+              height="80"
+            />
+            <div className="mt-2 ms-3">
+              <h5 className="m-0">{reviews[getLeftIndex()].name}</h5>
+              <p className="m-0">{reviews[getLeftIndex()].date}</p>
+              <div>
+                {'★'.repeat(reviews[getLeftIndex()].stars) +
+                  '☆'.repeat(5 - reviews[getLeftIndex()].stars)}
+              </div>
+            </div>
           </div>
-          <p className="mt-3">{reviews[getLeftIndex()].review}</p>
+          <p className="mt-4">{reviews[getLeftIndex()].review}</p>
         </div>
         {/* 左箭头 */}
-        <button className="btn btn-light" onClick={handlePrev}>
+        <button
+          className="btn btn-light"
+          onClick={handlePrev}
+          style={{
+            backgroundColor: 'transparent',
+            color: '#f8f0e5',
+            fontSize: '30px',
+            border: 'none',
+          }}
+        >
           &lt;
         </button>
         {/* 中间轮播卡片（当前） */}
         <div
-          className="card text-center"
+          className="card"
           style={{
-            width: '350px',
             padding: '20px',
-            backgroundColor: '#333',
-            color: '#fff',
+            // opacity: 0.5,
+            backgroundColor: 'transparent',
+            color: '#f8f0e5',
+            border: '1px solid #f8f0e5',
+            borderRadius: '10px',
+            width: '30%',
+            height: '300px',
           }}
         >
-          <Image
-            src={reviews[currentIndex].image}
-            alt="Profile"
-            className="rounded-circle"
-            width="80"
-            height="80"
-          />
-          <h5 className="mt-3">{reviews[currentIndex].name}</h5>
-          <p>{reviews[currentIndex].date}</p>
-          <div>
-            {'★'.repeat(reviews[currentIndex].stars) +
-              '☆'.repeat(5 - reviews[currentIndex].stars)}
+          <div className="d-flex ms-3">
+            <Image
+              src={reviews[currentIndex].image}
+              alt="Profile"
+              className="rounded-circle"
+              width="100"
+              height="100"
+            />
+            <div className="mt-2 ms-3">
+              <h5 className="m-1">{reviews[currentIndex].name}</h5>
+              <p className="m-1">{reviews[currentIndex].date}</p>
+              <div>
+                {'★'.repeat(reviews[currentIndex].stars) +
+                  '☆'.repeat(5 - reviews[currentIndex].stars)}
+              </div>
+            </div>
           </div>
-          <p className="mt-3">{reviews[currentIndex].review}</p>
+          <p className="mt-4 fs-5">{reviews[currentIndex].review}</p>
         </div>
         {/* 右箭头 */}
-        <button className="btn btn-light" onClick={handleNext}>
+        <button
+          className="btn btn-light"
+          onClick={handleNext}
+          style={{
+            backgroundColor: 'transparent',
+            color: '#f8f0e5',
+            fontSize: '30px',
+            border: 'none',
+          }}
+        >
           &gt;
         </button>
         {/* 右边轮播卡片 */}
         <div
-          className="card text-center"
-          style={{ width: '300px', padding: '20px', opacity: 0.5 }}
+          className="card"
+          style={{
+            padding: '20px',
+            // opacity: 0.5,
+            backgroundColor: 'transparent',
+            color: '#f8f0e5',
+            border: '1px solid #f8f0e5',
+            borderRadius: '10px',
+            width: '25%',
+            height: '250px',
+          }}
         >
-          <Image
-            src={reviews[getRightIndex()].image}
-            alt="Profile"
-            className="rounded-circle"
-            width="80"
-            height="80"
-          />
-          <h5 className="mt-3">{reviews[getRightIndex()].name}</h5>
-          <p>{reviews[getRightIndex()].date}</p>
-          <div>
-            {'★'.repeat(reviews[getRightIndex()].stars) +
-              '☆'.repeat(5 - reviews[getRightIndex()].stars)}
+          <div className="d-flex ms-3">
+            <Image
+              src={reviews[getRightIndex()].image}
+              alt="Profile"
+              className="rounded-circle"
+              width="80"
+              height="80"
+            />
+            <div className="mt-2 ms-3">
+              <h5 className="m-0">{reviews[getRightIndex()].name}</h5>
+              <p className="m-0">{reviews[getRightIndex()].date}</p>
+              <div>
+                {'★'.repeat(reviews[getRightIndex()].stars) +
+                  '☆'.repeat(5 - reviews[getRightIndex()].stars)}
+              </div>
+            </div>
           </div>
-          <p className="mt-3">{reviews[getRightIndex()].review}</p>
+          <p className="mt-4">{reviews[getRightIndex()].review}</p>
         </div>
       </div>
     </div>

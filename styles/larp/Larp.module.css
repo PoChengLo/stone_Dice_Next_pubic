@@ -32,7 +32,10 @@
 }
 
 .dropDown button {
+  display: flex;
+  align-items: center;
   margin-top: 25px;
+  font-size: 24px;
   background-color: #d7bf7d !important;
   color: #1f1f1f !important;
   border: none !important;
@@ -50,7 +53,15 @@
     height: 40px;
     width: 100px;
   }
-  .dropDown {
+  .dropDown button {
     margin-top: 20px;
+    height: auto;
+    padding: 5px;
+    font-size: 8px;
+  }
+
+  .siri {
+    margin-left: 5px !important;
+    font-size: 8px;
   }
 }
