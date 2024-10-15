@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import FocusCardsDemo from '@/components/layout/default-layout/user-layout/focus-cards' // 引入 FocusCards 組件
+import FocusCardsDemo from '@/components/layout/default-layout/user-layout/focus-cards'
 import styles from '@/styles/user-profile/home-page.module.scss'
 import Footer from '@/components/layout/default-layout/footer'
+import LayeredAnimation from '@/components/layout/default-layout/user-layout/layered-animation'
+import FloatingImages from '@/components/layout/default-layout/user-layout/fly-img'
+import Slider from '@/components/layout/default-layout/user-layout/slider'
 
 const HomePage = () => {
   const [showImages, setShowImages] = useState(false)
@@ -54,6 +57,7 @@ const HomePage = () => {
         <video className={styles.video} autoPlay loop muted playsInline>
           <source src="/user-profile/index_3840x2160.mp4" type="video/mp4" />
         </video>
+
         <AnimatePresence>
           {showTitle && (
             <motion.div
@@ -67,14 +71,17 @@ const HomePage = () => {
                 src="/user-profile/a-horizontal-logo-for-the-board-game-e-commerce-st-wFd7X15XTUqPGFVfIlZtTg-pQqTY0_UTKCR8FckmdvWoQ.png"
                 alt="The Dice in the Stone logo"
                 layout="intrinsic"
-                width={1200}
-                height={600}
+                width={950}
+                height={250}
                 className={styles.centerImage}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </header>
+      <FloatingImages />
+      {/* 添加動畫的分層區塊 */}
+      <LayeredAnimation />
 
       <main className={styles.main}>
         {showImages && (
@@ -121,9 +128,9 @@ const HomePage = () => {
           ))}
         </div>
       </main>
-
+      <Slider />
       <section className={styles.focusCardsSection}>
-        <FocusCardsDemo /> {/* 傳入卡片資料的組件 */}
+        <FocusCardsDemo />
       </section>
       <Footer />
     </div>
