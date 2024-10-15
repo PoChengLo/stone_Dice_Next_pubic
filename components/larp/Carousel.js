@@ -108,7 +108,8 @@ const ReviewCarousel = () => {
       date: '2024/05/21',
       stars: 4,
       review: '充滿驚喜。角色刻畫生動，氛圍營造得當，是一部不可錯過的佳作',
-      image: 'https://via.placeholder.com/80',
+      image:
+        'https://sf6-cdn-tos.bdxiguastatic.com/img/user-avatar/dd3c0c47462e36f909743cbe7439e2e6~300x300.image?from=avatar',
     },
     {
       id: 2,
@@ -117,7 +118,8 @@ const ReviewCarousel = () => {
       stars: 5,
       review:
         '劇情安排得當，讓人反思許多。演員表現出色，場景設計和氛圍營造非常好。',
-      image: 'https://via.placeholder.com/80',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgyKK9xs3ME-Yr9z585UxrngM10JTWOEhBQT4RFVwRpXUB9_zs3abs5R52BOP111pZgSE&usqp=CAU',
     },
     {
       id: 3,
@@ -126,7 +128,7 @@ const ReviewCarousel = () => {
       stars: 3,
       review:
         '劇情有點平淡，但角色刻畫還算不錯。是一部可以一看的電影，但不能說是最好的一部。',
-      image: 'https://via.placeholder.com/80',
+      image: 'http://inews.gtimg.com/newsapp_bt/0/2998841099/640',
     },
     {
       id: 4,
@@ -135,7 +137,8 @@ const ReviewCarousel = () => {
       stars: 4,
       review:
         '氛圍營造的非常棒。雖然有些部分可以更精緻，但仍是一部很值得推薦的作品。',
-      image: 'https://via.placeholder.com/80',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzF8NrsC26r4C4XSi2VBXW2d-BgYQWmXegExg1x2XKn88wiNZZa3NVqKBEwncuN-qO0U&usqp=CAU',
     },
   ]
 
@@ -171,6 +174,7 @@ const ReviewCarousel = () => {
             borderRadius: '10px',
             width: '25%',
             height: '250px',
+            objectFit: 'coontain',
           }}
         >
           <div className="d-flex ms-3">
