@@ -65,11 +65,11 @@ export default function UserProfile() {
       case 'shipping':
         return <ShippingInfo />
       case 'activity':
-        return <ActivityOrder />
+        return <MyOrder userId={id} />
       case 'favorite':
         return <MyFavorite />
       case 'order':
-        return <MyOrder userId={id} />
+        return <ActivityOrder />
       case 'settings':
         return <WebsiteSettings />
 
@@ -88,10 +88,10 @@ export default function UserProfile() {
       <div style={backgroundStyle}>
         <div className={styles['container']}>
           <div className={styles['sidebar']}>
-            <span className={styles['logo']}>S</span>
             <a className={styles['logo-expand']} href="#">
-              skateboard
+              The Dice in the Stone
             </a>
+
             <div className={styles['side-wrapper']}>
               <div className={styles['side-title']}>MENU</div>
               <div className={styles['side-menu']}>
@@ -131,7 +131,7 @@ export default function UserProfile() {
                     size={30}
                     style={{ marginRight: '16px' }}
                   />
-                  我的活動
+                  預約的活動
                 </a>
                 <a
                   className={styles['sidebar-link']}

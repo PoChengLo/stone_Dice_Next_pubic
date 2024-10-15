@@ -12,14 +12,107 @@
 
 .sidebar {
   width: 320px;
-  height: 100%;
-  padding: 30px;
-  padding-top: 100px;
+  height: calc(100% - 50px); // 調整高度以匹配主區域
+  margin-top: 50px; // 添加上邊距以與主區域對齊
+  padding: 20px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   overflow-y: auto;
-  overflow-x: auto;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #d7cebe, #a6977c);
+  border-radius: 20px 0 0 20px;
+  transition: all 0.3s ease;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: rgba(166, 151, 124, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(166, 151, 124, 0.5);
+    border-radius: 3px;
+  }
+
+  .logo-expand {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 34px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 15px; // 稍微減少 padding
+    margin-bottom: 20px; // 減少底部 margin
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+
+    &:before {
+      content: '';
+      width: 34px; // 稍微縮小圖標
+      height: 34px;
+      background-color: #4a4a4a;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/%3E%3C/svg%3E");
+      mask-size: cover;
+      margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      &:before {
+        transform: rotate(180deg);
+        background-color: #a6977c;
+      }
+    }
+  }
+
+  .side-wrapper {
+    margin-bottom: 20px; // 減少底部 margin
+
+    .side-title {
+      font-size: 14px; // 稍微縮小字體
+      letter-spacing: 0.07em;
+      margin-bottom: 15px; // 減少底部 margin
+      color: #4a4a4a;
+      text-transform: uppercase;
+      padding-left: 15px;
+    }
+
+    .side-menu {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        display: flex;
+        align-items: center;
+        color: #4a4a4a;
+        text-decoration: none;
+        padding: 8px 15px; // 減少上下 padding
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        margin-bottom: 5px; // 添加小間距
+
+        svg {
+          margin-right: 12px;
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+          color: #000;
+
+          svg {
+            color: #a6977c;
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
 }
 
 .sidebar .logo {
