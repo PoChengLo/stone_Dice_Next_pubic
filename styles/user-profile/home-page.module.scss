@@ -10,6 +10,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
 
 .video {
@@ -158,5 +159,53 @@
 
   .title {
     font-size: 1.5rem;
+  }
+}
+
+.layerContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .layer-1 {
+    background-image: url('/images/castle-4139917.svg');
+    background-color: #d9bf8f;
+  }
+
+  .layer-2 {
+    background-image: url('/images/collect-svgrepo-com.svg');
+    background-color: #a6977c;
+  }
+
+  .layer-3 {
+    background-image: url('/images/fence-7617059.svg');
+    background-color: #404040;
+  }
+
+  .layer-4 {
+    background-image: url('/images/layer-4.png');
+    background-color: #b89870; // 稍微更深的 #D9BF8F
+  }
+
+  .layer-5 {
+    background-image: url('/images/layer-5.png');
+    background-color: #676767; // 混合 #A6977C 和 #404040
+  }
+
+  .layer-6 {
+    background-image: url('/images/layer-6.png');
+    background: linear-gradient(to bottom, #d9bf8f, #a6977c);
+    opacity: 0.8;
   }
 }
