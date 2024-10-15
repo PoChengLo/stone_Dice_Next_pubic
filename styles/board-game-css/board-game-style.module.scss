@@ -732,7 +732,12 @@
       background: none;
       color: #f8f0e5;
       border: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .p {
       margin: 0px;
     }
