@@ -34,7 +34,7 @@
 .main-container {
   display: flex;
   width: 70%;
-  height: 85%; // 保持原來的高度
+  height: 85%;
   background: #d7cebe;
   overflow: hidden;
   border-radius: 24px;
@@ -54,44 +54,46 @@
   flex-direction: column;
   padding: 20px;
   position: relative;
-  height: 100%; // 確保 login-section 填滿整個高度
+  height: 100%;
 }
 
 .welcome-title {
   color: rgba(68, 68, 68, 1);
   text-align: left;
   width: 100%;
-  margin-bottom: 15px;
-  flex-shrink: 0; // 防止標題被壓縮
+ margin-top: 20px;
+ margin-left: 20px;
+  flex-shrink: 0;
 }
 
 .form-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; // 將 flex-start 改為 center
   flex-grow: 1;
-  height: calc(100% - 60px); // 減去 welcome-title 的大約高度
-  overflow-y: auto; // 允許內容在需要時滾動
+  height: calc(100% - 60px);
+  overflow-y: auto;
 }
 
 .login-form {
   width: 100%;
-  margin-top: 10px;
+ 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center; // 將 flex-start 改為 center
 }
 
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center; // 新增此行以居中對齊表單內容
 
   :global(.input_container) {
     position: relative;
     width: 100%;
-    margin-bottom: 20px; // 給每個 input 容器一些空間
-    height: auto; // 允許容器根據內容調整高度
+    margin-bottom: 20px;
+    height: auto;
   }
 
   :global(.input) {
@@ -127,10 +129,29 @@
     margin-top: 5px;
     min-height: 20px; 
   }
+
+  // 新增 checkbox 容器樣式
+  :global(.checkbox_container) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 80%; // 與按鈕寬度一致
+  }
+
+  // 新增 checkbox 樣式
+  :global(.checkbox) {
+    margin-right: 10px;
+  }
+
+  // 新增 checkbox 標籤文字樣式
+  :global(.checkbox_label) {
+    font-size: 14px;
+    color: #444;
+  }
 }
 
 .submit-button {
-  width: 80%;
+  width: 50%;
   border-radius: 12px;
   background: var(--d-9-bf-8-f, #a6977c);
   margin-top: 15px;
@@ -139,8 +160,8 @@
   letter-spacing: 0.2px;
   border: none;
   cursor: pointer;
-  height: 50px;
-  line-height: 50px;
+  height: 35px;
+  line-height: 30px;
   align-self: center;
 }
 
@@ -167,4 +188,84 @@
   position: absolute;
   bottom: 5px;
   right: 10px;
+}
+
+.checkbox_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 80%;
+  cursor: pointer;
+  position: relative;
+  padding-left: 28px; // 為自定義 checkbox 留出空間
+  margin-left: 20px;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+
+  &:checked ~ .checkmark:after {
+    display: block;
+  }
+}
+
+.checkmark {
+  position: absolute;
+  top: 2px; // 調整位置以與 18px 文字對齊
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #ddd;
+  border: 2px solid #888;
+  border-radius: 3px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid #555;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.checkbox_container:hover .checkbox ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkbox:checked ~ .checkmark {
+  background-color: #fff;
+}
+
+.main_text {
+  font-size: 18px; // 更新文字大小為 18px
+  color: #444;
+  display: flex;
+  align-items: center;
+  line-height: 1.5; // 確保適當的行高
+}
+
+.terms_link {
+  color: #D92626; // 更新連結顏色
+  text-decoration: none;
+  margin-left: 5px;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link_icon {
+  font-size: 14px; // 稍微調小圖標大小
+  margin-left: 4px;
 }

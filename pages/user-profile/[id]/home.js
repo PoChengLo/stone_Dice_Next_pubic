@@ -65,11 +65,11 @@ export default function UserProfile() {
       case 'shipping':
         return <ShippingInfo />
       case 'activity':
-        return <ActivityOrder />
+        return <MyOrder userId={id} />
       case 'favorite':
         return <MyFavorite />
       case 'order':
-        return <MyOrder userId={id} />
+        return <ActivityOrder />
       case 'settings':
         return <WebsiteSettings />
 

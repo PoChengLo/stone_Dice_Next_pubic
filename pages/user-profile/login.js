@@ -122,7 +122,7 @@ export default function LoginPage() {
                       href="/user-profile/forgot-password"
                       className={styles['forgot-password']}
                     >
-                      Forgot Password?
+                      忘記密碼了嗎？
                     </Link>
                     <button type="submit" className={styles['submit-button']}>
                       Sign in
@@ -150,7 +150,7 @@ export default function LoginPage() {
                         <span>還沒有帳號嗎？</span>
                         <Link
                           href="/user-profile/signup"
-                          style={{ color: 'rgba(217,38,38,1)' }}
+                          style={{ color: '#D92626' }}
                         >
                           Sign up
                         </Link>

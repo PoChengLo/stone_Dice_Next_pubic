@@ -5,6 +5,7 @@ import styles from '@/styles/user-profile/signup.module.scss'
 import Image from 'next/image'
 import { register } from '@/services/user'
 import Link from 'next/link'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 
 const backgroundStyle = {
   height: '100vh',
@@ -160,12 +161,26 @@ export default function SignupPage() {
                     defaultHelperText="請再次輸入您的密碼"
                     placeholder=" "
                   />
-                  <label>
-                    <input type="checkbox" required />
-                    <span className={styles['main-text']}>
-                      我同意服務條款及隱私政策
+
+                  <label className={styles.checkbox_container}>
+                    <input
+                      type="checkbox"
+                      required
+                      className={styles.checkbox}
+                    />
+                    <span className={styles.checkmark}></span>
+                    <span className={styles.main_text}>
+                      我同意
+                      <Link
+                        href="/terms-and-privacy"
+                        className={styles.terms_link}
+                      >
+                        服務條款與隱私政策
+                        <FaExternalLinkAlt className={styles.link_icon} />
+                      </Link>
                     </span>
                   </label>
+
                   {submitError && <p className={styles.error}>{submitError}</p>}
                   <button
                     type="submit"
