@@ -11,7 +11,6 @@ import { useRouter } from 'next/router'
 import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import Footer from '@/components/layout/default-layout/footer'
 
-
 export default function MysteryId() {
   const router = useRouter()
 
@@ -101,7 +100,7 @@ export default function MysteryId() {
 
       if (sceneRef.current) {
         const panorama = new PANOLENS.ImagePanorama(
-          'https://i.postimg.cc/WbFRqfh9/fotor-ai-2024100511526.png'
+          'https://u-static.fotor.com/images/text-to-image/result/PRO-ee61904acaf44a95bd3d81a5e89b8944.jpg'
         )
 
         const viewer = new PANOLENS.Viewer({
@@ -114,7 +113,7 @@ export default function MysteryId() {
   }, [])
 
   return (
-    <div className={styles.larpBody}>
+    <div className={styles.larpBody} style={{ paddingBottom: '0' }}>
       <Navbar />
       <div className={styles.larpContainer}>
         <div className="position-relative d-flex justify-content-between">
