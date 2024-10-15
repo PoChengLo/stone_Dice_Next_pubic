@@ -9,6 +9,8 @@ import { BsCheckCircleFill, BsCircle } from 'react-icons/bs'
 import { Button } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Footer from '@/components/layout/default-layout/footer'
+
 export default function PayShip() {
   // 設定會員資料
   const [authInfo, setAuthInfo] = useState({ isAuth: false })
@@ -148,8 +150,8 @@ export default function PayShip() {
   return (
     <>
       <Navbar />
-      <div id={`${styles.backgroundImage}`} className="pt-5">
-        <div className={`container pt-5 ${styles.pay_ship}`}>
+      <div id={`${styles.backgroundImage}`} className="py-5">
+        <div className={`container py-5 ${styles.pay_ship}`}>
           {/* 步驟提示，選擇運送與付款方式 */}
           <div className="row my-3">
             <div className="col d-flex align-items-xxl-center justify-content-xxl-evenly flex-xxl-row flex-column justify-content-evenly align-items-center">
@@ -444,6 +446,9 @@ export default function PayShip() {
           </div>
         </div>
       </div>
+      <div style={{ marginTop: '-130px' }}>
+        <Footer />
+      </div>{' '}
     </>
   )
 }

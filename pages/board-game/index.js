@@ -9,6 +9,7 @@ import SideClass from '../../components/board-game/side-class'
 import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import NavbarM from '@/components/layout/default-layout/user-layout/navbarM'
+import Footer from '@/components/layout/default-layout/footer'
 
 export default function BoardGame({ onClick }) {
   const router = useRouter()
@@ -94,7 +95,7 @@ export default function BoardGame({ onClick }) {
     <>
       <NavbarM />
       <Navbar />
-      <div id={`${styles.backgroundImage_index}`} className="pt-5">
+      <div id={`${styles.backgroundImage_index}`} className="py-5">
         <div className="container pt-5">
           {/* 搜尋欄，標籤 */}
           <div className="row my-xxl-3">
@@ -260,7 +261,7 @@ export default function BoardGame({ onClick }) {
               />
             </div>
             {/* 商品卡片 */}
-            <div className="col-12 col-xxl-10 ">
+            <div className="col-12 col-xxl-10 mb-5">
               <div className={`row`}>
                 {products.map((product) => (
                   <div
@@ -272,7 +273,7 @@ export default function BoardGame({ onClick }) {
                 ))}
               </div>
               {/* 分頁按鈕 */}
-              <div className="row mt-3 ">
+              <div className={`row my-5 ${styles.pagination_buttons}`}>
                 <div className="col">
                   <nav aria-label="Page navigation example d-flex justify-content-center">
                     <ul className="pagination d-flex justify-content-center">
@@ -340,6 +341,9 @@ export default function BoardGame({ onClick }) {
             </div>
           </div>
         </div>
+      </div>
+      <div style={{ marginTop: '-130px' }}>
+        <Footer />
       </div>
     </>
   )

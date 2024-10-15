@@ -15,6 +15,7 @@ import { useAuth } from '@/hooks/use-auth'
 import useLocalStorage from '@/hooks/use-localstorage'
 import { useRouter } from 'next/router'
 import ProdCard from '@/components/board-game/prod-card'
+import Footer from '@/components/layout/default-layout/footer'
 
 export default function ProductCart() {
   //可從useCart中獲取的各方法與屬性，參考README檔中說明
@@ -328,12 +329,12 @@ export default function ProductCart() {
             </div>
           </div>
           {/* 相關熱門商品 */}
-          <div className="row" style={{ left: '-30px', position: 'relative' }}>
-            <div className="col">
+          <div className="row " style={{ left: '-30px', position: 'relative' }}>
+            <div className="col pb-5">
               <h4 className={`${styles.h4}`}>熱門商品</h4>
-              <div className="row" style={{ width: '1400px' }}>
+              <div className="row pb-5" style={{ width: '1400px' }}>
                 {hotsales.map((v, i) => (
-                  <div className="col-6 col-xxl-3">
+                  <div key={v.id} className="col-6 col-xxl-3">
                     <ProdCard product={v} onClick={handleCardClick} />
                   </div>
                 ))}
@@ -354,6 +355,9 @@ export default function ProductCart() {
           </div>
         </div>
       </div>
+      <div style={{ marginTop: '-130px' }}>
+        <Footer />
+      </div>{' '}
     </>
   )
 }
