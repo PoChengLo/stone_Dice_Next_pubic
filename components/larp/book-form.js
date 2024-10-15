@@ -530,6 +530,27 @@ export default function BookForm({
           DEMO資料
         </Button>
         <Button
+          className={styles.demoBtn}
+          onClick={() => {
+            const newMobile = '0912054378'
+            const newUserName = '陳依珊'
+            const newUserEmail = 'jennie@gmail.com'
+
+            setMobile(newMobile)
+            setUserName(newUserName)
+            setUserEmail(newUserEmail)
+
+            setFormData((prevData) => ({
+              ...prevData,
+              name: newUserName,
+              mobile: newMobile,
+              email: newUserEmail,
+            }))
+          }}
+        >
+          DEMO資料
+        </Button>
+        <Button
           className="position-absolute end-0"
           style={{
             padding: '8px 29px',
