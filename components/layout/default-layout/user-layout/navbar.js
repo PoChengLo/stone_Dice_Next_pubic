@@ -230,7 +230,7 @@ export default function Navbar() {
                     <li className={styles.menuItem}>
                       <Link href="#">
                         <BsFillBagHeartFill />
-                        <span>我的收藏</span>
+                        <span>我的最愛</span>
                       </Link>
                     </li>
                     <li className={styles.menuItem}>
