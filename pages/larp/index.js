@@ -119,7 +119,10 @@ export default function LarpPage() {
             title={
               <>
                 <BsListUl />
-                <p style={{ margin: '0 0 0 18px', display: 'inline-block' }}>
+                <p
+                  style={{ margin: '0 0 0 18px', display: 'inline-block' }}
+                  className={styles.siri}
+                >
                   篩選小助理
                 </p>
               </>

@@ -81,7 +81,7 @@ export default function Navbar() {
         </div>
         <Link href="./">
           <Image
-            src="user-profile/navbarM_logo.png"
+            src="/user-profile/navbarM_logo.png"
             alt=""
             width={67}
             height={60}

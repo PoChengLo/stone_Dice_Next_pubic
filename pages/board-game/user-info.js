@@ -9,6 +9,7 @@ import Navbar from '@/components/layout/default-layout/user-layout/navbar'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 import { BsCircle } from 'react-icons/bs'
 import { Button } from 'react-bootstrap'
+import Footer from '@/components/layout/default-layout/footer'
 
 export default function UserInfo() {
   // 會員物件狀態
@@ -71,8 +72,8 @@ export default function UserInfo() {
   return (
     <>
       <Navbar />
-      <div id={`${styles.backgroundImage}`} className="pt-5">
-        <div className={`container pt-5 ${styles.user_info}`}>
+      <div id={`${styles.backgroundImage}`} className="py-5">
+        <div className={`container py-5 ${styles.user_info}`}>
           {/* 步驟提示，填寫購買人資訊 */}
           <div className="row my-3">
             <div className="col d-flex align-items-xxl-center justify-content-xxl-evenly flex-xxl-row flex-column justify-content-evenly align-items-center">
@@ -234,6 +235,9 @@ export default function UserInfo() {
           </div>
         </div>
       </div>
+      <div style={{ marginTop: '-130px' }}>
+        <Footer />
+      </div>{' '}
     </>
   )
 }

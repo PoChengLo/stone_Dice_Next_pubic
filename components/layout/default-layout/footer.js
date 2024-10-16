@@ -81,7 +81,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div>
+            <div className={styles.email}>
               <h4>訂閱電子報</h4>
               <div className="d-flex flex-direction-column">
                 <input
@@ -113,7 +113,7 @@ export default function Footer() {
               </div>
             </div>
             <div
-              className="position-absolute"
+              className={`position-absolute ${styles.copy}`}
               style={{
                 top: '150px',
                 left: 'calc((100% - 221.2px) / 2)',

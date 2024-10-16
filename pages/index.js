@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useInView,
+} from 'framer-motion'
 import FocusCardsDemo from '@/components/layout/default-layout/user-layout/focus-cards'
 import styles from '@/styles/user-profile/home-page.module.scss'
 import Footer from '@/components/layout/default-layout/footer'
@@ -9,31 +16,30 @@ import FloatingImages from '@/components/layout/default-layout/user-layout/fly-i
 import Slider from '@/components/layout/default-layout/user-layout/slider'
 
 const HomePage = () => {
-  const [showImages, setShowImages] = useState(false)
   const [showTitle, setShowTitle] = useState(false)
   const containerRef = useRef(null)
+  const callToActionRef = useRef(null)
+  const isInView = useInView(callToActionRef, { once: false, amount: 0.3 })
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   })
 
-  const leftImageX = useTransform(scrollYProgress, [0, 0.3], ['-100%', '0%'])
-  const rightImageX = useTransform(scrollYProgress, [0.2, 0.5], ['100%', '0%'])
-  const lightBeamY = useTransform(scrollYProgress, [0, 1], ['-50%', '100%'])
+  const meteorY = useTransform(scrollYProgress, [0, 1], ['-80%', '180%'])
+  const meteorX = useTransform(scrollYProgress, [0, 1], ['-50%', '100%'])
+  const meteorOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0, 1, 1, 0]
+  )
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      const windowHeight = window.innerHeight
+  const leftImageX = useTransform(scrollYProgress, [0, 0.5], ['-100%', '0%'])
+  const rightImageX = useTransform(scrollYProgress, [0, 0.5], ['100%', '0%'])
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1])
 
-      if (scrollPosition > windowHeight * 0.5) {
-        setShowImages(true)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const textY = useTransform(scrollYProgress, [0, 0.5], ['50px', '0px'])
+  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1])
 
   useEffect(() => {
     const titleTimer = setTimeout(() => setShowTitle(true), 8000)
@@ -50,6 +56,29 @@ const HomePage = () => {
     '巨龍的咆哮震撼大地,而你的策略將決定這場史詩之戰的勝負。',
     '每一個棋子,都是一個英雄;每一次擲骰,都是一次冒險。歡迎來到傳奇的殿堂。',
   ]
+
+  const callToActionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  }
+
+  const loopingTextVariants = {
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 2,
+        ease: 'easeInOut',
+        repeat: Infinity,
+      },
+    },
+  }
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -80,58 +109,143 @@ const HomePage = () => {
         </AnimatePresence>
       </header>
       <FloatingImages />
-      {/* 添加動畫的分層區塊 */}
       <LayeredAnimation />
 
       <main className={styles.main}>
-        {showImages && (
-          <div className={styles.imageContainer}>
+        <div className={styles.contentWrapper}>
+          <motion.div
+            className={styles.meteor}
+            style={{ y: meteorY, x: meteorX, opacity: meteorOpacity }}
+          />
+
+          <div className={styles.imageTextContainer}>
             <motion.div
               className={styles.imageWrapper}
-              style={{ x: leftImageX }}
+              style={{ x: leftImageX, opacity: imageOpacity }}
             >
               <Image
                 src="/user-profile/animal_hitsuji.png"
-                alt="左側浮動圖片"
+                alt="Left floating image"
                 width={300}
                 height={300}
                 objectFit="contain"
               />
             </motion.div>
+
+            <motion.div
+              className={styles.textContainer}
+              style={{ y: textY, opacity: textOpacity }}
+            >
+              {themedTexts.map((text, index) => (
+                <motion.p
+                  key={index}
+                  className={styles.floatingText}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3,
+                    delay: index * 0.5,
+                  }}
+                >
+                  {text}
+                </motion.p>
+              ))}
+            </motion.div>
+
             <motion.div
               className={styles.imageWrapper}
-              style={{ x: rightImageX }}
+              style={{ x: rightImageX, opacity: imageOpacity }}
             >
               <Image
                 src="/user-profile/dog_shetland_sheepdog.png"
-                alt="右側浮動圖片"
+                alt="Right floating image"
                 width={300}
                 height={300}
                 objectFit="contain"
               />
             </motion.div>
           </div>
-        )}
-
-        <div className={styles.textContainer}>
-          <motion.div className={styles.lightBeam} style={{ y: lightBeamY }} />
-          {themedTexts.map((text, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: index * 0.5 }}
-              className={styles.textBlock}
-            >
-              <p className={styles.floatingText}>{text}</p>
-            </motion.div>
-          ))}
         </div>
       </main>
       <Slider />
+
       <section className={styles.focusCardsSection}>
         <FocusCardsDemo />
       </section>
+
+      <section className={styles.callToActionSection} ref={callToActionRef}>
+        <motion.div
+          className={styles.textContainer}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.3,
+              },
+            },
+          }}
+        >
+          <motion.p
+            className={styles.callToActionText}
+            variants={callToActionVariants}
+            animate="animate"
+            custom={0}
+          >
+            勇者啊，你的冒險正等待著你！
+          </motion.p>
+          <motion.p
+            className={styles.callToActionText}
+            variants={callToActionVariants}
+            animate="animate"
+            custom={1}
+          >
+            在這片神奇的桌遊世界中，無盡的故事與挑戰等待著你的探索。
+          </motion.p>
+          <motion.p
+            className={styles.callToActionText}
+            variants={callToActionVariants}
+            animate="animate"
+            custom={2}
+          >
+            準備好開啟你的傳奇之旅了嗎？
+          </motion.p>
+          <motion.p
+            className={styles.callToActionText}
+            variants={callToActionVariants}
+            animate="animate"
+            custom={3}
+          >
+            加入我們，共同書寫屬於你的精彩篇章！
+          </motion.p>
+        </motion.div>
+        <motion.div
+          className={styles.buttonContainer}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+        >
+          <Link href="/user-profile/login">
+            <motion.button
+              className={`${styles.actionButton} ${styles.loginButton}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              登入
+            </motion.button>
+          </Link>
+          <Link href="/user-profile/signup">
+            <motion.button
+              className={`${styles.actionButton} ${styles.signupButton}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              註冊
+            </motion.button>
+          </Link>
+        </motion.div>
+      </section>
+
       <Footer />
     </div>
   )
