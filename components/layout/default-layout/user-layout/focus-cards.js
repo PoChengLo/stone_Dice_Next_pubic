@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import styles from '@/styles/user-profile/focus-cards.module.scss'
 
-const Card = ({ card, isSelected, onClick }) => (
+const ProductCard = ({ product, isSelected, onClick }) => (
   <motion.div
     className={`${styles.card} ${isSelected ? styles.selectedCard : ''}`}
     onClick={onClick}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.97 }}
     layout
-    initial={{ scale: 1 }}
-    animate={{ scale: isSelected ? 1.1 : 1 }}
-    transition={{ duration: 0.3 }}
   >
     <Image
-      src={card.image}
-      alt={card.title}
+      src={`/board-game/product-pic/${product.prod_img}`}
+      alt={product.prod_name}
       layout="fill"
       objectFit="cover"
       className={styles.cardImage}
@@ -22,61 +22,140 @@ const Card = ({ card, isSelected, onClick }) => (
     <motion.div
       className={styles.cardOverlay}
       initial={{ opacity: 0 }}
-      animate={{ opacity: isSelected ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
-      <h3 className={styles.cardTitle}>{card.title}</h3>
+      <h3 className={styles.cardTitle}>{product.prod_name}</h3>
+      <p className={styles.cardPrice}>NT$ {product.price}</p>
     </motion.div>
   </motion.div>
 )
 
-const FocusCardsDemo = () => {
-  const [selectedCard, setSelectedCard] = useState(null)
-
-  const cards = [
+const AnimatedProductCarousel = () => {
+  const mockProducts = [
     {
-      title: 'Forest Adventure',
-      image:
-        'https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      id: 201,
+      prod_name: '龍之遺跡 Dragons Legacy',
+      price: 1280,
+      prod_img: '001.jpeg',
     },
     {
-      title: 'Valley of life',
-      image:
-        'https://images.unsplash.com/photo-1600271772470-bd22a42787b3?q=80&w=3072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      id: 202,
+      prod_name: '幽靈船 Ghost Ship',
+      price: 1540,
+      prod_img: '002.jpeg',
     },
     {
-      title: 'Sala behta hi jayega',
-      image:
-        'https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      id: 203,
+      prod_name: '奇幻競技場 Fantasy Arena',
+      price: 2060,
+      prod_img: '003.jpeg',
     },
     {
-      title: 'Camping is for pros',
-      image:
-        'https://images.unsplash.com/photo-1486915309851-b0cc1f8a0084?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      id: 204,
+      prod_name: '時光迷宮 Chrono Labyrinth',
+      price: 2400,
+      prod_img: '004.jpeg',
     },
     {
-      title: 'The road not taken',
-      image:
-        'https://images.unsplash.com/photo-1507041957456-9c397ce39c97?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      id: 205,
+      prod_name: '魔法糖果工廠 Enchanted Candy Factory',
+      price: 1820,
+      prod_img: '005.jpeg',
     },
     {
-      title: 'The First Rule',
-      image: 'https://assets.aceternity.com/the-first-rule.png',
+      id: 206,
+      prod_name: '魔法餐廳 Enchanted Bistro',
+      price: 1100,
+      prod_img: '006.jpeg',
+    },
+    {
+      id: 207,
+      prod_name: '詭異時光錶 Eerie Hourglass',
+      price: 1580,
+      prod_img: '007.jpeg',
+    },
+    {
+      id: 208,
+      prod_name: '笑話大亂鬥 Joke Brawl',
+      price: 1700,
+      prod_img: '008.jpeg',
+    },
+    {
+      id: 209,
+      prod_name: '怪獸養成所 Monster Nursery',
+      price: 2220,
+      prod_img: '009.jpeg',
     },
   ]
 
+  const [visibleProducts, setVisibleProducts] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    const newVisibleProducts = []
+    for (let i = 0; i < 5; i++) {
+      const index = (currentIndex + i) % mockProducts.length
+      newVisibleProducts.push(mockProducts[index])
+    }
+    setVisibleProducts(newVisibleProducts)
+  }, [currentIndex])
+
+  const nextProduct = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % mockProducts.length)
+  }
+
+  const prevProduct = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + mockProducts.length) % mockProducts.length
+    )
+  }
+
   return (
-    <div className={styles.cardsContainer}>
-      {cards.map((card, index) => (
-        <Card
-          key={index}
-          card={card}
-          isSelected={selectedCard === index}
-          onClick={() => setSelectedCard(index === selectedCard ? null : index)}
-        />
-      ))}
+    <div className={styles.carouselContainer}>
+      <h2 className={styles.carouselTitle}>最新桌遊商品</h2>
+      <div className={styles.carouselWrapper}>
+        <motion.button
+          className={`${styles.navButton} ${styles.prevButton}`}
+          onClick={prevProduct}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronLeft size={24} />
+        </motion.button>
+        <div className={styles.cardsContainer}>
+          <AnimatePresence initial={false}>
+            {visibleProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                custom={index}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+              >
+                <ProductCard
+                  product={product}
+                  isSelected={index === 2}
+                  onClick={() => {
+                    /* Handle click */
+                  }}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+        <motion.button
+          className={`${styles.navButton} ${styles.nextButton}`}
+          onClick={nextProduct}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronRight size={24} />
+        </motion.button>
+      </div>
     </div>
   )
 }
 
-export default FocusCardsDemo
+export default AnimatedProductCarousel
