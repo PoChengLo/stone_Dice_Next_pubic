@@ -1,0 +1,43 @@
+.portfolio-section {
+  padding-top: 5%;
+  text-align: center;
+
+  .portfolio-slider {
+    margin-top: 20px;
+
+    .project-tile {
+      a {
+        img {
+          max-width: 100%;
+          height: auto;
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+
+  h2 {
+    color: #fff;
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  p {
+    color: #aaa;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+  }
+
+  .slick-dots li button:before {
+    color: #aaa;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: white;
+  }
+}

@@ -32,13 +32,6 @@ const LayeredAnimation = () => {
   )
   const opacity3 = useTransform(scrollYProgress, [0.4, 0.5], [0, 1])
 
-  // 第四層：位移和透明度設置
-  const y4 = useSpring(
-    useTransform(scrollYProgress, [0.5, 0.7], ['0%', '-20%']),
-    springConfig
-  )
-  const opacity4 = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
-
   const layers = [
     {
       image: '/images/castle-4139917.svg',
@@ -63,14 +56,6 @@ const LayeredAnimation = () => {
       y: y3,
       opacity: opacity3,
       topOffset: '5%', // 第三層更靠下
-    },
-    {
-      image: '/images/fence-7617059.svg',
-      filter: 'brightness(1) sepia(0)',
-      size: 'contain',
-      y: y4,
-      opacity: opacity4,
-      topOffset: '10%', // 第四層保持在可視範圍內
     },
   ]
 

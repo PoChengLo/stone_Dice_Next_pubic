@@ -203,7 +203,7 @@
 }
 
 .side-menu a + a {
-  margin-top: 26px;
+  margin-top: 16px;
 }
 
 .side-menu svg {
@@ -279,9 +279,9 @@
   flex-grow: 1;
   overflow: auto;
   margin-top: 50px;
-  
+
   background: rgba(166, 151, 124, 0.8);
-  border-radius:0 20px 20px 0;
+  border-radius: 0 20px 20px 0;
   box-shadow: -615px 600px 241px 0px rgba(0, 0, 0, 0),
     -394px 384px 220px 0px rgba(0, 0, 0, 0.01),
     -222px 216px 186px 0px rgba(0, 0, 0, 0.05),
