@@ -14,6 +14,7 @@ import Footer from '@/components/layout/default-layout/footer'
 import LayeredAnimation from '@/components/layout/default-layout/user-layout/layered-animation'
 import FloatingImages from '@/components/layout/default-layout/user-layout/fly-img'
 import Slider from '@/components/layout/default-layout/user-layout/slider'
+import LarpProductCard from '@/components/layout/default-layout/user-layout/larp-product-card'
 
 const HomePage = () => {
   const [showTitle, setShowTitle] = useState(false)
@@ -69,17 +70,6 @@ const HomePage = () => {
     },
   }
 
-  const loopingTextVariants = {
-    animate: {
-      y: [0, -10, 0],
-      transition: {
-        duration: 2,
-        ease: 'easeInOut',
-        repeat: Infinity,
-      },
-    },
-  }
-
   return (
     <div className={styles.container} ref={containerRef}>
       <header className={styles.header}>
@@ -124,7 +114,7 @@ const HomePage = () => {
               style={{ x: leftImageX, opacity: imageOpacity }}
             >
               <Image
-                src="/user-profile/animal_hitsuji.png"
+                src="/images/ai-generated-9045527_1920.png"
                 alt="Left floating image"
                 width={300}
                 height={300}
@@ -157,7 +147,7 @@ const HomePage = () => {
               style={{ x: rightImageX, opacity: imageOpacity }}
             >
               <Image
-                src="/user-profile/dog_shetland_sheepdog.png"
+                src="/images/crossbow-4578149_1920.png"
                 alt="Right floating image"
                 width={300}
                 height={300}
@@ -173,6 +163,8 @@ const HomePage = () => {
         <FocusCardsDemo />
       </section>
 
+      <LarpProductCard style={{ marginButton: '5rem' }} />
+
       <section className={styles.callToActionSection} ref={callToActionRef}>
         <motion.div
           className={styles.textContainer}
@@ -186,44 +178,50 @@ const HomePage = () => {
             },
           }}
         >
-          <motion.p
+          <motion.div
+            animate={{ x: [0, 100, 0] }}
             className={styles.callToActionText}
             variants={callToActionVariants}
-            animate="animate"
             custom={0}
+            style={{
+              marginTop: '5rem',
+            }}
           >
             勇者啊，你的冒險正等待著你！
-          </motion.p>
-          <motion.p
+          </motion.div>
+          <motion.div
+            animate={{ x: [0, 100, 0] }}
             className={styles.callToActionText}
             variants={callToActionVariants}
-            animate="animate"
             custom={1}
           >
             在這片神奇的桌遊世界中，無盡的故事與挑戰等待著你的探索。
-          </motion.p>
-          <motion.p
+          </motion.div>
+          <motion.div
+            animate={{ x: [0, 100, 0] }}
             className={styles.callToActionText}
             variants={callToActionVariants}
-            animate="animate"
             custom={2}
           >
             準備好開啟你的傳奇之旅了嗎？
-          </motion.p>
-          <motion.p
+          </motion.div>
+          <motion.div
+            animate={{ x: [0, 100, 0] }}
             className={styles.callToActionText}
             variants={callToActionVariants}
-            animate="animate"
             custom={3}
           >
             加入我們，共同書寫屬於你的精彩篇章！
-          </motion.p>
+          </motion.div>
         </motion.div>
         <motion.div
           className={styles.buttonContainer}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 1.2, duration: 0.5 }}
+          style={{
+            marginBottom: '10rem',
+          }}
         >
           <Link href="/user-profile/login">
             <motion.button

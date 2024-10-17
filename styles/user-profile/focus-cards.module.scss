@@ -6,10 +6,11 @@
 
 .carouselTitle {
   font-size: 2rem;
-  color: #d4af37; // 更柔和的金色
+  color: #f0e68c;
   text-align: center;
   margin-bottom: 1rem;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  margin-top: 5rem;
 }
 
 .carouselWrapper {
@@ -55,15 +56,15 @@
 }
 
 .cardTitle {
-  color: white;
-  font-size: 1.2rem;
+  color: #d9d9d9;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
 }
 
 .cardPrice {
   color: #f0e68c; // 淺黃色（柔和的黃色）
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 
