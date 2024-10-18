@@ -47,7 +47,7 @@
 }
 
 .label_float {
-  top: -11px;
+  top: -15px;
   color: #555;
 }
 
@@ -58,8 +58,11 @@
 .helper_text {
   font-size: 0.8rem;
   color: #888;
- margin-left: 10px;
-  white-space: nowrap; /* 確保換行 */
+  margin-left: 10px;
+  white-space: normal; /* 允許換行 */
+  word-wrap: break-word; /* 確保長單詞也能換行 */
+  line-height: 1.2; /* 適當的行高 */
+  max-width: 100%; /* 確保不會超出容器寬度 */
 }
 
 .error {
@@ -68,4 +71,15 @@
 
 .error_text {
   color: #ff0000;
+}
+
+/* 手機版樣式調整 */
+@media screen and (max-width: 430px) {
+  .input_container {
+    width: 90%;
+  }
+
+  .helper_text {
+    font-size: 0.75rem; /* 稍微縮小手機版的字體大小 */
+  }
 }

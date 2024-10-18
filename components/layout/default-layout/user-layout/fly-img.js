@@ -1,77 +1,121 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
 const FloatingImages = () => {
-  const controls1 = useAnimation()
-  const controls2 = useAnimation()
-  const [scrollY, setScrollY] = useState(0)
+  const controls = useAnimation()
+  const [isVisible, setIsVisible] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.3 } },
+    exit: { opacity: 0, transition: { duration: 0.3, delay: 1.5 } },
+  }
+
+  const leftImageVariants = {
+    hidden: { x: '-100%', opacity: 0 },
+    visible: {
+      x: '0%',
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 120, damping: 20 },
+    },
+    exit: {
+      x: '-100%',
+      opacity: 0,
+      transition: { type: 'spring', stiffness: 120, damping: 20, delay: 1 },
+    },
+  }
+
+  const rightImageVariants = {
+    hidden: { x: '100%', opacity: 0 },
+    visible: {
+      x: '0%',
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 120, damping: 20 },
+    },
+    exit: {
+      x: '100%',
+      opacity: 0,
+      transition: { type: 'spring', stiffness: 120, damping: 20, delay: 1 },
+    },
+  }
+
+  const handleScroll = useCallback(() => {
+    if (!hasAnimated && window.scrollY > 20) {
+      // 降低閾值到 20px
+      setIsVisible(true)
+      setHasAnimated(true)
+    }
+  }, [hasAnimated])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [handleScroll])
 
   useEffect(() => {
-    const triggerPoint = window.innerHeight * 0.1
-    if (scrollY > triggerPoint) {
-      controls1.start({
-        x: '0%',
-        opacity: 1,
-        transition: { type: 'spring', stiffness: 100, damping: 20 },
-      })
-      controls2.start({
-        x: '0%',
-        opacity: 1,
-        transition: { type: 'spring', stiffness: 100, damping: 20 },
-      })
-    } else {
-      controls1.start({ x: '-100%', opacity: 0 })
-      controls2.start({ x: '100%', opacity: 0 })
+    if (isVisible) {
+      controls
+        .start('visible')
+        .then(() => controls.start('exit'))
+        .then(() => setIsVisible(false))
     }
-  }, [scrollY, controls1, controls2])
+  }, [isVisible, controls])
+
+  if (!isVisible) return null
 
   return (
-    <div
+    <motion.div
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
       style={{
-        position: 'absolute',
-        top: '100vh', // 將容器放置在第一個視口高度之後
+        position: 'fixed',
+        top: '100vh',
         left: 0,
         width: '100%',
-        height: '100px', // 給予一個固定高度
+        height: '200px',
         pointerEvents: 'none',
         zIndex: 10,
+        transform: 'translateY(-100%)',
       }}
     >
       <motion.img
-        src="/user-profile/animal_hitsuji.png"
-        alt="Floating Image 1"
-        initial={{ x: '-100%', opacity: 0 }}
-        animate={controls1}
+        src="/images/silhouette-403695_1920.png"
+        alt="Floating Image Left"
+        variants={leftImageVariants}
         style={{
           position: 'absolute',
-          bottom: '20px',
-          left: '10%',
-          width: '150px',
+          bottom: 0,
+          left: '-20%',
+          width: '80%',
+          height: 'auto',
         }}
       />
-
       <motion.img
-        src="/user-profile/dog_shetland_sheepdog.png"
-        alt="Floating Image 2"
-        initial={{ x: '100%', opacity: 0 }}
-        animate={controls2}
+        src="/images/silhouette-403695_1920.png"
+        alt="Floating Image Right"
+        variants={rightImageVariants}
         style={{
           position: 'absolute',
-          bottom: '40px',
-          right: '10%',
-          width: '150px',
+          bottom: 0,
+          right: '-20%',
+          width: '80%',
+          height: 'auto',
         }}
       />
-    </div>
+    </motion.div>
   )
 }
 

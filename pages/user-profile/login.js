@@ -5,10 +5,10 @@ import styles from '@/styles/user-profile/login.module.scss'
 import SocialButton from '@/components/layout/default-layout/user-layout/social-butt'
 import { login, parseJwt, getUserById } from '@/services/user'
 import useLocalStorage from '@/hooks/use-localstorage'
-import toast, { Toaster } from 'react-hot-toast'
 import { initUserData } from '@/hooks/use-auth'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Swal from 'sweetalert2'
 
 // 背景樣式設定
 const backgroundStyle = {
@@ -71,17 +71,28 @@ export default function LoginPage() {
             userData,
           })
 
-          toast.success('已成功登入')
           router.push(`/user-profile/${jwtUser.id}/home`)
         } else {
-          toast.error('登入後無法得到會員資料')
+          Swal.fire({
+            icon: 'error',
+            title: '帳號或密碼錯誤',
+            text: '請檢查您的帳號和密碼是否正確。',
+          })
         }
       } else {
-        toast.error('登入失敗')
+        Swal.fire({
+          icon: 'error',
+          title: '帳號或密碼錯誤',
+          text: '請檢查您的帳號和密碼是否正確。',
+        })
       }
     } catch (error) {
       console.error('登入失敗', error)
-      toast.error('伺服器錯誤，請稍後再試')
+      Swal.fire({
+        icon: 'error',
+        title: '帳號或密碼錯誤',
+        text: '一定是奶油手打錯了啦！',
+      })
     }
   }
 
@@ -140,10 +151,6 @@ export default function LoginPage() {
                         <SocialButton
                           icon="https://cdn.builder.io/api/v1/image/assets/TEMP/9002037aa47f6718674f900f6e231f6dbb37e7345b6d153386f2c821a75ff990?placeholderIfAbsent=true&apiKey=efb5b4cc8c044d4a8cc81c446806a7df"
                           text="Sign in with Google"
-                        />
-                        <SocialButton
-                          icon="https://cdn.builder.io/api/v1/image/assets/TEMP/ffa5553a82763214792e8519750d4ccddf094d8413a32354ddcbb06d1cfc93f5?placeholderIfAbsent=true&apiKey=efb5b4cc8c044d4a8cc81c446806a7df"
-                          text="Sign in with Facebook"
                         />
                       </div>
                       <p className={styles['signup-prompt']}>
