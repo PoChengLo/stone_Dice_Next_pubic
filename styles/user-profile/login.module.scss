@@ -66,7 +66,7 @@
 
 .welcome-title {
   color: rgba(68, 68, 68, 1);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-top: 30px;
   text-align: left;
 }
@@ -74,7 +74,7 @@
 .welcome-description {
   color: var(--Secondary-text, #313957);
   letter-spacing: 0.2px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   text-align: left;
 }
 
@@ -117,10 +117,10 @@
 }
 
 .forgot-password {
-  color: #D92626;
+  color: #d92626;
   text-align: center;
   align-self: end;
-  font-weight:bolder;
+  font-weight: bolder;
 }
 
 .submit-button {
@@ -228,7 +228,14 @@
 }
 
 // 響應式設計
+// 保留所有現有的樣式
+
+// 修改現有的響應式設計
 @media (max-width: 768px) {
+  .main-container {
+    width: 90%;
+  }
+
   .login-section {
     flex-direction: column-reverse;
   }
@@ -244,5 +251,100 @@
 
   .login-form {
     padding: 20px 5%;
+  }
+}
+
+// 增強的手機版樣式 (430px 及以下)
+@media (max-width: 430px) {
+  .body {
+    height: auto;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .copyright {
+    display: none;
+  }
+
+  .main-container {
+    width: 100% !important; // 使用 !important 來確保覆蓋
+    height: auto !important;
+    min-height: 100vh;
+    border-radius: 0;
+    flex-direction: column;
+  }
+
+  .login-section {
+    flex-direction: column-reverse !important;
+    height: auto;
+  }
+
+  .login-form {
+    flex: 1 !important;
+    padding: 20px 15px !important;
+    width: 100% !important;
+  }
+
+  .art-section {
+    flex: 0 0 200px !important;
+    width: 100% !important;
+    height: 200px !important;
+    overflow: hidden;
+
+    img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+  }
+
+  .welcome-title {
+    font-size: 24px !important;
+    margin-bottom: 15px !important;
+    margin-top: 15px !important;
+    text-align: center !important;
+  }
+
+  .welcome-description {
+    font-size: 14px !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
+
+    br {
+      display: none !important;
+    }
+  }
+
+  .form {
+    width: 100% !important;
+  }
+
+  .submit-button {
+    width: 100% !important;
+    margin-top: 20px !important;
+  }
+
+  .social-sign-in {
+    max-width: 100% !important;
+  }
+
+  .divider-line {
+    width: 30% !important;
+  }
+
+  .social-buttons {
+    gap: 15px !important;
+  }
+
+  .signup-prompt {
+    margin-top: 20px !important;
+  }
+
+  .copyright {
+    position: static !important;
+    margin-top: 20px !important;
+    padding: 10px 0 !important;
+    width: 100% !important;
+    background-color: #f0f0f0 !important;
   }
 }
