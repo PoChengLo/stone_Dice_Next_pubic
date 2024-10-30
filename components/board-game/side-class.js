@@ -2,57 +2,37 @@ import Form from 'react-bootstrap/Form'
 import styles from '@/styles/board-game-css/board-game-style.module.css'
 
 export default function SideClass({ onClick = () => {}, onChange = () => {} }) {
+  const side_class_name = [
+    { name: '全部商品', tag_id: 'default' },
+    { name: '彼此競爭', tag_id: '28' },
+    { name: '闔家歡樂', tag_id: '26' },
+    { name: '親子互動', tag_id: '30' },
+    { name: '輕鬆小品', tag_id: '35' },
+    { name: '資源收集', tag_id: '39' },
+    { name: '策略遊戲', tag_id: '42' },
+    { name: '腦力計算', tag_id: '52' },
+  ]
   return (
     <>
       <div className={`${styles.side_class} `} id={`${styles.side_class}`}>
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>彼此競爭</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>闔家歡樂</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>親子互動</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>輕鬆小品</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>資源收集</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>策略遊戲</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-
-        <div>
-          <button className={`${styles.button}`}>
-            <h4 className={`${styles.p}`}>腦力計算</h4>
-          </button>
-        </div>
-        <hr className={`${styles.hr}`} />
-
+        {/* 側邊欄標籤 */}
+        {side_class_name.map((v, i) => (
+          <div key={i}>
+            <div>
+              <button
+                className={`${styles.button}`}
+                onClick={onClick}
+                value={v.tag_id}
+              >
+                <h4 className={`${styles.p}`} style={{ pointerEvents: 'none' }}>
+                  {v.name}
+                </h4>
+              </button>
+            </div>
+            <hr className={`${styles.hr}`} />
+          </div>
+        ))}
+        {/* 價格區間篩選 */}
         <div className={`${styles.price_selection}`}>
           <h4 className={`${styles.p} ${styles.price_title}`}>價格區間篩選</h4>
           <Form.Select

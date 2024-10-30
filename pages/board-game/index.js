@@ -222,7 +222,12 @@ export default function BoardGame({ onClick }) {
               <SideClass
                 onClick={(e) => {
                   const query = { ...router.query }
-                  router.push(`?` + new URLSearchParams(query))
+                  if (e.target.value == 'default') {
+                    router.push(`?`)
+                  } else {
+                    query.tag_id = e.target.value
+                    router.push(`?` + new URLSearchParams(query))
+                  }
                 }}
                 onChange={(e) => {
                   const query = { ...router.query }
@@ -231,25 +236,21 @@ export default function BoardGame({ onClick }) {
                       query.price_min = '1000'
                       query.price_max = '1499'
                       delete query.page
-
                       break
                     case '2':
                       query.price_min = '1500'
                       query.price_max = '1999'
                       delete query.page
-
                       break
                     case '3':
                       query.price_min = '2000'
                       query.price_max = '2499'
                       delete query.page
-
                       break
                     case '4':
                       query.price_min = '2500'
                       query.price_max = '2999'
                       delete query.page
-
                       break
                     default:
                       delete query.price_min
