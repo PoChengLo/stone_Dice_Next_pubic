@@ -92,7 +92,47 @@ function ProdCard({ product, onClick }) {
             <p className="card-text ">NT$ {product.price.toLocaleString()}</p>
           </Card.Title>
 
-          <div className={`d-flex justify-content-between ${styles.btns}`}>
+          {product.prod_stock === 0 ? (
+            <Button className={` ${styles.btn}  ${styles.a}`} disabled>
+              售完
+            </Button>
+          ) : (
+            <div className={`d-flex justify-content-between ${styles.btns}`}>
+              <Button
+                onClick={() => {
+                  // 商品原本沒有數量屬性(quantity)，要先加上
+                  const item = {
+                    ...product,
+                    quantity: 1,
+                  }
+                  // 注意: 重覆加入會自動+1產品數量
+                  addItem(item)
+                }}
+                href="/board-game/cart"
+                className={` ${styles.btn}  ${styles.a}`}
+              >
+                立即購買
+              </Button>
+              <button
+                type="button"
+                className={`btn btn-primary ${styles.btn}`}
+                onClick={() => {
+                  // 商品原本沒有數量屬性(quantity)，要先加上
+                  const item = {
+                    ...product,
+                    quantity: 1,
+                  }
+                  // 注意: 重覆加入會自動+1產品數量
+                  addItem(item)
+                  // 呈現跳出對話盒
+                  showModal(product.prod_name)
+                }}
+              >
+                加入購物車
+              </button>
+            </div>
+          )}
+          {/* <div className={`d-flex justify-content-between ${styles.btns}`}>
             <Button
               onClick={() => {
                 // 商品原本沒有數量屬性(quantity)，要先加上
@@ -125,7 +165,7 @@ function ProdCard({ product, onClick }) {
             >
               加入購物車
             </button>
-          </div>
+          </div> */}
           {messageModal}
         </Card.Body>
       </Card>

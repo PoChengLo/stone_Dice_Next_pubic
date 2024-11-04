@@ -1,0 +1,931 @@
+// 按鈕
+.btn {
+  --bs-btn-color: #f8f0e5;
+  --bs-btn-hover-color: #1f1f1f;
+  --bs-btn-bg: rgba(127, 90, 61, 0.7);
+  --bs-btn-border-color: #rgba(127, 90, 61, 0.7);
+  --bs-btn-hover-bg: #d7bf7d;
+  --bs-btn-hover-border-color: #d7bf7d;
+  --bs-btn-active-bg: #d7bf7d;
+  --bs-btn-active-color: #1f1f1f;
+  --bs-btn-active-border-color: #ffffff;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: rgba(127, 90, 61, 0.7);
+  --bs-btn-disabled-border-color: #f8f0e5;
+  font-size: 18px;
+}
+.active {
+  background-color: #d7bf7d;
+  color: #1f1f1f;
+}
+#side_class {
+}
+// 側邊欄
+.side_class {
+  padding: 0px 30px;
+  width: 230px;
+  color: #f8f0e5;
+  border-right: 1px solid #d7bf7d;
+
+  .button {
+    color: #f8f0e5;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .hr {
+    height: 1px;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+    background: rgb(127, 90, 61);
+    background: linear-gradient(
+      90deg,
+      rgba(127, 90, 61, 1) 0%,
+      rgba(215, 191, 125, 1) 100%
+    );
+  }
+  .p {
+    margin: 0px;
+  }
+  .price_selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .price_title {
+      margin: 20px 0px;
+    }
+  }
+}
+// 商品卡片
+.card {
+  color: #f8f0e5;
+  .card_body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+  }
+  .p {
+    color: #d7bf7d;
+  }
+}
+.card_box {
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+.card_box:hover {
+  box-shadow: 0px 0px 20px 2px rgba(215, 191, 125, 0.5);
+}
+
+.pagination_buttons {
+  position: relative;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+}
+
+// 單獨商品卡片
+.single_card {
+  --bs-card-bg: none;
+  border: none;
+  color: #f8f0e5;
+  .card_body {
+    height: 100%;
+    width: 100%;
+    .icons {
+      font-size: 30px;
+    }
+    .a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+    }
+  }
+}
+.h4 {
+  font-size: 20px;
+  color: #f8f0e5;
+}
+.h5 {
+  font-size: 14px;
+  color: #f8f0e5;
+}
+
+// tab 分頁顏色 pid
+.nav_tab_bg_commit {
+  --bs-nav-tabs-link-active-color: #f8f0e5;
+  --bs-nav-tabs-link-active-bg: #4e4e4e;
+  --bs-nav-tabs-link-active-border-color: none;
+}
+
+// 背景及評論
+.bg_commit {
+  color: #f8f0e5;
+
+  ul {
+    li {
+      button {
+        background-color: none;
+        color: #f8f0e5;
+      }
+      button:hover {
+        background-color: #6e6e6e;
+        color: #f8f0e5;
+      }
+    }
+  }
+
+  .card_commit {
+    background: none;
+    color: #f8f0e5;
+    border: none;
+  }
+}
+
+// 輸入框，下拉式選單
+.white_to_text {
+  background-color: #f8f0e5;
+  color: #1f1f1f;
+  border: none;
+}
+.white_to_text:focus {
+  background-color: #f8f0e5;
+  color: #1f1f1f;
+  box-shadow: none;
+  border: none;
+}
+
+.white_to_text:disabled {
+  background-color: #f8f0e5;
+}
+
+// 購物車按鈕
+#buttonCart {
+  color: #f4565c;
+  background: none;
+  border: none;
+  position: relative;
+  p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 0px;
+    margin-bottom: 5px;
+    svg {
+      vertical-align: middle;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  .items_length {
+    position: absolute;
+    top: -10px;
+    left: 90px;
+    background-color: #f4565c;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: #1f1f1f;
+      margin-bottom: 0px;
+    }
+  }
+}
+#buttonCartM {
+  color: #1f1f1f;
+  background: none;
+  border: none;
+  position: relative;
+  p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 0px;
+    margin-bottom: 5px;
+    svg {
+      vertical-align: middle;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  .items_length {
+    position: absolute;
+    top: -10px;
+    left: 90px;
+    background-color: #f4565c;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: #1f1f1f;
+      margin-bottom: 0px;
+    }
+  }
+}
+
+// 側邊欄購物車
+.side_cart {
+  --bs-offcanvas-color: #1f1f1f;
+  --bs-offcanvas-bg: #f8f0e5;
+  .card_offcanvas {
+    --bs-card-bg: #f8f0e5;
+    --bs-card-color: #1f1f1f;
+    height: 156px;
+    width: 348px;
+    border: none;
+    border-radius: 0%;
+    .card_body_offcanvas {
+      padding: 6px;
+    }
+    .p {
+      margin: 0;
+    }
+    .hr {
+      height: 1px;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+      background: rgb(127, 90, 61);
+      background: linear-gradient(
+        90deg,
+        rgba(127, 90, 61, 1) 0%,
+        rgba(215, 191, 125, 1) 100%
+      );
+    }
+  }
+}
+
+// 購物車
+.cart {
+  color: #f8f0e5;
+  .p {
+    margin: 0px;
+  }
+  .steps_active {
+    color: #d7bf7d;
+  }
+  .steps_no_active {
+    color: #6e7c9e;
+  }
+  .cart_icon {
+    color: #d7bf7d;
+  }
+  .cart_icon_no_active {
+    color: #6e7c9e;
+  }
+  .hr {
+    width: 180px;
+    height: 1px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .hr_active {
+    background-color: #d7bf7d;
+  }
+  .hr_no_active {
+    background-color: #6e7c9e;
+  }
+  .cart_main {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(153, 153, 153, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: 10px;
+  }
+  .cart_card {
+    --bs-card-bg: none;
+    border: 1px solid #f8f0e5;
+    color: #f8f0e5;
+
+    .cart_card_icon {
+      font-size: 24px;
+    }
+  }
+  .cart_hr {
+    height: 1px;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+    background: rgb(127, 90, 61);
+    background: linear-gradient(
+      90deg,
+      rgba(127, 90, 61, 1) 0%,
+      rgba(215, 191, 125, 1) 100%
+    );
+  }
+}
+
+// 填寫購買人資訊
+.user_info {
+  color: #f8f0e5;
+  .p {
+    font-size: 18px;
+    margin: 0;
+  }
+  .steps_active {
+    color: #d7bf7d;
+  }
+  .steps_no_active {
+    color: #6e7c9e;
+  }
+  .cart_icon {
+    color: #d7bf7d;
+  }
+  .cart_icon_no_active {
+    color: #6e7c9e;
+  }
+  .hr {
+    width: 180px;
+    height: 1px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .hr_active {
+    background-color: #d7bf7d;
+  }
+  .hr_no_active {
+    background-color: #6e7c9e;
+  }
+  .user_info_main {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(153, 153, 153, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: 10px;
+  }
+  .input_text {
+    color: #f8f0e5;
+  }
+  .nav_pills {
+    --bs-nav-pills-link-active-bg: #f8f0e5;
+    --bs-nav-pills-link-active-color: #1f1f1f;
+    --bs-nav-link-color: #f8f0e5;
+    --bs-nav-link-hover-color: #d7bf7d;
+    border: 1px solid #f8f0e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav_icons {
+    font-size: 24px;
+  }
+  .inputs {
+    width: 50%;
+  }
+  button {
+    margin-right: 2rem;
+    width: 200px;
+  }
+  .eticket {
+    height: 400px;
+  }
+  .user_info_border {
+    border: 1px solid #f8f0e5;
+    border-radius: 10px;
+  }
+}
+
+// 購物車側邊欄手風琴
+.side_cart_accordion {
+  --bs-accordion-bg: none;
+  --bs-accordion-box-shadow: none;
+  --bs-accordion-active-bg: none;
+  --bs-border-color: #f8f0e5;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-btn-color: #f8f0e5;
+  --bs-accordion-active-color: #f8f0e5;
+  --bs-accordion-color: #f8f0e5;
+  --bs-accordion-btn-icon-color: #f8f0e5;
+  --bs-accordion-btn-icon: none;
+  --bs-accordion-btn-active-icon: none;
+  h2 {
+    button {
+      font-size: 18px;
+    }
+  }
+  .accordion_icon {
+    margin-left: 1rem;
+  }
+}
+
+// 選擇運送與付款方式
+.pay_ship {
+  color: #f8f0e5;
+  .p {
+    font-size: 18px;
+    margin: 0;
+  }
+  .steps_active {
+    color: #d7bf7d;
+  }
+  .steps_no_active {
+    color: #6e7c9e;
+  }
+  .cart_icon {
+    color: #d7bf7d;
+  }
+  .cart_icon_no_active {
+    color: #6e7c9e;
+  }
+  .hr {
+    width: 180px;
+    height: 1px;
+    background-color: #d7bf7d;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+  }
+  .hr_active {
+    background-color: #d7bf7d;
+  }
+  .hr_no_active {
+    background-color: #6e7c9e;
+  }
+  .pay_ship_main {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(153, 153, 153, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: 10px;
+  }
+  .input_text {
+    color: #f8f0e5;
+  }
+  .nav_pills {
+    --bs-nav-pills-link-active-bg: #f8f0e5;
+    --bs-nav-pills-link-active-color: #1f1f1f;
+    --bs-nav-link-color: #f8f0e5;
+    --bs-nav-link-hover-color: #d7bf7d;
+    border: 1px solid #f8f0e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn_pay_ship {
+    --bs-btn-color: #f8f0e5;
+    --bs-btn-bg: none;
+    --bs-btn-border-color: #f8f0e5;
+    --bs-btn-active-bg: #f8f0e5;
+    --bs-btn-active-color: #1f1f1f;
+    --bs-btn-active-border-color: #f8f0e5;
+    width: 250px;
+    font-size: 18px;
+  }
+  .nav_icons {
+    font-size: 24px;
+  }
+  .inputs {
+    width: 50%;
+  }
+
+  .eticket {
+    height: 400px;
+  }
+  .pay_ship_border {
+    border: 1px solid #f8f0e5;
+    border-radius: 10px;
+  }
+  .pay_ship_border_method {
+    border: 1px solid #f8f0e5;
+    border-radius: 10px;
+    height: 370px;
+  }
+  .form_check_input {
+    appearance: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    --bs-checkbox-focus-box-shadow: none;
+  }
+  .form_check_input:checked {
+    background-color: #f8f0e5;
+    border-color: #f8f0e5;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .form_check_input:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  .form_check_input:checked::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://i.postimg.cc/Y2s9qFPk/check.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: none;
+    outline: none;
+  }
+  .btn {
+    width: 200px;
+  }
+}
+// 付款成功
+.success {
+  color: #f8f0e5;
+  .success_hr {
+    height: 1px;
+    border: none;
+    margin: 0px;
+    opacity: 1;
+    background: rgb(127, 90, 61);
+    background: linear-gradient(
+      90deg,
+      rgba(127, 90, 61, 1) 0%,
+      rgba(215, 191, 125, 1) 100%
+    );
+  }
+}
+
+// 會員商品訂單
+.table {
+  width: 100%;
+  margin: 1rem;
+  padding: 1rem;
+  // background-color: #f8f0e5;
+  border-radius: 10px;
+  height: 100px;
+  // color: #f8f0e5;
+
+  .thead {
+    border-bottom: 1px solid #1f1f1f;
+    text-align: center;
+    height: 48px;
+  }
+  .tbody {
+    height: 60px;
+    text-align: center;
+  }
+  .font_size_th {
+    font-size: 20px;
+  }
+  .font_size_td {
+    font-size: 18px;
+  }
+  .table_btn {
+    background-color: rgba(217, 217, 217, 0.2);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    border: 3px solid #635336;
+    font-size: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgba(217, 217, 217, 0.2);
+    color: #504633;
+  }
+  .table_btn:hover {
+    background: linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+    background-color: #ccc2a6;
+  }
+}
+
+.ord_modal {
+  color: #1f1f1f;
+  .table {
+    width: 90%;
+  }
+  .thead {
+    border-bottom: 1px solid #1f1f1f;
+    height: 36px;
+    text-align: start;
+  }
+  .tbody {
+    text-align: start;
+  }
+  .td {
+    height: 50px;
+  }
+}
+
+// 會員商品訂單詳情
+
+// 1920*1080
+@media (min-width: 577px) {
+  .side_class_m {
+    display: none;
+  }
+  // 背景
+  #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+  // 列表背景
+  #backgroundImage_index {
+    width: 100%;
+    height: 1451px;
+    padding-bottom: 40px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+  .card {
+    width: 320px;
+    height: 500px;
+    padding: 16px 12px;
+  }
+  .side_class_m_button {
+    display: none;
+  }
+}
+
+// 430 * 932
+@media (max-width: 576px) {
+  //背景
+  #backgroundImage {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+  // 列表背景
+  #backgroundImage_index {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    background-image: url('../../public/board-game/bg-smoke.png');
+  }
+
+  // 輸入框，下拉式選單
+  .white_to_text {
+    font-size: 12px;
+    height: 24px;
+  }
+
+  // 首頁隱藏部分
+  #prod_tag,
+  #filter_order,
+  #side_class {
+    display: none;
+  }
+
+  // 手機版側邊欄按鈕
+  .side_class_m {
+    display: flex;
+    height: 24px;
+    margin: 0px;
+    padding: 0px 18px;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+  .p_offcanvas {
+    font-size: 12px;
+    margin: 0px;
+  }
+  // 側邊欄
+  .side_class_offcanvas {
+    background-color: #1f1f1f;
+    max-width: 300px;
+
+    .white_to_text_selection {
+      height: 36px;
+    }
+  }
+
+  // 商品卡片
+  .card_img_top {
+    width: 140px;
+    height: 140px;
+  }
+  .bi_heart {
+    width: 14px;
+    height: 14px;
+  }
+  .btn {
+    display: flex;
+    height: 24px;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    font-size: 12px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 330px;
+  }
+  .btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+  }
+  .card_body {
+    display: flex;
+    width: 160px;
+    height: 100%;
+    padding: 16px 12px;
+    flex-direction: column;
+    .a {
+      font-size: 12px;
+    }
+  }
+
+  // modal
+  .modal_m {
+    width: 100%;
+    height: 50px;
+  }
+
+  // 單獨卡片
+  .single_card {
+    .card_body {
+      .icons {
+        font-size: 16px;
+      }
+      .a {
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+  }
+  .bg_commit {
+    ul {
+      li {
+        button {
+          font-size: 12px;
+        }
+        button:hover {
+          background-color: #6e6e6e;
+          color: #f8f0e5;
+        }
+      }
+    }
+
+    .card_commit {
+      background: none;
+      color: #f8f0e5;
+      border: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .p {
+      margin: 0px;
+    }
+  }
+
+  // 側邊欄購物車
+  .side_cart {
+    --bs-offcanvas-width: 300px;
+    .card_offcanvas {
+      margin: 0px;
+      width: 276px;
+      height: 116px;
+    }
+  }
+  .cart {
+    .hr {
+      width: 1px;
+      height: 30px;
+      background-color: #d7bf7d;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+    }
+    .cart_card {
+      .cart_card_icon {
+        font-size: 16px;
+      }
+    }
+    .h4 {
+      font-size: 16px;
+    }
+    .h5 {
+      font-size: 12px;
+    }
+  }
+  .user_info {
+    .p {
+      font-size: 12px;
+    }
+    .hr {
+      width: 1px;
+      height: 30px;
+      background-color: #d7bf7d;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+    }
+    .side_cart_accordion_m {
+      display: none;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .eticket {
+      height: 450px;
+    }
+    .nav_icons {
+      font-size: 16px;
+    }
+    button {
+      width: 372px;
+      height: 32px;
+      margin: 0px;
+    }
+    .input_text {
+      font-size: 10px;
+    }
+  }
+  .pay_ship {
+    .hr {
+      width: 1px;
+      height: 30px;
+      background-color: #d7bf7d;
+      border: none;
+      margin: 0px;
+      opacity: 1;
+    }
+    .side_cart_accordion_m {
+      display: none;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav_icons {
+      font-size: 16px;
+    }
+    .p {
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .btn_pay_ship {
+      width: auto;
+      font-size: 12px;
+    }
+    .nav_icons {
+      font-size: 12px;
+    }
+    .pay_ship_border_method {
+      height: 440px;
+    }
+    .white_to_text {
+      height: 30px;
+    }
+    .input_text {
+      font-size: 10px;
+    }
+    .btn_pay_ship_2 {
+      width: 372px;
+    }
+  }
+
+  #success_pic {
+    width: 360px;
+    height: 40px;
+  }
+}
