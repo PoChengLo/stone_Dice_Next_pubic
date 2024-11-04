@@ -60,7 +60,7 @@ export default function Navbar() {
         setUserName(user.nick_name || user.user_name)
         setUserAvatar(
           user.user_img
-            ? `http://localhost:3006/avatar/${
+            ? `http://13.113.180.141:3006/avatar/${
                 user.user_img
               }?t=${new Date().getTime()}`
             : 'https://i.postimg.cc/C1L1cpS1/DALL-E-2024-10-14-03-01-56-Flat-minimalistic-user-icon-in-grayscale-and-gold-featuring-a-person.png'

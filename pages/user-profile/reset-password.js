@@ -38,7 +38,7 @@ const ResetPassword = () => {
       try {
         console.log('Verifying old password for user ID:', auth.userData.id)
         const response = await axios.post(
-          `http://localhost:3006/user-profile/${auth.userData.id}/verify-password`,
+          `http://13.113.180.141:3006/user-profile/${auth.userData.id}/verify-password`,
           {
             password: oldPassword,
           },
@@ -109,7 +109,7 @@ const ResetPassword = () => {
     try {
       console.log('Submitting password change for user ID:', auth.userData.id)
       const response = await axios.put(
-        `http://localhost:3006/user-profile/${auth.userData.id}/password`,
+        `http://13.113.180.141:3006/user-profile/${auth.userData.id}/password`,
         {
           originPassword: oldPassword,
           newPassword: newPassword,

@@ -12,7 +12,7 @@ export default function ShippingInfo() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:3006/user-profile/${id}/home`)
+        .get(`http://13.113.180.141:3006/user-profile/${id}/home`)
         .then((res) => {
           if (res.data.status === 'success') {
             setUserData(res.data.data.user)

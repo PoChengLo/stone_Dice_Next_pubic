@@ -23,7 +23,7 @@ export default function CheckPayment() {
       ordTime: dateTimeDate, // place_time
     }
     try {
-      const res = await fetch(`http://localhost:3006/larp/ord-api`, {
+      const res = await fetch(`http://13.113.180.141:3006/larp/ord-api`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export default function CheckPayment() {
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
       // 先連到node伺服器後，導向至ECPay付款頁面
-      window.location.href = `http://localhost:3006/ecpay/larp?amount=${finalTotal}`
+      window.location.href = `http://13.113.180.141:3006/ecpay/larp?amount=${finalTotal}`
     }
   }
 

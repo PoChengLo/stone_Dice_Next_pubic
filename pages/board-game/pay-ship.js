@@ -69,7 +69,7 @@ export default function PayShip() {
   const goECPay = () => {
     if (window.confirm('確認要導向至ECPay進行付款?')) {
       // 先連到node伺服器後，導向至ECPay付款頁面
-      window.location.href = `http://localhost:3006/ecpay/board-game?amount=${finalTotal}&user_id=${authInfo.userData.id}`
+      window.location.href = `http://13.113.180.141:3006/ecpay/board-game?amount=${finalTotal}&user_id=${authInfo.userData.id}`
     }
   }
   // 付款方式選擇樣式
@@ -128,7 +128,7 @@ export default function PayShip() {
     }
     try {
       const res = await fetch(
-        `http://localhost:3006/board-game/pay-ship?user_id=${authInfo.userData.id}`,
+        `http://13.113.180.141:3006/board-game/pay-ship?user_id=${authInfo.userData.id}`,
         {
           method: 'POST',
           headers: {

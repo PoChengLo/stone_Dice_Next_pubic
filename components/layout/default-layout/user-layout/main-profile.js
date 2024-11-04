@@ -31,7 +31,7 @@ const MainProfile = ({ userData: initialUserData }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3006/user-profile/${userData.user_id}/home`,
+        `http://13.113.180.141:3006/user-profile/${userData.user_id}/home`,
         {
           nick_name: userData.nick_name,
           birthday: userData.birthday,

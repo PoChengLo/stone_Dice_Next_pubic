@@ -44,7 +44,7 @@ const secondImageStyle = {
 
 const ImageUpload = ({ initialImage }) => {
   const [previewImage, setPreviewImage] = useState(
-    initialImage ? `http://localhost:3006/avatar/${initialImage}` : ''
+    initialImage ? `http://13.113.180.141:3006/avatar/${initialImage}` : ''
   )
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [currentImage, setCurrentImage] = useState(null)
@@ -65,7 +65,7 @@ const ImageUpload = ({ initialImage }) => {
     try {
       const token = localStorage.getItem('accessToken')
       const response = await axios.post(
-        'http://localhost:3006/user-profile/upload-avatar',
+        'http://13.113.180.141:3006/user-profile/upload-avatar',
         formData,
         {
           headers: {
@@ -78,7 +78,7 @@ const ImageUpload = ({ initialImage }) => {
       if (response.data.status === 'success') {
         showCustomSwal('上傳成功', '您的圖片已成功更新', 'success')
         setPreviewImage(
-          `http://localhost:3006/avatar/${
+          `http://13.113.180.141:3006/avatar/${
             response.data.data.user_img
           }?t=${new Date().getTime()}`
         )

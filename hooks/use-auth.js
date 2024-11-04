@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3006/user-profile/check',
+          'http://13.113.180.141:3006/user-profile/check',
           {
             withCredentials: true,
           }
