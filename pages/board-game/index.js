@@ -45,7 +45,7 @@ export default function BoardGame({ onClick }) {
 
   // 向伺服器獲取資料(建議寫在useEffect外，用async-await)
   const getProducts = async () => {
-    const baseURL = 'http://13.113.180.141:3006/board-game'
+    const baseURL = 'https://13.113.180.141:3006/board-game'
     // 轉換params為查詢字串
     const searchParams = new URLSearchParams(router.query)
     const qs = searchParams.toString()
